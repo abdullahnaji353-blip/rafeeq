@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>رفيق · Rafeeq demo</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F7F3EE;--ink:#14213D;--orange:#E76F2E;--soft:#F4C9A8;--muted:#5B6478;--ok:#1F7A5A}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Arabic',system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:16px}
+  h1{margin:4px 0 0;font-size:28px}
+  .sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+  .owl{width:150px;height:160px;transition:transform .3s}
+  .owl.talk{animation:bob .5s ease-in-out infinite alternate}
+  .owl.happy{animation:hop .4s ease-out 3}
+  @keyframes bob{to{transform:rotate(-4deg)}}
+  @keyframes hop{50%{transform:translateY(-14px)}}
+  .bubble{background:#fff;border-radius:20px;padding:14px 18px;font-size:22px;font-weight:600;min-height:58px;width:100%;max-width:520px;text-align:center;box-shadow:0 6px 20px rgba(20,33,61,.08);margin:8px 0 12px}
+  video{width:100%;max-width:520px;border-radius:20px;background:#000;aspect-ratio:4/3;object-fit:cover}
+  .steps{list-style:none;padding:0;margin:12px 0;width:100%;max-width:520px}
+  .steps li{background:#fff;border-radius:14px;padding:10px 14px;margin:6px 0;font-size:17px;display:flex;justify-content:space-between;opacity:.55}
+  .steps li.now{opacity:1;outline:3px solid var(--orange)}
+  .steps li.done{opacity:1;color:var(--ok)}
+  .row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;width:100%;max-width:520px}
+  select,button{font:inherit;font-size:16px;border-radius:12px;border:2px solid #E2DCD3;padding:10px 12px;background:#fff;color:var(--ink)}
+  button.go{background:var(--orange);border-color:var(--orange);color:#fff;font-weight:700;flex:1}
+  .report{display:none;background:var(--ink);color:#F7F3EE;border-radius:20px;padding:16px 18px;width:100%;max-width:520px;margin-top:12px;font-size:16px;line-height:1.6}
+  .err{color:#B42318;font-size:14px;min-height:20px}
+</style>
+</head>
+<body>
+  <svg class="owl" id="owl" viewBox="0 0 400 420" aria-label="رفيق">
+    <ellipse cx="200" cy="230" rx="150" ry="165" fill="#E76F2E"/>
+    <ellipse cx="200" cy="275" rx="95" ry="110" fill="#F4C9A8"/>
+    <path d="M85 95 L120 150 L150 100 Z" fill="#C4561C"/><path d="M315 95 L280 150 L250 100 Z" fill="#C4561C"/>
+    <circle cx="140" cy="185" r="58" fill="#fff"/><circle cx="260" cy="185" r="58" fill="#fff"/>
+    <circle id="pL" cx="148" cy="190" r="26" fill="#14213D"/><circle id="pR" cx="252" cy="190" r="26" fill="#14213D"/>
+    <path d="M185 235 L215 235 L200 262 Z" fill="#14213D"/>
+  </svg>
+  <h1>رفيق</h1>
+  <p class="sub">Rafeeq demo · AI routine coach</p>
+
+  <div class="bubble" id="bubble">هلا! اضغط "ابدأ" ونبدأ سوا 🦉</div>
+
+  <video id="cam" playsinline muted autoplay></video>
+
+  <ul class="steps" id="steps"></ul>
+
+  <div class="row">
+    <select id="routine">
+      <option value="teeth">🪥 تفريش الأسنان</option>
+      <option value="hands">🧼 غسل اليدين</option>
+      <option value="bag">🎒 تجهيز الشنطة</option>
+    </select>
+    <select id="hint" title="مستوى المساعدة">
+      <option value="0">مساعدة كاملة</option>
+      <option value="1">تلميح خفيف</option>
+      <option value="2">بدون كلام إلا إذا احتاج</option>
+    </select>
+    <select id="facing">
+      <option value="user">الكاميرا الأمامية</option>
+      <option value="environment">الكاميرا الخلفية</option>
+    </select>
+  </div>
+  <div class="row" style="margin-top:8px">
+    <button class="go" id="go">ابدأ</button>
+    <button id="stop">إيقاف</button>
+  </div>
+  <p class="err" id="err"></p>
+
+  <div class="report" id="report"></div>
+
+<script>
+const ROUTINES = {
+  teeth: ["يمسك فرشاة الأسنان", "يحط معجون على الفرشاة", "يفرش أسنانه", "يرجع الفرشاة مكانها"],
+  hands: ["يفتح الماي", "يحط صابون على يدينه", "يفرك يدينه زين", "ينشف يدينه بالفوطة"],
+  bag:   ["يجيب الشنطة", "يحط الدفاتر في الشنطة", "يحط المقلمة", "يسكر الشنطة"]
+};
+// English versions sent to the model, so it judges the step reliably
+const ROUTINES_EN = {
+  teeth: ["Pick up the toothbrush", "Put toothpaste on the toothbrush", "Brush the teeth", "Put the toothbrush back"],
+  hands: ["Turn on the tap", "Put soap on the hands", "Rub the hands together well", "Dry the hands with a towel"],
+  bag:   ["Get the school bag", "Put the notebooks in the bag", "Put the pencil case in the bag", "Close the bag"]
+};
+const CHECK_EVERY_MS = 3000;
+
+const $ = id => document.getElementById(id);
+let stream = null, timer = null, busy = false, stepIdx = 0, startedAt = 0, hints = 0, log = [];
+let lastSaid = "", lastSaidAt = 0;
+
+function renderSteps() {
+  const steps = ROUTINES[$("routine").value];
+  $("steps").innerHTML = steps.map((s, i) =>
+    `<li class="${i < stepIdx ? "done" : i === stepIdx ? "now" : ""}"><span>${i + 1}. ${s}</span><span>${i < stepIdx ? "✅" : ""}</span></li>`
+  ).join("");
+}
+
+function speak(text) {
+  if (!text) return;
+  const now = Date.now();
+  if (text === lastSaid && now - lastSaidAt < 9000) return; // don't nag with the same line
+  lastSaid = text; lastSaidAt = now;
+  $("bubble").textContent = text;
+  if (!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  const voices = speechSynthesis.getVoices();
+  const ar = voices.find(v => /ar[-_](KW|SA|AE)/i.test(v.lang)) || voices.find(v => v.lang.startsWith("ar"));
+  if (ar) u.voice = ar;
+  u.lang = ar ? ar.lang : "ar-SA";
+  u.rate = 0.9;
+  $("owl").classList.add("talk");
+  u.onend = () => $("owl").classList.remove("talk");
+  speechSynthesis.speak(u);
+}
+
+function grabFrame() {
+  const v = $("cam");
+  const w = 512, h = Math.round(512 * (v.videoHeight / v.videoWidth || 0.75));
+  const c = document.createElement("canvas");
+  c.width = w; c.height = h;
+  c.getContext("2d").drawImage(v, 0, 0, w, h);
+  return c.toDataURL("image/jpeg", 0.7);
+}
+
+async function check() {
+  if (busy || !stream) return;
+  const key = $("routine").value;
+  const steps = ROUTINES_EN[key];
+  if (stepIdx >= steps.length) return;
+  busy = true;
+  try {
+    const r = await fetch("/api/coach", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        image: grabFrame(),
+        step: steps[stepIdx],
+        nextStep: steps[stepIdx + 1] || null,
+        hintLevel: Number($("hint").value)
+      })
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || "server error");
+    $("err").textContent = "";
+    log.push({ step: steps[stepIdx], status: data.status, note: data.reason, t: Date.now() });
+    if (data.status === "done") {
+      $("owl").classList.remove("happy"); void $("owl").offsetWidth; $("owl").classList.add("happy");
+      speak(data.say || "شاطر!");
+      stepIdx++;
+      renderSteps();
+      if (stepIdx >= steps.length) finish();
+    } else if (data.say) {
+      hints++;
+      speak(data.say);
+    }
+  } catch (e) {
+    $("err").textContent = "خطأ: " + e.message;
+  } finally {
+    busy = false;
+  }
+}
+
+function finish() {
+  clearInterval(timer); timer = null;
+  const mins = Math.max(1, Math.round((Date.now() - startedAt) / 60000));
+  setTimeout(() => speak("عفية عليك! خلصت كل الخطوات 🎉"), 1500);
+  $("report").style.display = "block";
+  $("report").innerHTML =
+    `<b>📊 تقرير ولي الأمر</b><br>` +
+    `الروتين: ${$("routine").selectedOptions[0].text}<br>` +
+    `الخطوات المنجزة: ${stepIdx} / ${ROUTINES[$("routine").value].length}<br>` +
+    `عدد التلميحات: ${hints}<br>` +
+    `المدة: حوالي ${mins} دقيقة<br>` +
+    `<small>Parent report · steps done ${stepIdx}, hints ${hints}, ~${mins} min</small>`;
+}
+
+async function start() {
+  stop();
+  stepIdx = 0; hints = 0; log = []; startedAt = Date.now();
+  $("report").style.display = "none";
+  renderSteps();
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: $("facing").value }, audio: false });
+    $("cam").srcObject = stream;
+    speak("يلا نبدأ! أول شي: " + ROUTINES[$("routine").value][0]);
+    timer = setInterval(check, CHECK_EVERY_MS);
+  } catch (e) {
+    $("err").textContent = "ما قدرت أفتح الكاميرا: " + e.message;
+  }
+}
+
+function stop() {
+  clearInterval(timer); timer = null;
+  if (stream) stream.getTracks().forEach(t => t.stop());
+  stream = null;
+}
+
+$("go").onclick = start;
+$("stop").onclick = () => { stop(); $("bubble").textContent = "وقفنا. نكمل بعدين 👋"; };
+$("routine").onchange = () => { stepIdx = 0; renderSteps(); };
+if ("speechSynthesis" in window) speechSynthesis.onvoiceschanged = () => {};
+renderSteps();
+</script>
+</body>
+</html>

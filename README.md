@@ -24,7 +24,7 @@ Rafeeq is a small, owl-shaped AI robot that sits where routines happen. It watch
 ## How the AI works
 | Step | Technology |
 |---|---|
-| See the task | Claude Opus 5.5 (vision), with Gemini as a backup |
+| See the task | Claude Opus 5.5 (vision), with Gemini as a backup. The demo also runs free on a local Ollama model (Gemma 3) |
 | Plan and coach | Claude Opus 5.5 writes short, personalized prompts in Kuwaiti Arabic |
 | Listen | Whisper fine-tuned for Gulf Arabic |
 | Speak | Gulf Arabic text-to-speech |
@@ -38,7 +38,7 @@ ESP32-S3 camera board, 2 servos (head turn and tilt), speaker, LED eyes, 3D-prin
 
 ## Status
 Idea stage. Coming next:
-- [ ] Phone demo: the camera sees a routine step and Rafeeq responds in Kuwaiti Arabic
+- [x] Phone demo: the camera sees a routine step and Rafeeq responds in Kuwaiti Arabic ([`demo/`](demo), runs free on a local Ollama model)
 - [ ] Prototype video: 3D animation of the robot plus the live phone demo
 - [ ] Pitch deck (Dec 7) and live pitch (Dec 13–14)
 
