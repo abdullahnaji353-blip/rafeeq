@@ -6,6 +6,9 @@ Primary track: Cognitive & Learning. Secondary track: Multiple disabilities & Ar
 
 ---
 
+## Prototype video
+▶️ **[Watch the 1-minute Rafeeq story](media/rafeeq-prototype-video.mp4)**: Yousef, a 7-year-old autistic boy, gets overwhelmed during his morning routine. Rafeeq spots the early signs, calms him with breathing in Gulf Arabic, then coaches him through the rest of the routine on his own.
+
 ## The problem
 Children with autism, Down syndrome and ADHD often struggle with everyday living skills such as brushing teeth, getting dressed and following a morning routine. Families rely on picture charts, generic apps or a parent standing beside the child at every step. These tools can't see what the child is doing, can't adapt in the moment, and rarely speak Gulf Arabic.
 
@@ -39,7 +42,7 @@ ESP32-S3 camera board, 2 servos (head turn and tilt), speaker, LED eyes, 3D-prin
 ## Status
 Idea stage. Coming next:
 - [x] Phone demo: the camera sees a routine step and Rafeeq responds in Kuwaiti Arabic ([`demo/`](demo), runs free on a local Ollama model)
-- [ ] Prototype video: 3D animation of the robot plus the live phone demo
+- [x] Prototype video: animated story of Rafeeq coaching a child through a routine and a sensory overload, with an English narrator and Gulf Arabic voice ([watch](media/rafeeq-prototype-video.mp4))
 - [ ] Pitch deck (Dec 7) and live pitch (Dec 13–14)
 
 ## Team
