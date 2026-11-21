@@ -47,5 +47,5 @@ Open the `https://….trycloudflare.com` link on your phone. The model still run
 For the highest accuracy, set `PROVIDER=claude` and your own `ANTHROPIC_API_KEY` in `.env`. This costs money per check. Set a spend limit in the Anthropic console first. `.env` is git-ignored, so your key never gets pushed.
 
 ## Notes
-- The voice uses the device's built-in Arabic text-to-speech. A true Gulf-dialect voice is the next upgrade.
+- The voice uses the device's built-in Arabic text-to-speech, because the lines are written live by the AI. (The website simulation uses a recorded Gulf-Arabic voice, see the main README.) A local Gulf-Arabic TTS model is the next upgrade.
 - Frames are processed only while a routine is running, and nothing is saved.
