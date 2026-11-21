@@ -336,6 +336,6 @@ After that, **every push to `main` updates the site automatically** within a min
 ---
 
 ## 14. Team
-[Your name / team members]
+**A.Naji**
 
 *Made for the ATSN26 Gen-AI & Software Innovation Competition, Kuwait.*
