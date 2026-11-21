@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rafeeq رفيق · Interactive Simulation</title>
+<meta name="description" content="Try Rafeeq: an Arabic Gen-AI companion that coaches children with autism and Down syndrome through daily routines.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F7F3EE;--ink:#14213D;--muted:#5B6478;--orange:#E76F2E;--deep:#B84E14;--soft:#F4C9A8;--green:#1F7A5A;--calm:#DCE8F2;--card:#fff;--red:#E5484D}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Plus Jakarta Sans",system-ui,sans-serif;line-height:1.5}
+.ar{font-family:"IBM Plex Sans Arabic",sans-serif;direction:rtl}
+a{color:inherit}
+header{position:sticky;top:0;z-index:20;background:rgba(247,243,238,.92);backdrop-filter:blur(8px);border-bottom:1px solid #E6DED3}
+.nav{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;text-decoration:none}
+.brand .ar{color:var(--orange)}
+.nav nav{display:flex;gap:18px;font-weight:700;font-size:15px}
+.nav nav a{text-decoration:none;color:var(--muted)}
+.nav nav a:hover{color:var(--ink)}
+.wrap{max-width:1200px;margin:auto;padding:0 20px}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center;padding:48px 0 24px}
+.kick{font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--deep)}
+h1{font-size:clamp(34px,5vw,58px);line-height:1.05;margin:10px 0 14px;letter-spacing:-.02em}
+h2{font-size:clamp(26px,3.5vw,38px);margin:0 0 8px;letter-spacing:-.01em}
+.lead{font-size:18px;color:var(--muted);max-width:560px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:14px;padding:13px 20px;font:700 16px "Plus Jakarta Sans";cursor:pointer;text-decoration:none;transition:transform .1s}
+.btn:active{transform:scale(.97)}
+.btn.primary{background:var(--orange);color:#fff}
+.btn.ghost{background:#fff;color:var(--ink);box-shadow:0 2px 10px rgba(20,33,61,.08)}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+section{padding:40px 0}
+/* simulator */
+.sim{display:grid;grid-template-columns:1.35fr .65fr;gap:20px}
+.stage{position:relative;background:#EAF1F4;border-radius:28px;overflow:hidden;aspect-ratio:16/10;box-shadow:0 10px 40px rgba(20,33,61,.1)}
+.stage .tiles{position:absolute;inset:0;background-image:linear-gradient(#d6e2e8 2px,transparent 2px),linear-gradient(90deg,#d6e2e8 2px,transparent 2px);background-size:9% 14.4%}
+.stage .mirror{position:absolute;left:34%;top:7%;width:34%;height:40%;border-radius:22px;background:linear-gradient(135deg,#cfe3ee,#eef6fa);border:8px solid #fff}
+.stage .counter{position:absolute;left:0;right:0;bottom:0;height:25%;background:#E9E4DC;border-top:6px solid #D8D1C6}
+.stage .redglow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 28% 60%,rgba(229,72,77,0) 35%,rgba(229,72,77,.4) 100%);opacity:0;transition:opacity .4s}
+.stage .calmglow{position:absolute;inset:0;pointer-events:none;background:var(--calm);opacity:0;transition:opacity .6s}
+#kidWrap{position:absolute;left:9%;bottom:6%;width:22%}
+#owlWrap{position:absolute;left:44%;bottom:23%;width:17%;transition:transform .2s}
+#noise{position:absolute;left:4%;bottom:30%;width:32%;pointer-events:none}
+.bubble{position:absolute;right:3%;top:6%;width:42%;background:#fff;border-radius:22px;padding:14px 18px;box-shadow:0 8px 24px rgba(20,33,61,.12);transform-origin:left bottom;transition:transform .25s,opacity .25s}
+.bubble .ar{font-weight:700;font-size:clamp(16px,2vw,24px);line-height:1.35}
+.bubble .en{font-size:clamp(12px,1.2vw,15px);color:var(--muted);margin-top:4px}
+.bubble.hide{opacity:0;transform:scale(.8)}
+.breath{position:absolute;left:78%;top:63%;transform:translate(-50%,-50%);width:22%;aspect-ratio:1;border-radius:50%;background:#8FBCE0;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--ink);opacity:0;transition:opacity .5s;font-size:clamp(12px,1.5vw,18px)}
+.cheer{position:absolute;left:42%;top:40%;font:700 clamp(20px,3vw,36px) "IBM Plex Sans Arabic";color:var(--orange);opacity:0;transition:opacity .3s,transform .6s}
+.panel{background:var(--card);border-radius:24px;padding:18px;box-shadow:0 6px 24px rgba(20,33,61,.07)}
+.panel h3{margin:0 0 10px;font-size:16px}
+.ctl{display:grid;gap:10px}
+select,input[type=range]{width:100%}
+select{font:600 15px "Plus Jakarta Sans";padding:10px;border-radius:12px;border:2px solid #E2DCD3;background:#fff}
+.act{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.act button{border:2px solid #E2DCD3;background:#fff;border-radius:14px;padding:11px 8px;font:700 14px "Plus Jakarta Sans";cursor:pointer;color:var(--ink)}
+.act button:hover{border-color:var(--orange)}
+.act button:disabled{opacity:.45;cursor:not-allowed}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.steps li{display:flex;gap:10px;align-items:center;background:#F7F3EE;border-radius:12px;padding:9px 12px;font-weight:600;font-size:14px;color:#8A93A6}
+.steps li .c{width:24px;height:24px;border-radius:50%;background:#D9D3CA;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;flex:none}
+.steps li.done{color:var(--ink)} .steps li.done .c{background:var(--green)}
+.steps li.now{color:var(--ink);outline:3px solid var(--orange)}
+.meter .track{height:14px;background:#EEE8E0;border-radius:8px;overflow:hidden;margin-top:6px}
+.meter .fill{height:100%;width:20%;background:var(--green);border-radius:8px;transition:width .5s,background .5s}
+.lbl{display:flex;justify-content:space-between;font-weight:700;font-size:14px}
+.log{font:12px/1.5 ui-monospace,Menlo,monospace;background:#14213D;color:#CFE0FF;border-radius:16px;padding:12px;height:170px;overflow:auto;white-space:pre-wrap}
+.log .k{color:#7FE0C3}
+.mode{display:inline-block;border-radius:999px;padding:4px 12px;font-weight:700;font-size:13px;background:#E8EEF7}
+.mode.calm{background:#7FE0C3}
+.report{display:none;margin-top:16px;background:var(--ink);color:#F7F3EE;border-radius:20px;padding:18px}
+.report.show{display:block}
+.report b{color:#F4A261}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(20,33,61,.06)}
+.card .big{font:800 44px "Plus Jakarta Sans";color:var(--orange)}
+video{width:100%;border-radius:24px;background:#000;box-shadow:0 10px 40px rgba(20,33,61,.15)}
+footer{padding:30px 0 50px;color:var(--muted);font-size:14px}
+.note{font-size:13px;color:var(--muted)}
+@media(max-width:900px){.hero,.sim{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}.nav nav{display:none}}
+</style>
+</head>
+<body>
+<header><div class="nav">
+  <a class="brand" href="#top"><svg width="30" height="32" viewBox="0 0 400 420"><ellipse cx="200" cy="230" rx="150" ry="165" fill="#E76F2E"/><ellipse cx="200" cy="275" rx="95" ry="110" fill="#F4C9A8"/><circle cx="140" cy="185" r="58" fill="#fff"/><circle cx="260" cy="185" r="58" fill="#fff"/><circle cx="148" cy="190" r="26" fill="#14213D"/><circle cx="252" cy="190" r="26" fill="#14213D"/></svg>Rafeeq <span class="ar">رفيق</span></a>
+  <nav><a href="#sim">Simulation</a><a href="#video">Video</a><a href="#how">How it works</a><a href="https://github.com/abdullahnaji353-blip/rafeeq">GitHub</a></nav>
+</div></header>
+
+<main id="top" class="wrap">
+  <div class="hero">
+    <div>
+      <div class="kick">ATSN26 · Gen-AI &amp; Software Innovation</div>
+      <h1>Meet Rafeeq, the AI buddy that teaches independence.</h1>
+      <p class="lead">A small owl robot that watches a child's daily routine, coaches each step in Kuwaiti Arabic, calms sensory overload early, and gives less help every week.</p>
+      <div class="row"><a class="btn primary" href="#sim">▶ Try the simulation</a><a class="btn ghost" href="#video">Watch the story</a></div>
+    </div>
+    <svg viewBox="0 0 400 440" style="width:100%;max-width:340px;justify-self:center" aria-label="Rafeeq owl"><ellipse cx="200" cy="415" rx="130" ry="16" fill="rgba(0,0,0,.08)"/><path d="M85 95 L120 150 L150 100 Z" fill="#C4561C"/><path d="M315 95 L280 150 L250 100 Z" fill="#C4561C"/><ellipse cx="200" cy="230" rx="150" ry="165" fill="#E76F2E"/><ellipse cx="200" cy="275" rx="95" ry="110" fill="#F4C9A8"/><circle cx="140" cy="185" r="58" fill="#fff"/><circle cx="260" cy="185" r="58" fill="#fff"/><circle cx="148" cy="190" r="26" fill="#14213D"/><circle cx="252" cy="190" r="26" fill="#14213D"/><circle cx="158" cy="180" r="8" fill="#fff"/><circle cx="262" cy="180" r="8" fill="#fff"/><path d="M185 235 L215 235 L200 262 Z" fill="#14213D"/></svg>
+  </div>
+
+  <section id="sim">
+    <div class="kick">Interactive simulation</div>
+    <h2>Be the child. See how Rafeeq responds.</h2>
+    <p class="note" style="margin-top:0">Pick a routine, then use the buttons to act like the child. Rafeeq "sees" what happens, decides what to say, and adapts. Turn on sound to hear it speak.</p>
+    <div class="sim">
+      <div>
+        <div class="stage" id="stage">
+          <div class="tiles"></div><div class="mirror"></div><div class="counter"></div>
+          <div class="calmglow" id="calmglow"></div>
+          <svg id="noise" viewBox="0 0 400 400"></svg>
+          <div id="kidWrap"></div>
+          <div id="owlWrap"></div>
+          <div class="breath" id="breath">Breathe in</div>
+          <div class="cheer" id="cheer"></div>
+          <div class="bubble hide" id="bubble"><div class="ar" id="bAr"></div><div class="en" id="bEn"></div></div>
+          <div class="redglow" id="redglow"></div>
+        </div>
+        <div class="report" id="report"></div>
+      </div>
+      <div class="ctl">
+        <div class="panel">
+          <h3>1 · Choose a routine</h3>
+          <select id="routine">
+            <option value="teeth">🪥 Brushing teeth</option>
+            <option value="hands">🧼 Washing hands</option>
+            <option value="bag">🎒 Packing the school bag</option>
+          </select>
+          <div style="margin-top:12px" class="lbl"><span>Week of using Rafeeq</span><span id="weekLbl">Week 1 · full guidance</span></div>
+          <input type="range" id="week" min="1" max="4" value="1">
+          <div class="row" style="margin-top:10px"><button class="btn primary" id="start" style="padding:10px 16px">▶ Start</button><button class="btn ghost" id="auto" style="padding:10px 16px">🎬 Auto demo</button><button class="btn ghost" id="sound" style="padding:10px 16px">🔈 Sound off</button></div>
+        </div>
+        <div class="panel">
+          <h3>2 · Act like the child</h3>
+          <div class="act">
+            <button data-a="do">✅ Do the step</button>
+            <button data-a="stuck">⏸ Get stuck</button>
+            <button data-a="distract">🙈 Get distracted</button>
+            <button data-a="overload">😣 Too loud!</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="lbl"><span>Routine</span><span class="mode" id="mode">Waiting</span></div>
+          <ul class="steps" id="steps" style="margin-top:10px"></ul>
+          <div class="meter" style="margin-top:14px"><div class="lbl"><span>Stress level</span><span id="pct">20%</span></div><div class="track"><div class="fill" id="fill"></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:20px">
+      <h3>What the AI is thinking <span class="note">(simulated vision-model output)</span></h3>
+      <div class="log" id="log">Press ▶ Start to begin.</div>
+    </div>
+  </section>
+
+  <section id="video">
+    <div class="kick">Prototype video</div>
+    <h2>Yousef's morning with Rafeeq</h2>
+    <p class="note" style="margin-top:0">A 1-minute story: sensory overload during the morning routine, and how Rafeeq helps. English narrator, Gulf Arabic voice for Rafeeq.</p>
+    <video controls preload="metadata" playsinline src="rafeeq-prototype-video.mp4"></video>
+  </section>
+
+  <section id="how">
+    <div class="kick">How it works</div>
+    <h2>See. Think. Coach. Step back.</h2>
+    <div class="grid3" style="margin-top:16px">
+      <div class="card"><div class="big">1</div><h3>Sees</h3><p>A camera watches the routine. A vision-language model (Claude Opus 5.5) checks whether the current step is done, in progress, or off track. Frames are never stored.</p></div>
+      <div class="card"><div class="big">2</div><h3>Coaches</h3><p>An LLM writes short, kind prompts in Kuwaiti Arabic. Gulf-Arabic speech recognition and text-to-speech make it feel like talking to a friend.</p></div>
+      <div class="card"><div class="big">3</div><h3>Steps back</h3><p>A prompt-fading algorithm gives less help each week, and calm mode reacts to early signs of overload. The goal: the child needs Rafeeq less over time.</p></div>
+    </div>
+  </section>
+</main>
+<footer class="wrap">Rafeeq رفيق · ATSN26 entry · This page is a simulation: Rafeeq's responses here are scripted to show how the real system behaves. · <a href="https://github.com/abdullahnaji353-blip/rafeeq">Source on GitHub</a></footer>
+
+<script>
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), lerp=(a,b,t)=>a+(b-a)*t, $=id=>document.getElementById(id);
+// ---------- characters ----------
+$("kidWrap").innerHTML=`<svg id="kid" viewBox="0 0 300 440" style="width:100%;overflow:visible"><g class="rock" style="transform-origin:150px 430px;transition:transform .15s">
+<rect x="88" y="236" width="124" height="180" rx="54" fill="#2A9D8F"/><rect x="128" y="226" width="44" height="24" rx="10" fill="#E2B08A"/>
+<g class="armL" style="transform-origin:100px 262px;transition:transform .3s"><rect x="86" y="256" width="30" height="120" rx="15" fill="#2A9D8F"/><circle cx="101" cy="380" r="19" fill="#E2B08A"/></g>
+<g class="armR" style="transform-origin:200px 262px;transition:transform .3s"><rect x="184" y="256" width="30" height="120" rx="15" fill="#2A9D8F"/><g class="prop"></g><circle cx="199" cy="380" r="19" fill="#E2B08A"/></g>
+<circle cx="150" cy="140" r="96" fill="#E8BC94"/><circle cx="56" cy="148" r="18" fill="#E2B08A"/><circle cx="244" cy="148" r="18" fill="#E2B08A"/>
+<path d="M58 128 C60 40 240 30 244 126 C220 86 170 78 150 92 C126 74 80 88 58 128 Z" fill="#2B1D16"/>
+<ellipse class="e" cx="114" cy="150" rx="11" ry="12" fill="#14213D"/><ellipse class="e" cx="186" cy="150" rx="11" ry="12" fill="#14213D"/>
+<path class="bL" d="M96 120 L130 122" stroke="#2B1D16" stroke-width="7" stroke-linecap="round"/><path class="bR" d="M170 122 L204 120" stroke="#2B1D16" stroke-width="7" stroke-linecap="round"/>
+<path class="mouth" d="M120 192 Q150 214 180 192" stroke="#8C3B2A" stroke-width="8" fill="none" stroke-linecap="round"/></g></svg>`;
+$("owlWrap").innerHTML=`<svg id="owl" viewBox="0 0 400 440" style="width:100%;overflow:visible"><circle class="glow" cx="200" cy="230" r="210" fill="#8FBCE0" opacity="0"/><circle class="ring" cx="200" cy="230" r="60" fill="none" stroke="#7FE0C3" stroke-width="10" opacity="0"/>
+<path d="M85 95 L120 150 L150 100 Z" fill="#C4561C"/><path d="M315 95 L280 150 L250 100 Z" fill="#C4561C"/><ellipse cx="200" cy="230" rx="150" ry="165" fill="#E76F2E"/><ellipse cx="200" cy="275" rx="95" ry="110" fill="#F4C9A8"/>
+<ellipse class="w" cx="140" cy="185" rx="58" ry="58" fill="#fff"/><ellipse class="w" cx="260" cy="185" rx="58" ry="58" fill="#fff"/><ellipse class="p" cx="140" cy="190" rx="26" ry="26" fill="#14213D"/><ellipse class="p" cx="244" cy="190" rx="26" ry="26" fill="#14213D"/>
+<path class="beak" d="M185 235 L215 235 L200 262 Z" fill="#14213D" style="transform-origin:200px 235px"/></svg>`;
+const PROPS={teeth:'<rect x="192" y="330" width="14" height="110" rx="7" fill="#4C8BF5"/><rect x="188" y="440" width="22" height="34" rx="6" fill="#EAF2FF"/>',hands:'<rect x="182" y="392" width="34" height="24" rx="8" fill="#F7D774"/>',bag:'<rect x="168" y="380" width="64" height="70" rx="14" fill="#E5484D"/>'};
+let pose={ears:0,mood:.6,rock:0,blink:0,armR:-8};
+function drawKid(){const k=$("kid");k.querySelector(".rock").style.transform=`rotate(${pose.rock}deg)`;k.querySelector(".armL").style.transform=`rotate(${lerp(8,152,pose.ears)}deg)`;k.querySelector(".armR").style.transform=`rotate(${pose.ears>.5?lerp(-8,-152,pose.ears):pose.armR}deg)`;
+const m=pose.mood;k.querySelector(".mouth").setAttribute("d",`M120 ${200-6*m} Q150 ${200+22*m} 180 ${200-6*m}`);const t=m<0?-m*10:0;k.querySelector(".bL").setAttribute("d",`M96 ${120+t} L130 ${122-t}`);k.querySelector(".bR").setAttribute("d",`M170 ${122-t} L204 ${120+t}`);
+k.querySelectorAll(".e").forEach(e=>e.setAttribute("ry",12*(1-.9*pose.blink)));}
+let owlS={talk:0,glow:0,sleepy:0,look:-14};
+function drawOwl(t){const o=$("owl");const shut=Math.max(owlS.sleepy*.5,(t%3.2)<.15?1:0);o.querySelectorAll(".w").forEach(e=>e.setAttribute("ry",58*(1-.85*shut)));o.querySelectorAll(".p").forEach((e,i)=>{e.setAttribute("ry",26*(1-shut));e.setAttribute("cx",(i?252:148)+owlS.look)});
+o.querySelector(".beak").style.transform=`scaleY(${1+.7*owlS.talk})`;o.querySelector(".glow").setAttribute("opacity",.35*owlS.glow);}
+function drawNoise(amt,t){let h="";for(let k=0;k<3;k++){const r=90+k*55,a=amt*(.6+.4*Math.sin(t*9+k));let pts=[];for(let i=0;i<=14;i++){const ang=-.9+1.8*i/14,j=(i%2?1:-1)*14*a;pts.push(`${200+Math.cos(ang)*(r+j)},${200+Math.sin(ang)*(r+j)}`)}h+=`<polyline points="${pts.join(" ")}" fill="none" stroke="#E5484D" stroke-width="9" stroke-linecap="round" opacity="${clamp(a)}"/>`;}$("noise").innerHTML=h;}
+// ---------- data ----------
+const R={
+ teeth:{en:["Pick up the toothbrush","Put on toothpaste","Brush up and down","Rinse and put it back"],
+  full:[["يلا يوسف، امسك الفرشاة","Come on Yousef, pick up the toothbrush"],["الحين حط شوية معجون","Now put a little toothpaste on"],["فرّش فوق وتحت، شوي شوي","Brush up and down, slowly"],["آخر شي، اغسل ورجّع الفرشاة","Last one, rinse and put it back"]],
+  light:[["الفرشاة؟","The toothbrush?"],["والمعجون؟","And the toothpaste?"],["فوق وتحت","Up and down"],["رجّعها مكانها","Back in its place"]]},
+ hands:{en:["Turn on the tap","Put soap on your hands","Rub hands together","Dry with the towel"],
+  full:[["يلا نفتح الماي","Let's turn on the water"],["حط صابون على يدينك","Put soap on your hands"],["افرك يدينك زين","Rub your hands well"],["نشّف يدينك بالفوطة","Dry your hands with the towel"]],
+  light:[["الماي؟","The water?"],["الصابون؟","The soap?"],["افرك","Rub"],["الفوطة","The towel"]]},
+ bag:{en:["Get your school bag","Put in your notebooks","Add your pencil case","Zip the bag closed"],
+  full:[["جيب شنطة المدرسة","Get your school bag"],["حط الدفاتر داخل الشنطة","Put the notebooks in the bag"],["لا تنسى المقلمة","Don't forget the pencil case"],["سكّر الشنطة","Zip the bag closed"]],
+  light:[["الشنطة؟","The bag?"],["الدفاتر؟","Notebooks?"],["المقلمة؟","Pencil case?"],["سكّرها","Close it"]]}};
+const CHEERS=[["شاطر","Great job"],["عفية عليك","Well done"],["ممتاز","Excellent"],["برافو يوسف","Bravo Yousef"]];
+const DISTRACT=[["يوسف، أنا هني، خلنا نكمل","Yousef, I'm here, let's continue"],["ركّز معاي شوي","Focus with me a little"]];
+// ---------- state ----------
+let S=null, sound=false, autoTimer=null;
+const weekInfo=w=>["","Week 1 · full guidance","Week 2 · lighter hints","Week 3 · short nudges","Week 4 · silent unless stuck"][w];
+function log(obj,note){const el=$("log");const line=(note?`<span class="k">// ${note}</span>\n`:"")+JSON.stringify(obj);el.innerHTML=(el.dataset.started?el.innerHTML+"\n":"")+line;el.dataset.started=1;el.scrollTop=1e9;}
+function say(ar,en){$("bAr").textContent=ar;$("bEn").textContent=en;const b=$("bubble");b.classList.remove("hide");owlS.talkUntil=performance.now()+1600;
+ if(sound&&"speechSynthesis"in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(ar);const v=speechSynthesis.getVoices().find(v=>/^ar/i.test(v.lang));if(v)u.voice=v;u.lang=v?v.lang:"ar-SA";u.rate=.9;speechSynthesis.speak(u);}}
+function setStress(v){S.stress=clamp(v,5,95);$("pct").textContent=Math.round(S.stress)+"%";const f=$("fill");f.style.width=S.stress+"%";f.style.background=S.stress>60?"var(--red)":S.stress>40?"#F4A261":"var(--green)";$("redglow").style.opacity=S.stress>60?(S.stress-60)/40:0;}
+function renderSteps(){const r=R[S.key];$("steps").innerHTML=r.en.map((s,i)=>`<li class="${i<S.step?"done":i===S.step&&!S.finished?"now":""}"><span class="c">${i<S.step?"✓":i+1}</span>${s}</li>`).join("");}
+function setMode(m){const el=$("mode");el.textContent=m;el.className="mode"+(m==="Calm mode"?" calm":"");}
+function prompt(){const r=R[S.key],i=S.step,w=S.week;
+ if(w===1){say(...r.full[i]);S.hints++;log({step:r.en[i],status:"in_progress",hint_level:0,say:r.full[i][0]},"week 1: full guidance");}
+ else if(w<=3){say(...r.light[i]);S.hints++;log({step:r.en[i],status:"in_progress",hint_level:w-1,say:r.light[i][0]},`week ${w}: lighter hint`);}
+ else{$("bubble").classList.add("hide");log({step:r.en[i],status:"in_progress",hint_level:3,say:""},"week 4: staying silent, child is on track");}}
+function start(){stopAuto();const key=$("routine").value,week=+$("week").value;S={key,week,step:0,hints:0,calms:0,alone:0,stress:20,calm:false,finished:false,stuckOnStep:false,t0:performance.now()};
+ $("log").innerHTML="";delete $("log").dataset.started;$("report").classList.remove("show");$("kid").querySelector(".prop").innerHTML=PROPS[key];
+ Object.assign(pose,{ears:0,mood:.6,rock:0,armR:-8});setStress(20);exitCalm(true);renderSteps();setMode("Coaching");enableActs(true);
+ log({event:"routine_started",routine:key,week,language:"ar-KW"},"Rafeeq wakes up");setTimeout(()=>{say(...[["صباح الخير يوسف","Good morning, Yousef"]][0]);setTimeout(prompt,1500)},300);}
+function enableActs(on){document.querySelectorAll(".act button").forEach(b=>b.disabled=!on);}
+function act(a){if(!S||S.finished)return;const r=R[S.key];
+ if(S.calm&&a!=="overload"){log({status:"calming",note:"waiting until stress is low before continuing"},"calm mode active");return;}
+ if(a==="do"){const helped=S.week===1||S.stuckOnStep||S.distracted;if(!helped)S.alone++;S.stuckOnStep=false;S.distracted=false;
+  pose.armR=-80;setTimeout(()=>pose.armR=-8,700);pose.mood=1;setStress(S.stress-6);
+  const c=CHEERS[S.step%4];log({step:r.en[S.step],status:"done",confidence:0.94,say:c[0]},"vision model: step completed");cheer(c[0]);say(...c);S.step++;renderSteps();
+  if(S.step>=r.en.length){finish();return;}setTimeout(prompt,1600);}
+ else if(a==="stuck"){S.stuckOnStep=true;pose.mood=.1;S.hints++;say(...r.full[S.step]);log({step:r.en[S.step],status:"stuck",seconds_idle:12,say:r.full[S.step][0]},"no progress → giving a full hint (fading resets for this step)");}
+ else if(a==="distract"){S.distracted=true;pose.mood=.3;owlS.look=-24;setTimeout(()=>owlS.look=-14,1500);S.hints++;const d=DISTRACT[S.hints%2];say(...d);log({step:r.en[S.step],status:"off_task",gaze:"away",say:d[0]},"child looked away → head turn + gentle nudge");setStress(S.stress+4);}
+ else if(a==="overload"){overload();}}
+function overload(){if(S.calm)return;setMode("Overload!");pose.ears=1;pose.mood=-1;S.over=true;let v=S.stress;const iv=setInterval(()=>{v+=12;setStress(v);if(v>=88){clearInterval(iv);
+  log({signals:["hands_on_ears","rocking","raised_voice"],stress_score:0.88,action:"enter_calm_mode"},"early signs of sensory overload detected");setTimeout(enterCalm,700);}},180);
+ $("bubble").classList.add("hide");log({audio:"tap water 78 dB",child:"covering ears"},"environment getting loud");}
+function enterCalm(){S.calm=true;S.calms++;setMode("Calm mode");$("calmglow").style.opacity=.85;$("breath").style.opacity=1;owlS.glow=1;owlS.sleepy=.8;say("خذ نفس معاي... شهيق... زفير","Breathe with me... in... and out");
+ let n=0;const iv=setInterval(()=>{n++;setStress(S.stress-9);if(n>4)pose.ears=clamp(pose.ears-.25);pose.mood=lerp(-1,.6,n/9);if(n>=9){clearInterval(iv);exitCalm();}},700);}
+function exitCalm(silent){if(S){S.calm=false;S.over=false;}$("calmglow").style.opacity=0;$("breath").style.opacity=0;owlS.glow=0;owlS.sleepy=0;pose.ears=0;
+ if(!silent&&S&&!S.finished){setMode("Coaching");say("خلنا نكمل، خطوة صغيرة بس","Let's keep going, just one small step");log({stress_score:0.22,action:"resume_routine"},"child is calm again");setTimeout(prompt,2200);}}
+function cheer(t){const c=$("cheer");c.textContent=t;c.style.transition="none";c.style.opacity=1;c.style.transform="translateY(0)";requestAnimationFrame(()=>{c.style.transition="opacity .5s .5s,transform 1s";c.style.opacity=0;c.style.transform="translateY(-40px)";});owlS.hop=performance.now();}
+function finish(){S.finished=true;setMode("Done 🎉");enableActs(false);renderSteps();setTimeout(()=>say("عفية عليك يوسف، خلصت كل شي","Well done Yousef, you finished everything"),1700);
+ const secs=Math.round((performance.now()-S.t0)/1000),total=R[S.key].en.length;
+ log({event:"routine_complete",steps_alone:S.alone,hints:S.hints,calm_downs:S.calms,seconds:secs},"parent report sent");
+ $("report").innerHTML=`<div class="kick" style="color:#F4A261">📱 Parent report · تقرير ولي الأمر</div><h3 style="margin:6px 0 10px;font-size:22px">${$("routine").selectedOptions[0].text}: finished</h3>
+ <div>Steps done without any hint: <b>${S.alone} of ${total}</b> · Hints given: <b>${S.hints}</b> · Calm-downs: <b>${S.calms}</b> · Time: <b>${secs}s</b></div>
+ <div class="note" style="color:#C9D3E3;margin-top:8px">${S.week<4?"Try a later week on the slider to see Rafeeq give less help.":"Week 4: Rafeeq only spoke when it was really needed. That's the goal."}</div>`;$("report").classList.add("show");}
+// auto demo (like the video)
+function stopAuto(){if(autoTimer){autoTimer.forEach(clearTimeout);autoTimer=null;}}
+function auto(){$("routine").value="teeth";$("week").value=1;$("weekLbl").textContent=weekInfo(1);start();const plan=[[3800,"do"],[7200,"overload"],[17500,"do"],[21500,"distract"],[24500,"do"],[28500,"do"]];autoTimer=plan.map(([t,a])=>setTimeout(()=>act(a),t));
+ document.getElementById("sim").scrollIntoView({behavior:"smooth"});}
+// wiring
+$("start").onclick=start;$("auto").onclick=auto;$("week").oninput=e=>$("weekLbl").textContent=weekInfo(+e.target.value);
+$("sound").onclick=()=>{sound=!sound;$("sound").textContent=sound?"🔊 Sound on":"🔈 Sound off";if(sound&&"speechSynthesis"in window)speechSynthesis.getVoices();};
+document.querySelectorAll(".act button").forEach(b=>b.onclick=()=>act(b.dataset.a));enableActs(false);
+// animation loop
+function loop(now){const t=now/1000;
+ if(S&&S.over&&!S.calm)pose.rock=7*Math.sin(t*6.5);else if(S&&S.calm)pose.rock=pose.ears*7*Math.sin(t*6.5);else pose.rock=0;
+ pose.blink=(t%2.9)<.14?1:(pose.ears>.5?.85:0);drawKid();
+ owlS.talk=owlS.talkUntil&&now<owlS.talkUntil?Math.abs(Math.sin(t*11)):0;drawOwl(t);
+ const hop=owlS.hop&&now-owlS.hop<400?Math.sin((now-owlS.hop)/400*Math.PI)*18:0;$("owlWrap").style.transform=`translateY(${-hop}px)`;
+ drawNoise(S&&(S.over||S.calm)?clamp((S.stress-30)/60):0,t);
+ if(S&&S.calm){const br=.5-.5*Math.cos(t*2*Math.PI/4);$("breath").style.transform=`translate(-50%,-50%) scale(${.75+.45*br})`;$("breath").textContent=Math.sin(t*2*Math.PI/4)>=0?"Breathe in":"Breathe out";}
+ requestAnimationFrame(loop);}
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
