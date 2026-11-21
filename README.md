@@ -28,19 +28,21 @@ Rafeeq is a small, owl-shaped AI robot that sits where routines happen. It watch
 - **Arabic-first:** Gulf-dialect speech in and out
 
 ## How the AI works
+Everything runs **on the device, offline**, using **Gemma 3 (4B)**, Google's open vision-language model, served locally with **[Ollama](https://ollama.com)**. No cloud and no API costs.
+
 | Step | Technology |
 |---|---|
-| See the task | Claude Opus 5.5 (vision), with Gemini as a backup. The demo also runs free on a local Ollama model (Gemma 3) |
-| Plan and coach | Claude Opus 5.5 writes short, personalized prompts in Kuwaiti Arabic |
-| Listen | Whisper fine-tuned for Gulf Arabic |
-| Speak | Gulf Arabic text-to-speech |
+| See the task | Gemma 3 4B (vision) via Ollama checks each camera frame: step done, in progress, stuck, or off task |
+| Plan and coach | Gemma 3 writes short, personalized prompts in Kuwaiti Arabic, matched to the child's hint level |
+| Listen | Whisper, running locally |
+| Speak | Local Arabic text-to-speech |
 | Calm mode | Lightweight on-device stress classifier (voice and movement) |
 | Independence | Prompt-fading algorithm: full guidance, then lighter hints, then silence |
 
-**Privacy:** no video is stored. Frames are analyzed, then deleted. Parents control all routines and data.
+**Privacy:** the AI runs inside Rafeeq, so video never leaves the home. Frames are analyzed, then deleted. Parents control all routines and data.
 
 ## Planned hardware
-ESP32-S3 camera board, 2 servos (head turn and tilt), speaker, LED eyes, 3D-printed owl body.
+Raspberry Pi 5 hub in the base (runs Ollama + Gemma 3, Whisper and the voice), ESP32-S3 camera board, 2 servos (head turn and tilt), speaker and mic, LED eyes, 3D-printed owl body.
 
 ## Status
 Idea stage. Coming next:

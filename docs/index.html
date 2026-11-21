@@ -143,6 +143,10 @@ input[type=range]{width:100%;accent-color:var(--orange)}
 .pipe .card{padding:20px;position:relative}
 .pipe .card small{display:inline-block;background:var(--bg2);border-radius:8px;padding:2px 8px;font-weight:700;font-size:12px;margin-bottom:8px;color:var(--deep)}
 .pipe .card p{font-size:14px}
+.model{margin-top:14px;display:grid;grid-template-columns:1fr 1.1fr;gap:20px;background:var(--ink);color:#F7F3EE;border-radius:28px;padding:26px 28px;align-items:center}
+.mH{font-size:34px;font-weight:800;letter-spacing:-.01em;margin:4px 0}.mD{color:#C9D3E3}
+.mTag{display:inline-block;margin-top:12px;font:13px ui-monospace,Menlo,monospace;background:#0B1222;color:#7FE0C3;border-radius:10px;padding:7px 12px;direction:ltr}
+.mGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mGrid div{background:rgba(255,255,255,.07);border-radius:16px;padding:14px;font-weight:700;display:flex;gap:10px;align-items:center}
 .calmCard{margin-top:14px;display:flex;gap:16px;align-items:center;background:#E8F1FA;border-radius:var(--r);padding:18px 22px}
 /* hardware */
 .hw{display:grid;grid-template-columns:.9fr 1.1fr;gap:30px;align-items:center}
@@ -165,7 +169,7 @@ html[dir=rtl] .crit .card b{letter-spacing:0}
 footer{padding:40px 0 60px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
 .reveal.in{opacity:1;transform:none}
-@media(max-width:1020px){.simTop{grid-template-columns:1fr}.phone{max-width:340px;margin:auto;width:100%}.ctlRow{grid-template-columns:1fr 1fr}.ctlRow .panel:last-child{grid-column:1/-1}.pipe{grid-template-columns:1fr 1fr}.crit{grid-template-columns:1fr 1fr}}
+@media(max-width:1020px){.simTop{grid-template-columns:1fr}.phone{max-width:340px;margin:auto;width:100%}.ctlRow{grid-template-columns:1fr 1fr}.ctlRow .panel:last-child{grid-column:1/-1}.pipe{grid-template-columns:1fr 1fr}.model{grid-template-columns:1fr}.crit{grid-template-columns:1fr 1fr}}
 @media(max-width:760px){.hero,.hw,.botRow{grid-template-columns:1fr}.grid3,.ctlRow,.pipe,.crit{grid-template-columns:1fr}.links{display:none}.chip{display:none}section{padding:50px 0}.band{flex-direction:column;align-items:flex-start}.screen{min-height:330px}.stageHud{top:auto;bottom:10px}#hudWeek{display:none}.bubble{width:50%;padding:10px 12px}.feed{max-height:200px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
@@ -185,7 +189,7 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:14px;border-top:1px soli
       <h1 data-i="hero.h1"></h1>
       <p class="lead" data-i="hero.lead"></p>
       <div class="row" style="margin-top:24px"><a class="btn primary" href="#sim" data-i="hero.cta1"></a><a class="btn ghost" href="#video" data-i="hero.cta2"></a></div>
-      <div class="badges"><span class="badge" data-i="b1"></span><span class="badge" data-i="b2"></span><span class="badge" data-i="b3"></span></div>
+      <div class="badges"><span class="badge" data-i="b1"></span><span class="badge" data-i="b2"></span><span class="badge" data-i="b3"></span><span class="badge" data-i="b4"></span></div>
     </div>
     <div class="owlHero reveal">
       <div class="blob"></div>
@@ -256,7 +260,7 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:14px;border-top:1px soli
 
   <div class="botRow">
     <div class="panel"><h3>🧠 <span data-i="log.t"></span></h3><div class="note" style="margin:-2px 0 10px" data-i="log.n"></div><div class="log" id="log"></div></div>
-    <div class="panel"><h3>📉 <span data-i="fd.t"></span></h3><div class="note" style="margin:-2px 0 6px" data-i="fd.n"></div><svg class="chart" id="chart" viewBox="0 0 420 230"></svg><div class="note" id="fdCap" style="margin-top:6px"></div></div>
+    <div class="panel"><h3>📉 <span data-i="fd.t"></span></h3><div class="note" style="margin:-2px 0 6px" data-i="fd.n"></div><svg class="chart" id="chart" viewBox="0 0 420 236"></svg><div class="note" id="fdCap" style="margin-top:6px"></div></div>
   </div>
 </div></section>
 
@@ -269,6 +273,8 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:14px;border-top:1px soli
     <div class="card reveal"><small>04</small><h3 data-i="p4t"></h3><p data-i="p4d"></p></div>
     <div class="card reveal"><small>05</small><h3 data-i="p5t"></h3><p data-i="p5d"></p></div>
   </div>
+  <div class="model reveal"><div class="mL"><div class="kick" style="color:#F4A261" data-i="m.kick"></div><div class="mH" data-i="m.h"></div><div class="mD" data-i="m.d"></div><div class="mTag">ollama run gemma3:4b</div></div>
+    <div class="mGrid"><div>📴<span data-i="m1"></span></div><div>💸<span data-i="m2"></span></div><div>🏠<span data-i="m3"></span></div><div>🔄<span data-i="m4"></span></div></div></div>
   <div class="calmCard reveal"><span style="font-size:30px">🫧</span><div><b data-i="calm.t"></b><div class="note" style="font-size:14px" data-i="calm.d"></div></div></div>
 </div></section>
 
@@ -280,7 +286,8 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:14px;border-top:1px soli
       <button class="pin" data-p="1" style="left:46%;top:24%">1</button>
       <button class="pin" data-p="2" style="left:27%;top:36%">2</button>
       <button class="pin" data-p="3" style="left:46%;top:68%">3</button>
-      <button class="pin" data-p="4" style="left:46%;top:88%">4</button>
+      <button class="pin" data-p="4" style="left:12%;top:52%">4</button>
+      <button class="pin" data-p="6" style="left:46%;top:88%">6</button>
       <button class="pin" data-p="5" style="left:76%;top:58%">5</button>
     </div>
     <div>
@@ -290,6 +297,7 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:14px;border-top:1px soli
         <li data-p="3"><span class="num">3</span><div><h3 data-i="hw3t"></h3><p data-i="hw3d"></p></div></li>
         <li data-p="4"><span class="num">4</span><div><h3 data-i="hw4t"></h3><p data-i="hw4d"></p></div></li>
         <li data-p="5"><span class="num">5</span><div><h3 data-i="hw5t"></h3><p data-i="hw5d"></p></div></li>
+        <li data-p="6"><span class="num">6</span><div><h3 data-i="hw6t"></h3><p data-i="hw6d"></p></div></li>
       </ul>
       <div class="privacy"><span style="font-size:22px">🔒</span><span data-i="priv"></span></div>
     </div>
@@ -321,8 +329,8 @@ const L={en:{
 "nav.sim":"Simulation","nav.how":"How it works","nav.hw":"Hardware","nav.vid":"Video",
 "hero.kick":"ATSN26 · Gen-AI &amp; Software Innovation","hero.h1":"The AI buddy that teaches kids to <span class='hl'>not need it.</span>",
 "hero.lead":"Rafeeq is a small owl robot for children with autism, Down syndrome and ADHD. It sees the daily routine, coaches each step in Kuwaiti Arabic, calms sensory overload early, and gives less help every week.",
-"hero.cta1":"▶ Try the simulation","hero.cta2":"Watch the story","b1":"🗣️ Speaks Kuwaiti Arabic","b2":"🫧 Calm mode","b3":"📉 Hints fade over time",
-"chip1":"praise after every step","chip2":"🔒 No video stored","chip2s":"frames analyzed, then deleted",
+"hero.cta1":"▶ Try the simulation","hero.cta2":"Watch the story","b1":"🗣️ Speaks Kuwaiti Arabic","b2":"🫧 Calm mode","b3":"📉 Hints fade over time","b4":"🧠 Gemma 3 via Ollama",
+"chip1":"praise after every step","chip2":"🔒 Runs offline at home","chip2s":"no cloud, no video stored",
 "pr.kick":"The problem","pr.h2":"Daily routines are hard, and today's tools can't see.",
 "pr.1t":"Picture charts are blind","pr.1d":"A chart on the wall can't tell if the child skipped a step, got stuck, or is getting overwhelmed.",
 "pr.2t":"Parents become the prompt","pr.2d":"A parent stands beside the child at every step, every morning. The child learns to wait for them instead of doing it alone.",
@@ -335,8 +343,8 @@ const L={en:{
 "r.teeth":"🪥 Brushing teeth","r.hands":"🧼 Washing hands","r.bag":"🎒 Packing the school bag",
 "wk":"Week with Rafeeq","btn.start":"▶ Start","btn.auto":"🎬 Auto demo","snd.on":"🔊 Sound on","snd.off":"🔈 Sound off",
 "a.do":"Do the step","a.stuck":"Get stuck","a.distract":"Get distracted","a.overload":"Too loud!",
-"stress":"Stress level","log.t":"What the AI is thinking","log.n":"Simulated output of the vision + coaching models",
-"fd.t":"Hints fade every week","fd.n":"How much Rafeeq talks for each step",
+"stress":"Stress level","log.t":"What the AI is thinking","log.n":"Simulated output of Gemma 3 (vision + coaching) running locally through Ollama",
+"fd.t":"Hints fade every week","fd.n":"Bars: how much Rafeeq talks per step. Line: steps the child does alone (example)","lg.help":"Rafeeq's help","lg.alone":"Done alone",
 "w1":"Week 1 · full guidance","w2":"Week 2 · lighter hints","w3":"Week 3 · short nudges","w4":"Week 4 · silent unless stuck",
 "wS1":"Week 1","wS2":"Week 2","wS3":"Week 3","wS4":"Week 4",
 "fd1":"Week 1: a full sentence for every step.","fd2":"Week 2: just the key word.","fd3":"Week 3: a one-word nudge.","fd4":"Week 4: silent. Rafeeq only speaks if the child gets stuck.",
@@ -347,30 +355,30 @@ const L={en:{
 "rep.t":"Report sent to parent","rep.alone":"Steps done alone","rep.hints":"Hints","rep.calms":"Calm-downs","rep.time":"Time",
 "rep.tip1":"Try Week 4 on the slider to see Rafeeq stay quiet.","rep.tip4":"Week 4: Rafeeq only spoke when it was really needed. That's the goal.",
 "logStart":"Press ▶ Start to begin.",
-"how.kick":"How it works","how.h2":"See → Think → Coach → Step back","how.sub":"Generative AI is the core: a vision-language model understands what the child is doing, and an LLM writes each prompt fresh, short and kind, in Kuwaiti Arabic.",
-"p1t":"See","p1d":"The camera sends a frame every few seconds. Claude Opus 5.5 (vision) decides: step done, in progress, stuck, or off task.",
+"how.kick":"How it works","how.h2":"See → Think → Coach → Step back","how.sub":"Generative AI is the core. Google's open Gemma 3 model runs on a small hub inside Rafeeq through Ollama: it understands what the child is doing and writes every prompt fresh, short and kind, in Kuwaiti Arabic. No cloud, no API bills.",
+"p1t":"See","p1d":"The camera sends a frame every few seconds. Gemma 3 (4B, vision) decides: step done, in progress, stuck, or off task.",
 "p2t":"Think","p2d":"The routine planner knows the steps, the child's week, and what helped last time.",
-"p3t":"Coach","p3d":"Claude writes one short prompt in Kuwaiti Arabic, matched to the child's hint level.",
-"p4t":"Speak &amp; listen","p4d":"Gulf-Arabic text-to-speech talks; Whisper fine-tuned for Gulf Arabic listens to the child.",
+"p3t":"Coach","p3d":"Gemma writes one short prompt in Kuwaiti Arabic, matched to the child's hint level.",
+"p4t":"Speak &amp; listen","p4d":"Local Arabic text-to-speech talks; Whisper, running on the hub, listens to the child.",
 "p5t":"Step back","p5d":"The fading algorithm lowers help each week and resets only when the child struggles.",
-"calm.t":"Calm mode runs on the device","calm.d":"A light stress classifier watches voice and movement (hands on ears, rocking, raised voice). Before a meltdown builds, Rafeeq dims its eyes, lowers its voice and starts a breathing game.",
+"m.kick":"The model","m.h":"Gemma 3 · 4B","m.d":"Open model from Google, run with Ollama. Sees images and writes Arabic.","m1":"Runs offline","m2":"$0 per month","m3":"Video never leaves home","m4":"Swap or upgrade anytime","calm.t":"Calm mode runs on the device","calm.d":"A light stress classifier watches voice and movement (hands on ears, rocking, raised voice). Before a meltdown builds, Rafeeq dims its eyes, lowers its voice and starts a breathing game.",
 "hw.kick":"Hardware","hw.h2":"Small, soft, and built from cheap parts","hw.sub":"Tap a number to see each part. Designed to sit on a bathroom counter or a bedroom desk.",
-"hw1t":"ESP32-S3 camera","hw1d":"Sees the routine. Frames go to the AI and are deleted right after.","hw2t":"LED eyes","hw2d":"Change color with Rafeeq's mood: teal when coaching, blue in calm mode, gold when celebrating.",
-"hw3t":"Speaker &amp; mic","hw3d":"Talks in a soft Gulf-Arabic voice and hears the child answer.","hw4t":"2 servos","hw4d":"Turn and tilt the head, so Rafeeq can look at the child and nod.","hw5t":"3D-printed owl body","hw5d":"Rounded, friendly, no sharp edges. Printable at a school makerspace.",
-"priv":"No video is stored. Parents control every routine and all data.",
+"hw1t":"ESP32-S3 camera","hw1d":"Sees the routine. Frames go straight to the hub in the base and are deleted right after.","hw2t":"LED eyes","hw2d":"Change color with Rafeeq's mood: teal when coaching, blue in calm mode, gold when celebrating.",
+"hw3t":"Speaker &amp; mic","hw3d":"Talks in a soft Gulf-Arabic voice and hears the child answer.","hw4t":"2 servos","hw4d":"Turn and tilt the head, so Rafeeq can look at the child and nod.","hw5t":"3D-printed owl body","hw5d":"Rounded, friendly, no sharp edges. Printable at a school makerspace.","hw6t":"Home hub: Raspberry Pi 5","hw6d":"Hidden in the base. Runs Ollama with Gemma 3, Whisper and the voice, so the AI works with no internet.",
+"priv":"No cloud and no stored video. The AI runs inside Rafeeq, and parents control every routine and all data.",
 "vid.kick":"Prototype video","vid.h2":"Yousef's morning with Rafeeq","vid.sub":"A 1-minute story: sensory overload during the morning routine, and how Rafeeq helps. English narrator, Gulf Arabic voice for Rafeeq.",
 "cr.kick":"For the judges","cr.h2":"How Rafeeq meets the criteria",
 "cr1t":"Autonomy impact","cr1d":"Built to make the child independent: help fades until the child does the routine alone.",
-"cr2t":"Gen-AI innovation","cr2d":"Vision-language understanding of real routines plus LLM-written, personalized Arabic coaching.",
+"cr2t":"Gen-AI innovation","cr2d":"An open vision-language model (Gemma 3) understands real routines and writes personalized Arabic coaching, all on the device.",
 "cr3t":"Usability","cr3d":"No screen for the child: just a friendly voice. Parents get a simple Arabic report on their phone.",
-"cr4t":"Feasibility &amp; Arabic","cr4d":"Off-the-shelf parts, a working demo in the repo, and Kuwaiti Arabic from day one.",
+"cr4t":"Feasibility &amp; Arabic","cr4d":"Off-the-shelf parts, a free open model with no API costs, a working demo in the repo, and Kuwaiti Arabic from day one.",
 "foot":"Rafeeq رفيق · ATSN26 entry · This page is a simulation: Rafeeq's responses here are scripted to show how the real system behaves.","foot.gh":"Source on GitHub →"
 },ar:{
 "nav.sim":"المحاكاة","nav.how":"كيف يشتغل","nav.hw":"القطع","nav.vid":"الفيديو",
 "hero.kick":"ATSN26 · مسابقة الابتكار بالذكاء الاصطناعي التوليدي","hero.h1":"رفيق ذكي يعلّم الطفل <span class='hl'>إنه ما يحتاجه.</span>",
 "hero.lead":"رفيق روبوت صغير على شكل بومة للأطفال من ذوي التوحد ومتلازمة داون وفرط الحركة. يشوف الروتين اليومي، ويوجّه كل خطوة باللهجة الكويتية، ويهدّي الطفل قبل لا يتضايق، ويقلّل مساعدته كل أسبوع.",
-"hero.cta1":"▶ جرّب المحاكاة","hero.cta2":"شوف القصة","b1":"🗣️ يتكلم كويتي","b2":"🫧 وضع الهدوء","b3":"📉 المساعدة تقل مع الوقت",
-"chip1":"مدح بعد كل خطوة","chip2":"🔒 ما يحفظ أي فيديو","chip2s":"يحلل الصورة ثم يحذفها",
+"hero.cta1":"▶ جرّب المحاكاة","hero.cta2":"شوف القصة","b1":"🗣️ يتكلم كويتي","b2":"🫧 وضع الهدوء","b3":"📉 المساعدة تقل مع الوقت","b4":"🧠 Gemma 3 عبر Ollama",
+"chip1":"مدح بعد كل خطوة","chip2":"🔒 يشتغل بالبيت بدون إنترنت","chip2s":"لا سحابة ولا فيديو محفوظ",
 "pr.kick":"المشكلة","pr.h2":"الروتين اليومي صعب، والأدوات الحالية ما تشوف.",
 "pr.1t":"لوحات الصور ما تشوف","pr.1d":"اللوحة على الجدار ما تعرف إذا الطفل نسى خطوة أو وقف أو بدأ يتضايق.",
 "pr.2t":"الأهل صاروا هم التذكير","pr.2d":"الأب أو الأم واقفين جنب الطفل كل خطوة كل صباح، فيتعلم الطفل ينتظرهم بدل ما يسوّيها بروحه.",
@@ -383,8 +391,8 @@ const L={en:{
 "r.teeth":"🪥 تفريش الأسنان","r.hands":"🧼 غسل اليدين","r.bag":"🎒 تجهيز شنطة المدرسة",
 "wk":"الأسبوع مع رفيق","btn.start":"▶ ابدأ","btn.auto":"🎬 عرض تلقائي","snd.on":"🔊 الصوت شغّال","snd.off":"🔈 الصوت مطفي",
 "a.do":"سوّ الخطوة","a.stuck":"وقف","a.distract":"تشتت","a.overload":"الصوت عالي!",
-"stress":"مستوى التوتر","log.t":"شنو يفكر الذكاء الاصطناعي","log.n":"مخرجات محاكاة لنموذج الرؤية ونموذج التوجيه",
-"fd.t":"المساعدة تقل كل أسبوع","fd.n":"كم يتكلم رفيق لكل خطوة",
+"stress":"مستوى التوتر","log.t":"شنو يفكر الذكاء الاصطناعي","log.n":"مخرجات محاكاة لنموذج Gemma 3 (رؤية وتوجيه) شغّال محلياً عبر Ollama",
+"fd.t":"المساعدة تقل كل أسبوع","fd.n":"الأعمدة: كم يتكلم رفيق لكل خطوة. الخط: الخطوات اللي يسويها الطفل بروحه (مثال)","lg.help":"مساعدة رفيق","lg.alone":"بروحه",
 "w1":"الأسبوع ١ · توجيه كامل","w2":"الأسبوع ٢ · تلميحات أخف","w3":"الأسبوع ٣ · تذكير قصير","w4":"الأسبوع ٤ · صامت إلا إذا وقف",
 "wS1":"أسبوع ١","wS2":"أسبوع ٢","wS3":"أسبوع ٣","wS4":"أسبوع ٤",
 "fd1":"الأسبوع ١: جملة كاملة لكل خطوة.","fd2":"الأسبوع ٢: الكلمة المهمة بس.","fd3":"الأسبوع ٣: كلمة وحدة للتذكير.","fd4":"الأسبوع ٤: صامت. رفيق ما يتكلم إلا إذا الطفل وقف.",
@@ -395,23 +403,23 @@ const L={en:{
 "rep.t":"تقرير وصل لولي الأمر","rep.alone":"خطوات بروحه","rep.hints":"تلميحات","rep.calms":"مرات التهدئة","rep.time":"الوقت",
 "rep.tip1":"جرّب الأسبوع ٤ عشان تشوف رفيق ساكت.","rep.tip4":"الأسبوع ٤: رفيق ما تكلم إلا لما احتاج. هذا هو الهدف.",
 "logStart":"اضغط ▶ ابدأ.",
-"how.kick":"كيف يشتغل","how.h2":"يشوف ← يفكر ← يوجّه ← يبتعد","how.sub":"الذكاء الاصطناعي التوليدي هو الأساس: نموذج رؤية ولغة يفهم شنو يسوي الطفل، ونموذج لغوي يكتب كل جملة جديدة وقصيرة ولطيفة باللهجة الكويتية.",
-"p1t":"يشوف","p1d":"الكاميرا ترسل صورة كل كم ثانية، وClaude Opus 5.5 يقرر: الخطوة خلصت، جارية، الطفل واقف، أو متشتت.",
+"how.kick":"كيف يشتغل","how.h2":"يشوف ← يفكر ← يوجّه ← يبتعد","how.sub":"الذكاء الاصطناعي التوليدي هو الأساس. نموذج Gemma 3 المفتوح من Google يشتغل على جهاز صغير داخل رفيق عبر Ollama: يفهم شنو يسوي الطفل ويكتب كل جملة جديدة وقصيرة ولطيفة بالكويتي. بدون سحابة وبدون فواتير.",
+"p1t":"يشوف","p1d":"الكاميرا ترسل صورة كل كم ثانية، وGemma 3 يقرر: الخطوة خلصت، جارية، الطفل واقف، أو متشتت.",
 "p2t":"يفكر","p2d":"مخطط الروتين يعرف الخطوات، وأسبوع الطفل، وشنو ساعده آخر مرة.",
-"p3t":"يوجّه","p3d":"Claude يكتب جملة قصيرة بالكويتي تناسب مستوى التلميح للطفل.",
-"p4t":"يتكلم ويسمع","p4d":"صوت خليجي يتكلم، وWhisper مدرّب على اللهجة الخليجية يسمع الطفل.",
+"p3t":"يوجّه","p3d":"Gemma يكتب جملة قصيرة بالكويتي تناسب مستوى التلميح للطفل.",
+"p4t":"يتكلم ويسمع","p4d":"صوت عربي محلي يتكلم، وWhisper على الجهاز يسمع الطفل.",
 "p5t":"يبتعد","p5d":"خوارزمية التلاشي تقلل المساعدة كل أسبوع، وترجعها بس إذا الطفل احتاج.",
-"calm.t":"وضع الهدوء يشتغل على الجهاز نفسه","calm.d":"مصنّف توتر خفيف يراقب الصوت والحركة (اليدين على الأذن، التأرجح، رفع الصوت). قبل لا يزيد التوتر، رفيق يخفف ضوء عيونه وصوته ويبدأ لعبة تنفس.",
+"m.kick":"النموذج","m.h":"Gemma 3 · 4B","m.d":"نموذج مفتوح من Google يشتغل عبر Ollama. يشوف الصور ويكتب عربي.","m1":"يشتغل بدون إنترنت","m2":"٠ د.ك بالشهر","m3":"الفيديو ما يطلع من البيت","m4":"تقدر تغيّره أو تطوّره","calm.t":"وضع الهدوء يشتغل على الجهاز نفسه","calm.d":"مصنّف توتر خفيف يراقب الصوت والحركة (اليدين على الأذن، التأرجح، رفع الصوت). قبل لا يزيد التوتر، رفيق يخفف ضوء عيونه وصوته ويبدأ لعبة تنفس.",
 "hw.kick":"القطع","hw.h2":"صغير، ناعم، ومن قطع رخيصة","hw.sub":"اضغط على أي رقم عشان تشوف القطعة. مصمم يكون على مغسلة الحمام أو مكتب الغرفة.",
-"hw1t":"كاميرا ESP32-S3","hw1d":"تشوف الروتين. الصور تروح للذكاء الاصطناعي وتنحذف على طول.","hw2t":"عيون LED","hw2d":"يتغير لونها حسب حالة رفيق: فيروزي وقت التوجيه، أزرق وقت الهدوء، ذهبي وقت الاحتفال.",
-"hw3t":"سماعة ومايك","hw3d":"يتكلم بصوت خليجي ناعم ويسمع رد الطفل.","hw4t":"٢ سيرفو","hw4d":"يلف ويميّل الرأس عشان رفيق يطالع الطفل ويهز راسه.","hw5t":"جسم بومة مطبوع ثلاثي الأبعاد","hw5d":"مدوّر وودود وبدون حواف حادة. ينطبع بمختبر المدرسة.",
-"priv":"ما يحفظ أي فيديو. الأهل يتحكمون بكل روتين وكل البيانات.",
+"hw1t":"كاميرا ESP32-S3","hw1d":"تشوف الروتين. الصور تروح للجهاز اللي بالقاعدة وتنحذف على طول.","hw2t":"عيون LED","hw2d":"يتغير لونها حسب حالة رفيق: فيروزي وقت التوجيه، أزرق وقت الهدوء، ذهبي وقت الاحتفال.",
+"hw3t":"سماعة ومايك","hw3d":"يتكلم بصوت خليجي ناعم ويسمع رد الطفل.","hw4t":"٢ سيرفو","hw4d":"يلف ويميّل الرأس عشان رفيق يطالع الطفل ويهز راسه.","hw5t":"جسم بومة مطبوع ثلاثي الأبعاد","hw5d":"مدوّر وودود وبدون حواف حادة. ينطبع بمختبر المدرسة.","hw6t":"جهاز البيت: Raspberry Pi 5","hw6d":"مخفي بالقاعدة. يشغّل Ollama مع Gemma 3 وWhisper والصوت، فالذكاء يشتغل بدون إنترنت.",
+"priv":"لا سحابة ولا فيديو محفوظ. الذكاء يشتغل داخل رفيق، والأهل يتحكمون بكل روتين وكل البيانات.",
 "vid.kick":"فيديو النموذج","vid.h2":"صباح يوسف مع رفيق","vid.sub":"قصة دقيقة وحدة: توتر حسي وقت روتين الصبح، وكيف رفيق يساعد. راوي بالإنجليزي وصوت رفيق بالخليجي.",
 "cr.kick":"للحكّام","cr.h2":"كيف رفيق يحقق المعايير",
 "cr1t":"أثر الاستقلالية","cr1d":"مصمم يخلي الطفل مستقل: المساعدة تقل لين يسوي الروتين بروحه.",
-"cr2t":"ابتكار بالذكاء التوليدي","cr2d":"فهم بالرؤية واللغة للروتين الحقيقي، وتوجيه عربي مكتوب بنموذج لغوي لكل طفل.",
+"cr2t":"ابتكار بالذكاء التوليدي","cr2d":"نموذج رؤية ولغة مفتوح (Gemma 3) يفهم الروتين الحقيقي ويكتب توجيه عربي لكل طفل، كله على الجهاز.",
 "cr3t":"سهولة الاستخدام","cr3d":"ما في شاشة للطفل، بس صوت ودود. والأهل يوصلهم تقرير عربي بسيط على التلفون.",
-"cr4t":"الجدوى والعربية","cr4d":"قطع متوفرة، نموذج شغّال في المستودع، ولهجة كويتية من أول يوم.",
+"cr4t":"الجدوى والعربية","cr4d":"قطع متوفرة، نموذج مجاني مفتوح بدون تكاليف API، نموذج شغّال في المستودع، ولهجة كويتية من أول يوم.",
 "foot":"رفيق · مشاركة ATSN26 · هذي الصفحة محاكاة: ردود رفيق هنا مكتوبة مسبقاً عشان توضح كيف يشتغل النظام الحقيقي.","foot.gh":"الكود على GitHub ←"
 }};
 let lang="en";const t=k=>(L[lang][k]??L.en[k]??k);
@@ -491,9 +499,12 @@ function clock(){const s=S?Math.round((performance.now()-S.t0)/1000):0,m=Math.fl
 function addFeed(icon,en,ar){feed.push({icon,en,ar,time:clock()});renderFeed();}
 function renderFeed(){const f=$("feed");if(!feed.length){f.innerHTML=`<li style="background:none;justify-content:center;color:var(--muted)">${lang==="ar"?"لا يوجد نشاط بعد":"No activity yet"}</li>`;return;}
  f.innerHTML=feed.map(x=>`<li><time>${x.time}</time><span>${x.icon}</span><span>${typeof x.en==="function"?x[lang]():x[lang]}</span></li>`).join("");f.scrollTop=1e9;}
-function log(obj,note,warn){const el=$("log");if(!el.dataset.started){el.innerHTML="";el.dataset.started=1;}
+function log(obj,note,warn){if(obj.status||obj.say!==undefined||obj.signals)obj={model:"gemma3:4b",...obj,latency_ms:Math.round(700+Math.random()*900)};const el=$("log");if(!el.dataset.started){el.innerHTML="";el.dataset.started=1;}
  el.innerHTML+=(note?`<span class="${warn?"w":"k"}">// ${note}</span>\n`:"")+JSON.stringify(obj)+"\n";el.scrollTop=1e9;}
-function say(ar,en){$("bAr").textContent=ar;$("bEn").textContent=en;$("bubble").classList.remove("hide");owlS.talkUntil=performance.now()+1500;
+let typeIv=null;function typeIn(el,txt){clearInterval(typeIv);let i=0;el.textContent="";typeIv=setInterval(()=>{i+=2;el.textContent=txt.slice(0,i);if(i>=txt.length)clearInterval(typeIv);},28);}
+let AC=null;function sfx(kind){if(!sound)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const seq={done:[[660,0],[880,.09]],calm:[[330,0],[294,.35]],finish:[[523,0],[659,.1],[784,.2],[1047,.32]],stuck:[[440,0]]}[kind]||[];
+ seq.forEach(([f,d])=>{const o=AC.createOscillator(),g=AC.createGain(),t0=AC.currentTime+d;o.type=kind==="calm"?"sine":"triangle";o.frequency.value=f;g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(kind==="calm"?.12:.18,t0+.02);g.gain.exponentialRampToValueAtTime(.001,t0+(kind==="calm"?.9:.35));o.connect(g).connect(AC.destination);o.start(t0);o.stop(t0+1);});}catch(e){}}
+function say(ar,en){typeIn($("bAr"),ar);$("bEn").textContent=en;$("bubble").classList.remove("hide");owlS.talkUntil=performance.now()+1500;
  if(sound&&"speechSynthesis"in window){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(ar);const v=speechSynthesis.getVoices().find(v=>/^ar/i.test(v.lang));if(v)u.voice=v;u.lang=v?v.lang:"ar-SA";u.rate=.9;speechSynthesis.speak(u);}catch(e){}}}
 function hush(){$("bubble").classList.add("hide");}
 function setStress(v){S.stress=clamp(v,5,95);$("pct").textContent=Math.round(S.stress)+"%";const f=$("fill");f.style.width=S.stress+"%";
@@ -506,6 +517,10 @@ function renderChart(){const w=+(S?S.week:$("week").value),lv=[100,62,32,8],cols
   `<text x="${x+35}" y="${y-8}" text-anchor="middle" font-size="13" font-weight="700" fill="#14213D" font-family="inherit">${t("lvl."+lvlKey(i+1))}</text>`+
   `<text x="${x+35}" y="204" text-anchor="middle" font-size="13" font-weight="${on?800:600}" fill="${on?"#14213D":"#5B6478"}" font-family="inherit">${t("wS"+(i+1))}</text>`;}
  h+=`<line x1="20" y1="180" x2="410" y2="180" stroke="#E7DED2" stroke-width="2"/>`;
+ const al=[0,1,3,4],pts=al.map((v,i)=>[65+i*98,172-v*34]);
+ h+=`<polyline points="${pts.map(p=>p.join(",")).join(" ")}" fill="none" stroke="#1F7A5A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 9"/>`;
+ pts.forEach((p,i)=>{h+=`<circle cx="${p[0]}" cy="${p[1]}" r="${i+1===w?9:6}" fill="#1F7A5A" stroke="#fff" stroke-width="3"/><text x="${p[0]+(lang==="ar"?-14:14)}" y="${p[1]+4}" font-size="12" font-weight="800" fill="#1F7A5A" text-anchor="${lang==="ar"?"end":"start"}">${al[i]}/4</text>`;});
+ h+=`<g font-size="12" font-weight="700" fill="#5B6478"><rect x="30" y="218" width="12" height="12" rx="3" fill="#E76F2E"/><text x="48" y="228">${t("lg.help")}</text><circle cx="190" cy="224" r="6" fill="#1F7A5A"/><text x="202" y="228">${t("lg.alone")}</text></g>`;
  $("chart").innerHTML=h;$("fdCap").textContent=t("fd"+w);}
 /* ---------------- simulation ---------------- */
 function start(){clearTimers();const key=$("routine").value,week=+$("week").value;
@@ -524,9 +539,9 @@ function act(a){if(!S||S.finished)return;const r=R[S.key];
   pose.armR=-85;later(()=>pose.armR=-8,700);pose.mood=1;setStress(S.stress-6);
   const c=CHEERS[S.step%4];log({step:r.en[S.step],status:"done",confidence:+(0.9+Math.random()*.08).toFixed(2),say:c[0]},"vision model: step completed");
   const i=S.step;addFeed("✅",()=>`${r.en[i]}: ${t(alone?"f.doneAlone":"f.done")}`,()=>`${r.ar[i]}: ${t(alone?"f.doneAlone":"f.done")}`);
-  cheer(c[0]);say(...c);S.step++;renderSteps();updateWater();
+  sfx("done");cheer(c[0]);say(...c);S.step++;renderSteps();updateWater();
   if(S.step>=r.en.length){finish();return;}later(prompt,1600);}
- else if(a==="stuck"){S.helped=true;pose.mood=.1;S.hints++;say(...r.full[S.step]);
+ else if(a==="stuck"){sfx("stuck");S.helped=true;pose.mood=.1;S.hints++;say(...r.full[S.step]);
   log({step:r.en[S.step],status:"stuck",seconds_idle:12,hint_level:"full",say:r.full[S.step][0]},"no progress: give full hint for this step only",true);
   addFeed("🤔",()=>t("f.stuck"),()=>t("f.stuck"));}
  else if(a==="distract"){S.helped=true;pose.mood=.3;owlS.look=1;later(()=>owlS.look=0,1600);S.hints++;const d=DISTRACT[S.hints%2];say(...d);setStress(S.stress+4);
@@ -538,7 +553,7 @@ function overload(){S.over=true;S.calmStart=performance.now();setMode("alert");p
  let v=S.stress;const iv=setInterval(()=>{if(!S||!S.over){clearInterval(iv);return;}v+=12;setStress(v);if(v>=88){clearInterval(iv);
   log({signals:["hands_on_ears","rocking","raised_voice"],stress_score:.88,action:"enter_calm_mode"},"early signs of sensory overload",true);
   addFeed("🫧",()=>t("f.overload"),()=>t("f.overload"));later(enterCalm,600);}},170);timers.push(iv);}
-function enterCalm(){if(!S)return;S.calm=true;S.calms++;setMode("calm");$("calmglow").style.opacity=.85;$("breath").style.opacity=1;owlS.glow=1;owlS.sleepy=.75;
+function enterCalm(){if(!S)return;S.calm=true;S.calms++;sfx("calm");setMode("calm");$("calmglow").style.opacity=.85;$("breath").style.opacity=1;owlS.glow=1;owlS.sleepy=.75;
  say("خذ نفس معاي… شهيق… زفير","Breathe with me… in… and out");log({voice:"soft",volume:0.4,eyes:"dim_blue",activity:"breathing_game"},"calm mode on");
  let n=0;const iv=setInterval(()=>{if(!S||!S.calm){clearInterval(iv);return;}n++;setStress(S.stress-8.5);if(n>4)pose.ears=clamp(pose.ears-.25);pose.mood=lerp(-1,.6,n/9);if(n>=9){clearInterval(iv);exitCalm();}},700);timers.push(iv);}
 function exitCalm(silent){$("calmglow").style.opacity=0;$("breath").style.opacity=0;owlS.glow=0;owlS.sleepy=0;pose.ears=0;
@@ -548,7 +563,7 @@ function exitCalm(silent){$("calmglow").style.opacity=0;$("breath").style.opacit
   say("خلنا نكمل، خطوة صغيرة بس","Let's keep going, just one small step");log({stress_score:.22,action:"resume_routine"},"child is calm again");later(prompt,2200);}}
 function cheer(txt){const c=$("cheer");c.textContent=txt;c.animate([{opacity:1,transform:"translateY(0) scale(.8)"},{opacity:1,transform:"translateY(-10px) scale(1.05)",offset:.3},{opacity:0,transform:"translateY(-50px) scale(1)"}],{duration:1300,easing:"ease-out"});owlS.hop=performance.now();}
 function confetti(){const st=$("stage"),cs=["#E76F2E","#2EC4B6","#FFD166","#4C8BF5","#E5484D"];for(let i=0;i<46;i++){const d=document.createElement("div");d.className="confetti";d.style.left=Math.random()*100+"%";d.style.background=cs[i%5];d.style.animationDelay=Math.random()*.6+"s";st.appendChild(d);setTimeout(()=>d.remove(),3200);}}
-function finish(){S.finished=true;setMode("done");enableActs(false);renderSteps();confetti();
+function finish(){S.finished=true;setMode("done");enableActs(false);renderSteps();confetti();setTimeout(()=>sfx("finish"),300);
  later(()=>say("عفية عليك يوسف، خلصت كل شي","Well done Yousef, you finished everything"),1700);
  const secs=Math.round((performance.now()-S.t0)/1000),n=R[S.key].en.length,s={...S};
  log({event:"routine_complete",steps_alone:s.alone,hints:s.hints,calm_downs:s.calms,seconds:secs},"report sent to parent app");
@@ -562,7 +577,7 @@ function auto(){$("routine").value="teeth";$("week").value=1;$("weekLbl").textCo
 $("start").onclick=start;$("ovStart").onclick=start;$("auto").onclick=auto;$("ovAuto").onclick=auto;
 $("week").oninput=e=>{$("weekLbl").textContent=t("w"+e.target.value);if(!S||S.finished){$("hudWeek").textContent=t("wS"+e.target.value);renderChart();}};
 $("routine").onchange=()=>{if(!S||S.finished){$("room").innerHTML=ROOMS[R[$("routine").value].room];$("kid").querySelector(".prop").innerHTML=PROPS[$("routine").value];S=null;feed=[];renderSteps();renderFeed();}};
-$("sound").onclick=()=>{sound=!sound;$("sound").textContent=t(sound?"snd.on":"snd.off");if(sound&&"speechSynthesis"in window)speechSynthesis.getVoices();};
+$("sound").onclick=()=>{sound=!sound;$("sound").textContent=t(sound?"snd.on":"snd.off");if(sound&&"speechSynthesis"in window)speechSynthesis.getVoices();if(sound){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume();}catch(e){}sfx("done");}};
 document.querySelectorAll(".act button").forEach(b=>b.onclick=()=>act(b.dataset.a));
 $("lEn").onclick=()=>{lang="en";applyLang()};$("lAr").onclick=()=>{lang="ar";applyLang()};
 function pickPart(p){document.querySelectorAll("[data-p]").forEach(e=>e.classList.toggle("on",e.dataset.p===p));}
