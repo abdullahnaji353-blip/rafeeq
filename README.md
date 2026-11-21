@@ -11,6 +11,7 @@
 | 🌐 **Live website (interactive simulation)** | **https://abdullahnaji353-blip.github.io/rafeeq/** |
 | 🎬 **Prototype video (1 min)** | [`docs/rafeeq-prototype-video.mp4`](docs/rafeeq-prototype-video.mp4) (also embedded on the website) |
 | 📱 **Working camera demo (real AI)** | [`demo/`](demo) |
+| 📲 **QR code** | <img src="docs/rafeeq-qr.png" width="140" alt="QR code to the Rafeeq website"> |
 | 🧠 **AI model** | **Gemma 3 (4B)** run locally with **Ollama**: offline, free, private |
 
 ---
@@ -39,6 +40,16 @@ Children with autism, Down syndrome and ADHD often struggle with everyday living
 - **Picture charts on the wall.** They can't see the child, so they don't know if a step was skipped, if the child is stuck, or if the child is getting overwhelmed.
 - **A parent standing beside the child at every step, every morning.** The child learns to wait for the parent's prompt instead of doing the task alone (this is called *prompt dependency*).
 - **Generic apps.** Most are English-first, live on a screen, and don't speak Gulf Arabic or adapt to one specific child in the moment.
+
+**The need in Kuwait and the Gulf:**
+| | |
+|---|---|
+| **30+** | autism diagnoses per 10,000 children in Kuwait (true numbers are likely higher) |
+| **1 vs 5.4** | psychologists per 100,000 people in our region vs Europe |
+| **up to 8,000 AED/SAR a month** | what diagnostics and therapy can cost Gulf families |
+| **Assessment & diagnosis only** | what GCC public health services cover; daily-routine support falls on parents at home |
+
+*Source: PwC Middle East, "[Elevating autism care in the GCC for meaningful change](https://www.pwc.com/m1/en/publications/documents/2024/elevating-autism-care-in-the-gcc-for-meaningful-change.pdf)" (2024), citing the WHO Mental Health Atlas 2020.*
 
 **The gap:** nothing on the market *sees* the routine, *adapts* in real time, speaks the child's own dialect, and is designed to **step back** over time.
 
@@ -217,6 +228,20 @@ Small, soft, and built from cheap, easy-to-find parts:
 | 5 | **3D-printed owl body** | Rounded and friendly, no sharp edges; printable at a school makerspace |
 | 6 | **Raspberry Pi 5 hub** (in the base) | Runs Ollama + Gemma 3, Whisper and the voice, so the AI works with no internet |
 
+### Cost to build (estimates, Nov 2026)
+| Part | Approx. price |
+|---|---|
+| Raspberry Pi 5 · 8 GB (AI hub) | 40 KD ($130) |
+| ESP32-S3 camera board (Seeed XIAO ESP32S3 Sense) | 4.5 KD ($14) |
+| Power supply + SD card | 7 KD ($22) |
+| Servos, speaker, mic, LEDs | 8.5 KD ($28) |
+| 3D-printed shell, wires | 5 KD ($16) |
+| **Total** | **≈ 65 KD ($210)** |
+
+Running the AI on the family's home computer instead of the Pi brings parts to about **25 KD**. Running costs are **$0**: open model, no subscription, no API bills. Less than one month of private therapy in the Gulf.
+
+*Pi 5 price reflects the 2026 memory-driven price rises ([Tom's Hardware](https://www.tomshardware.com/raspberry-pi/component-shortages-drive-raspberry-pi-prices-up-by-up-to-23-percent-escalating-lpddr4-lpddr5-costs-trigger-the-third-price-hike-of-the-year)); 1 USD ≈ 0.307 KD.*
+
 **Why the Pi?** The ESP32 camera board is far too weak to run Gemma. The Pi 5 can run Gemma 3 4B, but expect **a few seconds per frame**. That is fine for routines, because each step takes many seconds. The hub can be upgraded, or Ollama can run on the family's home computer.
 
 ---
@@ -272,6 +297,7 @@ rafeeq/
 ├── docs/                          ← the WEBSITE (served by GitHub Pages)
 │   ├── index.html                 ← the whole site: design, simulation, Arabic/English text, all logic
 │   ├── rafeeq-prototype-video.mp4 ← 1-minute prototype story video (embedded on the site)
+│   ├── rafeeq-qr.png              ← QR code to the live website
 │   └── voice/
 │       └── rafeeq-voice.webm      ← 46 recorded Gulf-Arabic lines packed in one file
 └── demo/                          ← the WORKING CAMERA DEMO (real AI, runs locally)
