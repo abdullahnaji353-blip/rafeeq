@@ -7,7 +7,7 @@ Primary track: Cognitive & Learning. Secondary track: Multiple disabilities & Ar
 ---
 
 ## Try it online
-🦉 **[Try the live simulation](https://abdullahnaji353-blip.github.io/rafeeq/)**: act like the child (do a step, get stuck, get distracted, or feel overwhelmed) and watch how Rafeeq responds, calms, and fades its help over the weeks. Runs in any browser, nothing to install.
+🦉 **[Try the live simulation](https://abdullahnaji353-blip.github.io/rafeeq/)**: act like the child (do a step, get stuck, get distracted, or feel overwhelmed) and watch how Rafeeq responds, calms, and fades its help over the weeks. Rafeeq speaks with a natural recorded Kuwaiti/Gulf-Arabic voice (46 lines, generated with ElevenLabs, stored in [`docs/voice/`](docs/voice)). Runs in any browser, nothing to install.
 
 ## Prototype video
 ▶️ **[Watch the 1-minute Rafeeq story](docs/rafeeq-prototype-video.mp4)**: Yousef, a 7-year-old autistic boy, gets overwhelmed during his morning routine. Rafeeq spots the early signs, calms him with breathing in Gulf Arabic, then coaches him through the rest of the routine on his own.
