@@ -77,6 +77,19 @@ section{padding:90px 0}
 .redglow{background:radial-gradient(ellipse at 22% 62%,rgba(255,90,106,0) 30%,rgba(255,90,106,.5) 100%)}
 .calmglow{background:radial-gradient(circle at 50% 55%,rgba(150,195,245,.55),rgba(60,90,150,.75))}
 #kidWrap{position:absolute;left:9%;bottom:4%;width:21%}
+#items{position:absolute;inset:0;pointer-events:none}
+#kidWrap{z-index:3}#owlWrap{z-index:2}.stage .hud,.stage .tracker,.stage .meter,.stage .bubble,.stage .breath,.stage .vignette,.stage #fx,.stage .redglow,.stage .calmglow{z-index:5}.stage .overlay,.stage .result{z-index:8}.stage .vbox{z-index:4}
+.it{position:absolute;transition:opacity .25s}
+.it svg{width:100%;display:block;overflow:visible}
+.it.gone{opacity:0}
+.it.glow::after{content:"";position:absolute;left:50%;top:50%;width:190%;aspect-ratio:1;border-radius:50%;border:3px solid #3EE6C8;box-shadow:0 0 22px #3EE6C8,inset 0 0 14px rgba(62,230,200,.5);transform:translate(-50%,-50%);animation:itg 1.1s ease-out infinite}
+@keyframes itg{from{opacity:1;transform:translate(-50%,-50%) scale(.55)}to{opacity:0;transform:translate(-50%,-50%) scale(1.25)}}
+@media (prefers-reduced-motion:reduce){.it.glow::after{animation:none;opacity:.9}}
+.it .bru{transition:opacity .2s}.it.nob .bru{opacity:0}
+.it.lift{transform:translate(-55%,-60%) rotate(-25deg);transition:transform .35s}.it.tube{transition:transform .35s,opacity .25s}
+.it .ph{transition:transform .2s;transform-origin:20px 26px}.it.press .ph{transform:translateY(7px)}
+.it .bk,.it .pc,.it .zp{opacity:0;transition:opacity .25s}.it.books .bk,.it.pencil .pc{opacity:1}
+.it .zp{transform-origin:10px 24px;transform:scaleX(0);transition:transform .9s,opacity .2s}.it.zip .zp{opacity:1;transform:none}.it.zip .bk,.it.zip .pc,.it.zip .open{opacity:0}
 #owlWrap{position:absolute;left:44%;bottom:23%;width:15.5%}
 #noise{position:absolute;left:1%;bottom:30%;width:36%;pointer-events:none}
 #fx{pointer-events:none;width:100%;height:100%}
@@ -452,6 +465,7 @@ html[dir=rtl] .sndBtn{font-family:"Alexandria",sans-serif}
       <div class="stage" id="stage" role="region" aria-label="Rafeeq simulation" aria-describedby="srNow">
         <div class="sr" id="srNow" role="status" aria-live="polite" aria-atomic="true"></div>
         <div aria-hidden="true" id="room"></div>
+        <div aria-hidden="true" id="items"></div>
         <div aria-hidden="true" class="water" id="water"></div>
         <div aria-hidden="true" class="calmglow" id="calmglow"></div>
         <svg aria-hidden="true" id="noise" viewBox="0 0 400 400"></svg>
@@ -641,9 +655,13 @@ function kidSVG(){return `<svg id="kid" viewBox="0 0 300 470" style="width:100%;
 <path d="M56 126 C58 34 242 26 246 124 C224 84 172 74 150 90 C124 72 80 86 56 126 Z" fill="url(#gHair)"/>
 <path d="M100 66 Q140 46 186 58" stroke="#fff" stroke-width="7" opacity=".15" fill="none" stroke-linecap="round"/>
 <ellipse cx="96" cy="178" rx="16" ry="9" fill="#F28C7A" opacity=".45"/><ellipse cx="204" cy="178" rx="16" ry="9" fill="#F28C7A" opacity=".45"/>
-<ellipse class="e" cx="114" cy="150" rx="12" ry="13" fill="#1A1430"/><ellipse class="e" cx="186" cy="150" rx="12" ry="13" fill="#1A1430"/><circle class="eh" cx="118" cy="145" r="4" fill="#fff"/><circle class="eh" cx="190" cy="145" r="4" fill="#fff"/>
+<g class="eyes"><ellipse class="e" cx="114" cy="150" rx="12" ry="13" fill="#1A1430"/><ellipse class="e" cx="186" cy="150" rx="12" ry="13" fill="#1A1430"/><circle class="eh" cx="118" cy="145" r="4" fill="#fff"/><circle class="eh" cx="190" cy="145" r="4" fill="#fff"/></g>
 <path class="bL" d="M96 120 L130 122" stroke="#2B1D16" stroke-width="7" stroke-linecap="round"/><path class="bR" d="M170 122 L204 120" stroke="#2B1D16" stroke-width="7" stroke-linecap="round"/>
 <path class="mouth" d="M120 192 Q150 214 180 192" stroke="#8C3B2A" stroke-width="8" fill="none" stroke-linecap="round"/>
+<g class="foam" opacity="0" fill="#fff"><circle cx="132" cy="214" r="8"/><circle cx="148" cy="220" r="10"/><circle cx="166" cy="214" r="8"/><circle cx="156" cy="228" r="5"/></g>
+<g class="hfoam" opacity="0" fill="#fff"><circle cx="138" cy="352" r="11"/><circle cx="158" cy="346" r="13"/><circle cx="174" cy="360" r="9"/><circle cx="128" cy="370" r="7"/><circle cx="150" cy="378" r="8"/></g>
+<g class="fprop" style="transform-origin:198px 264px"></g>
+<text class="kq" x="236" y="58" font-size="84" font-weight="800" fill="#FFD166" stroke="#0F1733" stroke-width="5" paint-order="stroke" opacity="0" font-family="Bricolage Grotesque,sans-serif">?</text>
 </g></g></svg>`;}
 const ROOMS={
 bath:`<div style="background:linear-gradient(180deg,#DDEFF0 0%,#EAF5F3 60%,#CFE3E3 100%)"></div>
@@ -689,7 +707,7 @@ const DISTRACT=[["يوسف، أنا هني، خلنا نكمل","Yousef, I'm her
 const LED={idle:"#9AA5B8",coach:"#3EE6C8",alert:"#FF9A4D",calm:"#9CC8FF",done:"#FFD166"};
 let S=null,sound=true,mode="idle",feed=[],timers=[],sel={r:"teeth",w:1};
 const cur={ears:0,mood:.6,armR:-8,rock:0,jump:0},tgt={ears:0,mood:.6,armR:-8};
-const owl={talkUntil:0,glow:0,sleepy:0,look:0,happyUntil:0,qUntil:0,hop:0};
+const owl={pt:0,talkUntil:0,glow:0,sleepy:0,look:0,happyUntil:0,qUntil:0,hop:0};
 const later=(f,ms)=>{const id=setTimeout(f,ms);timers.push(id);return id};
 function clearTimers(){timers.forEach(id=>{clearTimeout(id);clearInterval(id)});timers=[];}
 const lvl=w=>["","full","light","nudge","silent"][w];
@@ -742,29 +760,97 @@ const hush=()=>$("bubble").classList.add("hide");
 function setStress(v){S.stress=clamp(v,5,95);const s=S.stress;$("mTxt").textContent=Math.round(s);$("mArc").setAttribute("stroke-dashoffset",169.6*(1-s/100));
  $("mArc").setAttribute("stroke",s>60?"#FF5A6A":s>40?"#FFB27A":"#3EE6C8");$("redglow").style.opacity=s>55&&!S.calm?(s-55)/40:0;}
 const enableActs=on=>document.querySelectorAll(".acts button").forEach(b=>b.disabled=!on);
-function setRoom(key){$("room").innerHTML=ROOMS[R[key].room];KID.querySelector(".prop").innerHTML=PROPS[key];}
+function setRoom(key){$("room").innerHTML=ROOMS[R[key].room];buildItems(key);setProp(null);resetKid(key);W().classList.remove("on");}
 function start(){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume();}catch(e){}loadVoice();clearTimers();parts=[];$("result").classList.remove("show");$("overlay").classList.add("gone");
- S={key:sel.r,week:sel.w,step:0,hints:0,calms:0,alone:0,res:[],stress:20,calm:false,over:false,finished:false,helped:false,t0:performance.now()};feed=[];$("log").innerHTML="";
+ S={busy:false,key:sel.r,week:sel.w,step:0,hints:0,calms:0,alone:0,res:[],stress:20,calm:false,over:false,finished:false,helped:false,t0:performance.now()};feed=[];$("log").innerHTML="";
  setRoom(S.key);Object.assign(tgt,{ears:0,mood:.6,armR:-8});exitCalm(true);setStress(20);setMode("coach");renderSteps();enableActs(true);updWater();
  vision("detecting child…");log({event:"routine_started",routine:S.key,week:S.week,hint_level:lvl(S.week),language:"ar-KW"},"Rafeeq wakes up");
  addFeed("▶️",()=>t("f.start"),()=>t("f.start"));
  later(()=>{say("صباح الخير يوسف ☀️","Good morning, Yousef",0);vision(R[S.key].vis[0]+" · waiting");},350);later(prompt,1900);}
 function prompt(){if(!S||S.finished||S.calm)return;const r=R[S.key],i=S.step,lv=lvl(S.week);vision(r.vis[i]+" · in_progress");
  if(lv==="silent"){hush();log({step:r.en[i],status:"in_progress",hint_level:"silent",say:""},"week 4: child on track, staying quiet");return;}
- const line=r[lv][i];say(line[0],line[1],r.v+{full:0,light:4,nudge:8}[lv]+i);S.hints++;log({step:r.en[i],status:"in_progress",hint_level:lv,say:line[0]},`week ${S.week}: ${lv} hint`);}
-function act(a){if(!S||S.finished||S.calm||S.over)return;const r=R[S.key];
- if(a==="do"){const alone=S.week>1&&!S.helped,i=S.step;S.res[i]=alone?"alone":"help";if(alone)S.alone++;S.helped=false;
-  tgt.armR=-95;later(()=>tgt.armR=-8,650);tgt.mood=1;cur.jump=1;setStress(S.stress-7);
+ pointAt(TGT[S.key][i],1800);const line=r[lv][i];say(line[0],line[1],r.v+{full:0,light:4,nudge:8}[lv]+i);S.hints++;log({step:r.en[i],status:"in_progress",hint_level:lv,say:line[0]},`week ${S.week}: ${lv} hint`);}
+/* ===== ACTED-OUT SIMULATION: the kid really does each step ===== */
+const KA={x:0,dy:0,rot:0,armR:null,armL:null,ex:0,walk:0,foam:0,hfoam:0,q:0,mouthO:0};
+let tok=0;const GEN={};
+const HOME={teeth:-8,hands:-8,bag:0};
+function base(k){return k==="armR"?cur.armR:k==="armL"?lerp(8,150,cur.ears):0}
+function tw(o,k,to,ms){const my=tok,g=GEN[k]=(GEN[k]||0)+1;if(RM)ms=Math.min(ms,120);return new Promise(res=>{const from=o[k]==null?base(k):o[k],t0=performance.now();
+ (function f(now){if(my!==tok||GEN[k]!==g)return res(my===tok);const p=Math.min(1,(now-t0)/ms),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;o[k]=from+(to-from)*e;p<1?requestAnimationFrame(f):res(true);})(t0);});}
+function osc(o,k,c,a,hz,ms){const my=tok,g=GEN[k]=(GEN[k]||0)+1;if(RM)a*=.3;return new Promise(res=>{const t0=performance.now();
+ (function f(now){if(my!==tok||GEN[k]!==g)return res(my===tok);const p=(now-t0)/ms;o[k]=c+a*Math.sin((now-t0)/1000*hz*2*Math.PI);if(p<1)requestAnimationFrame(f);else{o[k]=c;res(true);}})(t0);});}
+const wait=ms=>{const my=tok;return new Promise(r=>setTimeout(()=>r(my===tok),RM?Math.min(ms,300):ms))};
+const all=(...p)=>Promise.all(p).then(v=>v.every(Boolean));
+async function walkTo(x){KA.walk=1;const ok=await tw(KA,"x",x,300+Math.abs(x-KA.x)*24);KA.walk=0;return ok;}
+async function arm(to,ms=420){return tw(KA,"armR",to,ms)}
+async function armRest(){if(KA.armR!=null){await tw(KA,"armR",-8,380);}KA.armR=null;if(KA.armL!=null){await tw(KA,"armL",8,300);}KA.armL=null;return true;}
+const PROPS2={
+ brush:'<rect x="191" y="326" width="15" height="112" rx="7.5" fill="#4C8BF5"/><rect x="187" y="438" width="23" height="34" rx="7" fill="#EAF2FF"/>',
+ brushPaste:'<rect x="191" y="326" width="15" height="112" rx="7.5" fill="#4C8BF5"/><rect x="187" y="438" width="23" height="34" rx="7" fill="#EAF2FF"/><path d="M180 444 q-12 8 0 16 q-10 6 2 12" stroke="#fff" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M181 446 q-8 7 0 13" stroke="#5DD3C3" stroke-width="3" fill="none" stroke-linecap="round"/>',
+ brushMouth:'<g transform="rotate(-54 198 378)"><rect x="186" y="371" width="122" height="14" rx="7" fill="#4C8BF5"/><rect x="298" y="363" width="28" height="30" rx="7" fill="#EAF2FF"/><circle cx="198" cy="378" r="20" fill="url(#gSkin)"/></g>',
+ soap:'<circle cx="190" cy="396" r="12" fill="#fff"/><circle cx="206" cy="390" r="9" fill="#fff"/><circle cx="200" cy="404" r="6" fill="#fff" opacity=".9"/>',
+ towel:'<path d="M176 368 h46 v74 q-23 12 -46 0z" fill="#7FD1C7"/><path d="M176 420 h46" stroke="#fff" stroke-width="5" opacity=".7"/>',
+ bag:'<rect x="164" y="380" width="70" height="76" rx="16" fill="#E5484D"/><rect x="176" y="366" width="46" height="18" rx="9" fill="none" stroke="#B8323A" stroke-width="7"/><rect x="180" y="410" width="38" height="20" rx="6" fill="#C93A44"/>',
+ notebook:'<rect x="168" y="368" width="56" height="70" rx="6" fill="#4C8BF5"/><rect x="176" y="378" width="40" height="9" rx="3" fill="#fff" opacity=".6"/><rect x="164" y="372" width="56" height="70" rx="6" fill="#2EC4B6" opacity=".9"/>',
+ pencil:'<rect x="166" y="378" width="64" height="26" rx="12" fill="#FFB020"/><rect x="166" y="388" width="64" height="5" fill="#C77800"/>'};
+const ITEMS={
+ teeth:[["cup",32.5,26,3.4,'<svg viewBox="0 0 40 90"><g class="bru"><rect x="17" y="-2" width="7" height="58" rx="3.5" fill="#4C8BF5"/><rect x="15" y="-8" width="11" height="17" rx="3" fill="#EAF2FF"/></g><path d="M3 40 H37 L32 88 H8Z" fill="#7FD1C7"/><path d="M3 40 H37" stroke="#4FB0A4" stroke-width="5"/></svg>'],
+        ["tube",36.6,25.6,4.2,'<svg viewBox="0 0 70 24"><path d="M0 6 Q0 2 6 3 L54 6 V18 L6 21 Q0 22 0 18Z" fill="#fff"/><rect x="10" y="9" width="28" height="7" rx="3" fill="#4C8BF5"/><rect x="54" y="7" width="14" height="10" rx="3" fill="#E5484D"/></svg>']],
+ hands:[["tap",21,43,4.6,'<svg viewBox="0 0 50 60"></svg>'],
+        ["pump",33,26,3,'<svg viewBox="0 0 40 84"><g class="ph"><rect x="17" y="4" width="6" height="22" fill="#D9D3CB"/><rect x="10" y="2" width="24" height="7" rx="3" fill="#D9D3CB"/></g><rect x="5" y="26" width="30" height="58" rx="9" fill="#FF8FB8"/><rect x="11" y="44" width="18" height="18" rx="4" fill="#fff" opacity=".7"/></svg>'],
+        ["towel",37.4,26,5,'<svg viewBox="0 0 60 30"><rect x="2" y="12" width="56" height="17" rx="5" fill="#5DBFB3"/><rect x="4" y="2" width="52" height="13" rx="5" fill="#7FD1C7"/><path d="M8 8 h44" stroke="#fff" stroke-width="3" opacity=".7"/></svg>']],
+ bag:[["bag",68,2,8,'<svg viewBox="0 0 80 80"><g class="bk"><rect x="16" y="4" width="20" height="22" rx="2" fill="#4C8BF5"/><rect x="30" y="7" width="18" height="20" rx="2" fill="#2EC4B6"/></g><g class="pc"><rect x="46" y="8" width="20" height="14" rx="6" fill="#FFB020"/></g><rect x="4" y="16" width="72" height="62" rx="14" fill="#E5484D"/><path d="M24 17 q16 -20 32 0" stroke="#B8323A" stroke-width="7" fill="none"/><rect class="open" x="12" y="19" width="56" height="11" rx="5" fill="#5E1A20"/><g class="zp"><rect x="10" y="19" width="60" height="10" rx="5" fill="#B8323A"/><rect x="64" y="19" width="9" height="18" rx="3" fill="#FFD166"/></g><rect x="22" y="44" width="36" height="20" rx="6" fill="#C93A44"/></svg>'],
+      ["books",36.8,27,4.6,'<svg viewBox="0 0 60 30"><rect x="2" y="16" width="56" height="13" rx="3" fill="#2EC4B6"/><rect x="5" y="4" width="50" height="13" rx="3" fill="#4C8BF5"/><rect x="10" y="8" width="24" height="4" rx="2" fill="#fff" opacity=".6"/></svg>'],
+      ["pencil",62.5,27,5,'<svg viewBox="0 0 64 26"><rect x="2" y="2" width="60" height="22" rx="11" fill="#FFB020"/><rect x="2" y="11" width="60" height="4" fill="#C77800"/><rect x="40" y="6" width="8" height="5" rx="2" fill="#fff" opacity=".8"/></svg>']]};
+const TGT={teeth:["cup","tube",null,"cup"],hands:["tap","pump",null,"towel"],bag:["bag","books","pencil","bag"]};
+const item=id=>document.getElementById("it-"+id);
+function buildItems(key){$("items").innerHTML=ITEMS[key].map(([id,l,b,w,svg])=>`<div class="it" id="it-${id}" style="left:${l}%;bottom:${b}%;width:${w}%">${svg}</div>`).join("");}
+function setProp(n){const f=n==="brushMouth";KID.querySelector(".prop").innerHTML=n&&!f?PROPS2[n]:"";KID.querySelector(".fprop").innerHTML=f?PROPS2[n]:"";}
+const cls=(id,c,on=true)=>{const e=item(id);if(e)e.classList.toggle(c,on)};
+function sideOf(id){const e=item(id);if(!e)return -1;const c=parseFloat(e.style.left)+parseFloat(e.style.width)/2;return c<51.7?-1:1;}
+function pointAt(id,ms){document.querySelectorAll(".it.glow").forEach(e=>e.classList.remove("glow"));owl.pt=id?sideOf(id):-1;if(id)cls(id,"glow");
+ if(ms)later(()=>{if(S&&!KA.q){owl.pt=0;document.querySelectorAll(".it.glow").forEach(e=>e.classList.remove("glow"));}},ms);}
+function clearStuck(){KA.q=0;KA.ex=0;owl.pt=0;document.querySelectorAll(".it.glow").forEach(e=>e.classList.remove("glow"));}
+function resetKid(key){tok++;for(const k in GEN)GEN[k]++;Object.assign(KA,{x:HOME[key],dy:0,rot:0,armR:null,armL:null,ex:0,walk:0,foam:0,hfoam:0,q:0,mouthO:0});owl.pt=0;}
+const W=()=>$("water");
+const STEPACT={
+ teeth:[
+  async h=>{await walkTo(h+10);await arm(-80);cls("cup","nob");setProp("brush");await wait(150);await arm(-8);return walkTo(h);},
+  async h=>{await walkTo(h+12);await arm(-82);cls("tube","lift");await wait(450);setProp("brushPaste");await wait(250);cls("tube","lift",false);await arm(-8);return walkTo(h);},
+  async h=>{KA.mouthO=1;await arm(-135,500);setProp("brushMouth");KA.foam=1;await osc(KA,"armR",-135,7,2.6,2300);KA.foam=0;KA.mouthO=0;setProp("brush");return arm(-8);},
+  async h=>{W().classList.add("on");await arm(-50);await osc(KA,"armR",-50,9,3,1100);W().classList.remove("on");await walkTo(h+10);await arm(-80);setProp(null);cls("cup","nob",false);await wait(150);await arm(-8);return walkTo(h);}],
+ hands:[
+  async h=>{await arm(-135,520);await wait(200);W().classList.add("on");burst(.225,.62,"bub",6);return arm(-8);},
+  async h=>{await walkTo(h+11);await arm(-80);cls("pump","press");await wait(260);cls("pump","press",false);setProp("soap");await wait(150);await arm(-8);return walkTo(h);},
+  async h=>{setProp(null);await all(tw(KA,"armL",-30,380),arm(30,380));KA.hfoam=1;burst(.12,.8,"bub",10);await all(osc(KA,"armL",-30,9,3,2000),osc(KA,"armR",30,9,3,2000));return true;},
+  async h=>{W().classList.remove("on");await armRest();await walkTo(h+13);await arm(-82);cls("towel","gone");setProp("towel");await arm(-8);await walkTo(h);
+   await all(tw(KA,"armL",-30,350),arm(30,350));await all(osc(KA,"armL",-30,9,3,1400),osc(KA,"armR",30,9,3,1400));KA.hfoam=0;await armRest();return true;}],
+ bag:[
+  async h=>{await walkTo(h+50);await all(tw(KA,"dy",16,300),arm(-12,300));cls("bag","gone");setProp("bag");await all(tw(KA,"dy",0,300),arm(-8,300));await walkTo(h+3);
+   const b=item("bag");b.style.left="31%";await all(tw(KA,"dy",12,260),arm(-30,260));setProp(null);cls("bag","gone",false);await all(tw(KA,"dy",0,260),arm(-8,260));return walkTo(h);},
+  async h=>{await walkTo(h+10);await arm(-125,480);cls("books","gone");setProp("notebook");await arm(-8);await walkTo(h);await arm(-45);setProp(null);cls("bag","books");await wait(150);return arm(-8);},
+  async h=>{await walkTo(h+36);await arm(-125,480);cls("pencil","gone");setProp("pencil");await arm(-8);await walkTo(h);await arm(-45);setProp(null);cls("bag","pencil");await wait(150);return arm(-8);},
+  async h=>{await walkTo(h+4);await all(tw(KA,"dy",14,300),arm(-40,300));cls("bag","zip");await osc(KA,"armR",-40,10,1.2,900);cls("bag","gone");setProp("bag");await all(tw(KA,"dy",0,300),arm(-60,300));await arm(-8);return walkTo(h);}]};
+async function act(a){if(!S||S.finished||S.calm||S.over||S.busy)return;const r=R[S.key],my=tok;
+ if(a==="do"){const i=S.step,alone=S.week>1&&!S.helped;S.busy=true;enableActs(false);clearStuck();hush();tgt.mood=.8;
+  if(KA.armL!=null)await tw(KA,"armL",8,250);KA.armL=null;vision(r.vis[i]+" · in_progress");
+  const ok=await STEPACT[S.key][i](HOME[S.key]);if(!ok||my!==tok||!S)return;KA.armR=null;
+  S.res[i]=alone?"alone":"help";if(alone)S.alone++;S.helped=false;tgt.mood=1;cur.jump=alone?1:.5;setStress(S.stress-7);
   const c=CHEERS[i%4];vision(r.vis[i]+" · done 0."+(90+Math.floor(Math.random()*9)));
-  log({step:r.en[i],status:"done",confidence:+(0.9+Math.random()*.08).toFixed(2),say:c[0]},"step completed");
+  log({step:r.en[i],status:"done",confidence:+(0.9+Math.random()*.08).toFixed(2),say:alone?c[0]:""},alone?"did it alone: short praise":"step seen done: nod, move on");
   addFeed(alone?"⭐":"✅",()=>`${r.en[i]} · ${t(alone?"f.alone":"f.done")}`,()=>`${r.ar[i]} · ${t(alone?"f.alone":"f.done")}`);
-  burst(.2,.45,"star",alone?28:14);sfx(alone?"star":"done");owl.happyUntil=performance.now()+1300;owl.hop=performance.now();say(c[0],c[1],37+i%4);
-  S.step++;renderSteps();updWater();if(S.step>=r.en.length){finish();return;}later(prompt,1700);}
- else if(a==="stuck"){sfx("stuck");S.helped=true;tgt.mood=.05;S.hints++;owl.qUntil=performance.now()+1600;say(r.full[S.step][0],r.full[S.step][1],r.v+S.step);vision(r.vis[S.step]+" · idle 12s",true);
-  log({step:r.en[S.step],status:"stuck",seconds_idle:12,hint_level:"full",say:r.full[S.step][0]},"no progress: full hint for this step",true);addFeed("🤔",()=>t("f.stuck"),()=>t("f.stuck"));}
- else if(a==="distract"){S.helped=true;tgt.mood=.3;owl.look=1;later(()=>owl.look=0,1700);S.hints++;const d=DISTRACT[S.hints%2];say(d[0],d[1],41+S.hints%2);setStress(S.stress+4);vision("gaze_away · off_task",true);
-  log({step:r.en[S.step],status:"off_task",gaze:"away",action:"head_turn",say:d[0]},"looked away: head turn + nudge",true);addFeed("🙈",()=>t("f.distract"),()=>t("f.distract"));}
- else if(a==="overload")overload();}
+  burst(.2,.45,"star",alone?24:8);sfx(alone?"star":"done");owl.happyUntil=performance.now()+900;owl.hop=performance.now();if(alone)say(c[0],c[1],37+i%4);
+  S.busy=false;S.step++;renderSteps();if(S.step>=r.en.length){finish();return;}enableActs(true);later(prompt,alone?1500:650);}
+ else if(a==="stuck"){if(KA.q)return;sfx("stuck");S.helped=true;tgt.mood=.05;S.hints++;KA.q=1;const tg=TGT[S.key][S.step];
+  KA.ex=tg?(sideOf(tg)>0||parseFloat(item(tg).style.left)>9+KA.x+10?1:-1):0;pointAt(tg,0);
+  tw(KA,"armL",158,450).then(ok=>{if(ok&&KA.q)osc(KA,"armL",158,7,2.2,60000);});
+  say(r.full[S.step][0],r.full[S.step][1],r.v+S.step);vision(r.vis[S.step]+" · idle 12s",true);
+  log({step:r.en[S.step],status:"stuck",seconds_idle:12,hint_level:"full",action:tg?"look_at:"+tg:"demo",say:r.full[S.step][0]},"no progress: full hint + looks at the object",true);addFeed("🤔",()=>t("f.stuck"),()=>t("f.stuck"));}
+ else if(a==="distract"){S.busy=true;enableActs(false);if(KA.armL!=null)await tw(KA,"armL",8,250);KA.armL=null;clearStuck();S.helped=true;tgt.mood=.3;S.hints++;const h=HOME[S.key];
+  KA.ex=-1;await all(walkTo(h-6),tw(KA,"rot",-5,500));if(my!==tok)return;owl.look=1;const d=DISTRACT[S.hints%2];say(d[0],d[1],41+S.hints%2);setStress(S.stress+4);vision("gaze_away · off_task",true);
+  log({step:r.en[S.step],status:"off_task",gaze:"away",action:"head_turn",say:d[0]},"looked away: head turn + nudge",true);addFeed("🙈",()=>t("f.distract"),()=>t("f.distract"));
+  if(!await wait(1700))return;KA.ex=0;owl.look=0;await all(walkTo(h),tw(KA,"rot",0,500));if(my!==tok)return;tgt.mood=.6;S.busy=false;enableActs(true);later(prompt,500);}
+ else if(a==="overload"){clearStuck();KA.armL=null;KA.armR=null;overload();}}
 function overload(){S.over=true;S.calmStart=performance.now();setMode("alert");sfx("alert");tgt.ears=1;tgt.mood=-1;hush();vision("hands_on_ears · stress ↑",true);$("stage").classList.add("shake");
  log({audio_db:78,source:"hairdryer next door",child:"covering ears"},"environment getting loud",true);
  let v=S.stress;const iv=setInterval(()=>{if(!S||!S.over){clearInterval(iv);return;}v+=11;setStress(v);if(v>=88){clearInterval(iv);$("stage").classList.remove("shake");
@@ -788,8 +874,10 @@ function showResult(){const s=S;$("resCard").innerHTML=`<div class="kick">${t("m
  <div style="color:var(--muted);font-size:14px;max-width:300px;margin:0 auto 14px">${t(s.week<4?"res.tip1":"res.tip4")}</div>
  <div class="row" style="justify-content:center">${s.week<4?`<button class="btn primary sm" id="go4">▶ ${t("wk")} 4</button>`:""}<button class="btn ghost sm" id="again">${t("res.again")}</button></div>`;
  $("result").classList.add("show");const g=$("go4");if(g)g.onclick=()=>{pickW(4);start();};$("again").onclick=start;}
-function updWater(){$("water").classList.toggle("on",!!S&&S.key==="hands"&&S.step>=1&&S.step<3);}
-function auto(){pickR("teeth");pickW(1);start();[[3800,"do"],[6800,"overload"],[16600,"do"],[20400,"distract"],[23600,"do"],[27400,"do"]].forEach(([ms,a])=>later(()=>act(a),ms));$("sim").scrollIntoView({behavior:"smooth"});}
+function updWater(){}
+async function auto(){pickR("teeth");pickW(1);start();$("sim").scrollIntoView({behavior:"smooth"});const my=tok;
+ for(const [ms,a] of [[2300,"do"],[1500,"do"],[900,"overload"],[1900,"stuck"],[1600,"do"],[1300,"distract"],[1400,"do"]]){
+  if(!await wait(ms))return;while(S&&(S.busy||S.calm||S.over)){if(!await wait(200))return;}if(my!==tok||!S||S.finished)return;if(a==="do"&&S.calm===false&&ms<1000)await wait(1200);act(a);}}
 function pickR(r){sel.r=r;document.querySelectorAll("#segR button").forEach(b=>b.classList.toggle("on",b.dataset.r===r));if(!S||S.finished){setRoom(r);if(S){S=null;feed=[];$("result").classList.remove("show");setMode("idle");}renderSteps();renderFeed();}}
 function pickW(w){sel.w=+w;document.querySelectorAll("#segW button").forEach(b=>b.classList.toggle("on",+b.dataset.w===sel.w));if(!S||S.finished)setMode(mode);}
 document.querySelectorAll("#segR button").forEach(b=>b.onclick=()=>pickR(b.dataset.r));
@@ -811,16 +899,18 @@ function loop(now){const tt=now/1000;
  for(const p of["ears","mood","armR"])cur[p]=lerp(cur[p],tgt[p],.14);
  cur.rock=S&&(S.over||S.calm)?cur.ears*7*Math.sin(tt*6.5):0;cur.jump*=.9;
  KID.querySelector(".jump").style.transform=`translateY(${-Math.sin(clamp(cur.jump)*Math.PI)*22}px)`;KID.querySelector(".rock").style.transform=`rotate(${cur.rock}deg)`;
- KID.querySelector(".armL").style.transform=`rotate(${lerp(8,150,cur.ears)}deg)`;KID.querySelector(".armR").style.transform=`rotate(${cur.ears>.5?lerp(-8,-150,cur.ears):cur.armR}deg)`;
- const m=cur.mood;KID.querySelector(".mouth").setAttribute("d",`M120 ${200-6*m} Q150 ${200+24*m} 180 ${200-6*m}`);const tb=m<0?-m*10:0;
+ KID.querySelector(".armL").style.transform=`rotate(${KA.armL!=null?KA.armL:lerp(8,150,cur.ears)}deg)`;const aR=KA.armR!=null?KA.armR:cur.ears>.5?lerp(-8,-150,cur.ears):cur.armR;KID.querySelector(".armR").style.transform=`rotate(${aR}deg)`;KID.querySelector(".fprop").style.transform=`rotate(${aR}deg)`;
+ const bob=KA.walk?Math.abs(Math.sin(tt*9))*7:0;$("kidWrap").style.transform=`translate(${KA.x/21*100}%,${KA.dy-bob}px) rotate(${KA.rot+(KA.walk?Math.sin(tt*9)*2:0)}deg)`;
+ KID.querySelector(".eyes").style.transform=`translateX(${KA.ex*9}px)`;KID.querySelector(".foam").setAttribute("opacity",KA.foam*(.75+.25*Math.sin(tt*14)));KID.querySelector(".hfoam").setAttribute("opacity",KA.hfoam);KID.querySelector(".kq").setAttribute("opacity",KA.q*(.8+.2*Math.sin(tt*5)));
+ const m=cur.mood,mo=KID.querySelector(".mouth");if(KA.mouthO){mo.setAttribute("d","M134 200 a16 12 0 1 0 32 0 a16 12 0 1 0 -32 0");mo.setAttribute("fill","#5A1E16");}else{mo.setAttribute("d",`M120 ${200-6*m} Q150 ${200+24*m} 180 ${200-6*m}`);mo.setAttribute("fill","none");}const tb=m<0?-m*10:0;
  KID.querySelector(".bL").setAttribute("d",`M96 ${120+tb} L130 ${122-tb}`);KID.querySelector(".bR").setAttribute("d",`M170 ${122-tb} L204 ${120+tb}`);
  const kb=(tt%3.1)<.13?1:(cur.ears>.5?.85:0);KID.querySelectorAll(".e").forEach(e=>e.setAttribute("ry",13*(1-.9*kb)));KID.querySelectorAll(".eh").forEach(e=>e.setAttribute("opacity",kb>.5?0:1));
  const happy=now<owl.happyUntil,shut=happy?0:Math.max(owl.sleepy*.55,(tt%3.6)<.13?1:0);
- const pu=OWL.querySelector(".pups");pu.style.transform=`translateX(${owl.look?-14:0}px) scaleY(${1-shut})`;pu.style.opacity=happy?0:1;OWL.querySelector(".happy").setAttribute("opacity",happy?1:0);
+ const pu=OWL.querySelector(".pups");pu.style.transform=`translateX(${owl.look?-14:owl.pt*13}px) scaleY(${1-shut})`;pu.style.opacity=happy?0:1;OWL.querySelector(".happy").setAttribute("opacity",happy?1:0);
  OWL.querySelectorAll(".led").forEach(e=>e.setAttribute("opacity",happy?.3:1-shut*.8));
  OWL.querySelector(".beak").style.transform=`scaleY(${1+.6*(now<owl.talkUntil?Math.abs(Math.sin(tt*11)):0)})`;
  OWL.querySelector(".glow").setAttribute("opacity",.4*owl.glow*(.75+.25*Math.sin(tt*1.6)));
- OWL.querySelector(".head").style.transform=`rotate(${owl.look?-12:now<owl.qUntil?8:0}deg)`;OWL.querySelector(".q").setAttribute("opacity",now<owl.qUntil?1:0);
+ OWL.querySelector(".head").style.transform=`rotate(${owl.look?-12:owl.pt?owl.pt*9:now<owl.qUntil?8:0}deg)`;OWL.querySelector(".q").setAttribute("opacity",now<owl.qUntil?1:0);
  const hp=owl.hop&&now-owl.hop<480?Math.sin((now-owl.hop)/480*Math.PI)*26:0;OWL.querySelector(".hop").style.transform=`translateY(${-hp-(mode==="idle"?4*Math.sin(tt*2):0)}px)`;
  sideOwls.forEach((o,i)=>{o.querySelector(".pups").style.transform=`scaleY(${((tt+i*1.3)%4.2)<.13?0:1})`;});
  noise(S&&(S.over||S.calm)?clamp((S.stress-30)/60):0,tt);
