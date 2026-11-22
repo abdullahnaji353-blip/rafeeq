@@ -7,7 +7,7 @@
 <meta name="description" content="Rafeeq: an owl robot that coaches children with autism, Down syndrome and ADHD through daily routines in Kuwaiti Arabic, powered by Gemma 3 running offline. Play the simulation.">
 <meta name="theme-color" content="#0A0F1E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Alexandria:wght@600;800&family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0A0F1E;--bg2:#0F1630;--card:rgba(255,255,255,.045);--line:rgba(255,255,255,.09);--text:#EEF2FF;--muted:#94A0BF;--orange:#FF7A3D;--orange2:#FFB27A;--teal:#3EE6C8;--blue:#7FB8FF;--gold:#FFD166;--red:#FF5A6A;--r:22px}
 *{box-sizing:border-box}
@@ -262,6 +262,123 @@ h1 .grad.glitch{animation:rgb .45s steps(2) 1}
 .replay{position:fixed;bottom:18px;right:18px;z-index:80;background:rgba(10,15,30,.75);backdrop-filter:blur(10px);border:1px solid var(--line);color:var(--text);border-radius:999px;padding:9px 14px;font:700 12px/1 inherit;cursor:pointer}
 html[dir=rtl] .replay{right:auto;left:18px}
 @media(prefers-reduced-motion:reduce){.grain,#intro,.replay{display:none!important}.sw{opacity:1!important;transform:none!important;filter:none!important}.ticker .track{animation:none!important}}
+/* ===== V3 THEME: tile & owl ===== */
+:root{--bg:#E6F0EE;--bg2:#D8E6E2;--card:#F4F8F7;--line:#C9D9D4;--text:#13233A;--muted:#4E6072;--orange:#F2641A;--orange2:#C24E10;--teal:#1E9E86;--blue:#2F6FB3;--gold:#FFC233;--red:#D93848;--night:#0E1A2B;--tile:64px}
+body{background-color:var(--bg);background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:var(--tile) var(--tile);background-position:-1px -1px;color:var(--text);font-family:"Bricolage Grotesque","Plus Jakarta Sans",system-ui,sans-serif;font-optical-sizing:auto}
+html[dir=rtl] body{font-family:"IBM Plex Sans Arabic","Bricolage Grotesque",sans-serif}
+.bgfx,.grain{display:none!important}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.kick,.chips,.halo,.ring1,.ring2,.heroOwl .speed{display:none!important}
+h1,h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;color:var(--text);font-stretch:85%}
+html[dir=rtl] h1,html[dir=rtl] h2,html[dir=rtl] .stat .n{font-family:"Alexandria","IBM Plex Sans Arabic",sans-serif;font-weight:800}
+h1{font-size:clamp(48px,7.6vw,112px);line-height:.92;letter-spacing:-.045em;margin:0 0 28px;max-width:11ch}
+h2{font-size:clamp(34px,4.6vw,64px);line-height:.98;letter-spacing:-.035em;margin:0 0 14px;max-width:18ch}
+html[dir=rtl] h1{line-height:1.15;max-width:12ch}html[dir=rtl] h2{line-height:1.2}
+.lead{color:var(--muted);font-size:clamp(18px,1.5vw,21px);line-height:1.5;max-width:46ch}
+.center{text-align:start}.center .lead{margin:0}
+section{padding:110px 0}
+/* nav */
+header{background:var(--bg);backdrop-filter:none;border-bottom:2px solid var(--text)}
+.brand{font-size:20px;letter-spacing:-.02em}.brand b{color:var(--orange)}
+.links a{color:var(--text);font-weight:600}.links a:hover{color:var(--orange);text-decoration:underline;text-underline-offset:5px}
+.lang{background:transparent;border:2px solid var(--text);border-radius:10px;padding:2px}
+.lang button{color:var(--text);border-radius:7px}.lang button.on{background:var(--text);color:var(--bg)}
+/* buttons */
+.btn{border-radius:12px;font-weight:700;padding:15px 24px;font-size:17px}
+.btn.primary{background:var(--orange);color:#fff;box-shadow:0 4px 0 var(--orange2)}
+.btn.primary:hover{box-shadow:0 6px 0 var(--orange2);transform:translateY(-2px)}
+.btn.primary:active{box-shadow:0 1px 0 var(--orange2);transform:translateY(3px)}
+.btn.ghost{background:transparent;border:2px solid var(--text);color:var(--text)}
+.btn.ghost:hover{background:var(--text);color:var(--bg)}
+.overlay .btn.ghost,.resCard .btn.ghost{border-color:#fff;color:#fff}.overlay .btn.ghost:hover{background:#fff;color:var(--text)}
+/* hero */
+.hero{grid-template-columns:1.15fr .85fr;min-height:calc(100vh - 66px);padding:64px 0 0;align-items:end}
+.hero>.reveal:first-child{align-self:center;padding-bottom:64px}
+.heroOwl{width:min(440px,100%);align-self:end;margin-bottom:-2px}
+#heroOwl svg{animation:none;filter:none}
+.heroOwl::after{content:"";position:absolute;left:-12%;right:-12%;bottom:0;height:18px;background:var(--text);border-radius:4px 4px 0 0}
+.say{background:#fff;color:var(--text);border:2px solid var(--text);box-shadow:4px 4px 0 var(--text);animation:none;top:2%;font-size:20px}
+.reveal{opacity:1!important;transform:none!important;transition:none}
+/* ticker */
+.tickWrap{padding:0;background:var(--night)}
+.ticker,.ticker.alt{transform:none;margin:0;background:var(--night);color:#fff;box-shadow:none;padding:18px 0;border:0}
+.ticker.alt{display:none}
+.ticker .track{text-transform:none;letter-spacing:-.01em;font-weight:700;font-size:clamp(20px,2.2vw,30px)}
+.ticker .track i{color:var(--orange);opacity:1;font-size:.7em}
+html[dir=rtl] .ticker .track{font-family:"Alexandria",sans-serif}
+/* why section */
+#problem .wrap{display:grid;grid-template-columns:1fr;gap:0}
+.stats{grid-template-columns:repeat(3,1fr);gap:0;margin:40px 0 0;border-top:2px solid var(--text)}
+.stat{background:none;border:0;border-radius:0;padding:28px 28px 30px 0;border-inline-end:2px solid var(--line)}
+.stat:last-child{border-inline-end:0}.stat:not(:first-child){padding-inline-start:28px}
+.stat .n{background:none;color:var(--text);-webkit-background-clip:initial;background-clip:initial;font-size:clamp(56px,7vw,104px);font-family:"Bricolage Grotesque",sans-serif;font-stretch:80%}
+.stat .d{color:var(--muted);font-size:17px;max-width:24ch}
+.stats+.src{margin:4px 0 0;font-size:13px;color:var(--muted)}
+.strip{grid-template-columns:repeat(3,1fr);gap:0;margin-top:56px;border-top:2px solid var(--text)}
+.tile{background:none;border:0;border-radius:0;padding:22px 28px 0 0}
+.tile:not(:first-child){padding-inline-start:28px;border-inline-start:2px solid var(--line)}
+.tile .ic{display:none}
+.tile b{font-size:21px;letter-spacing:-.01em;margin-bottom:6px}.tile span{color:var(--muted);font-size:16px}
+/* sim */
+#sim{background:var(--night);color:#fff;background-image:none}
+#sim h2{color:#fff}#sim .lead{color:#AFC0D2}
+.stage{border-radius:18px;box-shadow:0 0 0 2px rgba(255,255,255,.12);background:#1a2238}
+.vbox,#vbox{display:none!important}
+.overlay{background:rgba(14,26,43,.62)}
+.pill{background:rgba(14,26,43,.78);font-family:"Bricolage Grotesque",sans-serif}
+.box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:14px}
+.box .lab{color:#AFC0D2;text-transform:none;letter-spacing:0;font-size:13px;font-weight:600}
+.seg button{border:1px solid rgba(255,255,255,.14);background:transparent;color:#fff;border-radius:10px}
+.seg button small{color:#AFC0D2}
+.seg button.on{background:#fff;color:var(--text);border-color:#fff}.seg button.on small{color:var(--muted)}
+.wk .bar{background:rgba(255,255,255,.15)}.seg button.on .bar{background:var(--line)}
+.acts button{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);color:#fff;border-radius:14px;font-family:"Bricolage Grotesque",sans-serif}
+html[dir=rtl] .acts button{font-family:"IBM Plex Sans Arabic",sans-serif}
+.acts button:hover:not(:disabled){border-color:var(--orange);box-shadow:none;background:rgba(242,100,26,.12)}
+.acts button:hover:not(:disabled) .e{transform:none}
+.acts kbd{color:#AFC0D2;border-color:rgba(255,255,255,.2);font-family:"Bricolage Grotesque",sans-serif}
+details.raw summary{color:#AFC0D2}
+.log{background:#08111D;border-color:rgba(255,255,255,.12)}
+.phone{background:#000;box-shadow:0 0 0 2px rgba(255,255,255,.12)}
+.screen{background:var(--bg)}
+.sum,.feed li{background:#fff}
+.resCard{background:var(--night);border-color:rgba(255,255,255,.14)}
+/* how */
+.flow{gap:0;margin-top:48px;border-top:2px solid var(--text);counter-reset:s}
+.step{background:none;border:0;border-radius:0;padding:26px 26px 0 0;overflow:visible}
+.step:not(:first-child){padding-inline-start:26px;border-inline-start:2px solid var(--line)}
+.step .ic{display:none}
+.step .n{position:static;display:block;font-size:15px;font-weight:700;color:var(--orange);margin-bottom:22px}
+.step b{font-size:28px;letter-spacing:-.025em;font-weight:800;margin-bottom:8px}
+.step span{color:var(--muted);font-size:16px}
+.model{margin-top:56px;background:#fff;border:2px solid var(--text);border-radius:16px;box-shadow:6px 6px 0 var(--text);padding:24px 28px}
+.model .mh{font-size:30px;letter-spacing:-.02em}.model .mh small{color:var(--muted)}
+.model code{background:var(--night);color:#9FE7D6}
+.mchips span{background:var(--bg);border:0;border-radius:8px;color:var(--text);font-weight:600}
+/* hardware */
+#hwOwl svg{filter:none}
+.pin{background:var(--text);color:#fff;box-shadow:0 0 0 3px var(--bg)}
+.pin:hover,.pin.on{background:var(--orange);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--orange)}
+.parts{gap:0;grid-template-columns:1fr;border-top:2px solid var(--text)}
+.part{background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:16px 4px;display:grid;grid-template-columns:auto 1fr;column-gap:14px}
+.part.on{background:#fff}
+.part .n{background:var(--text);color:#fff;grid-row:span 2;margin:2px 0 0}
+.part b{font-size:18px}.part span{grid-column:2;margin-top:2px;font-size:15px}
+/* video */
+.vidWrap{border-radius:16px;box-shadow:8px 8px 0 var(--text);border:2px solid var(--text);overflow:visible}
+.vidWrap video{border-radius:14px}
+.vidWrap .cn{display:none}
+/* end + footer */
+.end{text-align:start;padding:120px 22px 130px}
+.end h2{font-size:clamp(44px,7vw,104px);max-width:13ch}
+.end .row{justify-content:flex-start!important}
+footer{background:var(--night);color:#AFC0D2;border-top:0}
+.replay{background:var(--bg);color:var(--text);border:2px solid var(--text);backdrop-filter:none;box-shadow:3px 3px 0 var(--text)}
+.part .n{grid-column:1;grid-row:1/3}.part b{grid-column:2;grid-row:1}.part span:not(.n){grid-column:2;grid-row:2}
+.heroOwl{width:min(520px,100%)}
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:40px}.hero>.reveal:first-child{padding-bottom:20px}.heroOwl{width:72%;justify-self:end}
+ .stats,.strip,.flow{grid-template-columns:1fr}.stat,.tile,.step{padding-inline:0!important;border-inline:0!important;border-bottom:1px solid var(--line);padding-bottom:22px}
+ h1{font-size:clamp(46px,13vw,72px)}section{padding:80px 0}}
 </style>
 </head>
 <body>
@@ -296,16 +413,16 @@ html[dir=rtl] .replay{right:auto;left:18px}
       <div class="row" style="margin-top:30px"><a class="btn primary" href="#sim" data-i="h.c1"></a><a class="btn ghost" href="#video" data-i="h.c2"></a></div>
       <div class="chips"><span class="chip" data-i="c1"></span><span class="chip" data-i="c2"></span><span class="chip" data-i="c3"></span></div>
     </div>
-    <div class="heroOwl reveal" aria-hidden="true"><div class="ring2"></div><div class="ring1"></div><div class="halo"></div><div id="heroOwl"></div><div class="say">شاطر يوسف! 🌟</div></div>
+    <div class="heroOwl reveal" aria-hidden="true"><div id="heroOwl"></div><div class="say">يلا نفرّش أسنانك</div></div>
   </div>
 </div>
 
 <section id="problem" style="padding-top:20px"><div class="wrap center">
   <div class="reveal"><div class="kick" data-i="p.k"></div><h2 data-i="p.t"></h2></div>
   <div class="strip">
-    <div class="tile reveal"><span class="ic" aria-hidden="true">🖼️</span><b data-i="p1"></b><span data-i="p1d"></span></div>
-    <div class="tile reveal"><span class="ic" aria-hidden="true">🧍‍♀️</span><b data-i="p2"></b><span data-i="p2d"></span></div>
-    <div class="tile reveal"><span class="ic" aria-hidden="true">🗣️</span><b data-i="p3"></b><span data-i="p3d"></span></div>
+    <div class="tile reveal"><b data-i="p1"></b><span data-i="p1d"></span></div>
+    <div class="tile reveal"><b data-i="p2"></b><span data-i="p2d"></span></div>
+    <div class="tile reveal"><b data-i="p3"></b><span data-i="p3d"></span></div>
   </div>
 </div></section>
 
@@ -351,10 +468,10 @@ html[dir=rtl] .replay{right:auto;left:18px}
         <button data-a="distract"><kbd>3</kbd><span class="e" aria-hidden="true">🙈</span><span data-i="a3"></span></button>
         <button data-a="overload"><kbd>4</kbd><span class="e" aria-hidden="true">😣</span><span data-i="a4"></span></button>
       </div>
-      <details class="raw"><summary>🧠 <span data-i="raw"></span> ▾</summary><div class="log" id="log"></div></details>
+      <details class="raw"><summary><span data-i="raw"></span></summary><div class="log" id="log"></div></details>
     </div>
     <div class="phone" role="region" aria-label="Parent app"><div class="screen"><div class="notch"></div><div class="app">
-      <div class="appH"><div><b data-i="ph.t"></b><br><small data-i="ph.c"></small></div><span style="font-size:22px">🦉</span></div>
+      <div class="appH"><div><b data-i="ph.t"></b><br><small data-i="ph.c"></small></div></div>
       <div class="sum"><svg width="54" height="54" viewBox="0 0 58 58"><circle cx="29" cy="29" r="24" fill="none" stroke="#EEE8E0" stroke-width="7"/><circle id="ring" cx="29" cy="29" r="24" fill="none" stroke="#1F9A85" stroke-width="7" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="150.8" transform="rotate(-90 29 29)" style="transition:stroke-dashoffset .5s"/><text id="ringTxt" x="29" y="34" text-anchor="middle" font-weight="800" font-size="14" fill="#14213D">0/4</text></svg><div><div class="t" data-i="ph.d"></div><div class="v" id="phR"></div></div></div>
       <ul class="feed" id="feed" aria-live="polite"></ul>
     </div></div></div>
@@ -364,10 +481,10 @@ html[dir=rtl] .replay{right:auto;left:18px}
 <section id="how"><div class="wrap">
   <div class="center reveal"><div class="kick" data-i="w.k"></div><h2 data-i="w.t"></h2></div>
   <div class="flow">
-    <div class="step reveal"><span class="n">01</span><div class="ic" style="background:rgba(62,230,200,.14)">👁️</div><b data-i="f1"></b><span data-i="f1d"></span></div>
-    <div class="step reveal"><span class="n">02</span><div class="ic" style="background:rgba(255,122,61,.16)">🧠</div><b data-i="f2"></b><span data-i="f2d"></span></div>
-    <div class="step reveal"><span class="n">03</span><div class="ic" style="background:rgba(255,209,102,.16)">🗣️</div><b data-i="f3"></b><span data-i="f3d"></span></div>
-    <div class="step reveal"><span class="n">04</span><div class="ic" style="background:rgba(127,184,255,.16)">📉</div><b data-i="f4"></b><span data-i="f4d"></span></div>
+    <div class="step reveal"><span class="n">01</span><b data-i="f1"></b><span data-i="f1d"></span></div>
+    <div class="step reveal"><span class="n">02</span><b data-i="f2"></b><span data-i="f2d"></span></div>
+    <div class="step reveal"><span class="n">03</span><b data-i="f3"></b><span data-i="f3d"></span></div>
+    <div class="step reveal"><span class="n">04</span><b data-i="f4"></b><span data-i="f4d"></span></div>
   </div>
   <div class="model reveal"><div><div class="mh">Gemma 3 <small>4B · Ollama</small></div><code>ollama run gemma3:4b</code></div><div class="mchips"><span data-i="m1"></span><span data-i="m2"></span><span data-i="m3"></span><span data-i="m4"></span></div></div>
 </div></section>
@@ -391,10 +508,10 @@ html[dir=rtl] .replay{right:auto;left:18px}
 
 <section id="video"><div class="wrap">
   <div class="center reveal"><div class="kick" data-i="v.k"></div><h2 data-i="v.t"></h2></div>
-  <div class="vidWrap reveal"><video controls preload="metadata" playsinline src="rafeeq-prototype-video.mp4" aria-label="Rafeeq prototype video"><track kind="captions" src="captions-en.vtt" srclang="en" label="English"><track kind="captions" src="captions-ar.vtt" srclang="ar" label="العربية"></video></div>
+  <div class="vidWrap reveal"><video controls preload="metadata" playsinline poster="video-poster.jpg" src="rafeeq-prototype-video.mp4" aria-label="Rafeeq prototype video"><track kind="captions" src="captions-en.vtt" srclang="en" label="English"><track kind="captions" src="captions-ar.vtt" srclang="ar" label="العربية"></video></div>
 </div></section>
 
-<div class="wrap end reveal"><div class="kick" data-i="e.k"></div><h2 data-i="e.t"></h2><div class="row" style="justify-content:center;margin-top:24px"><a class="btn primary" href="#sim" data-i="e.c"></a><a class="btn ghost" href="https://github.com/abdullahnaji353-blip/rafeeq">GitHub ↗</a></div></div>
+<div class="wrap end reveal"><div class="kick" data-i="e.k"></div><h2 data-i="e.t"></h2><div class="row" style="justify-content:center;margin-top:24px"><a class="btn primary" href="#sim" data-i="e.c"></a><a class="btn ghost" href="https://github.com/abdullahnaji353-blip/rafeeq">See the code on GitHub</a></div></div>
 </main>
 <footer><div class="wrap" data-i="foot"></div></footer>
 
@@ -403,14 +520,14 @@ const $=id=>document.getElementById(id),clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b
 const L={en:{
 skip:"Skip to the simulation",
 n1:"Simulation",n2:"How it works",n3:"Hardware",n4:"Video",
-"h.k":"ATSN26 · Gen-AI Innovation","h.t":"The AI buddy that teaches kids to <span class='grad'>not need it.</span>","h.l":"An owl robot that coaches kids with autism, Down syndrome and ADHD through daily routines, in Kuwaiti Arabic.",
-"h.c1":"▶ Play the simulation","h.c2":"Watch the story",c1:"🗣️ Kuwaiti Arabic",c2:"🔒 Runs offline",c3:"📉 Help fades weekly",
-"p.k":"The problem","p.t":"Today's routine tools can't see.",p1:"Charts are blind",p1d:"They can't tell if a step was skipped.",p2:"Parents become the prompt",p2d:"Every step, every morning.",p3:"No Gulf Arabic",p3d:"Most apps are English and generic.",
-"s.k":"Interactive simulation","s.t":"You're the kid. Rafeeq reacts.","s.l":"Pick a routine and a week, then play.",
-"ov.t":"Yousef's morning routine","ov.s":"▶ Play","ov.a":"🎬 Watch demo","ov.k":"Keys: 1 do · 2 stuck · 3 distracted · 4 too loud",
+"h.k":"ATSN26 · Gen-AI Innovation","h.t":"A friend for the morning routine.","h.l":"Rafeeq is an owl robot that coaches kids with autism, Down syndrome and ADHD one step at a time, in Kuwaiti Arabic. Every week it helps a little less.",
+"h.c1":"Play the simulation","h.c2":"Watch the 1-minute story",c1:"🗣️ Kuwaiti Arabic",c2:"🔒 Runs offline",c3:"📉 Help fades weekly",
+"p.k":"The problem","p.t":"Right now, parents are the reminder for every single step.",p1:"Charts are blind",p1d:"They can't tell if a step was skipped.",p2:"Parents become the prompt",p2d:"Every step, every morning.",p3:"No Gulf Arabic",p3d:"Most apps are English and generic.",
+"s.k":"Interactive simulation","s.t":"Be the kid for a minute.","s.l":"Pick a routine and a week, press Start, then choose what the child does. Rafeeq answers out loud.",
+"ov.t":"Yousef's morning routine","ov.s":"Play","ov.a":"Watch demo","ov.k":"Keys: 1 do · 2 stuck · 3 distracted · 4 too loud",
 "l.r":"Routine","l.w":"Week with Rafeeq","r.teeth":"Teeth","r.hands":"Hands","r.bag":"Bag",
 wS1:"W1",wS2:"W2",wS3:"W3",wS4:"W4",lv1:"Full",lv2:"Light",lv3:"Nudge",lv4:"Silent",wk:"Week",
-"b.s":"▶ Start","b.a":"🎬 Demo",a1:"Do it",a2:"Stuck",a3:"Distracted",a4:"Too loud!",raw:"Show Gemma's raw output",
+"b.s":"Start","b.a":"Watch demo",a1:"Do it",a2:"Stuck",a3:"Distracted",a4:"Too loud!",raw:"Show what Gemma decided",
 "ph.t":"Rafeeq · Parent","ph.c":"Yousef, 7","ph.d":"Today",empty:"Nothing yet. Press Play.",
 "m.idle":"Ready","m.coach":"Coaching","m.alert":"Overload!","m.calm":"Calm mode","m.done":"Done",
 bIn:"Breathe in",bOut:"Breathe out",
@@ -418,23 +535,23 @@ bIn:"Breathe in",bOut:"Breathe out",
 "res.t":"Routine complete!","res.a":"alone","res.h":"hints","res.c":"calm-downs","res.tip1":"Now try Week 4: Rafeeq stays quiet unless needed.","res.tip4":"Week 4: Rafeeq barely spoke. That's the goal.","res.again":"Play again",
 "w.k":"How it works","w.t":"See. Think. Coach. Step back.",
 f1:"See",f1d:"Camera frame every few seconds.",f2:"Think",f2d:"Gemma 3 checks the step: done, stuck, or off task.",f3:"Coach",f3d:"One short, kind line in Kuwaiti Arabic.",f4:"Step back",f4d:"Less help every week.",
-m1:"📴 Offline",m2:"💸 $0/month",m3:"🏠 Video stays home",m4:"🔓 Open model",
+m1:"Works offline",m2:"0 KD a month",m3:"Video never leaves home",m4:"Open model",
 "hw.k":"Hardware","hw.t":"Cheap parts. Friendly shape.",
 hw1:"Camera",hw1d:"ESP32-S3",hw2:"LED eyes",hw2d:"Color = mood",hw3:"Speaker + mic",hw3d:"Talks and listens",hw4:"2 servos",hw4d:"Head turns and nods",hw5:"3D-printed body",hw5d:"No sharp edges",hw6:"Raspberry Pi 5",hw6d:"Runs Gemma 3 offline",
 "v.k":"Prototype video","v.t":"Yousef's morning",
-"e.k":"The goal","e.t":"Rafeeq wins when it's <span class='grad'>not needed.</span>","e.c":"▶ Play again",
+"e.k":"The goal","e.t":"Rafeeq wins when it's not needed.","e.c":"Play the simulation",
 foot:"Rafeeq رفيق · by A.Naji · ATSN26 · Simulation: responses are scripted to show how the real system behaves."
 },ar:{
 skip:"انتقل إلى المحاكاة",
 n1:"المحاكاة",n2:"كيف يشتغل",n3:"القطع",n4:"الفيديو",
-"h.k":"ATSN26 · ابتكار بالذكاء التوليدي","h.t":"رفيق ذكي يعلّم الطفل <span class='grad'>إنه ما يحتاجه.</span>","h.l":"روبوت بومة يوجّه أطفال التوحد ومتلازمة داون وفرط الحركة في روتينهم اليومي، باللهجة الكويتية.",
-"h.c1":"▶ جرّب المحاكاة","h.c2":"شوف القصة",c1:"🗣️ لهجة كويتية",c2:"🔒 بدون إنترنت",c3:"📉 المساعدة تقل كل أسبوع",
-"p.k":"المشكلة","p.t":"أدوات الروتين الحالية ما تشوف.",p1:"اللوحات عمياء",p1d:"ما تعرف إذا الطفل نسى خطوة.",p2:"الأهل صاروا التذكير",p2d:"كل خطوة، كل صباح.",p3:"ما في خليجي",p3d:"أغلب التطبيقات إنجليزي وعامة.",
-"s.k":"محاكاة تفاعلية","s.t":"إنت الطفل، ورفيق يتفاعل.","s.l":"اختار الروتين والأسبوع، وابدأ.",
-"ov.t":"روتين يوسف الصباحي","ov.s":"▶ ابدأ","ov.a":"🎬 عرض تلقائي","ov.k":"الأزرار: ١ سوّها · ٢ وقف · ٣ تشتت · ٤ الصوت عالي",
+"h.k":"ATSN26 · ابتكار بالذكاء التوليدي","h.t":"رفيق لروتين الصباح.","h.l":"رفيق روبوت بومة يوجّه أطفال التوحد ومتلازمة داون وفرط الحركة خطوة بخطوة، باللهجة الكويتية. وكل أسبوع يساعد أقل.",
+"h.c1":"جرّب المحاكاة","h.c2":"شوف القصة بدقيقة",c1:"🗣️ لهجة كويتية",c2:"🔒 بدون إنترنت",c3:"📉 المساعدة تقل كل أسبوع",
+"p.k":"المشكلة","p.t":"اليوم، الأهل هم التذكير في كل خطوة.",p1:"اللوحات عمياء",p1d:"ما تعرف إذا الطفل نسى خطوة.",p2:"الأهل صاروا التذكير",p2d:"كل خطوة، كل صباح.",p3:"ما في خليجي",p3d:"أغلب التطبيقات إنجليزي وعامة.",
+"s.k":"محاكاة تفاعلية","s.t":"كون الطفل لدقيقة.","s.l":"اختار الروتين والأسبوع، اضغط ابدأ، واختار شنو يسوي الطفل. ورفيق يرد عليك بصوته.",
+"ov.t":"روتين يوسف الصباحي","ov.s":"ابدأ","ov.a":"عرض تلقائي","ov.k":"الأزرار: ١ سوّها · ٢ وقف · ٣ تشتت · ٤ الصوت عالي",
 "l.r":"الروتين","l.w":"الأسبوع مع رفيق","r.teeth":"أسنان","r.hands":"يدين","r.bag":"شنطة",
 wS1:"أ١",wS2:"أ٢",wS3:"أ٣",wS4:"أ٤",lv1:"كامل",lv2:"خفيف",lv3:"تذكير",lv4:"صامت",wk:"أسبوع",
-"b.s":"▶ ابدأ","b.a":"🎬 عرض",a1:"سوّها",a2:"وقف",a3:"تشتت",a4:"الصوت عالي!",raw:"اعرض مخرجات Gemma",
+"b.s":"ابدأ","b.a":"شوف العرض",a1:"سوّها",a2:"وقف",a3:"تشتت",a4:"الصوت عالي!",raw:"شوف شنو قرر Gemma",
 "ph.t":"رفيق · ولي الأمر","ph.c":"يوسف، ٧ سنوات","ph.d":"اليوم",empty:"ما في شي بعد. اضغط ابدأ.",
 "m.idle":"جاهز","m.coach":"يوجّه","m.alert":"توتر!","m.calm":"وضع الهدوء","m.done":"خلص",
 bIn:"شهيق",bOut:"زفير",
@@ -442,11 +559,11 @@ bIn:"شهيق",bOut:"زفير",
 "res.t":"خلص الروتين!","res.a":"بروحه","res.h":"تلميحات","res.c":"تهدئة","res.tip1":"جرّب الأسبوع ٤: رفيق ساكت إلا إذا احتاج.","res.tip4":"الأسبوع ٤: رفيق بالكاد تكلم. هذا الهدف.","res.again":"العب مرة ثانية",
 "w.k":"كيف يشتغل","w.t":"يشوف. يفكر. يوجّه. يبتعد.",
 f1:"يشوف",f1d:"صورة من الكاميرا كل كم ثانية.",f2:"يفكر",f2d:"Gemma 3 يحدد: خلصت، وقف، أو تشتت.",f3:"يوجّه",f3d:"جملة قصيرة ولطيفة بالكويتي.",f4:"يبتعد",f4d:"مساعدة أقل كل أسبوع.",
-m1:"📴 بدون إنترنت",m2:"💸 ٠ بالشهر",m3:"🏠 الفيديو ما يطلع من البيت",m4:"🔓 نموذج مفتوح",
+m1:"يشتغل بدون إنترنت",m2:"٠ د.ك بالشهر",m3:"الفيديو ما يطلع من البيت",m4:"نموذج مفتوح",
 "hw.k":"القطع","hw.t":"قطع رخيصة. شكل ودود.",
 hw1:"كاميرا",hw1d:"ESP32-S3",hw2:"عيون LED",hw2d:"اللون = المزاج",hw3:"سماعة ومايك",hw3d:"يتكلم ويسمع",hw4:"٢ سيرفو",hw4d:"الرأس يلف ويهز",hw5:"جسم مطبوع 3D",hw5d:"بدون حواف حادة",hw6:"Raspberry Pi 5",hw6d:"يشغّل Gemma 3 بدون إنترنت",
 "v.k":"فيديو النموذج","v.t":"صباح يوسف",
-"e.k":"الهدف","e.t":"رفيق يفوز لما <span class='grad'>ما يحتاجونه.</span>","e.c":"▶ العب مرة ثانية",
+"e.k":"الهدف","e.t":"رفيق يفوز لما ما يحتاجونه.","e.c":"جرّب المحاكاة",
 foot:"رفيق · إعداد A.Naji · ATSN26 · محاكاة: الردود مكتوبة مسبقاً عشان توضح كيف يشتغل النظام الحقيقي."}};
 let lang="en";const t=k=>(L[lang][k]??L.en[k]??k);
 function owlSVG(){return `<svg class="owl" viewBox="0 0 400 460" style="width:100%;overflow:visible">
@@ -695,7 +812,7 @@ const g=document.createElement("div");g.className="grain";g.setAttribute("aria-h
 function tickHTML(items,alt){const one=items.map(x=>`<span>${x}</span><i>✦</i>`).join("");return `<div class="ticker${alt?" alt":""}" aria-hidden="true"><div class="track">${one}${one}</div></div>`;}
 const hero=Q(".hero")?.closest(".wrap");const tw1=document.createElement("div");tw1.className="tickWrap";hero.after(tw1);
 const hw=Q("#hardware");const tw2=document.createElement("div");tw2.className="tickWrap";hw.before(tw2);
-function renderTickers(){tw1.innerHTML=tickHTML(tt().tk1)+tickHTML(tt().tk1.slice().reverse(),1);tw2.innerHTML=tickHTML(tt().tk2,1);}
+function renderTickers(){tw1.innerHTML=tickHTML(tt().tk1);tw2.remove();}
 
 /* stats drop */
 const strip=Q("#problem .strip");const stats=document.createElement("div");stats.className="stats";const src=document.createElement("p");src.className="src";strip.after(stats);stats.after(src);
@@ -705,7 +822,7 @@ function countUp(el){const v=el.dataset.v;if(RMx){el.textContent=v;return;}const
  (function step(now){const p=Math.min(1,(now-t0)/D),e=1-Math.pow(1-p,3);el.textContent=f(e);if(p<1)requestAnimationFrame(step);else{el.textContent=v;el.closest(".stat").classList.add("punch");}})(t0);}
 
 /* split headings into words that slam in */
-function split(el){if(el.dataset.split===lang+el.innerHTML.length)return;let i=0;
+function split(el){return;if(el.dataset.split===lang+el.innerHTML.length)return;let i=0;
  const walk=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const parts=c.textContent.split(/(\s+)/);const frag=document.createDocumentFragment();
   parts.forEach(p=>{if(!p)return;if(/^\s+$/.test(p)){frag.appendChild(document.createTextNode(p));return;}const s=document.createElement("span");s.className="sw";s.style.setProperty("--i",i++);s.textContent=p;frag.appendChild(s);});c.replaceWith(frag);}
   else if(c.nodeType===1&&!c.classList.contains("sw"))walk(c);});};
@@ -726,7 +843,7 @@ window.applyLang=applyLang=function(){_apply();renderTickers();renderStats();pre
 
 /* hero speed lines + periodic glitch */
 const ho=Q(".heroOwl");if(ho){const sp=document.createElement("div");sp.className="speed";ho.prepend(sp);}
-if(!RMx)setInterval(()=>{const gr=Q("h1 .grad");if(!gr||document.hidden)return;gr.classList.remove("glitch");void gr.offsetWidth;gr.classList.add("glitch");},5200);
+if(false)setInterval(()=>{const gr=Q("h1 .grad");if(!gr||document.hidden)return;gr.classList.remove("glitch");void gr.offsetWidth;gr.classList.add("glitch");},5200);
 
 /* sim: hits and cinematic calm */
 const stage=Q("#stage");["t","b"].forEach(k=>{const d=document.createElement("div");d.className="lbx "+k;d.setAttribute("aria-hidden","true");stage.appendChild(d);});
@@ -736,7 +853,7 @@ const _ec=window.enterCalm;window.enterCalm=enterCalm=function(){stage.classList
 const _xc=window.exitCalm;window.exitCalm=exitCalm=function(){stage.classList.remove("cine");return _xc.apply(this,arguments);};
 
 /* video framed like an edit */
-const vw=Q(".vidWrap");if(vw)vw.insertAdjacentHTML("beforeend",'<span class="rec" aria-hidden="true"><b>●</b> REC · RAFEEQ</span><i class="cn a"></i><i class="cn b"></i><i class="cn c"></i><i class="cn d"></i>');
+const vw=Q(".vidWrap");if(false)vw.insertAdjacentHTML("beforeend",'<span class="rec" aria-hidden="true"><b>●</b> REC · RAFEEQ</span><i class="cn a"></i><i class="cn b"></i><i class="cn c"></i><i class="cn d"></i>');
 
 /* cold-open intro */
 function intro(){if(RMx)return;const w=tt().words;
@@ -755,13 +872,13 @@ function intro(){if(RMx)return;const w=tt().words;
   try{sessionStorage.setItem("rafeeqIntro","1")}catch(e){}}
  el.addEventListener("click",end);document.addEventListener("keydown",function k(e){if(e.key==="Escape"||e.key==="Enter"){end();document.removeEventListener("keydown",k);}});
  Q(".iskip",el).focus({preventScroll:true});}
-const rb=document.createElement("button");rb.className="replay";rb.type="button";rb.onclick=()=>{scrollTo(0,0);intro();};document.body.appendChild(rb);
-const _a2=window.applyLang;window.applyLang=applyLang=function(){_a2();rb.textContent=tt().replay;};
+
+
 
 /* boot */
-applyLang();heads().forEach(h=>io2.observe(h));io3.observe(stats);
+applyLang();io3.observe(stats);
 let seen=false;try{seen=sessionStorage.getItem("rafeeqIntro")==="1"}catch(e){}
-if(!seen)intro();
+
 })();
 </script>
 </body>
