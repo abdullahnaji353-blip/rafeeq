@@ -868,7 +868,7 @@ document.querySelectorAll(".page").forEach(p=>pio.observe(p));
 setStep(0);document.querySelector(".page").classList.add("on");
 
 /* narration while scrolling */
-const NARR={ar:{src:"voice/narr-ar.webm",meta:[[0,6.85],[7.6,5.2],[13.45,5.8],[19.87,3.0],[23.48,5.2],[29.27,4.5],[34.29,3.0]]}};
+const NARR={en:{src:"voice/narr-en.webm",meta:[[0,6.0],[6.98,4.93],[12.84,5.73],[19.43,2.78],[23.12,5.51],[29.55,4.76],[34.89,2.83]]},ar:{src:"voice/narr-ar.webm",meta:[[0,6.85],[7.6,5.2],[13.45,5.8],[19.87,3.0],[23.48,5.2],[29.27,4.5],[34.29,3.0]]}};
 const RAF_LINE={2:0,4:43,5:37};
 var nOn=false,NBUF={},NSRC=null,nTimer=null;
 async function nLoad(l){if(!NARR[l]||NBUF[l])return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const b=await(await fetch(NARR[l].src)).arrayBuffer();NBUF[l]=await AC.decodeAudioData(b);}catch(e){}}
