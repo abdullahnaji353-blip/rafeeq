@@ -360,6 +360,31 @@ html[dir=rtl] .page{justify-content:flex-start}
 .cover h1 span:not(.t1){display:block;margin:8px 0 0;font-size:.4em;vertical-align:0}
 @media(max-width:760px){.sbox{bottom:4vh}.page{align-items:flex-start;padding:84px 20px 0;min-height:85vh}.cover h1{font-size:64px}.cover .sub{font-size:17px}.cap p{font-size:26px}
  .grade{background:linear-gradient(180deg,rgba(15,23,51,1) 0%,rgba(15,23,51,1) 44%,rgba(15,23,51,0) 56%,rgba(15,23,51,0) 85%,rgba(15,23,51,.6) 100%)}}
+/* ===== LAYOUT PASS ===== */
+header.bar{background:rgba(15,23,51,.94)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;border-bottom:1px solid var(--line)!important;padding:12px max(28px,calc((100vw - 1180px)/2 + 28px))!important}
+section,.end{scroll-margin-top:70px}
+#play,.facts,#inside,#video{padding:120px 0}
+#video{background:var(--night2)}
+#play .lead,#inside .lead{margin-bottom:0}
+.simGrid,.hw{margin-top:44px}
+.facts h2{margin-bottom:44px}
+#video .vidWrap{margin-top:44px}
+.simGrid{grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start}
+.phone{position:sticky;top:90px}
+.screen{min-height:0!important;height:var(--sh,520px)}
+.ctl{grid-template-columns:1fr 1.35fr .95fr;gap:14px;margin-top:16px}
+.ctl .box{display:flex;flex-direction:column;min-width:0}
+.ctl .box:last-child{justify-content:space-between;gap:10px}
+.ctl .box:last-child>.btn{width:100%;justify-content:center}
+.ctl .box:last-child .row{display:grid!important;grid-template-columns:1fr auto}
+.ctl .box:last-child .row .btn{justify-content:center}
+.seg{gap:8px}.seg button{flex:1;min-width:0;padding:10px 4px}
+.acts{margin-top:16px}
+details.raw{margin-top:16px}
+.brain .cost{justify-self:end;text-align:end}
+.parts{align-self:center}
+@media(max-width:1060px){.simGrid{grid-template-columns:1fr}.phone{position:static;max-width:340px;margin:24px auto 0}.screen{height:auto!important;min-height:420px!important}}
+@media(max-width:760px){header.bar{padding:10px 16px!important}#play,.facts,#inside,#video{padding:84px 0}.ctl{grid-template-columns:1fr}.brain .cost{justify-self:start;text-align:start}.simGrid,.hw{margin-top:32px}}
 </style>
 </head>
 <body>
@@ -853,6 +878,11 @@ const _xc=window.exitCalm;window.exitCalm=exitCalm=function(){stage.classList.re
 const _apply=window.applyLang;window.applyLang=applyLang=function(){_apply();renderFacts();const s=step;step=-1;setStep(s<0?0:s);};
 applyLang();
 })();
+
+/* phone matches left column height */
+(function(){const col=document.querySelector(".simGrid>div"),acts=document.querySelector(".acts"),st=document.getElementById("stage"),scr=document.querySelector(".screen");
+function fit(){if(innerWidth<=1060){scr.style.removeProperty("--sh");return;}const h=acts.getBoundingClientRect().bottom-st.getBoundingClientRect().top;scr.style.setProperty("--sh",(h-20)+"px");}
+new ResizeObserver(fit).observe(col);addEventListener("resize",fit);fit();})();
 </script>
 </body>
 </html>
