@@ -46,7 +46,7 @@ Children with autism, Down syndrome and ADHD often struggle with everyday living
 |---|---|
 | **30+** | autism diagnoses per 10,000 children in Kuwait (true numbers are likely higher) |
 | **1 vs 5.4** | psychologists per 100,000 people in our region vs Europe |
-| **up to 8,000 AED/SAR a month** | what diagnostics and therapy can cost Gulf families |
+| **82 families** | in Ahmadi, Kuwait, ranked behaviour as their hardest daily challenge ([PAAET study](https://maed.journals.ekb.eg/article_409059.html)) |
 | **Assessment & diagnosis only** | what GCC public health services cover; daily-routine support falls on parents at home |
 
 *Source: PwC Middle East, "[Elevating autism care in the GCC for meaningful change](https://www.pwc.com/m1/en/publications/documents/2024/elevating-autism-care-in-the-gcc-for-meaningful-change.pdf)" (2024), citing the WHO Mental Health Atlas 2020.*
@@ -208,7 +208,7 @@ Camera frame ──► Gemma 3 (vision): "is step 2 done, in progress, stuck, or
 
 **Why a local open model instead of a cloud API?**
 - 📴 **Works offline.** No internet, no outages.
-- 💸 **$0 per month.** No API bills for families.
+- 🧾 **No account and no outside servers.** It keeps working without depending on any company.
 - 🏠 **Video never leaves the home.** This matters for children.
 - 🔓 **Open model.** Can be upgraded or fine-tuned on Gulf-Arabic coaching data later.
 
@@ -239,19 +239,16 @@ Small, soft, and built from cheap, easy-to-find parts:
 | 5 | **3D-printed owl body** | Rounded and friendly, no sharp edges; printable at a school makerspace |
 | 6 | **Raspberry Pi 5 hub** (in the base) | Runs Ollama + Gemma 3, Whisper and the voice, so the AI works with no internet |
 
-### Cost to build (estimates, Nov 2026)
-| Part | Approx. price |
+### Parts list
+| Part | Role |
 |---|---|
-| Raspberry Pi 5 · 8 GB (AI hub) | 40 KD ($130) |
-| ESP32-S3 camera board (Seeed XIAO ESP32S3 Sense) | 4.5 KD ($14) |
-| Power supply + SD card | 7 KD ($22) |
-| Servos, speaker, mic, LEDs | 8.5 KD ($28) |
-| 3D-printed shell, wires | 5 KD ($16) |
-| **Total** | **≈ 65 KD ($210)** |
+| Raspberry Pi 5 · 8 GB | AI hub: runs Ollama + Gemma 3 offline |
+| ESP32-S3 camera board (Seeed XIAO ESP32S3 Sense) | Camera + mic in the owl's head |
+| Power supply + SD card | Power and storage |
+| Servos, speaker, mic, LEDs | Head movement, voice, LED eyes |
+| 3D-printed shell, wires | The owl body |
 
-Running the AI on the family's home computer instead of the Pi brings parts to about **25 KD**. Running costs are **$0**: open model, no subscription, no API bills. Less than one month of private therapy in the Gulf.
-
-*Pi 5 price reflects the 2026 memory-driven price rises ([Tom's Hardware](https://www.tomshardware.com/raspberry-pi/component-shortages-drive-raspberry-pi-prices-up-by-up-to-23-percent-escalating-lpddr4-lpddr5-costs-trigger-the-third-price-hike-of-the-year)); 1 USD ≈ 0.307 KD.*
+All parts are standard, off-the-shelf components. The AI can also run on the family's home computer instead of the Pi.
 
 **Why the Pi?** The ESP32 camera board is far too weak to run Gemma. The Pi 5 can run Gemma 3 4B, but expect **a few seconds per frame**. That is fine for routines, because each step takes many seconds. The hub can be upgraded, or Ollama can run on the family's home computer.
 
@@ -296,7 +293,7 @@ To use it on a phone (cameras need https), run `npx cloudflared tunnel --url htt
 | **Accessibility & autonomy impact** | Built to make the child independent: help fades until the child does the routine alone. Calm mode reduces distress. Parents get their mornings back. |
 | **Gen-AI innovation** | An open vision-language model (Gemma 3) understands real routines from a camera and writes personalized Arabic coaching on the device. |
 | **Usability (UI/UX)** | No screen for the child, just a friendly voice and glowing eyes. Parents get a simple Arabic report. The website lets anyone try the experience in seconds. |
-| **Technical feasibility** | Off-the-shelf parts (ESP32, Raspberry Pi 5, servos, 3D print), a free open model with no API costs, and a working demo in this repo. |
+| **Technical feasibility** | Off-the-shelf parts (ESP32, Raspberry Pi 5, servos, 3D print), a free open model running locally, and a working demo in this repo. |
 | **Arabic support** | Kuwaiti Arabic from day one: coaching lines, a recorded Gulf-Arabic voice, and a fully Arabic (RTL) website. |
 
 ---
