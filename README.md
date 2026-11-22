@@ -130,6 +130,17 @@ The website is the main thing judges can try. It is one self-contained page (`do
 
 ---
 
+### Accessibility of the website and video
+
+An accessibility project should be accessible itself, so:
+
+- The prototype video has **Arabic and English captions burned in**, plus separate caption files (`docs/captions-ar.vtt`, `docs/captions-en.vtt`) that can be switched on in the player.
+- Everything Rafeeq says in the simulation is also announced to **screen readers** (a live region), in Arabic or English depending on the site language.
+- Every control works with the **keyboard** (Tab, Enter, and keys 1 to 4 in the simulation), with a visible focus ring and a "Skip to the simulation" link.
+- Toggle buttons (routine, week, language, sound) report their on/off state to screen readers; decorative drawings and emoji are hidden from them.
+- With **reduced motion** turned on in the device settings, animations and particle effects are switched off.
+- Text colours pass WCAG AA contrast on the dark background.
+
 ## 4. How the simulation works (step by step)
 This is the logic coded into `docs/index.html`.
 
