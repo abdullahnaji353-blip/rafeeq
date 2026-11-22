@@ -364,7 +364,7 @@ html[dir=rtl] .page{justify-content:flex-start}
 header.bar{background:rgba(15,23,51,.94)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;border-bottom:1px solid var(--line)!important;padding:12px max(28px,calc((100vw - 1180px)/2 + 28px))!important}
 section,.end{scroll-margin-top:70px}
 #play,.facts,#inside,#video{padding:120px 0}
-#video{background:var(--night2)}
+#inside{background:var(--night2)}#video{background:var(--night)}.end{background:var(--night2)}
 #play .lead,#inside .lead{margin-bottom:0}
 .simGrid,.hw{margin-top:44px}
 .facts h2{margin-bottom:44px}
@@ -385,6 +385,8 @@ details.raw{margin-top:16px}
 .parts{align-self:center}
 @media(max-width:1060px){.simGrid{grid-template-columns:1fr}.phone{position:static;max-width:340px;margin:24px auto 0}.screen{height:auto!important;min-height:420px!important}}
 @media(max-width:760px){header.bar{padding:10px 16px!important}#play,.facts,#inside,#video{padding:84px 0}.ctl{grid-template-columns:1fr}.brain .cost{justify-self:start;text-align:start}.simGrid,.hw{margin-top:32px}}
+.sweeks{left:6%;top:13%}
+@media(max-width:760px){.sweeks{top:6%;left:16%}}
 </style>
 </head>
 <body>
@@ -404,7 +406,7 @@ details.raw{margin-top:16px}
 
 <header class="bar">
   <a class="brand" href="#top"><svg width="26" height="28" viewBox="0 0 400 440" aria-hidden="true"><ellipse cx="200" cy="240" rx="150" ry="170" fill="#F2641A"/><ellipse cx="200" cy="290" rx="96" ry="110" fill="#FFE3CC"/><circle cx="140" cy="190" r="58" fill="#fff"/><circle cx="260" cy="190" r="58" fill="#fff"/><circle cx="140" cy="195" r="25" fill="#1F2D4D"/><circle cx="260" cy="195" r="25" fill="#1F2D4D"/></svg>Rafeeq <b>رفيق</b></a>
-  <nav class="navR" aria-label="Sections"><a href="#inside" data-i="n3"></a><a href="#video" data-i="n4"></a><a href="https://github.com/abdullahnaji353-blip/rafeeq">GitHub</a><a class="play" href="#play" data-i="n1"></a>
+  <nav class="navR" aria-label="Sections"><a href="#why" data-i="nW"></a><a href="#inside" data-i="n3"></a><a href="#video" data-i="n4"></a><a href="https://github.com/abdullahnaji353-blip/rafeeq">GitHub</a><a class="play" href="#play" data-i="n1"></a>
   <div class="lang" role="group" aria-label="Language"><button id="lEn" class="on" lang="en">EN</button><button id="lAr" lang="ar">عربي</button></div></nav>
 </header>
 
@@ -430,6 +432,11 @@ details.raw{margin-top:16px}
     <article class="page last" data-step="6"><div class="cap"><p data-i="st6"></p><a class="btn primary" href="#play" data-i="st.cta"></a></div></article>
   </div>
 </section>
+
+<section class="facts" id="why"><div class="wrap">
+  <h2 data-i="fa.t"></h2>
+  <div id="factText"></div>
+</div></section>
 
 <section id="play"><div class="wrap" id="sim">
   <h2 data-i="pl.t"></h2><p class="lead" data-i="s.l"></p>
@@ -483,10 +490,7 @@ details.raw{margin-top:16px}
   </div>
 </div></section>
 
-<section class="facts"><div class="wrap">
-  <h2 data-i="fa.t"></h2>
-  <div id="factText"></div>
-</div></section>
+
 
 <section id="inside"><div class="wrap">
   <h2 data-i="in.t"></h2>
@@ -519,13 +523,14 @@ details.raw{margin-top:16px}
 <script>
 const $=id=>document.getElementById(id),clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),lerp=(a,b,t)=>a+(b-a)*t;
 const L={en:{
+nW:"Why",
 "st.title":"Rafeeq","st.title2":"رفيق","st.sub":"An owl robot that coaches kids with autism through the morning, in Kuwaiti Arabic. And then steps back.","st.hint":"Scroll",
 st1:"Yousef is seven. Every morning is too loud, with too many steps.",
 st2:"Rafeeq watches and says one small step at a time, in the Kuwaiti Arabic he hears at home.",
 st3:"Some mornings, it all gets too much.",
 st4:"Rafeeq notices first. It stops, dims its light, and breathes with him.",
 st5:"Every week, it says a little less. Week four, it just watches.",
-st6:"Now you be Yousef.",
+st6:"That's Rafeeq. Want to try being Yousef?",
 
 
 st9:"Now you be Yousef.","st.cta":"Play the simulation",
@@ -534,7 +539,7 @@ st9:"Now you be Yousef.","st.cta":"Play the simulation",
 "br.c":"≈ 65 KD","br.cd":"in parts to build one. 0 KD a month to run.",
 "end.t":"Rafeeq wins when it's not needed.","end.d":"Help that fades, so kids grow.","end.gh":"See the code on GitHub",
 skip:"Skip to the simulation",
-n1:"Simulation",n2:"How it works",n3:"Hardware",n4:"Video",
+n1:"Simulation",n2:"How it works",n3:"Inside",n4:"Video",
 "h.k":"ATSN26 · Gen-AI Innovation","h.t":"A friend for the morning routine.","h.l":"Rafeeq is an owl robot that coaches kids with autism, Down syndrome and ADHD one step at a time, in Kuwaiti Arabic. Every week it helps a little less.",
 "h.c1":"Play the simulation","h.c2":"Watch the 1-minute story",c1:"🗣️ Kuwaiti Arabic",c2:"🔒 Runs offline",c3:"📉 Help fades weekly",
 "p.k":"The problem","p.t":"Right now, parents are the reminder for every single step.",p1:"Charts are blind",p1d:"They can't tell if a step was skipped.",p2:"Parents become the prompt",p2d:"Every step, every morning.",p3:"No Gulf Arabic",p3d:"Most apps are English and generic.",
@@ -557,13 +562,14 @@ hw1:"Camera",hw1d:"ESP32-S3",hw2:"LED eyes",hw2d:"Color = mood",hw3:"Speaker + m
 "e.k":"The goal","e.t":"Rafeeq wins when it's not needed.","e.c":"Play the simulation",
 foot:"Rafeeq رفيق · by A.Naji · ATSN26 · Simulation: responses are scripted to show how the real system behaves."
 },ar:{
+nW:"ليش",
 "st.title":"رفيق","st.title2":"Rafeeq","st.sub":"روبوت بومة يوجّه أطفال التوحد في روتين الصباح، باللهجة الكويتية. وبعدين يتراجع.","st.hint":"انزل",
 st1:"يوسف عمره سبع سنين. كل صبح صوت عالي، وخطوات واجد.",
 st2:"رفيق يطالع ويقول خطوة صغيرة وحدة كل مرة، باللهجة اللي يسمعها في البيت.",
 st3:"بعض الأيام، يصير كل شي فوق طاقته.",
 st4:"رفيق ينتبه أول. يوقف، ويخفّف ضوّه، ويتنفس وياه.",
 st5:"كل أسبوع يتكلم أقل. بالأسبوع الرابع، بس يطالع.",
-st6:"الحين إنت كون يوسف.",
+st6:"هذا رفيق. تبي تجرب تكون يوسف؟",
 
 
 st9:"الحين إنت كون يوسف.","st.cta":"جرّب المحاكاة",
@@ -572,7 +578,7 @@ st9:"الحين إنت كون يوسف.","st.cta":"جرّب المحاكاة",
 "br.c":"≈ 65 د.ك","br.cd":"قطع لصنع وحدة. و٠ د.ك بالشهر للتشغيل.",
 "end.t":"رفيق يفوز لما ما يحتاجونه.","end.d":"مساعدة تخف، عشان الطفل يكبر.","end.gh":"شوف الكود على GitHub",
 skip:"انتقل إلى المحاكاة",
-n1:"المحاكاة",n2:"كيف يشتغل",n3:"القطع",n4:"الفيديو",
+n1:"المحاكاة",n2:"كيف يشتغل",n3:"من داخل",n4:"الفيديو",
 "h.k":"ATSN26 · ابتكار بالذكاء التوليدي","h.t":"رفيق لروتين الصباح.","h.l":"رفيق روبوت بومة يوجّه أطفال التوحد ومتلازمة داون وفرط الحركة خطوة بخطوة، باللهجة الكويتية. وكل أسبوع يساعد أقل.",
 "h.c1":"جرّب المحاكاة","h.c2":"شوف القصة بدقيقة",c1:"🗣️ لهجة كويتية",c2:"🔒 بدون إنترنت",c3:"📉 المساعدة تقل كل أسبوع",
 "p.k":"المشكلة","p.t":"اليوم، الأهل هم التذكير في كل خطوة.",p1:"اللوحات عمياء",p1d:"ما تعرف إذا الطفل نسى خطوة.",p2:"الأهل صاروا التذكير",p2d:"كل خطوة، كل صباح.",p3:"ما في خليجي",p3d:"أغلب التطبيقات إنجليزي وعامة.",
