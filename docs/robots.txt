@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abdullahnaji353-blip.github.io/rafeeq/sitemap.xml
