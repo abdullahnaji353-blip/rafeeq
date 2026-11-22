@@ -6,9 +6,18 @@
 <title>Rafeeq رفيق · The AI buddy that teaches independence</title>
 <meta name="description" content="Rafeeq: an owl robot that coaches children with autism, Down syndrome and ADHD through daily routines in Kuwaiti Arabic, powered by Gemma 3 running offline. Play the simulation.">
 <meta name="theme-color" content="#0A0F1E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Alexandria:wght@600;800&family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+@font-face{font-family:"Baloo 2";src:url(fonts/baloo-2-latin-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Baloo 2";src:url(fonts/baloo-2-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Baloo 2";src:url(fonts/baloo-2-latin-800-normal.woff2) format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Baloo Bhaijaan 2";src:url(fonts/baloo-bhaijaan-2-arabic-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Baloo Bhaijaan 2";src:url(fonts/baloo-bhaijaan-2-arabic-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Baloo Bhaijaan 2";src:url(fonts/baloo-bhaijaan-2-arabic-800-normal.woff2) format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(fonts/atkinson-hyperlegible-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Atkinson Hyperlegible";src:url(fonts/atkinson-hyperlegible-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"IBM Plex Sans Arabic";src:url(fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Sans Arabic";src:url(fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"IBM Plex Sans Arabic";src:url(fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
 :root{--bg:#0A0F1E;--bg2:#0F1630;--card:rgba(255,255,255,.045);--line:rgba(255,255,255,.09);--text:#EEF2FF;--muted:#94A0BF;--orange:#FF7A3D;--orange2:#FFB27A;--teal:#3EE6C8;--blue:#7FB8FF;--gold:#FFD166;--red:#FF5A6A;--r:22px}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -176,214 +185,179 @@ footer{padding:30px 0 50px;color:var(--muted);font-size:13px;border-top:1px soli
 @media(max-width:760px){.hero,.hw{grid-template-columns:1fr}.hero{min-height:auto;padding:40px 0}.strip,.flow,.parts{grid-template-columns:1fr}.links{display:none}.ctl{grid-template-columns:1fr}.acts{grid-template-columns:1fr 1fr}.seg button{min-width:0;flex:1;padding:8px 6px}section{padding:60px 0}.bubble{max-width:52%;padding:9px 12px}.meter{width:50px;height:50px}.tracker span{width:24px;height:24px;font-size:12px}#hudWeek{display:none}.say{display:none}.vbox .tag{font-size:10px}.resCard,.result.show .resCard{transform:scale(.6)}.overlay .keys{display:none}}
 .sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}.skip{position:absolute;left:12px;top:-60px;z-index:999;background:var(--teal);color:#0A0F1E;padding:10px 16px;border-radius:10px;font-weight:700;text-decoration:none}.skip:focus{top:12px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
-/* ===== EDIT LAYER: montage-style motion ===== */
-.grain{position:fixed;inset:0;background-size:160px;z-index:90;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain .5s steps(4) infinite}
-@keyframes grain{0%{background-position:0 0}25%{background-position:-40px 30px}50%{background-position:30px -50px}75%{background-position:-25px -15px}}
-html,body{overflow-x:clip}
-/* intro */
-#intro{position:fixed;inset:0;z-index:200;background:#05070F;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}
-#intro .bar{position:absolute;left:0;right:0;height:11vh;background:#000;z-index:3;transition:transform .5s cubic-bezier(.7,0,.2,1)}
-#intro .bar.t{top:0}#intro .bar.b{bottom:0}
-#intro.open .bar.t{transform:translateY(-100%)}#intro.open .bar.b{transform:translateY(100%)}
-#intro .word{position:absolute;font-weight:900;font-size:clamp(46px,11vw,170px);letter-spacing:-.04em;line-height:.95;text-align:center;color:#fff;opacity:0;padding:0 5vw;text-transform:uppercase}
-html[dir=rtl] #intro .word{text-transform:none;letter-spacing:0;font-family:'IBM Plex Sans Arabic',sans-serif}
-#intro .word.on{animation:slam .42s cubic-bezier(.2,1.4,.4,1) both}
-#intro .word.red{color:var(--red)}
-#intro .word.off{animation:cutout .14s linear both}
-@keyframes slam{0%{opacity:0;transform:scale(2.4);filter:blur(14px)}60%{opacity:1;filter:blur(0)}100%{opacity:1;transform:scale(1)}}
-@keyframes cutout{to{opacity:0;transform:scale(.92)}}
-#intro .shake{animation:ishake .32s linear}
-@keyframes ishake{20%{transform:translate(9px,-6px) rotate(.6deg)}40%{transform:translate(-8px,5px)}60%{transform:translate(6px,4px) rotate(-.5deg)}80%{transform:translate(-4px,-3px)}}
-#intro .flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:4;pointer-events:none}
-#intro .flash.go{animation:flash .32s ease-out}
-@keyframes flash{0%{opacity:.55}100%{opacity:0}}
-#intro .iowl{position:absolute;width:min(38vh,62vw);opacity:0;z-index:2}
-#intro .iowl.on{animation:owlzoom .7s cubic-bezier(.15,1,.3,1) both}
-@keyframes owlzoom{0%{opacity:0;transform:scale(4) rotate(-8deg);filter:blur(18px)}100%{opacity:1;transform:none;filter:none}}
-#intro .rays{position:absolute;width:220vmax;height:220vmax;background:repeating-conic-gradient(from 0deg,rgba(255,122,61,.16) 0 3deg,transparent 3deg 12deg);opacity:0;z-index:1;border-radius:50%;mask:radial-gradient(circle,transparent 8%,#000 30%,transparent 62%);-webkit-mask:radial-gradient(circle,transparent 8%,#000 30%,transparent 62%)}
-#intro .rays.on{opacity:1;animation:spin 9s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-#intro .ititle{position:absolute;bottom:17vh;z-index:3;text-align:center;opacity:0}
-#intro .ititle.on{animation:slam .5s cubic-bezier(.2,1.4,.4,1) both}
-#intro .ititle b{display:block;font-size:clamp(44px,8vw,110px);font-weight:900;letter-spacing:-.04em;color:#fff}
-#intro .ititle span{font-family:'IBM Plex Sans Arabic',sans-serif;font-size:clamp(28px,4vw,52px);color:var(--orange);font-weight:700}
-.rgb{animation:rgb .5s steps(2) 2}
-@keyframes rgb{0%{text-shadow:-5px 0 #ff2d55,5px 0 #00e5ff}50%{text-shadow:4px 0 #ff2d55,-4px 0 #00e5ff;transform:translateX(2px) skewX(-4deg)}100%{text-shadow:none;transform:none}}
-#intro .iskip{position:absolute;bottom:3vh;right:4vw;z-index:5;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:9px 18px;font:600 13px/1 inherit;cursor:pointer}
-html[dir=rtl] #intro .iskip{right:auto;left:4vw}
-#intro.wipe{animation:wipe .6s cubic-bezier(.8,0,.2,1) forwards}
-@keyframes wipe{to{clip-path:polygon(100% 0,100% 0,100% 100%,100% 100%)}}
-#intro{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
-/* word slam on headings */
-.sw{display:inline-block;opacity:0;transform:scale(1.7) translateY(-6px);filter:blur(10px);will-change:transform}
-.slam .sw{animation:wslam .5s cubic-bezier(.2,1.5,.4,1) both;animation-delay:calc(var(--i)*75ms)}
-@keyframes wslam{0%{opacity:0;transform:scale(1.7) translateY(-6px);filter:blur(10px)}55%{opacity:1;filter:blur(0)}100%{opacity:1;transform:none;filter:none}}
-.slamDone .sw{opacity:1;transform:none;filter:none}
-/* light streak when a section hits */
-.streak{position:relative}
-.streak::after{content:"";position:absolute;top:0;bottom:0;left:-30%;width:22%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.14),transparent);transform:skewX(-20deg);pointer-events:none;opacity:0}
-.streak.go::after{animation:streak .7s ease-out}
-@keyframes streak{0%{left:-30%;opacity:1}100%{left:120%;opacity:0}}
-.punch{animation:punch .38s cubic-bezier(.2,1.4,.4,1)}
-@keyframes punch{0%{transform:scale(1.035)}100%{transform:scale(1)}}
-/* tickers */
-.ticker{position:relative;overflow:hidden;transform:rotate(-2deg) scale(1.04);margin:8px 0;background:var(--orange);color:#0A0F1E;padding:13px 0;box-shadow:0 10px 40px rgba(255,122,61,.25);z-index:2}
-.ticker.alt{background:var(--teal);transform:rotate(1.5deg) scale(1.04);margin-top:-18px;box-shadow:0 10px 40px rgba(62,230,200,.2)}
-.ticker .track{display:flex;width:max-content;animation:tick 26s linear infinite;font-weight:900;font-size:clamp(18px,2.4vw,30px);letter-spacing:.02em;text-transform:uppercase;white-space:nowrap}
-.ticker.alt .track{animation-direction:reverse;animation-duration:30s}
-.ticker .track span{padding:0 22px}.ticker .track i{font-style:normal;opacity:.55}
-html[dir=rtl] .ticker .track{font-family:'IBM Plex Sans Arabic',sans-serif;text-transform:none;letter-spacing:0}
-@keyframes tick{to{transform:translateX(-50%)}}
-.tickWrap{padding:30px 0 10px;overflow:hidden}
-/* stats drop */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:46px 0 10px}
-.stat{position:relative;background:linear-gradient(160deg,rgba(255,122,61,.13),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:22px;padding:28px 22px 22px;overflow:hidden}
-.stat .n{font-weight:900;font-size:clamp(48px,6.4vw,86px);line-height:1;letter-spacing:-.04em;background:linear-gradient(90deg,#fff,var(--orange2));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums;direction:ltr;display:inline-block}
-.stat .d{display:block;margin-top:10px;color:var(--muted);font-size:15px;line-height:1.4}
-.stats+.src{font-size:12px;color:var(--muted);opacity:.8}
-@media(max-width:760px){.stats{grid-template-columns:1fr}}
-/* hero hype */
-.heroOwl .speed{position:absolute;inset:-30%;background:repeating-conic-gradient(rgba(255,178,122,.10) 0 2deg,transparent 2deg 9deg);border-radius:50%;-webkit-mask:radial-gradient(circle,transparent 30%,#000 45%,transparent 70%);mask:radial-gradient(circle,transparent 30%,#000 45%,transparent 70%);animation:spin 40s linear infinite;pointer-events:none}
-h1 .grad.glitch{animation:rgb .45s steps(2) 1}
-.ownIn{animation:owlzoom .8s cubic-bezier(.15,1,.3,1) both}
-/* sim hits */
-.stage.hit{animation:punch .3s cubic-bezier(.2,1.4,.4,1),ishake .3s linear}
-.stage .lbx{position:absolute;left:0;right:0;height:0;background:#000;z-index:30;transition:height .6s cubic-bezier(.7,0,.2,1);pointer-events:none}
-.stage .lbx.t{top:0}.stage .lbx.b{bottom:0}
-.stage.cine .lbx{height:9%}
-/* video framed like an edit */
-.vidWrap{position:relative}
-.vidWrap .rec{position:absolute;top:14px;left:16px;z-index:3;font:800 12px/1 ui-monospace,monospace;letter-spacing:.12em;color:#fff;background:rgba(0,0,0,.45);padding:7px 10px;border-radius:8px;pointer-events:none}
-.vidWrap .rec b{color:var(--red);animation:blink 1s steps(2) infinite}
-@keyframes blink{50%{opacity:0}}
-.vidWrap .cn{position:absolute;width:26px;height:26px;border:3px solid var(--orange);z-index:3;pointer-events:none}
-.vidWrap .cn.a{top:-8px;left:-8px;border-right:0;border-bottom:0}.vidWrap .cn.b{top:-8px;right:-8px;border-left:0;border-bottom:0}.vidWrap .cn.c{bottom:-8px;left:-8px;border-right:0;border-top:0}.vidWrap .cn.d{bottom:-8px;right:-8px;border-left:0;border-top:0}
-/* replay intro button */
-.replay{position:fixed;bottom:18px;right:18px;z-index:80;background:rgba(10,15,30,.75);backdrop-filter:blur(10px);border:1px solid var(--line);color:var(--text);border-radius:999px;padding:9px 14px;font:700 12px/1 inherit;cursor:pointer}
-html[dir=rtl] .replay{right:auto;left:18px}
-@media(prefers-reduced-motion:reduce){.grain,#intro,.replay{display:none!important}.sw{opacity:1!important;transform:none!important;filter:none!important}.ticker .track{animation:none!important}}
-/* ===== V3 THEME: tile & owl ===== */
-:root{--bg:#E6F0EE;--bg2:#D8E6E2;--card:#F4F8F7;--line:#C9D9D4;--text:#13233A;--muted:#4E6072;--orange:#F2641A;--orange2:#C24E10;--teal:#1E9E86;--blue:#2F6FB3;--gold:#FFC233;--red:#D93848;--night:#0E1A2B;--tile:64px}
-body{background-color:var(--bg);background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:var(--tile) var(--tile);background-position:-1px -1px;color:var(--text);font-family:"Bricolage Grotesque","Plus Jakarta Sans",system-ui,sans-serif;font-optical-sizing:auto}
-html[dir=rtl] body{font-family:"IBM Plex Sans Arabic","Bricolage Grotesque",sans-serif}
-.bgfx,.grain{display:none!important}
-:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
-.kick,.chips,.halo,.ring1,.ring2,.heroOwl .speed{display:none!important}
-h1,h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;color:var(--text);font-stretch:85%}
-html[dir=rtl] h1,html[dir=rtl] h2,html[dir=rtl] .stat .n{font-family:"Alexandria","IBM Plex Sans Arabic",sans-serif;font-weight:800}
-h1{font-size:clamp(48px,7.6vw,112px);line-height:.92;letter-spacing:-.045em;margin:0 0 28px;max-width:11ch}
-h2{font-size:clamp(34px,4.6vw,64px);line-height:.98;letter-spacing:-.035em;margin:0 0 14px;max-width:18ch}
-html[dir=rtl] h1{line-height:1.15;max-width:12ch}html[dir=rtl] h2{line-height:1.2}
-.lead{color:var(--muted);font-size:clamp(18px,1.5vw,21px);line-height:1.5;max-width:46ch}
-.center{text-align:start}.center .lead{margin:0}
-section{padding:110px 0}
-/* nav */
-header{background:var(--bg);backdrop-filter:none;border-bottom:2px solid var(--text)}
-.brand{font-size:20px;letter-spacing:-.02em}.brand b{color:var(--orange)}
-.links a{color:var(--text);font-weight:600}.links a:hover{color:var(--orange);text-decoration:underline;text-underline-offset:5px}
-.lang{background:transparent;border:2px solid var(--text);border-radius:10px;padding:2px}
-.lang button{color:var(--text);border-radius:7px}.lang button.on{background:var(--text);color:var(--bg)}
+/* ===== V4: picture-book scroll story + game ===== */
+:root{--sky:#CDE7F6;--paper:#FFFFFF;--ink:#1F2D4D;--owl:#F2641A;--owlD:#B94A0E;--star:#FFC233;--calm:#8FBCE8;--alert:#E5484D;--night:#1B2440;--night2:#2A3560;--mint:#1E9E86;
+ --bg:var(--sky);--text:var(--ink);--muted:#4A5878;--line:rgba(31,45,77,.18);--orange:var(--owl);--teal:var(--mint);--gold:var(--star);--red:var(--alert)}
+html{scroll-behavior:smooth}
+body{background:var(--sky);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-size:18px;line-height:1.55;overflow-x:clip}
+html[dir=rtl] body{font-family:"IBM Plex Sans Arabic",sans-serif}
+.bk,h1,h2,.btn,.page p,.lab,.acts button,.seg button,.pill,.stat-n,.facts b{font-family:"Baloo 2",system-ui,sans-serif}
+html[dir=rtl] .bk,html[dir=rtl] h1,html[dir=rtl] h2,html[dir=rtl] .btn,html[dir=rtl] .page p,html[dir=rtl] .lab,html[dir=rtl] .acts button,html[dir=rtl] .seg button,html[dir=rtl] .facts{font-family:"Baloo Bhaijaan 2","IBM Plex Sans Arabic",sans-serif}
+:focus-visible{outline:3px solid var(--owl);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1180px;margin:auto;padding:0 24px}
+/* header */
+header.bar{position:fixed;top:14px;left:14px;right:14px;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:12px;pointer-events:none}
+header.bar>*{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:8px;background:var(--paper);border:3px solid var(--ink);border-radius:999px;padding:6px 16px 6px 8px;font:800 20px/1 "Baloo 2";text-decoration:none;color:var(--ink);box-shadow:0 4px 0 var(--ink)}
+.brand b{color:var(--owl);font-family:"Baloo Bhaijaan 2"}
+.navR{display:flex;gap:8px;align-items:center}
+.navR a,.lang{background:var(--paper);border:3px solid var(--ink);border-radius:999px;box-shadow:0 4px 0 var(--ink);color:var(--ink);text-decoration:none;font:700 15px/1 "Baloo 2";padding:9px 14px}
+html[dir=rtl] .navR a{font-family:"Baloo Bhaijaan 2"}
+.navR a.play{background:var(--owl);color:#fff}
+.lang{display:flex;padding:3px;gap:2px}.lang button{border:0;background:none;border-radius:999px;padding:6px 11px;font:700 14px/1 "Baloo 2";color:var(--ink);cursor:pointer}
+.lang button.on{background:var(--ink);color:#fff}
 /* buttons */
-.btn{border-radius:12px;font-weight:700;padding:15px 24px;font-size:17px}
-.btn.primary{background:var(--orange);color:#fff;box-shadow:0 4px 0 var(--orange2)}
-.btn.primary:hover{box-shadow:0 6px 0 var(--orange2);transform:translateY(-2px)}
-.btn.primary:active{box-shadow:0 1px 0 var(--orange2);transform:translateY(3px)}
-.btn.ghost{background:transparent;border:2px solid var(--text);color:var(--text)}
-.btn.ghost:hover{background:var(--text);color:var(--bg)}
-.overlay .btn.ghost,.resCard .btn.ghost{border-color:#fff;color:#fff}.overlay .btn.ghost:hover{background:#fff;color:var(--text)}
-/* hero */
-.hero{grid-template-columns:1.15fr .85fr;min-height:calc(100vh - 66px);padding:64px 0 0;align-items:end}
-.hero>.reveal:first-child{align-self:center;padding-bottom:64px}
-.heroOwl{width:min(440px,100%);align-self:end;margin-bottom:-2px}
-#heroOwl svg{animation:none;filter:none}
-.heroOwl::after{content:"";position:absolute;left:-12%;right:-12%;bottom:0;height:18px;background:var(--text);border-radius:4px 4px 0 0}
-.say{background:#fff;color:var(--text);border:2px solid var(--text);box-shadow:4px 4px 0 var(--text);animation:none;top:2%;font-size:20px}
-.reveal{opacity:1!important;transform:none!important;transition:none}
-/* ticker */
-.tickWrap{padding:0;background:var(--night)}
-.ticker,.ticker.alt{transform:none;margin:0;background:var(--night);color:#fff;box-shadow:none;padding:18px 0;border:0}
-.ticker.alt{display:none}
-.ticker .track{text-transform:none;letter-spacing:-.01em;font-weight:700;font-size:clamp(20px,2.2vw,30px)}
-.ticker .track i{color:var(--orange);opacity:1;font-size:.7em}
-html[dir=rtl] .ticker .track{font-family:"Alexandria",sans-serif}
-/* why section */
-#problem .wrap{display:grid;grid-template-columns:1fr;gap:0}
-.stats{grid-template-columns:repeat(3,1fr);gap:0;margin:40px 0 0;border-top:2px solid var(--text)}
-.stat{background:none;border:0;border-radius:0;padding:28px 28px 30px 0;border-inline-end:2px solid var(--line)}
-.stat:last-child{border-inline-end:0}.stat:not(:first-child){padding-inline-start:28px}
-.stat .n{background:none;color:var(--text);-webkit-background-clip:initial;background-clip:initial;font-size:clamp(56px,7vw,104px);font-family:"Bricolage Grotesque",sans-serif;font-stretch:80%}
-.stat .d{color:var(--muted);font-size:17px;max-width:24ch}
-.stats+.src{margin:4px 0 0;font-size:13px;color:var(--muted)}
-.strip{grid-template-columns:repeat(3,1fr);gap:0;margin-top:56px;border-top:2px solid var(--text)}
-.tile{background:none;border:0;border-radius:0;padding:22px 28px 0 0}
-.tile:not(:first-child){padding-inline-start:28px;border-inline-start:2px solid var(--line)}
-.tile .ic{display:none}
-.tile b{font-size:21px;letter-spacing:-.01em;margin-bottom:6px}.tile span{color:var(--muted);font-size:16px}
-/* sim */
-#sim{background:var(--night);color:#fff;background-image:none}
-#sim h2{color:#fff}#sim .lead{color:#AFC0D2}
-.stage{border-radius:18px;box-shadow:0 0 0 2px rgba(255,255,255,.12);background:#1a2238}
+.btn{display:inline-flex;align-items:center;gap:8px;border:3px solid var(--ink);border-radius:18px;padding:12px 24px;font-weight:700;font-size:20px;line-height:1.2;cursor:pointer;text-decoration:none;transition:transform .08s,box-shadow .08s}
+.btn.primary{background:var(--owl);color:#fff;box-shadow:0 6px 0 var(--ink)}
+.btn.ghost{background:var(--paper);color:var(--ink);box-shadow:0 6px 0 var(--ink)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 0 var(--ink)}
+.btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--ink)}
+.btn.sm{font-size:16px;padding:9px 16px;border-radius:14px}
+/* ---------- story ---------- */
+.story{position:relative}
+.scene{position:sticky;top:0;height:100vh;overflow:hidden;background:#DDEFF0}
+.sbox{position:absolute;left:50%;top:50%;width:max(100vw,177.78vh);height:max(56.25vw,100vh);transform:translate(-50%,-50%)}
+.sroom,.sroom>div{position:absolute;inset:0}
+.skid{position:absolute;left:12%;bottom:4%;width:20%;transition:transform .7s cubic-bezier(.3,1.3,.5,1),opacity .5s;transform:translateX(-140%);opacity:0}
+.sowl{position:absolute;left:38%;bottom:25%;width:14%;transition:transform .55s cubic-bezier(.3,1.6,.5,1),opacity .3s}
+.sowl #heroOwl svg{width:100%;filter:drop-shadow(0 18px 18px rgba(31,45,77,.25))}
+.scene.kid .skid{transform:none;opacity:1}
+.scene.noowl .sowl{transform:scale(0) translateY(40%);opacity:0}
+.scene.loud .skid{animation:kshake .28s linear infinite}
+@keyframes kshake{25%{transform:translate(6px,-3px) rotate(1.5deg)}75%{transform:translate(-6px,2px) rotate(-1.5deg)}}
+.sbub{position:absolute;left:24%;top:13%;max-width:27%;background:var(--paper);border:3px solid var(--ink);border-radius:26px 26px 26px 8px;padding:14px 20px;box-shadow:0 6px 0 var(--ink);transform-origin:20% 100%;transition:transform .35s cubic-bezier(.3,1.6,.5,1),opacity .2s;transform:scale(.4);opacity:0}
+.scene.talk .sbub{transform:none;opacity:1}
+.sbub .ar{font:700 clamp(20px,2vw,34px)/1.35 "Baloo Bhaijaan 2";direction:rtl;text-align:right}
+.sbub .en{font-size:clamp(13px,1vw,17px);color:var(--muted);margin-top:2px}
+.sred,.scalm{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .6s}
+.sred{background:radial-gradient(ellipse at 22% 60%,rgba(229,72,77,0) 25%,rgba(229,72,77,.55) 100%)}
+.scalm{background:radial-gradient(circle at 40% 55%,rgba(170,205,245,.55),rgba(70,100,160,.7))}
+.scene.loud .sred,.scene.calm .scalm{opacity:1}
+.sbreath{position:absolute;left:26%;top:44%;width:13%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 40% 35%,#EAF3FF,var(--calm) 70%);border:3px solid #fff;opacity:0;transition:opacity .5s;transform:translate(-50%,-50%)}
+.scene.calm .sbreath{opacity:.95;animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:translate(-50%,-50%) scale(.75)}50%{transform:translate(-50%,-50%) scale(1.15)}}
+.sstars{position:absolute;left:14%;top:12%;width:20%;height:30%;pointer-events:none}
+.sstars i{position:absolute;font-style:normal;color:var(--star);font-size:clamp(28px,3vw,54px);opacity:0;text-shadow:0 3px 0 var(--owlD)}
+.scene.star .sstars i{animation:pop 1.6s cubic-bezier(.3,1.6,.5,1) infinite}
+.sstars i:nth-child(1){left:10%;top:40%}.sstars i:nth-child(2){left:45%;top:5%;animation-delay:.25s!important}.sstars i:nth-child(3){left:80%;top:35%;animation-delay:.5s!important}
+@keyframes pop{0%{opacity:0;transform:scale(.2) rotate(-30deg)}30%{opacity:1;transform:scale(1.2) rotate(8deg)}60%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1) translateY(-30px)}}
+.sweeks{position:absolute;left:6%;bottom:6%;display:flex;gap:10px;opacity:0;transition:opacity .4s;direction:ltr}
+.scene.weeks .sweeks{opacity:1}
+.sweeks span{background:var(--paper);border:3px solid var(--ink);border-radius:14px;padding:6px 12px;font:800 clamp(14px,1.2vw,20px)/1 "Baloo 2";box-shadow:0 4px 0 var(--ink);transition:background .2s,color .2s}
+.sweeks span.on{background:var(--owl);color:#fff}
+.pages{position:relative;margin-top:-100vh;z-index:2}
+.page{min-height:100vh;display:flex;align-items:center;justify-content:flex-end;padding:90px 6vw 40px}
+.card{position:relative;width:min(440px,100%);background:var(--paper);border:3px solid var(--ink);border-radius:28px;padding:30px 32px 36px;box-shadow:0 10px 0 var(--ink)}
+.page p{margin:0;font-weight:600;font-size:clamp(24px,2.1vw,32px);line-height:1.3}
+.card .pn{position:absolute;bottom:10px;inset-inline-end:16px;font:700 14px/1 "Baloo 2";color:var(--muted)}
+.cover .card{width:min(560px,100%);padding:36px 38px 40px}
+.cover h1{margin:0;font-weight:800;font-size:clamp(72px,9vw,136px);line-height:.9;color:var(--owl);letter-spacing:-.02em}
+.cover h1 span{display:block;font-family:"Baloo Bhaijaan 2";font-size:.5em;color:var(--ink);line-height:1.3;letter-spacing:0}
+html[dir=rtl] .cover h1 span{font-family:"Baloo 2"}
+.cover .sub{margin-top:16px!important;font-size:clamp(20px,1.7vw,26px)!important;font-weight:600!important;color:var(--muted)}
+.cover .hint{margin-top:22px!important;font-size:16px!important;color:var(--ink);display:flex;gap:8px;align-items:center}
+.cover .hint::after{content:"";width:12px;height:12px;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:rotate(45deg);animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{50%{translate:0 5px}}
+.last .btn{margin-top:22px}
+/* ---------- play (game) ---------- */
+#play{background:var(--night);color:#fff;padding:110px 0 90px;position:relative}
+#play h2{color:#fff}
+#play .lead{color:#B9C6E4;max-width:46ch}
+h2{font-weight:800;font-size:clamp(42px,5vw,72px);line-height:1;margin:0 0 12px;letter-spacing:-.01em}
+.lead{font-size:20px;color:var(--muted);margin:0}
+.simGrid{margin-top:36px}
+.stage{border:4px solid #fff;border-radius:26px;box-shadow:0 10px 0 #0B1022;background:#1a2238}
 .vbox,#vbox{display:none!important}
-.overlay{background:rgba(14,26,43,.62)}
-.pill{background:rgba(14,26,43,.78);font-family:"Bricolage Grotesque",sans-serif}
-.box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:14px}
-.box .lab{color:#AFC0D2;text-transform:none;letter-spacing:0;font-size:13px;font-weight:600}
-.seg button{border:1px solid rgba(255,255,255,.14);background:transparent;color:#fff;border-radius:10px}
-.seg button small{color:#AFC0D2}
-.seg button.on{background:#fff;color:var(--text);border-color:#fff}.seg button.on small{color:var(--muted)}
-.wk .bar{background:rgba(255,255,255,.15)}.seg button.on .bar{background:var(--line)}
-.acts button{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);color:#fff;border-radius:14px;font-family:"Bricolage Grotesque",sans-serif}
-html[dir=rtl] .acts button{font-family:"IBM Plex Sans Arabic",sans-serif}
-.acts button:hover:not(:disabled){border-color:var(--orange);box-shadow:none;background:rgba(242,100,26,.12)}
-.acts button:hover:not(:disabled) .e{transform:none}
-.acts kbd{color:#AFC0D2;border-color:rgba(255,255,255,.2);font-family:"Bricolage Grotesque",sans-serif}
-details.raw summary{color:#AFC0D2}
-.log{background:#08111D;border-color:rgba(255,255,255,.12)}
-.phone{background:#000;box-shadow:0 0 0 2px rgba(255,255,255,.12)}
-.screen{background:var(--bg)}
-.sum,.feed li{background:#fff}
-.resCard{background:var(--night);border-color:rgba(255,255,255,.14)}
-/* how */
-.flow{gap:0;margin-top:48px;border-top:2px solid var(--text);counter-reset:s}
-.step{background:none;border:0;border-radius:0;padding:26px 26px 0 0;overflow:visible}
-.step:not(:first-child){padding-inline-start:26px;border-inline-start:2px solid var(--line)}
-.step .ic{display:none}
-.step .n{position:static;display:block;font-size:15px;font-weight:700;color:var(--orange);margin-bottom:22px}
-.step b{font-size:28px;letter-spacing:-.025em;font-weight:800;margin-bottom:8px}
-.step span{color:var(--muted);font-size:16px}
-.model{margin-top:56px;background:#fff;border:2px solid var(--text);border-radius:16px;box-shadow:6px 6px 0 var(--text);padding:24px 28px}
-.model .mh{font-size:30px;letter-spacing:-.02em}.model .mh small{color:var(--muted)}
-.model code{background:var(--night);color:#9FE7D6}
-.mchips span{background:var(--bg);border:0;border-radius:8px;color:var(--text);font-weight:600}
-/* hardware */
-#hwOwl svg{filter:none}
-.pin{background:var(--text);color:#fff;box-shadow:0 0 0 3px var(--bg)}
-.pin:hover,.pin.on{background:var(--orange);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--orange)}
-.parts{gap:0;grid-template-columns:1fr;border-top:2px solid var(--text)}
-.part{background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:16px 4px;display:grid;grid-template-columns:auto 1fr;column-gap:14px}
-.part.on{background:#fff}
-.part .n{background:var(--text);color:#fff;grid-row:span 2;margin:2px 0 0}
-.part b{font-size:18px}.part span{grid-column:2;margin-top:2px;font-size:15px}
-/* video */
-.vidWrap{border-radius:16px;box-shadow:8px 8px 0 var(--text);border:2px solid var(--text);overflow:visible}
-.vidWrap video{border-radius:14px}
-.vidWrap .cn{display:none}
-/* end + footer */
-.end{text-align:start;padding:120px 22px 130px}
-.end h2{font-size:clamp(44px,7vw,104px);max-width:13ch}
-.end .row{justify-content:flex-start!important}
-footer{background:var(--night);color:#AFC0D2;border-top:0}
-.replay{background:var(--bg);color:var(--text);border:2px solid var(--text);backdrop-filter:none;box-shadow:3px 3px 0 var(--text)}
-.part .n{grid-column:1;grid-row:1/3}.part b{grid-column:2;grid-row:1}.part span:not(.n){grid-column:2;grid-row:2}
-.heroOwl{width:min(520px,100%)}
-@media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:40px}.hero>.reveal:first-child{padding-bottom:20px}.heroOwl{width:72%;justify-self:end}
- .stats,.strip,.flow{grid-template-columns:1fr}.stat,.tile,.step{padding-inline:0!important;border-inline:0!important;border-bottom:1px solid var(--line);padding-bottom:22px}
- h1{font-size:clamp(46px,13vw,72px)}section{padding:80px 0}}
+.overlay{background:rgba(27,36,64,.6)}
+.overlay .big{font-family:"Baloo 2";font-size:clamp(26px,3vw,40px)}
+html[dir=rtl] .overlay .big{font-family:"Baloo Bhaijaan 2"}
+.overlay .btn.ghost{background:transparent;color:#fff;border-color:#fff;box-shadow:0 6px 0 #fff}
+.pill{background:rgba(27,36,64,.82);border:2px solid rgba(255,255,255,.25);font-weight:700}
+.box{background:var(--night2);border:0;border-radius:20px;padding:14px;box-shadow:0 6px 0 #0B1022}
+.box .lab{font-size:16px;font-weight:700;color:#fff;text-transform:none;letter-spacing:0;margin-bottom:10px}
+.seg button{background:#3A4677;border:0;border-radius:14px;color:#fff;box-shadow:0 4px 0 #10162B;padding:9px 13px;font-size:16px}
+.seg button small{color:#C9D4F0;font-family:"Atkinson Hyperlegible";font-size:12px}
+.seg button.on{background:var(--star);color:var(--ink);box-shadow:0 4px 0 #A87700}.seg button.on small{color:var(--ink)}
+.seg button:active{transform:translateY(3px);box-shadow:0 1px 0 #10162B}
+.wk .bar{background:rgba(255,255,255,.2)}.seg button.on .bar{background:rgba(31,45,77,.2)}.wk .bar i{background:var(--owl)}
+.acts{gap:14px;margin-top:16px}
+.acts button{background:#fff;color:var(--ink);border:0;border-radius:22px;box-shadow:0 8px 0 #0B1022;font-size:20px;font-weight:700;padding:16px 8px 14px}
+.acts button:hover:not(:disabled){box-shadow:0 10px 0 #0B1022;transform:translateY(-2px);border:0}
+.acts button:active:not(:disabled){transform:translateY(6px);box-shadow:0 2px 0 #0B1022}
+.acts button .e{font-size:36px}
+.acts button[data-a=overload]{background:#FFE1E1}
+.acts kbd{color:var(--muted);border-color:rgba(31,45,77,.25);font-family:"Baloo 2"}
+details.raw summary{color:#B9C6E4}
+.log{background:#0E1430;border:0}
+.phone{background:#0B1022;border:4px solid #fff;box-shadow:0 10px 0 #0B1022}
+.screen{background:#F3F7FB}
+.resCard{background:var(--night);border:3px solid #fff;font-family:"Baloo 2"}
+.stage.hit{animation:hit .3s cubic-bezier(.2,1.4,.4,1)}
+@keyframes hit{0%{transform:scale(1.03) rotate(-.4deg)}100%{transform:none}}
+.stage .lbx{position:absolute;left:0;right:0;height:0;background:#000;z-index:30;transition:height .6s cubic-bezier(.7,0,.2,1);pointer-events:none}
+.stage .lbx.t{top:0}.stage .lbx.b{bottom:0}.stage.cine .lbx{height:9%}
+/* ---------- facts ---------- */
+.facts{padding:120px 0}
+.facts p.big{font-family:"Baloo 2";font-weight:600;font-size:clamp(30px,3.6vw,52px);line-height:1.25;margin:0 0 .6em;max-width:28ch}
+html[dir=rtl] .facts p.big{font-family:"Baloo Bhaijaan 2"}
+.facts b{font-weight:800;color:var(--owl);background:linear-gradient(transparent 62%,rgba(255,194,51,.55) 62%);padding:0 .08em;direction:ltr;unicode-bidi:isolate}
+.facts .src{font-size:15px;color:var(--muted)}
+/* ---------- inside ---------- */
+#inside{padding:40px 0 120px}
+.hw{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:30px}
+.hwOwl{position:relative;width:min(400px,90%);justify-self:center}
+#hwOwl svg{width:100%;filter:drop-shadow(0 14px 0 rgba(31,45,77,.15))}
+.pin{background:var(--ink);color:#fff;border:3px solid #fff;font-family:"Baloo 2"}
+.pin:hover,.pin.on{background:var(--owl);box-shadow:none;transform:scale(1.2)}
+.parts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.part{background:var(--paper);border:3px solid var(--ink);border-radius:18px;padding:12px 14px;box-shadow:0 5px 0 var(--ink);transition:transform .1s}
+.part.on{background:#FFF1E6;transform:translateY(-3px)}
+.part .n{background:var(--ink);color:#fff}
+.part b{font-family:"Baloo 2";font-size:19px}html[dir=rtl] .part b{font-family:"Baloo Bhaijaan 2"}
+.part span:not(.n){display:block;color:var(--muted);font-size:15px;margin-top:2px}
+.brain{margin-top:44px;background:var(--paper);border:3px solid var(--ink);border-radius:26px;box-shadow:0 8px 0 var(--ink);padding:26px 30px;display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:center}
+.brain p{margin:0;font-size:19px}
+.brain h3{margin:0 0 8px;font:800 28px/1.1 "Baloo 2"}html[dir=rtl] .brain h3{font-family:"Baloo Bhaijaan 2"}
+.brain code{display:inline-block;margin-top:12px;background:var(--night);color:#9FE7D6;border-radius:10px;padding:8px 12px;font:14px ui-monospace,Menlo,monospace;direction:ltr}
+.brain .cost{font:800 clamp(40px,4vw,60px)/1 "Baloo 2";color:var(--owl)}
+.brain .cost small{display:block;font:500 17px/1.4 "Atkinson Hyperlegible";color:var(--muted);margin-top:8px}
+html[dir=rtl] .brain .cost small{font-family:"IBM Plex Sans Arabic"}
+/* ---------- video + end ---------- */
+#video{padding:0 0 120px}
+.vidWrap{margin-top:26px;border:4px solid var(--ink);border-radius:26px;overflow:hidden;box-shadow:0 10px 0 var(--ink)}
+video{width:100%;display:block;background:#000}
+.end{padding:40px 24px 130px;text-align:center}
+.end .theend{font:800 clamp(60px,9vw,140px)/1 "Baloo 2";color:var(--owl);margin:0}
+html[dir=rtl] .end .theend{font-family:"Baloo Bhaijaan 2"}
+.end p{font-size:clamp(20px,1.8vw,26px);margin:14px auto 28px;max-width:30ch}
+.end .row{justify-content:center}
+footer{background:var(--night);color:#B9C6E4;padding:28px 0 40px;font-size:14px}
+.row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+@media(max-width:1060px){.simGrid{grid-template-columns:1fr}.phone{max-width:340px;width:100%;margin:auto}}
+@media(max-width:760px){
+ header.bar{top:10px;left:10px;right:10px}.navR a:not(.play){display:none}
+ .sbox{left:-14vw;top:auto;bottom:0;width:180vw;height:101.25vw;transform:none}
+ .scene{background:linear-gradient(180deg,#DDEFF0 0%,#DDEFF0 50%,#D6CEC2 50%)}
+ .sbub{max-width:34%;padding:10px 12px}
+ .page{align-items:flex-start;justify-content:center;padding:84px 16px 0}
+ .card{padding:22px 22px 28px}.page p{font-size:22px}
+ .cover h1{font-size:76px}
+ .hw,.brain{grid-template-columns:1fr}.parts{grid-template-columns:1fr}
+ .facts{padding:80px 0}#play{padding:80px 0}
+}
+@media(prefers-reduced-motion:reduce){.skid,.sowl,.sbub{transition:none!important}.scene *{animation:none!important}}
+header.bar{background:none!important;border:0!important;backdrop-filter:none!important;position:fixed}
+.cover h1 .t1{display:block;font-family:"Baloo 2";font-size:1em;color:var(--owl);line-height:.95}
+html[dir=rtl] .cover h1 .t1{font-family:"Baloo Bhaijaan 2";line-height:1.2}
+html[dir=rtl] .cover h1 span:not(.t1){font-family:"Baloo 2"}
+.sbreath{left:58%;top:42%}
+.facts h2{margin-bottom:34px}
+html[dir=rtl] .page{justify-content:flex-start}
+@media(max-width:760px){html[dir=rtl] .page{justify-content:center}.brand b{display:none}.brand{font-size:18px;padding:5px 12px 5px 6px}.navR{gap:6px}.navR a.play{padding:8px 11px;font-size:14px}.lang button{padding:5px 8px}}
 </style>
 </head>
 <body>
-<a class="skip" href="#sim" data-i="skip">Skip to the simulation</a>
-<div class="bgfx"></div>
+<a class="skip" href="#play" data-i="skip">Skip to the simulation</a>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
  <radialGradient id="gBody" cx="38%" cy="30%" r="80%"><stop offset="0" stop-color="#FFA466"/><stop offset=".55" stop-color="#F06A26"/><stop offset="1" stop-color="#B9440F"/></radialGradient>
  <radialGradient id="gBelly" cx="45%" cy="30%" r="80%"><stop offset="0" stop-color="#FFF1E4"/><stop offset="1" stop-color="#F2C29C"/></radialGradient>
@@ -397,37 +371,40 @@ footer{background:var(--night);color:#AFC0D2;border-top:0}
  <filter id="fGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 </defs></svg>
 
-<header><div class="nav">
-  <a class="brand" href="#top"><svg width="28" height="30" viewBox="0 0 400 440" aria-hidden="true"><ellipse cx="200" cy="240" rx="150" ry="170" fill="url(#gBody)"/><ellipse cx="200" cy="290" rx="96" ry="110" fill="url(#gBelly)"/><circle cx="140" cy="190" r="58" fill="#fff"/><circle cx="260" cy="190" r="58" fill="#fff"/><circle cx="140" cy="195" r="25" fill="#0E1630"/><circle cx="260" cy="195" r="25" fill="#0E1630"/></svg>Rafeeq <b>رفيق</b></a>
-  <nav class="links" aria-label="Sections"><a href="#sim" data-i="n1"></a><a href="#how" data-i="n2"></a><a href="#hardware" data-i="n3"></a><a href="#video" data-i="n4"></a><a href="https://github.com/abdullahnaji353-blip/rafeeq">GitHub</a></nav>
-  <div class="lang" role="group" aria-label="Language"><button id="lEn" class="on" lang="en">EN</button><button id="lAr" lang="ar" style="font-family:'IBM Plex Sans Arabic'">عربي</button></div>
-</div></header>
+<header class="bar">
+  <a class="brand" href="#top"><svg width="26" height="28" viewBox="0 0 400 440" aria-hidden="true"><ellipse cx="200" cy="240" rx="150" ry="170" fill="#F2641A"/><ellipse cx="200" cy="290" rx="96" ry="110" fill="#FFE3CC"/><circle cx="140" cy="190" r="58" fill="#fff"/><circle cx="260" cy="190" r="58" fill="#fff"/><circle cx="140" cy="195" r="25" fill="#1F2D4D"/><circle cx="260" cy="195" r="25" fill="#1F2D4D"/></svg>Rafeeq <b>رفيق</b></a>
+  <nav class="navR" aria-label="Sections"><a href="#inside" data-i="n3"></a><a href="#video" data-i="n4"></a><a href="https://github.com/abdullahnaji353-blip/rafeeq">GitHub</a><a class="play" href="#play" data-i="n1"></a>
+  <div class="lang" role="group" aria-label="Language"><button id="lEn" class="on" lang="en">EN</button><button id="lAr" lang="ar">عربي</button></div></nav>
+</header>
 
 <main id="top">
-<div class="wrap">
-  <div class="hero">
-    <div class="reveal">
-      <div class="kick" data-i="h.k"></div>
-      <h1 data-i="h.t"></h1>
-      <p class="lead" data-i="h.l"></p>
-      <div class="row" style="margin-top:30px"><a class="btn primary" href="#sim" data-i="h.c1"></a><a class="btn ghost" href="#video" data-i="h.c2"></a></div>
-      <div class="chips"><span class="chip" data-i="c1"></span><span class="chip" data-i="c2"></span><span class="chip" data-i="c3"></span></div>
-    </div>
-    <div class="heroOwl reveal" aria-hidden="true"><div id="heroOwl"></div><div class="say">يلا نفرّش أسنانك</div></div>
+<section class="story" aria-label="Story">
+  <div class="scene noowl" id="scene" aria-hidden="true"><div class="sbox">
+    <div class="sroom" id="sroom"></div>
+    <div class="sred"></div><div class="scalm"></div>
+    <div class="skid" id="skid"></div>
+    <div class="sowl"><div id="heroOwl"></div></div>
+    <div class="sbreath"></div>
+    <div class="sstars"><i>★</i><i>★</i><i>★</i></div>
+    <div class="sbub" id="sbub"><div class="ar" id="sbAr"></div><div class="en" id="sbEn"></div></div>
+    <div class="sweeks" id="sweeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+  </div></div>
+  <div class="pages">
+    <article class="page cover" data-step="0"><div class="card"><h1><span class="t1" data-i="st.title"></span><span data-i="st.title2"></span></h1><p class="sub" data-i="st.sub"></p><p class="hint" data-i="st.hint"></p></div></article>
+<article class="page" data-step="1"><div class="card"><p data-i="st1"></p><span class="pn" aria-hidden="true">1</span></div></article>
+<article class="page" data-step="2"><div class="card"><p data-i="st2"></p><span class="pn" aria-hidden="true">2</span></div></article>
+<article class="page" data-step="3"><div class="card"><p data-i="st3"></p><span class="pn" aria-hidden="true">3</span></div></article>
+<article class="page" data-step="4"><div class="card"><p data-i="st4"></p><span class="pn" aria-hidden="true">4</span></div></article>
+<article class="page" data-step="5"><div class="card"><p data-i="st5"></p><span class="pn" aria-hidden="true">5</span></div></article>
+<article class="page" data-step="6"><div class="card"><p data-i="st6"></p><span class="pn" aria-hidden="true">6</span></div></article>
+<article class="page" data-step="7"><div class="card"><p data-i="st7"></p><span class="pn" aria-hidden="true">7</span></div></article>
+<article class="page" data-step="8"><div class="card"><p data-i="st8"></p><span class="pn" aria-hidden="true">8</span></div></article>
+    <article class="page last" data-step="9"><div class="card"><p data-i="st9"></p><a class="btn primary" href="#play" data-i="st.cta"></a></div></article>
   </div>
-</div>
+</section>
 
-<section id="problem" style="padding-top:20px"><div class="wrap center">
-  <div class="reveal"><div class="kick" data-i="p.k"></div><h2 data-i="p.t"></h2></div>
-  <div class="strip">
-    <div class="tile reveal"><b data-i="p1"></b><span data-i="p1d"></span></div>
-    <div class="tile reveal"><b data-i="p2"></b><span data-i="p2d"></span></div>
-    <div class="tile reveal"><b data-i="p3"></b><span data-i="p3d"></span></div>
-  </div>
-</div></section>
-
-<section id="sim"><div class="wrap">
-  <div class="center reveal"><div class="kick" data-i="s.k"></div><h2 data-i="s.t"></h2><p class="lead" data-i="s.l"></p></div>
+<section id="play"><div class="wrap" id="sim">
+  <h2 data-i="pl.t"></h2><p class="lead" data-i="s.l"></p>
   <div class="simGrid">
     <div>
       <div class="stage" id="stage" role="region" aria-label="Rafeeq simulation" aria-describedby="srNow">
@@ -478,19 +455,13 @@ footer{background:var(--night);color:#AFC0D2;border-top:0}
   </div>
 </div></section>
 
-<section id="how"><div class="wrap">
-  <div class="center reveal"><div class="kick" data-i="w.k"></div><h2 data-i="w.t"></h2></div>
-  <div class="flow">
-    <div class="step reveal"><span class="n">01</span><b data-i="f1"></b><span data-i="f1d"></span></div>
-    <div class="step reveal"><span class="n">02</span><b data-i="f2"></b><span data-i="f2d"></span></div>
-    <div class="step reveal"><span class="n">03</span><b data-i="f3"></b><span data-i="f3d"></span></div>
-    <div class="step reveal"><span class="n">04</span><b data-i="f4"></b><span data-i="f4d"></span></div>
-  </div>
-  <div class="model reveal"><div><div class="mh">Gemma 3 <small>4B · Ollama</small></div><code>ollama run gemma3:4b</code></div><div class="mchips"><span data-i="m1"></span><span data-i="m2"></span><span data-i="m3"></span><span data-i="m4"></span></div></div>
+<section class="facts"><div class="wrap">
+  <h2 data-i="fa.t"></h2>
+  <div id="factText"></div>
 </div></section>
 
-<section id="hardware"><div class="wrap">
-  <div class="center reveal"><div class="kick" data-i="hw.k"></div><h2 data-i="hw.t"></h2></div>
+<section id="inside"><div class="wrap">
+  <h2 data-i="in.t"></h2>
   <div class="hw">
     <div class="hwOwl reveal"><div id="hwOwl"></div>
       <button class="pin" data-p="1" aria-label="Part 1" style="left:46%;top:21%">1</button><button class="pin" data-p="2" aria-label="Part 2" style="left:26%;top:36%">2</button><button class="pin" data-p="3" aria-label="Part 3" style="left:46%;top:66%">3</button>
@@ -504,20 +475,36 @@ footer{background:var(--night);color:#AFC0D2;border-top:0}
       <div class="part reveal" data-p="6"><span class="n">6</span><b data-i="hw6"></b><span data-i="hw6d"></span></div>
     </div>
   </div>
+
+  <div class="brain"><div><h3 data-i="br.t"></h3><p data-i="br.d"></p><code>ollama run gemma3:4b</code></div><div class="cost"><span data-i="br.c"></span><small data-i="br.cd"></small></div></div>
 </div></section>
 
 <section id="video"><div class="wrap">
-  <div class="center reveal"><div class="kick" data-i="v.k"></div><h2 data-i="v.t"></h2></div>
-  <div class="vidWrap reveal"><video controls preload="metadata" playsinline poster="video-poster.jpg" src="rafeeq-prototype-video.mp4" aria-label="Rafeeq prototype video"><track kind="captions" src="captions-en.vtt" srclang="en" label="English"><track kind="captions" src="captions-ar.vtt" srclang="ar" label="العربية"></video></div>
+  <h2 data-i="v.t"></h2>
+  <div class="vidWrap"><video controls preload="metadata" playsinline poster="video-poster.jpg" src="rafeeq-prototype-video.mp4" aria-label="Rafeeq prototype video"><track kind="captions" src="captions-en.vtt" srclang="en" label="English"><track kind="captions" src="captions-ar.vtt" srclang="ar" label="العربية"></video></div>
 </div></section>
 
-<div class="wrap end reveal"><div class="kick" data-i="e.k"></div><h2 data-i="e.t"></h2><div class="row" style="justify-content:center;margin-top:24px"><a class="btn primary" href="#sim" data-i="e.c"></a><a class="btn ghost" href="https://github.com/abdullahnaji353-blip/rafeeq">See the code on GitHub</a></div></div>
+<div class="end"><p class="theend" data-i="end.t"></p><p data-i="end.d"></p><div class="row"><a class="btn primary" href="#play" data-i="e.c"></a><a class="btn ghost" href="https://github.com/abdullahnaji353-blip/rafeeq" data-i="end.gh"></a></div></div>
 </main>
 <footer><div class="wrap" data-i="foot"></div></footer>
 
 <script>
 const $=id=>document.getElementById(id),clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),lerp=(a,b,t)=>a+(b-a)*t;
 const L={en:{
+"st.title":"Rafeeq","st.title2":"رفيق","st.sub":"A story about Yousef, his mornings, and an owl that knows when to stay quiet.","st.hint":"Scroll to read",
+st1:"This is Yousef. He's seven, and he has autism.",
+st2:"Mornings are hard. Too much noise, too many steps, and Mom has to say every single one.",
+st3:"Then his family brought home Rafeeq.",
+st4:"Rafeeq watches the routine and says one small step at a time, in the same Kuwaiti Arabic Yousef hears at home.",
+st5:"Some mornings, it all gets too loud.",
+st6:"Rafeeq notices before it becomes a meltdown. It stops the task, dims its light and breathes with him.",
+st7:"Then, one small step at a time, Yousef finishes. Every step gets a cheer.",
+st8:"And every week, Rafeeq says a little less. By week four, it just watches.",
+st9:"Now you be Yousef.","st.cta":"Play the simulation",
+"pl.t":"Your turn.","fa.t":"Why this matters in Kuwait",
+"in.t":"Inside the owl","br.t":"Its brain runs at home","br.d":"Rafeeq thinks with Gemma 3 (4B), an open AI model, running offline through Ollama on a Raspberry Pi 5. Camera frames are checked and thrown away on the spot. Nothing goes to the cloud.",
+"br.c":"≈ 65 KD","br.cd":"in parts to build one. 0 KD a month to run.",
+"end.t":"The end.","end.d":"Rafeeq wins when it's not needed.","end.gh":"See the code on GitHub",
 skip:"Skip to the simulation",
 n1:"Simulation",n2:"How it works",n3:"Hardware",n4:"Video",
 "h.k":"ATSN26 · Gen-AI Innovation","h.t":"A friend for the morning routine.","h.l":"Rafeeq is an owl robot that coaches kids with autism, Down syndrome and ADHD one step at a time, in Kuwaiti Arabic. Every week it helps a little less.",
@@ -542,6 +529,20 @@ hw1:"Camera",hw1d:"ESP32-S3",hw2:"LED eyes",hw2d:"Color = mood",hw3:"Speaker + m
 "e.k":"The goal","e.t":"Rafeeq wins when it's not needed.","e.c":"Play the simulation",
 foot:"Rafeeq رفيق · by A.Naji · ATSN26 · Simulation: responses are scripted to show how the real system behaves."
 },ar:{
+"st.title":"رفيق","st.title2":"Rafeeq","st.sub":"قصة يوسف وصباحه، وبومة تعرف متى تسكت.","st.hint":"انزل تحت عشان تقرا",
+st1:"هذا يوسف. عمره سبع سنين، وعنده توحّد.",
+st2:"الصبح صعب. صوت واجد، وخطوات واجد، وأمه لازم تقول كل خطوة.",
+st3:"وبعدين جابوا له أهله رفيق.",
+st4:"رفيق يشوف الروتين ويقول خطوة صغيرة وحدة كل مرة، بنفس اللهجة الكويتية اللي يسمعها يوسف في البيت.",
+st5:"بعض الأيام، يصير كل شي عالي زيادة.",
+st6:"رفيق ينتبه قبل لا تصير نوبة. يوقف المهمة، ويخفّف ضوّه، ويتنفس وياه.",
+st7:"وبعدها، خطوة خطوة، يخلّص يوسف. وكل خطوة لها تشجيع.",
+st8:"وكل أسبوع، رفيق يتكلم أقل. بالأسبوع الرابع، بس يطالع.",
+st9:"الحين إنت كون يوسف.","st.cta":"جرّب المحاكاة",
+"pl.t":"دورك.","fa.t":"ليش هذا مهم في الكويت",
+"in.t":"داخل البومة","br.t":"عقله يشتغل في البيت","br.d":"رفيق يفكر باستخدام Gemma 3 (4B)، نموذج ذكاء اصطناعي مفتوح، يشتغل بدون إنترنت عبر Ollama على Raspberry Pi 5. صور الكاميرا تنفحص وتنحذف على طول. ولا شي يروح للسحابة.",
+"br.c":"≈ 65 د.ك","br.cd":"قطع لصنع وحدة. و٠ د.ك بالشهر للتشغيل.",
+"end.t":"النهاية.","end.d":"رفيق يفوز لما ما يحتاجونه.","end.gh":"شوف الكود على GitHub",
 skip:"انتقل إلى المحاكاة",
 n1:"المحاكاة",n2:"كيف يشتغل",n3:"القطع",n4:"الفيديو",
 "h.k":"ATSN26 · ابتكار بالذكاء التوليدي","h.t":"رفيق لروتين الصباح.","h.l":"رفيق روبوت بومة يوجّه أطفال التوحد ومتلازمة داون وفرط الحركة خطوة بخطوة، باللهجة الكويتية. وكل أسبوع يساعد أقل.",
@@ -789,96 +790,69 @@ function syncPressed(){document.querySelectorAll("#segR button,#segW button,.lan
 new MutationObserver(syncPressed).observe(document.body,{subtree:true,attributes:true,attributeFilter:["class"]});syncPressed();document.addEventListener("click",()=>setTimeout(syncPressed,0));
 </script>
 <script>
-/* ===== EDIT LAYER ===== */
+/* ===== STORY + GAME LAYER ===== */
 (function(){
 const RMx=matchMedia("(prefers-reduced-motion: reduce)").matches;
-const Q=(s,r=document)=>r.querySelector(s),QA=(s,r=document)=>[...r.querySelectorAll(s)];
-const T={en:{words:[["EVERY MORNING."],["TOO LOUD.","red"],["TOO MANY STEPS.","red"],["UNTIL…"]],skip:"Skip ⏭",replay:"↺ Intro",
- tk1:["Gemma 3 on-device","Kuwaiti Arabic","Calm mode","Hints fade weekly","Zero cloud","0 KD / month"],
- tk2:["See","Think","Coach","Step back","See","Think","Coach","Step back"],
- st:[["30+","autism diagnoses per 10,000 children in Kuwait"],["1 vs 5.4","psychologists per 100,000 people: our region vs Europe"],["8,000","AED/SAR a month that therapy can cost Gulf families"]],
- src:"Source: PwC Middle East (2024), citing WHO Mental Health Atlas 2020"},
- ar:{words:[["كل صبح."],["صوت عالي.","red"],["خطوات وايد.","red"],["لين ما جا…"]],skip:"تخطّي ⏭",replay:"↺ المقدمة",
- tk1:["Gemma 3 على الجهاز","لهجة كويتية","وضع الهدوء","التلميح يخف كل أسبوع","بدون سحابة","0 د.ك بالشهر"],
- tk2:["يشوف","يفكر","يرشد","يتراجع","يشوف","يفكر","يرشد","يتراجع"],
- st:[["30+","حالة توحد مشخّصة لكل 10,000 طفل في الكويت"],["1 vs 5.4","أخصائي نفسي لكل 100,000 شخص: منطقتنا مقابل أوروبا"],["8,000","درهم/ريال بالشهر قد يكلّفها العلاج على الأسر الخليجية"]],
- src:"المصدر: PwC الشرق الأوسط (2024)، نقلاً عن أطلس الصحة النفسية لمنظمة الصحة العالمية 2020"}};
-const tt=()=>T[lang]||T.en;
+const $$=id=>document.getElementById(id);
+const scene=$$("scene");
+$$("sroom").innerHTML=ROOMS.bath;
+$$("skid").innerHTML=kidSVG().replace('id="kid"','id="skidSvg"');
+const K=$$("skidSvg");
+K.querySelectorAll(".armL,.armR,.jump").forEach(g=>g.style.transition="transform .5s cubic-bezier(.3,1.4,.5,1)");
+function pose(m,ears,brush){
+ K.querySelector(".mouth").setAttribute("d",`M120 ${200-6*m} Q150 ${200+24*m} 180 ${200-6*m}`);
+ const tb=m<0?-m*10:0;K.querySelector(".bL").setAttribute("d",`M96 ${120+tb} L130 ${122-tb}`);K.querySelector(".bR").setAttribute("d",`M170 ${122-tb} L204 ${120+tb}`);
+ K.querySelector(".armL").style.transform=`rotate(${8+142*ears}deg)`;
+ K.querySelector(".armR").style.transform=`rotate(${ears>.5?-8-142*ears:(brush?-58:0)}deg)`;
+ K.querySelector(".prop").innerHTML=brush?PROPS.teeth:"";}
+const LINES={talk:["صباح الخير يوسف، يلا نفرّش أسنانك","Good morning, Yousef. Let's brush your teeth."],
+ calm:["خذ نفس معاي…","Breathe with me…"],star:["شاطر! عافية عليك","Well done! Good job."],
+ w:[["يلا يوسف، امسك الفرشاة","Come on Yousef, pick up the toothbrush"],["الفرشاة؟","The toothbrush?"],["يوسف…","Yousef…"],null]};
+function bubble(l){if(!l){scene.classList.remove("talk");return;}$$("sbAr").textContent=l[0];$$("sbEn").textContent=lang==="ar"?"":l[1];scene.classList.add("talk");}
+let wkT=null,step=-1;
+function setStep(n){if(n===step)return;step=n;clearInterval(wkT);
+ const c=scene.classList;["kid","noowl","talk","loud","calm","star","weeks"].forEach(x=>c.remove(x));
+ const owlEl=$$("heroOwl").querySelector(".owl"),glow=owlEl&&owlEl.querySelector(".glow");if(glow)glow.setAttribute("opacity",0);
+ if(n===0){pose(.3,0,0);}
+ if(n>=1)c.add("kid");
+ if(n===1)pose(.3,0,0);
+ if(n===2){pose(-.8,0,0);c.add("noowl");}
+ if(n===1)c.add("noowl");
+ if(n===3)pose(.6,0,0);
+ if(n===4){pose(.5,0,1);bubble(LINES.talk);}
+ if(n===5){pose(-1,1,0);c.add("loud");}
+ if(n===6){pose(0,0,0);c.add("calm");bubble(LINES.calm);if(glow)glow.setAttribute("opacity",.4);}
+ if(n===7){pose(1,0,1);c.add("star");bubble(LINES.star);}
+ if(n===8){pose(.7,0,1);c.add("weeks");let w=0;const run=()=>{[...$$("sweeks").children].forEach((e,i)=>e.classList.toggle("on",i===w));bubble(LINES.w[w]);w=(w+1)%4;};run();if(!RMx)wkT=setInterval(run,1500);}
+ if(n===9){pose(1,0,0);}
+}
+const pio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)setStep(+e.target.dataset.step);}),{rootMargin:"-45% 0px -45% 0px"});
+document.querySelectorAll(".page").forEach(p=>pio.observe(p));
+setStep(0);
 
-/* grain */
-const g=document.createElement("div");g.className="grain";g.setAttribute("aria-hidden","true");document.body.appendChild(g);
+/* facts with count-up */
+const FT={en:[`In Kuwait, <b data-n="30" data-s="+">30+</b> in every 10,000 children are diagnosed with autism, and the real number is likely higher.`,
+ `Our region has 1 psychologist for every 100,000 people. Europe has <b data-n="5.4">5.4</b>.`,
+ `Private therapy can cost a Gulf family up to <b data-n="8000">8,000</b> AED/SAR a month. Public care mostly stops at the diagnosis.`],
+ ar:[`في الكويت، أكثر من <b data-n="30" data-s="+">30+</b> طفل من كل 10,000 مشخّصين بالتوحد، والرقم الحقيقي غالباً أعلى.`,
+ `في منطقتنا، أخصائي نفسي واحد لكل 100,000 شخص. في أوروبا <b data-n="5.4">5.4</b>.`,
+ `العلاج الخاص ممكن يكلّف الأسرة الخليجية لين <b data-n="8000">8,000</b> درهم/ريال بالشهر. والرعاية الحكومية غالباً توقف عند التشخيص.`]};
+const SRC={en:"Source: PwC Middle East (2024), citing WHO Mental Health Atlas 2020",ar:"المصدر: PwC الشرق الأوسط (2024)، نقلاً عن أطلس الصحة النفسية لمنظمة الصحة العالمية 2020"};
+const ft=$$("factText");let counted=false;
+function renderFacts(){ft.innerHTML=(FT[lang]||FT.en).map(x=>`<p class="big">${x}</p>`).join("")+`<p class="src">${SRC[lang]||SRC.en}</p>`;if(!counted)ft.querySelectorAll("b").forEach(b=>b.dataset.final=b.textContent);}
+function count(){counted=true;if(RMx)return;ft.querySelectorAll("b").forEach((b,k)=>{const n=+b.dataset.n,fin=b.textContent,t0=performance.now()+k*200,D=1100;
+ (function st(now){const p=Math.max(0,Math.min(1,(now-t0)/D)),e=1-Math.pow(1-p,3),v=n*e;b.textContent=(n%1?v.toFixed(1):Math.round(v).toLocaleString("en-US"))+(b.dataset.s||"");if(p<1)requestAnimationFrame(st);else b.textContent=fin;})(performance.now());});}
+const fio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){fio.disconnect();count();}}),{threshold:.35});fio.observe(ft);
 
-/* tickers */
-function tickHTML(items,alt){const one=items.map(x=>`<span>${x}</span><i>✦</i>`).join("");return `<div class="ticker${alt?" alt":""}" aria-hidden="true"><div class="track">${one}${one}</div></div>`;}
-const hero=Q(".hero")?.closest(".wrap");const tw1=document.createElement("div");tw1.className="tickWrap";hero.after(tw1);
-const hw=Q("#hardware");const tw2=document.createElement("div");tw2.className="tickWrap";hw.before(tw2);
-function renderTickers(){tw1.innerHTML=tickHTML(tt().tk1);tw2.remove();}
-
-/* stats drop */
-const strip=Q("#problem .strip");const stats=document.createElement("div");stats.className="stats";const src=document.createElement("p");src.className="src";strip.after(stats);stats.after(src);
-function renderStats(){stats.innerHTML=tt().st.map(s=>`<div class="stat streak reveal in"><span class="n" data-v="${s[0]}">${s[0]}</span><span class="d">${s[1]}</span></div>`).join("");src.textContent=tt().src;}
-function countUp(el){const v=el.dataset.v;if(RMx){el.textContent=v;return;}const t0=performance.now(),D=1100;
- const f=p=>{if(v.includes("vs")){return "1 vs "+(5.4*p).toFixed(1);}const n=parseInt(v.replace(/\D/g,""));const c=Math.round(n*p);return (n>=1000?c.toLocaleString("en-US"):c)+(v.endsWith("+")?"+":"");};
- (function step(now){const p=Math.min(1,(now-t0)/D),e=1-Math.pow(1-p,3);el.textContent=f(e);if(p<1)requestAnimationFrame(step);else{el.textContent=v;el.closest(".stat").classList.add("punch");}})(t0);}
-
-/* split headings into words that slam in */
-function split(el){return;if(el.dataset.split===lang+el.innerHTML.length)return;let i=0;
- const walk=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const parts=c.textContent.split(/(\s+)/);const frag=document.createDocumentFragment();
-  parts.forEach(p=>{if(!p)return;if(/^\s+$/.test(p)){frag.appendChild(document.createTextNode(p));return;}const s=document.createElement("span");s.className="sw";s.style.setProperty("--i",i++);s.textContent=p;frag.appendChild(s);});c.replaceWith(frag);}
-  else if(c.nodeType===1&&!c.classList.contains("sw"))walk(c);});};
- walk(el);el.dataset.split=lang+el.innerHTML.length;}
-const heads=()=>QA("main h2, .end h2");
-function prepHeads(done){heads().forEach(h=>{split(h);if(done||h.dataset.seen)h.classList.add("slamDone");});}
-const io2=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const h=e.target;io2.unobserve(h);h.dataset.seen=1;
- if(RMx){h.classList.add("slamDone");return;}h.classList.add("slam");const sec=h.closest("section")||h.parentElement;sec.classList.add("streak");sec.classList.remove("go");void sec.offsetWidth;sec.classList.add("go");
- const n=h.querySelectorAll(".sw").length;setTimeout(()=>{h.classList.add("slamDone");h.classList.remove("slam");},n*75+600);}),{threshold:.6});
-const io3=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io3.unobserve(e.target);QA(".n",e.target).forEach((el,k)=>setTimeout(()=>countUp(el),k*180));}}),{threshold:.4});
-
-/* gradient words keep their gradient */
-const st=document.createElement("style");st.textContent=".grad .sw{background:linear-gradient(90deg,var(--orange),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}";document.head.appendChild(st);
-
-/* language switch re-renders everything */
-const _apply=window.applyLang;
-window.applyLang=applyLang=function(){_apply();renderTickers();renderStats();prepHeads(true);io3.observe(stats);};
-
-/* hero speed lines + periodic glitch */
-const ho=Q(".heroOwl");if(ho){const sp=document.createElement("div");sp.className="speed";ho.prepend(sp);}
-if(false)setInterval(()=>{const gr=Q("h1 .grad");if(!gr||document.hidden)return;gr.classList.remove("glitch");void gr.offsetWidth;gr.classList.add("glitch");},5200);
-
-/* sim: hits and cinematic calm */
-const stage=Q("#stage");["t","b"].forEach(k=>{const d=document.createElement("div");d.className="lbx "+k;d.setAttribute("aria-hidden","true");stage.appendChild(d);});
-function hit(){if(RMx)return;stage.classList.remove("hit");void stage.offsetWidth;stage.classList.add("hit");}
-const _burst=window.burst;window.burst=burst=function(x,y,kind,n){if(kind==="star"||kind==="conf")hit();return _burst(x,y,kind,n);};
+/* sim: game hits + cinematic calm */
+const stage=$$("stage");["t","b"].forEach(k=>{const d=document.createElement("div");d.className="lbx "+k;d.setAttribute("aria-hidden","true");stage.appendChild(d);});
+const _burst=window.burst;window.burst=burst=function(x,y,kind,n){if(!RMx&&(kind==="star"||kind==="conf")){stage.classList.remove("hit");void stage.offsetWidth;stage.classList.add("hit");}return _burst(x,y,kind,n);};
 const _ec=window.enterCalm;window.enterCalm=enterCalm=function(){stage.classList.add("cine");return _ec.apply(this,arguments);};
 const _xc=window.exitCalm;window.exitCalm=exitCalm=function(){stage.classList.remove("cine");return _xc.apply(this,arguments);};
 
-/* video framed like an edit */
-const vw=Q(".vidWrap");if(false)vw.insertAdjacentHTML("beforeend",'<span class="rec" aria-hidden="true"><b>●</b> REC · RAFEEQ</span><i class="cn a"></i><i class="cn b"></i><i class="cn c"></i><i class="cn d"></i>');
-
-/* cold-open intro */
-function intro(){if(RMx)return;const w=tt().words;
- const el=document.createElement("div");el.id="intro";
- el.innerHTML=`<div class="bar t"></div><div class="bar b"></div><div class="rays" aria-hidden="true"></div><div class="stack" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">${w.map(x=>`<div class="word${x[1]?" "+x[1]:""}">${x[0]}</div>`).join("")}</div><div class="iowl" aria-hidden="true">${owlSVG()}</div><div class="ititle" aria-hidden="true"><b>${lang==="ar"?"رفيق":"RAFEEQ"}</b><span>${lang==="ar"?"Rafeeq":"رفيق"}</span></div><div class="flash"></div><button class="iskip" type="button">${tt().skip}</button>`;
- document.body.appendChild(el);document.body.style.overflow="hidden";
- const words=QA(".word",el),stack=Q(".stack",el),ts=[];let ended=false;
- const at=(ms,fn)=>ts.push(setTimeout(fn,ms));
- const show=i=>{words.forEach((x,k)=>{if(k<i&&x.classList.contains("on")){x.classList.remove("on");x.classList.add("off");}});words[i].classList.add("on");if(words[i].classList.contains("red")){stack.classList.remove("shake");void stack.offsetWidth;stack.classList.add("shake");}};
- at(250,()=>show(0));at(900,()=>show(1));at(1450,()=>show(2));at(2050,()=>show(3));
- at(2600,()=>{words[3].classList.remove("on");words[3].classList.add("off");Q(".flash",el).classList.add("go");Q(".rays",el).classList.add("on");Q(".iowl",el).classList.add("on");});
- at(3050,()=>{const ti=Q(".ititle",el);ti.classList.add("on");setTimeout(()=>Q("b",ti).classList.add("rgb"),300);});
- at(4200,end);
- function end(){if(ended)return;ended=true;ts.forEach(clearTimeout);el.classList.add("open");setTimeout(()=>el.classList.add("wipe"),180);
-  setTimeout(()=>{el.remove();document.body.style.overflow="";const h=Q("#heroOwl");h&&h.classList.add("ownIn");const gr=Q("h1 .grad");gr&&gr.classList.add("glitch");},800);
-  try{sessionStorage.setItem("rafeeqIntro","1")}catch(e){}}
- el.addEventListener("click",end);document.addEventListener("keydown",function k(e){if(e.key==="Escape"||e.key==="Enter"){end();document.removeEventListener("keydown",k);}});
- Q(".iskip",el).focus({preventScroll:true});}
-
-
-
-/* boot */
-applyLang();io3.observe(stats);
-let seen=false;try{seen=sessionStorage.getItem("rafeeqIntro")==="1"}catch(e){}
-
+/* language */
+const _apply=window.applyLang;window.applyLang=applyLang=function(){_apply();renderFacts();const s=step;step=-1;setStep(s<0?0:s);};
+applyLang();
 })();
 </script>
 </body>
