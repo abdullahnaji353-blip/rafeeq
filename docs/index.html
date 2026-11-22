@@ -407,6 +407,42 @@ html[dir=rtl] .sndBtn{font-family:"Alexandria",sans-serif}
 .sndBtn.on{background:var(--owl);color:#fff}
 .sndBtn.on::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 5V4L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 5V4L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E")}
 .sndBtn{left:24px;transform:translateY(20px)}.sndBtn.show{transform:none}html[dir=rtl] .sndBtn{left:auto;right:24px}
+
+/* watch mode */
+.watch{margin-top:22px;display:inline-flex;align-items:center;gap:14px;padding:10px 22px 10px 10px;border:0;border-radius:999px;background:rgba(255,255,255,.08);color:#fff;cursor:pointer;backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);text-align:start;font:inherit;transition:background .25s,transform .25s}
+.watch:hover{background:rgba(255,255,255,.16);transform:translateY(-2px)}
+.watch b{display:block;font:800 18px/1.1 "Bricolage Grotesque",sans-serif}.watch small{display:block;margin-top:3px;font-size:13px;opacity:.65}
+html[dir=rtl] .watch b{font-family:"Alexandria",sans-serif}
+html[dir=rtl] .watch{padding:10px 10px 10px 22px}
+.wPlay{width:46px;height:46px;border-radius:50%;background:var(--owl);position:relative;flex:none;box-shadow:0 0 0 0 rgba(255,122,61,.5);animation:wpulse 2.4s ease-out infinite}
+.wPlay::after{content:"";position:absolute;left:53%;top:50%;transform:translate(-50%,-50%);border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent #fff}
+@keyframes wpulse{0%{box-shadow:0 0 0 0 rgba(255,122,61,.55)}70%,100%{box-shadow:0 0 0 18px rgba(255,122,61,0)}}
+.tBar{position:fixed;left:0;right:0;height:0;background:#000;z-index:90;transition:height .9s cubic-bezier(.7,0,.2,1);pointer-events:none}
+.tBar.t{top:0}.tBar.b{bottom:0}
+body.touring .tBar{height:6vh}
+body.touring header{opacity:0;pointer-events:none;transition:opacity .4s}
+body.touring .sndBtn{display:none}
+html[dir=rtl] .tSk svg{transform:scaleX(-1)}
+.tour{position:fixed;left:50%;bottom:calc(6vh + 14px);z-index:95;display:flex;align-items:center;gap:12px;padding:7px 7px 7px 16px;border-radius:999px;background:rgba(10,15,30,.84);backdrop-filter:blur(14px);box-shadow:0 14px 40px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.12);color:#fff;font:700 14px/1 "Bricolage Grotesque",sans-serif;opacity:0;pointer-events:none;transform:translate(-50%,24px);transition:opacity .4s,transform .4s}
+html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px}
+.tour.on{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+.tSeg{display:flex;gap:4px}.tSeg i{width:22px;height:4px;border-radius:2px;background:rgba(255,255,255,.18)}.tSeg i.done{background:rgba(255,255,255,.85)}.tSeg i.now{background:var(--owl);animation:tnow 1.6s ease-in-out infinite}
+.tour.paused .tSeg i.now{animation:none;opacity:.6}
+@keyframes tnow{50%{opacity:.45}}
+.tLab{min-width:64px}
+.tour button{width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.1);color:#fff;font-size:14px;cursor:pointer;display:grid;place-items:center}
+.tour button:hover{background:rgba(255,255,255,.2)}.tour .tPP{background:#fff;color:#0F1733}
+.tCard{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse at 50% 40%,#1A2547 0%,#070A14 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#fff;opacity:0;pointer-events:none;transition:opacity .6s}
+.tCard.on{opacity:1;pointer-events:auto}
+.tOwl{width:120px;transform:translateY(16px) scale(.9);opacity:0;transition:transform 1s cubic-bezier(.2,1.3,.4,1) .15s,opacity .6s .15s}
+.tCard.on .tOwl{transform:none;opacity:1}
+.tTitle{font:800 clamp(40px,7vw,76px)/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.02em;opacity:0;transform:translateY(12px);transition:.8s .35s}
+.tTitle span{font-family:"Alexandria",sans-serif;color:var(--owl);margin-inline-start:.25em}
+.tFilm{font-size:18px;opacity:0;transition:opacity .8s .7s;color:rgba(255,255,255,.7)}
+.tTake{position:absolute;bottom:9vh;font-size:13px;opacity:0;transition:opacity .8s 1s;color:rgba(255,255,255,.5)}
+.tCard.on .tTitle{opacity:1;transform:none}.tCard.on .tFilm{opacity:1}.tCard.on .tTake{opacity:1}
+@media (max-width:640px){.tSeg i{width:12px}.tLab{min-width:0;font-size:12px}.tour{gap:8px}}
+@media (prefers-reduced-motion:reduce){.wPlay,.tSeg i.now{animation:none}}
 </style>
 </head>
 <body>
@@ -443,7 +479,7 @@ html[dir=rtl] .sndBtn{font-family:"Alexandria",sans-serif}
     <div class="sweeks" id="sweeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
   </div></div>
   <div class="pages">
-    <article class="page cover" data-step="0"><div class="cap"><h1><span class="t1" data-i="st.title"></span><span data-i="st.title2"></span></h1><p class="sub" data-i="st.sub"></p><p class="hint" data-i="st.hint"></p></div></article>
+    <article class="page cover" data-step="0"><div class="cap"><h1><span class="t1" data-i="st.title"></span><span data-i="st.title2"></span></h1><p class="sub" data-i="st.sub"></p><p class="hint" data-i="st.hint"></p><button class="watch" type="button" data-watch><span class="wPlay" aria-hidden="true"></span><span><b data-i="tw.b"></b><small data-i="tw.s"></small></span></button></div></article>
     <article class="page" data-step="1"><div class="cap"><span class="pn" aria-hidden="true">01</span><p data-i="st1"></p></div></article>
     <article class="page" data-step="2"><div class="cap"><span class="pn" aria-hidden="true">02</span><p data-i="st2"></p></div></article>
     <article class="page" data-step="3"><div class="cap"><span class="pn" aria-hidden="true">03</span><p data-i="st3"></p></div></article>
@@ -537,7 +573,7 @@ html[dir=rtl] .sndBtn{font-family:"Alexandria",sans-serif}
   <div class="vidWrap"><video controls preload="metadata" playsinline poster="video-poster.jpg" src="rafeeq-prototype-video.mp4" aria-label="Rafeeq prototype video"><track kind="captions" src="captions-en.vtt" srclang="en" label="English"><track kind="captions" src="captions-ar.vtt" srclang="ar" label="العربية"></video></div>
 </div></section>
 
-<div class="end"><p class="theend" data-i="end.t"></p><p data-i="end.d"></p><div class="row"><a class="btn primary" href="#play" data-i="e.c"></a><a class="btn ghost" href="https://github.com/abdullahnaji353-blip/rafeeq" data-i="end.gh"></a></div></div>
+<div class="end"><p class="theend" data-i="end.t"></p><p data-i="end.d"></p><div class="row"><button class="btn ghost" type="button" data-watch data-i="tw.a"></button><a class="btn primary" href="#play" data-i="e.c"></a><a class="btn ghost" href="https://github.com/abdullahnaji353-blip/rafeeq" data-i="end.gh"></a></div></div>
 </main>
 <footer><div class="wrap" data-i="foot"></div></footer>
 
@@ -545,7 +581,7 @@ html[dir=rtl] .sndBtn{font-family:"Alexandria",sans-serif}
 const $=id=>document.getElementById(id),clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),lerp=(a,b,t)=>a+(b-a)*t;
 const L={en:{
 nW:"Why",
-"st.title":"Rafeeq","st.title2":"رفيق","st.sub":"An owl robot that coaches kids with autism through the morning, in Kuwaiti Arabic. And then steps back.","st.hint":"Scroll",
+"st.title":"Rafeeq","st.title2":"رفيق","st.sub":"An owl robot that coaches kids with autism through the morning, in Kuwaiti Arabic. And then steps back.","st.hint":"Scroll","tw.b":"Watch it play","tw.s":"2 min · sound on","tw.a":"Watch again",
 st1:"Yousef is seven. Every morning is too loud, with too many steps.",
 st2:"Rafeeq watches and says one small step at a time, in the Kuwaiti Arabic he hears at home.",
 st3:"Some mornings, it all gets too much.",
@@ -584,7 +620,7 @@ hw1:"Camera",hw1d:"ESP32-S3",hw2:"LED eyes",hw2d:"Color = mood",hw3:"Speaker + m
 foot:"Rafeeq رفيق · by A.Naji · ATSN26 · Simulation: responses are scripted to show how the real system behaves."
 },ar:{
 nW:"ليش",
-"st.title":"رفيق","st.title2":"Rafeeq","st.sub":"روبوت بومة يوجّه أطفال التوحد في روتين الصباح، باللهجة الكويتية. وبعدين يتراجع.","st.hint":"انزل",
+"st.title":"رفيق","st.title2":"Rafeeq","st.sub":"روبوت بومة يوجّه أطفال التوحد في روتين الصباح، باللهجة الكويتية. وبعدين يتراجع.","st.hint":"انزل","tw.b":"شغّلها لي","tw.s":"دقيقتين · بالصوت","tw.a":"شوفها مرة ثانية",
 st1:"يوسف عمره سبع سنين. كل صبح صوت عالي، وخطوات واجد.",
 st2:"رفيق يطالع ويقول خطوة صغيرة وحدة كل مرة، باللهجة اللي يسمعها في البيت.",
 st3:"بعض الأيام، يصير كل شي فوق طاقته.",
@@ -994,6 +1030,57 @@ const _xc=window.exitCalm;window.exitCalm=exitCalm=function(){stage.classList.re
 /* language */
 const _apply=window.applyLang;window.applyLang=applyLang=function(){_apply();renderFacts();sbLabel();nStop();const s=step;step=-1;setStep(s<0?0:s);};
 applyLang();
+/* ===== WATCH MODE: the page plays itself like a short film ===== */
+const TL={en:{ch:["Story","Why","Try it","Inside","Video","The end"],film:"a two-minute film",take:"Scroll, tap or press a key to take over",p:"Paused",r:"Resume",x:"Exit",sk:"Next chapter"},
+ ar:{ch:["القصة","ليش","جرّب","من داخل","الفيديو","النهاية"],film:"فيلم دقيقتين",take:"حرّك الصفحة أو المس الشاشة عشان تتحكم",p:"موقّف",r:"كمّل",x:"اطلع",sk:"الجزء الجاي"}};
+const tl=k=>(TL[lang]||TL.en)[k];
+const bars=["t","b"].map(c=>{const d=document.createElement("div");d.className="tBar "+c;d.setAttribute("aria-hidden","true");document.body.appendChild(d);return d;});
+const card=document.createElement("div");card.className="tCard";card.setAttribute("aria-hidden","true");
+card.innerHTML=`<div class="tOwl">${owlSVG()}</div><b class="tTitle">Rafeeq <span>رفيق</span></b><span class="tFilm"></span><small class="tTake"></small>`;document.body.appendChild(card);
+const hud=document.createElement("div");hud.className="tour";hud.setAttribute("role","region");hud.setAttribute("aria-label","Watch mode");
+hud.innerHTML=`<span class="tSeg"></span><span class="tLab" aria-live="polite"></span><button class="tPP" type="button"></button><button class="tSk" type="button"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 2.5v9l6-4.5z" fill="currentColor"/><rect x="9.2" y="2.5" width="2.6" height="9" rx="1" fill="currentColor"/></svg></button><button class="tX" type="button"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>`;document.body.appendChild(hud);
+let tTok=0,tCh=0,tPg=0,touring=false,paused=false;
+const alive=my=>my===tTok&&touring&&!paused;
+function paint(){hud.querySelector(".tSeg").innerHTML=TL.en.ch.map((_,i)=>`<i class="${i<tCh?"done":i===tCh?"now":""}"></i>`).join("");
+ hud.querySelector(".tLab").textContent=paused?tl("p"):tl("ch")[tCh]||"";const pp=hud.querySelector(".tPP");pp.innerHTML=paused?'<svg width="14" height="14" viewBox="0 0 14 14"><path d="M4 2.2v9.6a.8.8 0 0 0 1.2.7l7.6-4.8a.8.8 0 0 0 0-1.4L5.2 1.5A.8.8 0 0 0 4 2.2z" fill="currentColor"/></svg>':'<svg width="14" height="14" viewBox="0 0 14 14"><rect x="2.5" y="2" width="3.4" height="10" rx="1.2" fill="currentColor"/><rect x="8.1" y="2" width="3.4" height="10" rx="1.2" fill="currentColor"/></svg>';pp.setAttribute("aria-label",paused?tl("r"):tl("p"));
+ hud.querySelector(".tSk").setAttribute("aria-label",tl("sk"));hud.querySelector(".tX").setAttribute("aria-label",tl("x"));hud.classList.toggle("paused",paused);
+ card.querySelector(".tFilm").textContent=tl("film");card.querySelector(".tTake").textContent=tl("take");}
+function glide(y,ms){const my=tTok;y=Math.max(0,Math.min(y,document.documentElement.scrollHeight-innerHeight));const y0=scrollY,t0=performance.now();if(RMx)ms=1;
+ return new Promise(r=>{(function f(now){if(!alive(my))return r(false);const p=Math.min(1,(now-t0)/ms),e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;scrollTo({top:y0+(y-y0)*e,behavior:"instant"});p<1?requestAnimationFrame(f):r(true);})(t0);});}
+const nap=ms=>{const my=tTok;return new Promise(r=>setTimeout(()=>r(alive(my)),ms));};
+const topOf=el=>el.getBoundingClientRect().top+scrollY;
+async function dolly(el,ms){const a=topOf(el),b=a+Math.max(0,el.offsetHeight-innerHeight);if(!await glide(a,1400))return false;if(!await nap(500))return false;return b>a+30?glide(b,ms):nap(ms);}
+function pageMs(i){const m=NARR[lang]&&NARR[lang].meta[i];if(!nOn||!m)return 3800;let ms=m[1]*1000+900;if(RAF_LINE[i]!=null&&VMETA[RAF_LINE[i]])ms+=VMETA[RAF_LINE[i]][1]*1000+600;return Math.max(ms,3200);}
+const pages=[...document.querySelectorAll(".pages .page")];
+const CH=[
+ async my=>{for(let i=tPg;i<pages.length;i++){tPg=i;const p=pages[i];
+   if(!await glide(topOf(p)+p.offsetHeight/2-innerHeight/2,i===0?600:1500))return false;
+   if(step!==i||i===0){document.querySelectorAll(".page.on").forEach(x=>x.classList.remove("on"));p.classList.add("on");step=-1;setStep(i);}
+   if(!await nap(pageMs(i)))return false;}return true;},
+ async my=>dolly($$("why"),5200),
+ async my=>{const sg=$$("stage");if(!await glide(topOf(sg)+sg.offsetHeight/2-innerHeight/2+40,1500))return false;if(!await nap(400))return false;auto();
+   for(let k=0;k<160;k++){if(!await nap(400))return false;if(S&&S.finished&&$$("result").classList.contains("show"))break;}return nap(2600);},
+ async my=>dolly($$("inside"),9000),
+ async my=>dolly($$("video"),3800),
+ async my=>{const e=document.querySelector(".end");if(!await glide(topOf(e)+e.offsetHeight/2-innerHeight/2,1600))return false;return nap(2600);}];
+async function runTour(){const my=++tTok;paint();for(;tCh<CH.length;tCh++){paint();const ok=await CH[tCh](my);if(!alive(my))return;tPg=0;}exitTour();}
+async function startTour(){if(touring)exitTour();touring=true;paused=false;tCh=0;tPg=0;document.body.classList.add("touring");
+ try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();await AC.resume();}catch(e){}
+ nOn=true;sbLabel();nLoad(lang);loadVoice();paint();
+ if(!RMx){card.classList.add("on");const my=++tTok;await new Promise(r=>setTimeout(r,2300));if(my!==tTok||!touring)return;card.classList.remove("on");}
+ hud.classList.add("on");runTour();}
+function pauseTour(){if(!touring||paused)return;paused=true;tTok++;nStop();paint();}
+function resumeTour(){if(!touring||!paused)return;paused=false;runTour();}
+function exitTour(){touring=false;paused=false;tTok++;document.body.classList.remove("touring");hud.classList.remove("on");card.classList.remove("on");}
+hud.querySelector(".tPP").onclick=()=>paused?resumeTour():pauseTour();
+hud.querySelector(".tSk").onclick=()=>{if(!touring)return;nStop();tCh=Math.min(tCh+1,CH.length-1);tPg=0;paused=false;runTour();};
+hud.querySelector(".tX").onclick=exitTour;
+document.querySelectorAll("[data-watch]").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();startTour();}));
+const takeOver=e=>{if(!touring||paused)return;if(e.target&&e.target.closest&&e.target.closest(".tour,[data-watch]"))return;if(e.type==="keydown"&&(e.key==="Tab"||e.key==="Shift"))return;
+ if(e.type==="keydown"&&e.key==="Escape"){exitTour();return;}pauseTour();};
+["wheel","touchstart","keydown","mousedown"].forEach(t=>addEventListener(t,takeOver,{passive:true}));
+const _ap2=window.applyLang;window.applyLang=applyLang=function(){_ap2();paint();};
+
 })();
 
 /* phone matches left column height */
