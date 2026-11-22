@@ -387,6 +387,13 @@ details.raw{margin-top:16px}
 @media(max-width:760px){header.bar{padding:10px 16px!important}#play,.facts,#inside,#video{padding:84px 0}.ctl{grid-template-columns:1fr}.brain .cost{justify-self:start;text-align:start}.simGrid,.hw{margin-top:32px}}
 .sweeks{left:6%;top:13%}
 @media(max-width:760px){.sweeks{top:6%;left:16%}}
+.sndBtn{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);z-index:70;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;display:flex;align-items:center;gap:10px;background:#fff;color:#0F1733;border:0;border-radius:999px;padding:12px 20px 12px 16px;font:700 16px/1 "Bricolage Grotesque",sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.35);cursor:pointer}
+html[dir=rtl] .sndBtn{font-family:"Alexandria",sans-serif}
+.sndBtn.show{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+.sndBtn::before{content:"";width:18px;height:18px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 5V4L7 9H3z'/%3E%3Cpath d='M16 8l6 8M22 8l-6 8' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 5V4L7 9H3z'/%3E%3Cpath d='M16 8l6 8M22 8l-6 8' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E") center/contain no-repeat}
+.sndBtn.on{background:var(--owl);color:#fff}
+.sndBtn.on::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 5V4L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 5V4L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E")}
+.sndBtn{left:24px;transform:translateY(20px)}.sndBtn.show{transform:none}html[dir=rtl] .sndBtn{left:auto;right:24px}
 </style>
 </head>
 <body>
@@ -844,7 +851,7 @@ const LINES={talk:["صباح الخير يوسف، يلا نفرّش أسنان�
  w:[["يلا يوسف، امسك الفرشاة","Come on Yousef, pick up the toothbrush"],["الفرشاة؟","The toothbrush?"],["يوسف…","Yousef…"],null]};
 function bubble(l){if(!l){scene.classList.remove("talk");return;}$$("sbAr").textContent=l[0];$$("sbEn").textContent=lang==="ar"?"":l[1];scene.classList.add("talk");}
 let wkT=null,step=-1;
-function setStep(n){if(n===step)return;step=n;clearInterval(wkT);
+function setStep(n){if(n===step)return;step=n;clearInterval(wkT);narrate(n);
  const c=scene.classList;["kid","noowl","talk","loud","calm","star","weeks","lit"].forEach(x=>c.remove(x));
  const owlEl=$$("heroOwl").querySelector(".owl"),glow=owlEl&&owlEl.querySelector(".glow");if(glow)glow.setAttribute("opacity",0);
  if(n>=1)c.add("kid");
@@ -860,6 +867,20 @@ const pio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){docum
 document.querySelectorAll(".page").forEach(p=>pio.observe(p));
 setStep(0);document.querySelector(".page").classList.add("on");
 
+/* narration while scrolling */
+const NARR={ar:{src:"voice/narr-ar.webm",meta:[[0,6.85],[7.6,5.2],[13.45,5.8],[19.87,3.0],[23.48,5.2],[29.27,4.5],[34.29,3.0]]}};
+const RAF_LINE={2:0,4:43,5:37};
+var nOn=false,NBUF={},NSRC=null,nTimer=null;
+async function nLoad(l){if(!NARR[l]||NBUF[l])return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const b=await(await fetch(NARR[l].src)).arrayBuffer();NBUF[l]=await AC.decodeAudioData(b);}catch(e){}}
+function nStop(){clearTimeout(nTimer);try{NSRC&&NSRC.stop();}catch(e){}NSRC=null;try{VSRC&&VSRC.stop();}catch(e){}}
+async function narrate(n){if(!nOn)return;nStop();const l=lang;await nLoad(l);if(!nOn||n!==step)return;let wait=300;
+ const m=NARR[l]&&NARR[l].meta[n];
+ if(m&&NBUF[l]){const s=AC.createBufferSource();s.buffer=NBUF[l];s.connect(AC.destination);s.start(0,m[0],m[1]);NSRC=s;wait=m[1]*1000+250;}
+ if(RAF_LINE[n]!=null){await loadVoice();nTimer=setTimeout(()=>{if(nOn&&step===n)playVoice(RAF_LINE[n]);},wait);}}
+const sb=document.createElement("button");sb.className="sndBtn";sb.type="button";sb.setAttribute("aria-pressed","false");document.body.appendChild(sb);
+function sbLabel(){sb.textContent=nOn?(lang==="ar"?"الصوت شغّال":"Sound on"):(lang==="ar"?"شغّل صوت القصة":"Turn on story sound");sb.classList.toggle("on",nOn);sb.setAttribute("aria-pressed",String(nOn));}
+sb.onclick=async()=>{nOn=!nOn;sbLabel();if(nOn){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();await AC.resume();}catch(e){}const s=step;step=-1;setStep(s<0?0:s);}else nStop();};
+new IntersectionObserver(es=>es.forEach(e=>{sb.classList.toggle("show",e.isIntersecting);if(!e.isIntersecting)nStop();}),{threshold:0}).observe(document.querySelector(".story"));
 /* facts with count-up */
 const FT={en:[`In Kuwait, <b data-n="30" data-s="+">30+</b> in every 10,000 children are diagnosed with autism, and the real number is likely higher.`,
  `Our region has 1 psychologist for every 100,000 people. Europe has <b data-n="5.4">5.4</b>.`,
@@ -881,7 +902,7 @@ const _ec=window.enterCalm;window.enterCalm=enterCalm=function(){stage.classList
 const _xc=window.exitCalm;window.exitCalm=exitCalm=function(){stage.classList.remove("cine");return _xc.apply(this,arguments);};
 
 /* language */
-const _apply=window.applyLang;window.applyLang=applyLang=function(){_apply();renderFacts();const s=step;step=-1;setStep(s<0?0:s);};
+const _apply=window.applyLang;window.applyLang=applyLang=function(){_apply();renderFacts();sbLabel();nStop();const s=step;step=-1;setStep(s<0?0:s);};
 applyLang();
 })();
 
