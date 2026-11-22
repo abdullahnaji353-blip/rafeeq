@@ -7,12 +7,11 @@
 <meta name="description" content="Rafeeq: an owl robot that coaches children with autism, Down syndrome and ADHD through daily routines in Kuwaiti Arabic, powered by Gemma 3 running offline. Play the simulation.">
 <meta name="theme-color" content="#0A0F1E">
 <style>
-@font-face{font-family:"Baloo 2";src:url(fonts/baloo-2-latin-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
-@font-face{font-family:"Baloo 2";src:url(fonts/baloo-2-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
-@font-face{font-family:"Baloo 2";src:url(fonts/baloo-2-latin-800-normal.woff2) format("woff2");font-weight:800;font-display:swap}
-@font-face{font-family:"Baloo Bhaijaan 2";src:url(fonts/baloo-bhaijaan-2-arabic-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
-@font-face{font-family:"Baloo Bhaijaan 2";src:url(fonts/baloo-bhaijaan-2-arabic-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
-@font-face{font-family:"Baloo Bhaijaan 2";src:url(fonts/baloo-bhaijaan-2-arabic-800-normal.woff2) format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Bricolage Grotesque";src:url(fonts/bricolage-grotesque-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Bricolage Grotesque";src:url(fonts/bricolage-grotesque-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Bricolage Grotesque";src:url(fonts/bricolage-grotesque-latin-800-normal.woff2) format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Alexandria";src:url(fonts/alexandria-arabic-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Alexandria";src:url(fonts/alexandria-arabic-800-normal.woff2) format("woff2");font-weight:800;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(fonts/atkinson-hyperlegible-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(fonts/atkinson-hyperlegible-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
 @font-face{font-family:"IBM Plex Sans Arabic";src:url(fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
@@ -185,175 +184,182 @@ footer{padding:30px 0 50px;color:var(--muted);font-size:13px;border-top:1px soli
 @media(max-width:760px){.hero,.hw{grid-template-columns:1fr}.hero{min-height:auto;padding:40px 0}.strip,.flow,.parts{grid-template-columns:1fr}.links{display:none}.ctl{grid-template-columns:1fr}.acts{grid-template-columns:1fr 1fr}.seg button{min-width:0;flex:1;padding:8px 6px}section{padding:60px 0}.bubble{max-width:52%;padding:9px 12px}.meter{width:50px;height:50px}.tracker span{width:24px;height:24px;font-size:12px}#hudWeek{display:none}.say{display:none}.vbox .tag{font-size:10px}.resCard,.result.show .resCard{transform:scale(.6)}.overlay .keys{display:none}}
 .sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}.skip{position:absolute;left:12px;top:-60px;z-index:999;background:var(--teal);color:#0A0F1E;padding:10px 16px;border-radius:10px;font-weight:700;text-decoration:none}.skip:focus{top:12px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
-/* ===== V4: picture-book scroll story + game ===== */
-:root{--sky:#CDE7F6;--paper:#FFFFFF;--ink:#1F2D4D;--owl:#F2641A;--owlD:#B94A0E;--star:#FFC233;--calm:#8FBCE8;--alert:#E5484D;--night:#1B2440;--night2:#2A3560;--mint:#1E9E86;
- --bg:var(--sky);--text:var(--ink);--muted:#4A5878;--line:rgba(31,45,77,.18);--orange:var(--owl);--teal:var(--mint);--gold:var(--star);--red:var(--alert)}
+/* ===== V5: cinematic night story + game ===== */
+:root{--night:#0F1733;--night2:#18224A;--night3:#222E5E;--ink:#F3F5FB;--muted:#A9B4D6;--owl:#FF7A2F;--owlD:#C4521A;--star:#FFC233;--calm:#8FBCE8;--alert:#FF4D5E;--mint:#3ED6B4;
+ --bg:var(--night);--text:var(--ink);--line:rgba(255,255,255,.12);--orange:var(--owl);--teal:var(--mint);--gold:var(--star);--red:var(--alert)}
 html{scroll-behavior:smooth}
-body{background:var(--sky);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-size:18px;line-height:1.55;overflow-x:clip}
+body{background:var(--night);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-size:18px;line-height:1.55;overflow-x:clip}
 html[dir=rtl] body{font-family:"IBM Plex Sans Arabic",sans-serif}
-.bk,h1,h2,.btn,.page p,.lab,.acts button,.seg button,.pill,.stat-n,.facts b{font-family:"Baloo 2",system-ui,sans-serif}
-html[dir=rtl] .bk,html[dir=rtl] h1,html[dir=rtl] h2,html[dir=rtl] .btn,html[dir=rtl] .page p,html[dir=rtl] .lab,html[dir=rtl] .acts button,html[dir=rtl] .seg button,html[dir=rtl] .facts{font-family:"Baloo Bhaijaan 2","IBM Plex Sans Arabic",sans-serif}
-:focus-visible{outline:3px solid var(--owl);outline-offset:3px;border-radius:8px}
-.wrap{max-width:1180px;margin:auto;padding:0 24px}
+h1,h2,h3,.cap p,.btn,.brand,.navR a,.lab,.acts button,.seg button,.pill,.facts p.big,.theend,.cost{font-family:"Bricolage Grotesque",system-ui,sans-serif}
+html[dir=rtl] h1,html[dir=rtl] h2,html[dir=rtl] h3,html[dir=rtl] .cap p,html[dir=rtl] .btn,html[dir=rtl] .navR a,html[dir=rtl] .lab,html[dir=rtl] .acts button,html[dir=rtl] .seg button,html[dir=rtl] .facts p.big,html[dir=rtl] .theend{font-family:"Alexandria","IBM Plex Sans Arabic",sans-serif}
+:focus-visible{outline:3px solid var(--owl);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin:auto;padding:0 28px}
 /* header */
-header.bar{position:fixed;top:14px;left:14px;right:14px;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:12px;pointer-events:none}
-header.bar>*{pointer-events:auto}
-.brand{display:flex;align-items:center;gap:8px;background:var(--paper);border:3px solid var(--ink);border-radius:999px;padding:6px 16px 6px 8px;font:800 20px/1 "Baloo 2";text-decoration:none;color:var(--ink);box-shadow:0 4px 0 var(--ink)}
-.brand b{color:var(--owl);font-family:"Baloo Bhaijaan 2"}
-.navR{display:flex;gap:8px;align-items:center}
-.navR a,.lang{background:var(--paper);border:3px solid var(--ink);border-radius:999px;box-shadow:0 4px 0 var(--ink);color:var(--ink);text-decoration:none;font:700 15px/1 "Baloo 2";padding:9px 14px}
-html[dir=rtl] .navR a{font-family:"Baloo Bhaijaan 2"}
-.navR a.play{background:var(--owl);color:#fff}
-.lang{display:flex;padding:3px;gap:2px}.lang button{border:0;background:none;border-radius:999px;padding:6px 11px;font:700 14px/1 "Baloo 2";color:var(--ink);cursor:pointer}
-.lang button.on{background:var(--ink);color:#fff}
+header.bar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 28px;background:linear-gradient(rgba(15,23,51,.85),rgba(15,23,51,0))!important;border:0!important}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:21px;text-decoration:none;color:#fff;letter-spacing:-.02em}
+.brand b{color:var(--owl);font-family:"Alexandria";font-weight:800}
+.navR{display:flex;gap:22px;align-items:center}
+.navR a{color:#fff;text-decoration:none;font-weight:600;font-size:15px;opacity:.85}.navR a:hover{opacity:1;text-decoration:underline;text-underline-offset:6px}
+.navR a.play{opacity:1;background:var(--owl);padding:9px 16px;border-radius:10px;text-decoration:none}
+.lang{display:flex;border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:2px}.lang button{border:0;background:none;color:#fff;border-radius:8px;padding:6px 10px;font:700 13px/1 "Bricolage Grotesque";cursor:pointer}
+.lang button.on{background:#fff;color:var(--night)}
 /* buttons */
-.btn{display:inline-flex;align-items:center;gap:8px;border:3px solid var(--ink);border-radius:18px;padding:12px 24px;font-weight:700;font-size:20px;line-height:1.2;cursor:pointer;text-decoration:none;transition:transform .08s,box-shadow .08s}
-.btn.primary{background:var(--owl);color:#fff;box-shadow:0 6px 0 var(--ink)}
-.btn.ghost{background:var(--paper);color:var(--ink);box-shadow:0 6px 0 var(--ink)}
-.btn:hover{transform:translateY(-2px);box-shadow:0 8px 0 var(--ink)}
-.btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--ink)}
-.btn.sm{font-size:16px;padding:9px 16px;border-radius:14px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:14px 24px;font-weight:700;font-size:18px;line-height:1.2;cursor:pointer;text-decoration:none;transition:transform .12s,background .2s}
+.btn.primary{background:var(--owl);color:#fff}
+.btn.primary:hover{background:#FF8E4D;transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.45)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1.5px #fff}
+.btn:active{transform:scale(.97)}
+.btn.sm{font-size:15px;padding:10px 15px;border-radius:10px}
 /* ---------- story ---------- */
 .story{position:relative}
-.scene{position:sticky;top:0;height:100vh;overflow:hidden;background:#DDEFF0}
+.scene{position:sticky;top:0;height:100vh;overflow:hidden;background:#0F1733}
 .sbox{position:absolute;left:50%;top:50%;width:max(100vw,177.78vh);height:max(56.25vw,100vh);transform:translate(-50%,-50%)}
 .sroom,.sroom>div{position:absolute;inset:0}
-.skid{position:absolute;left:12%;bottom:4%;width:20%;transition:transform .7s cubic-bezier(.3,1.3,.5,1),opacity .5s;transform:translateX(-140%);opacity:0}
-.sowl{position:absolute;left:38%;bottom:25%;width:14%;transition:transform .55s cubic-bezier(.3,1.6,.5,1),opacity .3s}
-.sowl #heroOwl svg{width:100%;filter:drop-shadow(0 18px 18px rgba(31,45,77,.25))}
+.sroom{filter:brightness(.62) saturate(.85) contrast(1.05);transition:filter .8s}
+.scene.lit .sroom{filter:brightness(.92) saturate(1)}
+.grade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(15,23,51,.55) 0%,rgba(15,23,51,0) 22%,rgba(15,23,51,0) 50%,rgba(15,23,51,.92) 100%)}
+.skid{position:absolute;left:12%;bottom:4%;width:20%;transition:transform .8s cubic-bezier(.3,1.2,.5,1),opacity .6s;transform:translateX(-140%);opacity:0}
+.sowl{position:absolute;left:38%;bottom:25%;width:14%;transition:transform .6s cubic-bezier(.3,1.5,.5,1),opacity .3s}
+.sowl #heroOwl svg{width:100%;filter:drop-shadow(0 20px 22px rgba(0,0,0,.4))}
 .scene.kid .skid{transform:none;opacity:1}
 .scene.noowl .sowl{transform:scale(0) translateY(40%);opacity:0}
 .scene.loud .skid{animation:kshake .28s linear infinite}
 @keyframes kshake{25%{transform:translate(6px,-3px) rotate(1.5deg)}75%{transform:translate(-6px,2px) rotate(-1.5deg)}}
-.sbub{position:absolute;left:24%;top:13%;max-width:27%;background:var(--paper);border:3px solid var(--ink);border-radius:26px 26px 26px 8px;padding:14px 20px;box-shadow:0 6px 0 var(--ink);transform-origin:20% 100%;transition:transform .35s cubic-bezier(.3,1.6,.5,1),opacity .2s;transform:scale(.4);opacity:0}
+.sbub{position:absolute;left:24%;top:16%;max-width:27%;background:#fff;color:#14213D;border-radius:22px 22px 22px 6px;padding:14px 20px;box-shadow:0 20px 40px rgba(0,0,0,.35);transform-origin:20% 100%;transition:transform .35s cubic-bezier(.3,1.6,.5,1),opacity .2s;transform:scale(.4);opacity:0}
 .scene.talk .sbub{transform:none;opacity:1}
-.sbub .ar{font:700 clamp(20px,2vw,34px)/1.35 "Baloo Bhaijaan 2";direction:rtl;text-align:right}
-.sbub .en{font-size:clamp(13px,1vw,17px);color:var(--muted);margin-top:2px}
+.sbub .ar{font:700 clamp(20px,2vw,32px)/1.4 "IBM Plex Sans Arabic";direction:rtl;text-align:right}
+.sbub .en{font-size:clamp(13px,1vw,16px);color:#5B6478;margin-top:2px}
 .sred,.scalm{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .6s}
-.sred{background:radial-gradient(ellipse at 22% 60%,rgba(229,72,77,0) 25%,rgba(229,72,77,.55) 100%)}
-.scalm{background:radial-gradient(circle at 40% 55%,rgba(170,205,245,.55),rgba(70,100,160,.7))}
+.sred{background:radial-gradient(ellipse at 22% 60%,rgba(255,77,94,0) 20%,rgba(255,77,94,.6) 100%)}
+.scalm{background:radial-gradient(circle at 40% 55%,rgba(143,188,232,.35),rgba(40,70,140,.75))}
 .scene.loud .sred,.scene.calm .scalm{opacity:1}
-.sbreath{position:absolute;left:26%;top:44%;width:13%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 40% 35%,#EAF3FF,var(--calm) 70%);border:3px solid #fff;opacity:0;transition:opacity .5s;transform:translate(-50%,-50%)}
-.scene.calm .sbreath{opacity:.95;animation:breathe 4s ease-in-out infinite}
+.sbreath{position:absolute;left:58%;top:42%;width:13%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 40% 35%,#EAF3FF,var(--calm) 70%);opacity:0;transition:opacity .5s;transform:translate(-50%,-50%);box-shadow:0 0 60px rgba(143,188,232,.6)}
+.scene.calm .sbreath{opacity:.9;animation:breathe 4s ease-in-out infinite}
 @keyframes breathe{0%,100%{transform:translate(-50%,-50%) scale(.75)}50%{transform:translate(-50%,-50%) scale(1.15)}}
-.sstars{position:absolute;left:14%;top:12%;width:20%;height:30%;pointer-events:none}
-.sstars i{position:absolute;font-style:normal;color:var(--star);font-size:clamp(28px,3vw,54px);opacity:0;text-shadow:0 3px 0 var(--owlD)}
+.sstars{position:absolute;left:14%;top:14%;width:20%;height:30%;pointer-events:none}
+.sstars i{position:absolute;font-style:normal;color:var(--star);font-size:clamp(28px,3vw,54px);opacity:0;filter:drop-shadow(0 0 12px rgba(255,194,51,.7))}
 .scene.star .sstars i{animation:pop 1.6s cubic-bezier(.3,1.6,.5,1) infinite}
 .sstars i:nth-child(1){left:10%;top:40%}.sstars i:nth-child(2){left:45%;top:5%;animation-delay:.25s!important}.sstars i:nth-child(3){left:80%;top:35%;animation-delay:.5s!important}
 @keyframes pop{0%{opacity:0;transform:scale(.2) rotate(-30deg)}30%{opacity:1;transform:scale(1.2) rotate(8deg)}60%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1) translateY(-30px)}}
-.sweeks{position:absolute;left:6%;bottom:6%;display:flex;gap:10px;opacity:0;transition:opacity .4s;direction:ltr}
+.sweeks{position:absolute;left:24%;top:9%;display:flex;gap:8px;opacity:0;transition:opacity .4s;direction:ltr}
 .scene.weeks .sweeks{opacity:1}
-.sweeks span{background:var(--paper);border:3px solid var(--ink);border-radius:14px;padding:6px 12px;font:800 clamp(14px,1.2vw,20px)/1 "Baloo 2";box-shadow:0 4px 0 var(--ink);transition:background .2s,color .2s}
-.sweeks span.on{background:var(--owl);color:#fff}
+.sweeks span{background:rgba(15,23,51,.7);color:#fff;border-radius:8px;padding:6px 10px;font:700 clamp(13px,1vw,17px)/1 "Bricolage Grotesque";transition:background .2s}
+.sweeks span.on{background:var(--owl)}
 .pages{position:relative;margin-top:-100vh;z-index:2}
-.page{min-height:100vh;display:flex;align-items:center;justify-content:flex-end;padding:90px 6vw 40px}
-.card{position:relative;width:min(440px,100%);background:var(--paper);border:3px solid var(--ink);border-radius:28px;padding:30px 32px 36px;box-shadow:0 10px 0 var(--ink)}
-.page p{margin:0;font-weight:600;font-size:clamp(24px,2.1vw,32px);line-height:1.3}
-.card .pn{position:absolute;bottom:10px;inset-inline-end:16px;font:700 14px/1 "Baloo 2";color:var(--muted)}
-.cover .card{width:min(560px,100%);padding:36px 38px 40px}
-.cover h1{margin:0;font-weight:800;font-size:clamp(72px,9vw,136px);line-height:.9;color:var(--owl);letter-spacing:-.02em}
-.cover h1 span{display:block;font-family:"Baloo Bhaijaan 2";font-size:.5em;color:var(--ink);line-height:1.3;letter-spacing:0}
-html[dir=rtl] .cover h1 span{font-family:"Baloo 2"}
-.cover .sub{margin-top:16px!important;font-size:clamp(20px,1.7vw,26px)!important;font-weight:600!important;color:var(--muted)}
-.cover .hint{margin-top:22px!important;font-size:16px!important;color:var(--ink);display:flex;gap:8px;align-items:center}
-.cover .hint::after{content:"";width:12px;height:12px;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:rotate(45deg);animation:nudge 1.4s ease-in-out infinite}
+.page{min-height:85vh;display:flex;align-items:flex-end;padding:90px 6vw 12vh}
+.page:first-child{min-height:100vh}
+.cap{max-width:min(760px,90vw)}
+.cap p{margin:0;font-weight:700;font-size:clamp(32px,4vw,60px);line-height:1.08;letter-spacing:-.025em;color:#fff;text-shadow:0 4px 30px rgba(0,0,0,.55)}
+html[dir=rtl] .cap p{line-height:1.4;letter-spacing:0;font-weight:800}
+.cap .pn{display:block;margin-bottom:14px;font:600 15px/1 "Bricolage Grotesque";color:var(--owl)}
+.cover .cap{max-width:900px}
+.cover h1{margin:0;font-weight:800;font-size:clamp(84px,13vw,200px);line-height:.85;letter-spacing:-.05em;color:#fff;text-shadow:0 6px 40px rgba(0,0,0,.5)}
+.cover h1 span:not(.t1){display:inline-block;font-family:"Alexandria";font-size:.42em;color:var(--owl);letter-spacing:0;margin-inline-start:.3em;vertical-align:.35em}
+html[dir=rtl] .cover h1{font-family:"Alexandria";letter-spacing:0;line-height:1.15}
+html[dir=rtl] .cover h1 span:not(.t1){font-family:"Bricolage Grotesque"}
+.cover .sub{margin:18px 0 0;font-size:clamp(19px,1.6vw,24px);color:#DDE3F5;max-width:40ch;text-shadow:0 2px 16px rgba(0,0,0,.6)}
+.cover .hint{margin-top:26px;font-size:15px;color:#fff;display:flex;gap:10px;align-items:center;opacity:.85}
+.cover .hint::after{content:"";width:10px;height:10px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg);animation:nudge 1.4s ease-in-out infinite}
 @keyframes nudge{50%{translate:0 5px}}
-.last .btn{margin-top:22px}
-/* ---------- play (game) ---------- */
-#play{background:var(--night);color:#fff;padding:110px 0 90px;position:relative}
-#play h2{color:#fff}
-#play .lead{color:#B9C6E4;max-width:46ch}
-h2{font-weight:800;font-size:clamp(42px,5vw,72px);line-height:1;margin:0 0 12px;letter-spacing:-.01em}
-.lead{font-size:20px;color:var(--muted);margin:0}
-.simGrid{margin-top:36px}
-.stage{border:4px solid #fff;border-radius:26px;box-shadow:0 10px 0 #0B1022;background:#1a2238}
+.last .btn{margin-top:26px}
+/* ---------- play ---------- */
+#play{background:var(--night);padding:120px 0 100px}
+h2{font-weight:800;font-size:clamp(40px,5vw,72px);line-height:1;letter-spacing:-.035em;margin:0 0 14px;color:#fff}
+html[dir=rtl] h2{letter-spacing:0;line-height:1.3}
+.lead{font-size:20px;color:var(--muted);margin:0;max-width:52ch}
+.simGrid{margin-top:40px}
+.stage{border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 0 1px var(--line);background:#1a2238}
 .vbox,#vbox{display:none!important}
-.overlay{background:rgba(27,36,64,.6)}
-.overlay .big{font-family:"Baloo 2";font-size:clamp(26px,3vw,40px)}
-html[dir=rtl] .overlay .big{font-family:"Baloo Bhaijaan 2"}
-.overlay .btn.ghost{background:transparent;color:#fff;border-color:#fff;box-shadow:0 6px 0 #fff}
-.pill{background:rgba(27,36,64,.82);border:2px solid rgba(255,255,255,.25);font-weight:700}
-.box{background:var(--night2);border:0;border-radius:20px;padding:14px;box-shadow:0 6px 0 #0B1022}
-.box .lab{font-size:16px;font-weight:700;color:#fff;text-transform:none;letter-spacing:0;margin-bottom:10px}
-.seg button{background:#3A4677;border:0;border-radius:14px;color:#fff;box-shadow:0 4px 0 #10162B;padding:9px 13px;font-size:16px}
-.seg button small{color:#C9D4F0;font-family:"Atkinson Hyperlegible";font-size:12px}
-.seg button.on{background:var(--star);color:var(--ink);box-shadow:0 4px 0 #A87700}.seg button.on small{color:var(--ink)}
-.seg button:active{transform:translateY(3px);box-shadow:0 1px 0 #10162B}
-.wk .bar{background:rgba(255,255,255,.2)}.seg button.on .bar{background:rgba(31,45,77,.2)}.wk .bar i{background:var(--owl)}
-.acts{gap:14px;margin-top:16px}
-.acts button{background:#fff;color:var(--ink);border:0;border-radius:22px;box-shadow:0 8px 0 #0B1022;font-size:20px;font-weight:700;padding:16px 8px 14px}
-.acts button:hover:not(:disabled){box-shadow:0 10px 0 #0B1022;transform:translateY(-2px);border:0}
-.acts button:active:not(:disabled){transform:translateY(6px);box-shadow:0 2px 0 #0B1022}
-.acts button .e{font-size:36px}
-.acts button[data-a=overload]{background:#FFE1E1}
-.acts kbd{color:var(--muted);border-color:rgba(31,45,77,.25);font-family:"Baloo 2"}
-details.raw summary{color:#B9C6E4}
-.log{background:#0E1430;border:0}
-.phone{background:#0B1022;border:4px solid #fff;box-shadow:0 10px 0 #0B1022}
-.screen{background:#F3F7FB}
-.resCard{background:var(--night);border:3px solid #fff;font-family:"Baloo 2"}
+.overlay{background:rgba(15,23,51,.62)}
+.overlay .big{font-family:"Bricolage Grotesque";font-size:clamp(24px,2.8vw,38px);letter-spacing:-.02em}
+html[dir=rtl] .overlay .big{font-family:"Alexandria"}
+.pill{background:rgba(15,23,51,.8);border:1px solid var(--line);font-weight:700}
+.box{background:var(--night2);border:1px solid var(--line);border-radius:16px;padding:14px}
+.box .lab{font-size:14px;font-weight:600;color:var(--muted);text-transform:none;letter-spacing:0;margin-bottom:10px}
+.seg button{background:transparent;border:1px solid var(--line);border-radius:10px;color:#fff;padding:9px 13px;font-size:15px}
+.seg button small{color:var(--muted);font-family:"Atkinson Hyperlegible";font-size:12px}
+.seg button.on{background:#fff;color:var(--night);border-color:#fff}.seg button.on small{color:#4A5878}
+.wk .bar{background:rgba(255,255,255,.15)}.seg button.on .bar{background:#D9DEEC}.wk .bar i{background:var(--owl)}
+.acts{gap:12px;margin-top:14px}
+.acts button{background:var(--night2);color:#fff;border:1px solid var(--line);border-radius:16px;font-size:18px;font-weight:700;padding:16px 8px 14px}
+.acts button:hover:not(:disabled){border-color:var(--owl);background:var(--night3);box-shadow:none}
+.acts button:hover:not(:disabled) .e{transform:scale(1.12)}
+.acts button[data-a=overload]:hover:not(:disabled){border-color:var(--alert)}
+.acts kbd{color:var(--muted);border-color:var(--line);font-family:"Bricolage Grotesque"}
+details.raw summary{color:var(--muted)}
+.log{background:#0A1026;border:1px solid var(--line)}
+.phone{background:#05070F;box-shadow:0 30px 70px rgba(0,0,0,.45),0 0 0 1px var(--line)}
+.screen{background:#F3F5FA}
+.resCard{background:var(--night2);border:1px solid var(--line);font-family:"Bricolage Grotesque"}
 .stage.hit{animation:hit .3s cubic-bezier(.2,1.4,.4,1)}
 @keyframes hit{0%{transform:scale(1.03) rotate(-.4deg)}100%{transform:none}}
 .stage .lbx{position:absolute;left:0;right:0;height:0;background:#000;z-index:30;transition:height .6s cubic-bezier(.7,0,.2,1);pointer-events:none}
 .stage .lbx.t{top:0}.stage .lbx.b{bottom:0}.stage.cine .lbx{height:9%}
 /* ---------- facts ---------- */
-.facts{padding:120px 0}
-.facts p.big{font-family:"Baloo 2";font-weight:600;font-size:clamp(30px,3.6vw,52px);line-height:1.25;margin:0 0 .6em;max-width:28ch}
-html[dir=rtl] .facts p.big{font-family:"Baloo Bhaijaan 2"}
-.facts b{font-weight:800;color:var(--owl);background:linear-gradient(transparent 62%,rgba(255,194,51,.55) 62%);padding:0 .08em;direction:ltr;unicode-bidi:isolate}
-.facts .src{font-size:15px;color:var(--muted)}
+.facts{padding:110px 0;background:var(--night2)}
+.facts h2{margin-bottom:40px}
+.facts p.big{font-weight:600;font-size:clamp(28px,3.2vw,46px);line-height:1.2;letter-spacing:-.02em;margin:0 0 .7em;max-width:30ch;color:#fff}
+html[dir=rtl] .facts p.big{letter-spacing:0;line-height:1.5}
+.facts b{font-weight:800;color:var(--owl);direction:ltr;unicode-bidi:isolate}
+.facts .src{font-size:14px;color:var(--muted)}
 /* ---------- inside ---------- */
-#inside{padding:40px 0 120px}
-.hw{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:30px}
+#inside{padding:110px 0}
+.hw{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:30px}
 .hwOwl{position:relative;width:min(400px,90%);justify-self:center}
-#hwOwl svg{width:100%;filter:drop-shadow(0 14px 0 rgba(31,45,77,.15))}
-.pin{background:var(--ink);color:#fff;border:3px solid #fff;font-family:"Baloo 2"}
-.pin:hover,.pin.on{background:var(--owl);box-shadow:none;transform:scale(1.2)}
-.parts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.part{background:var(--paper);border:3px solid var(--ink);border-radius:18px;padding:12px 14px;box-shadow:0 5px 0 var(--ink);transition:transform .1s}
-.part.on{background:#FFF1E6;transform:translateY(-3px)}
-.part .n{background:var(--ink);color:#fff}
-.part b{font-family:"Baloo 2";font-size:19px}html[dir=rtl] .part b{font-family:"Baloo Bhaijaan 2"}
-.part span:not(.n){display:block;color:var(--muted);font-size:15px;margin-top:2px}
-.brain{margin-top:44px;background:var(--paper);border:3px solid var(--ink);border-radius:26px;box-shadow:0 8px 0 var(--ink);padding:26px 30px;display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:center}
-.brain p{margin:0;font-size:19px}
-.brain h3{margin:0 0 8px;font:800 28px/1.1 "Baloo 2"}html[dir=rtl] .brain h3{font-family:"Baloo Bhaijaan 2"}
-.brain code{display:inline-block;margin-top:12px;background:var(--night);color:#9FE7D6;border-radius:10px;padding:8px 12px;font:14px ui-monospace,Menlo,monospace;direction:ltr}
-.brain .cost{font:800 clamp(40px,4vw,60px)/1 "Baloo 2";color:var(--owl)}
-.brain .cost small{display:block;font:500 17px/1.4 "Atkinson Hyperlegible";color:var(--muted);margin-top:8px}
+#hwOwl svg{width:100%;filter:drop-shadow(0 30px 40px rgba(0,0,0,.45))}
+.pin{background:#fff;color:var(--night);border:0;font-family:"Bricolage Grotesque"}
+.pin:hover,.pin.on{background:var(--owl);color:#fff;box-shadow:0 0 0 6px rgba(255,122,47,.25);transform:scale(1.15)}
+.parts{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line)}
+.part{background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:15px 4px;display:grid;grid-template-columns:auto 1fr;column-gap:14px;box-shadow:none;transition:background .2s}
+.part.on{background:rgba(255,122,47,.08);transform:none}
+.part .n{grid-column:1;grid-row:1/3;background:#fff;color:var(--night);margin:2px 0 0}
+.part b{grid-column:2;grid-row:1;font-family:"Bricolage Grotesque";font-size:19px;color:#fff}html[dir=rtl] .part b{font-family:"Alexandria"}
+.part span:not(.n){grid-column:2;grid-row:2;display:block;color:var(--muted);font-size:15px;margin-top:2px}
+.brain{margin-top:56px;padding-top:40px;border-top:1px solid var(--line);display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start}
+.brain p{margin:0;font-size:19px;color:#DDE3F5;max-width:52ch}
+.brain h3{margin:0 0 10px;font-weight:800;font-size:30px;letter-spacing:-.02em;color:#fff}
+.brain code{display:inline-block;margin-top:16px;background:#0A1026;color:#9FE7D6;border:1px solid var(--line);border-radius:8px;padding:8px 12px;font:14px ui-monospace,Menlo,monospace;direction:ltr}
+.brain .cost{font-weight:800;font-size:clamp(48px,5vw,76px);line-height:1;color:var(--owl);letter-spacing:-.03em}
+.brain .cost small{display:block;font:500 17px/1.45 "Atkinson Hyperlegible";color:var(--muted);margin-top:10px;letter-spacing:0}
 html[dir=rtl] .brain .cost small{font-family:"IBM Plex Sans Arabic"}
 /* ---------- video + end ---------- */
-#video{padding:0 0 120px}
-.vidWrap{margin-top:26px;border:4px solid var(--ink);border-radius:26px;overflow:hidden;box-shadow:0 10px 0 var(--ink)}
+#video{padding:0 0 110px}
+.vidWrap{margin-top:28px;border-radius:20px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 0 1px var(--line)}
 video{width:100%;display:block;background:#000}
-.end{padding:40px 24px 130px;text-align:center}
-.end .theend{font:800 clamp(60px,9vw,140px)/1 "Baloo 2";color:var(--owl);margin:0}
-html[dir=rtl] .end .theend{font-family:"Baloo Bhaijaan 2"}
-.end p{font-size:clamp(20px,1.8vw,26px);margin:14px auto 28px;max-width:30ch}
+.end{padding:60px 28px 140px;text-align:center}
+.end .theend{font-weight:800;font-size:clamp(48px,7vw,104px);line-height:1;letter-spacing:-.04em;color:#fff;margin:0 auto;max-width:14ch}
+html[dir=rtl] .end .theend{letter-spacing:0;line-height:1.3}
+.end p:not(.theend){font-size:20px;color:var(--muted);margin:16px auto 30px}
 .end .row{justify-content:center}
-footer{background:var(--night);color:#B9C6E4;padding:28px 0 40px;font-size:14px}
+footer{background:#0A1026;color:var(--muted);padding:28px 0 40px;font-size:14px;border-top:1px solid var(--line)}
 .row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.skip{background:var(--owl);color:#fff}
 @media(max-width:1060px){.simGrid{grid-template-columns:1fr}.phone{max-width:340px;width:100%;margin:auto}}
 @media(max-width:760px){
- header.bar{top:10px;left:10px;right:10px}.navR a:not(.play){display:none}
- .sbox{left:-14vw;top:auto;bottom:0;width:180vw;height:101.25vw;transform:none}
- .scene{background:linear-gradient(180deg,#DDEFF0 0%,#DDEFF0 50%,#D6CEC2 50%)}
- .sbub{max-width:34%;padding:10px 12px}
- .page{align-items:flex-start;justify-content:center;padding:84px 16px 0}
- .card{padding:22px 22px 28px}.page p{font-size:22px}
- .cover h1{font-size:76px}
- .hw,.brain{grid-template-columns:1fr}.parts{grid-template-columns:1fr}
- .facts{padding:80px 0}#play{padding:80px 0}
+ header.bar{padding:12px 16px}.navR{gap:10px}.navR a:not(.play){display:none}.brand b{display:none}
+ .sbox{left:-14vw;top:auto;bottom:18vh;width:180vw;height:101.25vw;transform:none}
+ .grade{background:linear-gradient(180deg,rgba(15,23,51,.7) 0%,rgba(15,23,51,0) 18%,rgba(15,23,51,0) 45%,rgba(15,23,51,.95) 78%)}
+ .sbub{max-width:36%;padding:9px 12px}
+ .page{padding:80px 20px 7vh;min-height:80vh}
+ .cap p{font-size:30px}.cover h1{font-size:88px}
+ .hw,.brain{grid-template-columns:1fr}
+ #play,#inside,.facts{padding:80px 0}
 }
 @media(prefers-reduced-motion:reduce){.skid,.sowl,.sbub{transition:none!important}.scene *{animation:none!important}}
-header.bar{background:none!important;border:0!important;backdrop-filter:none!important;position:fixed}
-.cover h1 .t1{display:block;font-family:"Baloo 2";font-size:1em;color:var(--owl);line-height:.95}
-html[dir=rtl] .cover h1 .t1{font-family:"Baloo Bhaijaan 2";line-height:1.2}
-html[dir=rtl] .cover h1 span:not(.t1){font-family:"Baloo 2"}
-.sbreath{left:58%;top:42%}
-.facts h2{margin-bottom:34px}
+.page{justify-content:flex-end}
 html[dir=rtl] .page{justify-content:flex-start}
-@media(max-width:760px){html[dir=rtl] .page{justify-content:center}.brand b{display:none}.brand{font-size:18px;padding:5px 12px 5px 6px}.navR{gap:6px}.navR a.play{padding:8px 11px;font-size:14px}.lang button{padding:5px 8px}}
+.cap{max-width:min(600px,90vw);opacity:0;transform:translateY(24px);transition:opacity .5s,transform .5s}
+.page.on .cap{opacity:1;transform:none}
+.cover .cap{max-width:min(720px,92vw)}
+@media(max-width:760px){.page{justify-content:flex-start}.cap{max-width:100%}}
+@media(prefers-reduced-motion:reduce){.cap{transition:none}}
+.cap{max-width:min(560px,90vw)}
+.cover .cap{max-width:min(580px,92vw)}
+.cover h1{font-size:clamp(72px,8.6vw,136px)}
+.cover h1 span:not(.t1){display:block;margin:8px 0 0;font-size:.4em;vertical-align:0}
+@media(max-width:760px){.sbox{bottom:4vh}.page{align-items:flex-start;padding:84px 20px 0;min-height:85vh}.cover h1{font-size:64px}.cover .sub{font-size:17px}.cap p{font-size:26px}
+ .grade{background:linear-gradient(180deg,rgba(15,23,51,1) 0%,rgba(15,23,51,1) 44%,rgba(15,23,51,0) 56%,rgba(15,23,51,0) 85%,rgba(15,23,51,.6) 100%)}}
 </style>
 </head>
 <body>
@@ -381,7 +387,7 @@ html[dir=rtl] .page{justify-content:flex-start}
 <section class="story" aria-label="Story">
   <div class="scene noowl" id="scene" aria-hidden="true"><div class="sbox">
     <div class="sroom" id="sroom"></div>
-    <div class="sred"></div><div class="scalm"></div>
+    <div class="sred"></div><div class="scalm"></div><div class="grade"></div>
     <div class="skid" id="skid"></div>
     <div class="sowl"><div id="heroOwl"></div></div>
     <div class="sbreath"></div>
@@ -390,16 +396,13 @@ html[dir=rtl] .page{justify-content:flex-start}
     <div class="sweeks" id="sweeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
   </div></div>
   <div class="pages">
-    <article class="page cover" data-step="0"><div class="card"><h1><span class="t1" data-i="st.title"></span><span data-i="st.title2"></span></h1><p class="sub" data-i="st.sub"></p><p class="hint" data-i="st.hint"></p></div></article>
-<article class="page" data-step="1"><div class="card"><p data-i="st1"></p><span class="pn" aria-hidden="true">1</span></div></article>
-<article class="page" data-step="2"><div class="card"><p data-i="st2"></p><span class="pn" aria-hidden="true">2</span></div></article>
-<article class="page" data-step="3"><div class="card"><p data-i="st3"></p><span class="pn" aria-hidden="true">3</span></div></article>
-<article class="page" data-step="4"><div class="card"><p data-i="st4"></p><span class="pn" aria-hidden="true">4</span></div></article>
-<article class="page" data-step="5"><div class="card"><p data-i="st5"></p><span class="pn" aria-hidden="true">5</span></div></article>
-<article class="page" data-step="6"><div class="card"><p data-i="st6"></p><span class="pn" aria-hidden="true">6</span></div></article>
-<article class="page" data-step="7"><div class="card"><p data-i="st7"></p><span class="pn" aria-hidden="true">7</span></div></article>
-<article class="page" data-step="8"><div class="card"><p data-i="st8"></p><span class="pn" aria-hidden="true">8</span></div></article>
-    <article class="page last" data-step="9"><div class="card"><p data-i="st9"></p><a class="btn primary" href="#play" data-i="st.cta"></a></div></article>
+    <article class="page cover" data-step="0"><div class="cap"><h1><span class="t1" data-i="st.title"></span><span data-i="st.title2"></span></h1><p class="sub" data-i="st.sub"></p><p class="hint" data-i="st.hint"></p></div></article>
+    <article class="page" data-step="1"><div class="cap"><span class="pn" aria-hidden="true">01</span><p data-i="st1"></p></div></article>
+    <article class="page" data-step="2"><div class="cap"><span class="pn" aria-hidden="true">02</span><p data-i="st2"></p></div></article>
+    <article class="page" data-step="3"><div class="cap"><span class="pn" aria-hidden="true">03</span><p data-i="st3"></p></div></article>
+    <article class="page" data-step="4"><div class="cap"><span class="pn" aria-hidden="true">04</span><p data-i="st4"></p></div></article>
+    <article class="page" data-step="5"><div class="cap"><span class="pn" aria-hidden="true">05</span><p data-i="st5"></p></div></article>
+    <article class="page last" data-step="6"><div class="cap"><p data-i="st6"></p><a class="btn primary" href="#play" data-i="st.cta"></a></div></article>
   </div>
 </section>
 
@@ -491,20 +494,20 @@ html[dir=rtl] .page{justify-content:flex-start}
 <script>
 const $=id=>document.getElementById(id),clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),lerp=(a,b,t)=>a+(b-a)*t;
 const L={en:{
-"st.title":"Rafeeq","st.title2":"رفيق","st.sub":"A story about Yousef, his mornings, and an owl that knows when to stay quiet.","st.hint":"Scroll to read",
-st1:"This is Yousef. He's seven, and he has autism.",
-st2:"Mornings are hard. Too much noise, too many steps, and Mom has to say every single one.",
-st3:"Then his family brought home Rafeeq.",
-st4:"Rafeeq watches the routine and says one small step at a time, in the same Kuwaiti Arabic Yousef hears at home.",
-st5:"Some mornings, it all gets too loud.",
-st6:"Rafeeq notices before it becomes a meltdown. It stops the task, dims its light and breathes with him.",
-st7:"Then, one small step at a time, Yousef finishes. Every step gets a cheer.",
-st8:"And every week, Rafeeq says a little less. By week four, it just watches.",
+"st.title":"Rafeeq","st.title2":"رفيق","st.sub":"An owl robot that coaches kids with autism through the morning, in Kuwaiti Arabic. And then steps back.","st.hint":"Scroll",
+st1:"Yousef is seven. Every morning is too loud, with too many steps.",
+st2:"Rafeeq watches and says one small step at a time, in the Kuwaiti Arabic he hears at home.",
+st3:"Some mornings, it all gets too much.",
+st4:"Rafeeq notices first. It stops, dims its light, and breathes with him.",
+st5:"Every week, it says a little less. Week four, it just watches.",
+st6:"Now you be Yousef.",
+
+
 st9:"Now you be Yousef.","st.cta":"Play the simulation",
 "pl.t":"Your turn.","fa.t":"Why this matters in Kuwait",
 "in.t":"Inside the owl","br.t":"Its brain runs at home","br.d":"Rafeeq thinks with Gemma 3 (4B), an open AI model, running offline through Ollama on a Raspberry Pi 5. Camera frames are checked and thrown away on the spot. Nothing goes to the cloud.",
 "br.c":"≈ 65 KD","br.cd":"in parts to build one. 0 KD a month to run.",
-"end.t":"The end.","end.d":"Rafeeq wins when it's not needed.","end.gh":"See the code on GitHub",
+"end.t":"Rafeeq wins when it's not needed.","end.d":"Help that fades, so kids grow.","end.gh":"See the code on GitHub",
 skip:"Skip to the simulation",
 n1:"Simulation",n2:"How it works",n3:"Hardware",n4:"Video",
 "h.k":"ATSN26 · Gen-AI Innovation","h.t":"A friend for the morning routine.","h.l":"Rafeeq is an owl robot that coaches kids with autism, Down syndrome and ADHD one step at a time, in Kuwaiti Arabic. Every week it helps a little less.",
@@ -529,20 +532,20 @@ hw1:"Camera",hw1d:"ESP32-S3",hw2:"LED eyes",hw2d:"Color = mood",hw3:"Speaker + m
 "e.k":"The goal","e.t":"Rafeeq wins when it's not needed.","e.c":"Play the simulation",
 foot:"Rafeeq رفيق · by A.Naji · ATSN26 · Simulation: responses are scripted to show how the real system behaves."
 },ar:{
-"st.title":"رفيق","st.title2":"Rafeeq","st.sub":"قصة يوسف وصباحه، وبومة تعرف متى تسكت.","st.hint":"انزل تحت عشان تقرا",
-st1:"هذا يوسف. عمره سبع سنين، وعنده توحّد.",
-st2:"الصبح صعب. صوت واجد، وخطوات واجد، وأمه لازم تقول كل خطوة.",
-st3:"وبعدين جابوا له أهله رفيق.",
-st4:"رفيق يشوف الروتين ويقول خطوة صغيرة وحدة كل مرة، بنفس اللهجة الكويتية اللي يسمعها يوسف في البيت.",
-st5:"بعض الأيام، يصير كل شي عالي زيادة.",
-st6:"رفيق ينتبه قبل لا تصير نوبة. يوقف المهمة، ويخفّف ضوّه، ويتنفس وياه.",
-st7:"وبعدها، خطوة خطوة، يخلّص يوسف. وكل خطوة لها تشجيع.",
-st8:"وكل أسبوع، رفيق يتكلم أقل. بالأسبوع الرابع، بس يطالع.",
+"st.title":"رفيق","st.title2":"Rafeeq","st.sub":"روبوت بومة يوجّه أطفال التوحد في روتين الصباح، باللهجة الكويتية. وبعدين يتراجع.","st.hint":"انزل",
+st1:"يوسف عمره سبع سنين. كل صبح صوت عالي، وخطوات واجد.",
+st2:"رفيق يطالع ويقول خطوة صغيرة وحدة كل مرة، باللهجة اللي يسمعها في البيت.",
+st3:"بعض الأيام، يصير كل شي فوق طاقته.",
+st4:"رفيق ينتبه أول. يوقف، ويخفّف ضوّه، ويتنفس وياه.",
+st5:"كل أسبوع يتكلم أقل. بالأسبوع الرابع، بس يطالع.",
+st6:"الحين إنت كون يوسف.",
+
+
 st9:"الحين إنت كون يوسف.","st.cta":"جرّب المحاكاة",
 "pl.t":"دورك.","fa.t":"ليش هذا مهم في الكويت",
 "in.t":"داخل البومة","br.t":"عقله يشتغل في البيت","br.d":"رفيق يفكر باستخدام Gemma 3 (4B)، نموذج ذكاء اصطناعي مفتوح، يشتغل بدون إنترنت عبر Ollama على Raspberry Pi 5. صور الكاميرا تنفحص وتنحذف على طول. ولا شي يروح للسحابة.",
 "br.c":"≈ 65 د.ك","br.cd":"قطع لصنع وحدة. و٠ د.ك بالشهر للتشغيل.",
-"end.t":"النهاية.","end.d":"رفيق يفوز لما ما يحتاجونه.","end.gh":"شوف الكود على GitHub",
+"end.t":"رفيق يفوز لما ما يحتاجونه.","end.d":"مساعدة تخف، عشان الطفل يكبر.","end.gh":"شوف الكود على GitHub",
 skip:"انتقل إلى المحاكاة",
 n1:"المحاكاة",n2:"كيف يشتغل",n3:"القطع",n4:"الفيديو",
 "h.k":"ATSN26 · ابتكار بالذكاء التوليدي","h.t":"رفيق لروتين الصباح.","h.l":"رفيق روبوت بومة يوجّه أطفال التوحد ومتلازمة داون وفرط الحركة خطوة بخطوة، باللهجة الكويتية. وكل أسبوع يساعد أقل.",
@@ -811,24 +814,20 @@ const LINES={talk:["صباح الخير يوسف، يلا نفرّش أسنان�
 function bubble(l){if(!l){scene.classList.remove("talk");return;}$$("sbAr").textContent=l[0];$$("sbEn").textContent=lang==="ar"?"":l[1];scene.classList.add("talk");}
 let wkT=null,step=-1;
 function setStep(n){if(n===step)return;step=n;clearInterval(wkT);
- const c=scene.classList;["kid","noowl","talk","loud","calm","star","weeks"].forEach(x=>c.remove(x));
+ const c=scene.classList;["kid","noowl","talk","loud","calm","star","weeks","lit"].forEach(x=>c.remove(x));
  const owlEl=$$("heroOwl").querySelector(".owl"),glow=owlEl&&owlEl.querySelector(".glow");if(glow)glow.setAttribute("opacity",0);
- if(n===0){pose(.3,0,0);}
  if(n>=1)c.add("kid");
- if(n===1)pose(.3,0,0);
- if(n===2){pose(-.8,0,0);c.add("noowl");}
- if(n===1)c.add("noowl");
- if(n===3)pose(.6,0,0);
- if(n===4){pose(.5,0,1);bubble(LINES.talk);}
- if(n===5){pose(-1,1,0);c.add("loud");}
- if(n===6){pose(0,0,0);c.add("calm");bubble(LINES.calm);if(glow)glow.setAttribute("opacity",.4);}
- if(n===7){pose(1,0,1);c.add("star");bubble(LINES.star);}
- if(n===8){pose(.7,0,1);c.add("weeks");let w=0;const run=()=>{[...$$("sweeks").children].forEach((e,i)=>e.classList.toggle("on",i===w));bubble(LINES.w[w]);w=(w+1)%4;};run();if(!RMx)wkT=setInterval(run,1500);}
- if(n===9){pose(1,0,0);}
+ if(n===0){pose(.3,0,0);if(glow)glow.setAttribute("opacity",.35);}
+ if(n===1){pose(-.8,0,0);c.add("noowl");}
+ if(n===2){pose(.5,0,1);c.add("lit");bubble(LINES.talk);}
+ if(n===3){pose(-1,1,0);c.add("loud");}
+ if(n===4){pose(0,0,0);c.add("calm");bubble(LINES.calm);if(glow)glow.setAttribute("opacity",.4);}
+ if(n===5){pose(.9,0,1);c.add("weeks","star","lit");let w=0;const run=()=>{[...$$("sweeks").children].forEach((e,i)=>e.classList.toggle("on",i===w));bubble(LINES.w[w]);w=(w+1)%4;};run();if(!RMx)wkT=setInterval(run,1500);}
+ if(n===6){pose(1,0,0);c.add("lit");}
 }
-const pio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)setStep(+e.target.dataset.step);}),{rootMargin:"-45% 0px -45% 0px"});
+const pio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll(".page.on").forEach(x=>x.classList.remove("on"));e.target.classList.add("on");setStep(+e.target.dataset.step);}}),{rootMargin:"-45% 0px -45% 0px"});
 document.querySelectorAll(".page").forEach(p=>pio.observe(p));
-setStep(0);
+setStep(0);document.querySelector(".page").classList.add("on");
 
 /* facts with count-up */
 const FT={en:[`In Kuwait, <b data-n="30" data-s="+">30+</b> in every 10,000 children are diagnosed with autism, and the real number is likely higher.`,
