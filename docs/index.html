@@ -354,6 +354,27 @@ html[dir=rtl] .facts p.big{letter-spacing:0;line-height:1.5}
 .brain .cost small{display:block;font:500 17px/1.45 "Atkinson Hyperlegible";color:var(--muted);margin-top:10px;letter-spacing:0}
 html[dir=rtl] .brain .cost small{font-family:"IBM Plex Sans Arabic"}
 /* ---------- video + end ---------- */
+.chap{padding:110px 0 10px}.chap .wrap{display:flex;gap:26px;align-items:flex-start;border-top:1px solid var(--line);padding-top:34px}
+.chap .cn{font:800 clamp(64px,8vw,104px)/.8 "Bricolage Grotesque",sans-serif;color:var(--orange);letter-spacing:-.04em}
+.chap .ct{margin:0 0 6px;font-size:clamp(34px,4.6vw,58px)}.chap p{margin:0;color:var(--muted);font-size:18px;max-width:560px}
+.chap+section{padding-top:40px!important}
+#glance{padding:30px 0 10px}.gl{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.gl>div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}.gl b{display:block;font-size:22px;color:#fff;margin-bottom:6px}.gl span{color:var(--muted);font-size:15px;line-height:1.4}
+.gl>div:first-child{background:linear-gradient(160deg,rgba(255,122,61,.18),rgba(255,122,61,.04));border-color:rgba(255,122,61,.35)}
+.runs{list-style:none;margin:30px 0 0;padding:0;display:grid;gap:12px;counter-reset:r}
+.runs li{counter-increment:r;display:grid;grid-template-columns:44px 1fr minmax(0,1.3fr);gap:18px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px}
+.runs li::before{content:counter(r);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(62,230,200,.12);color:var(--teal);font-weight:800}
+.rh b{display:block;color:#fff}.rh span{color:var(--muted);font-size:14px}
+.cmd{display:flex;gap:8px;align-items:center;background:#070b16;border:1px solid var(--line);border-radius:12px;padding:8px 8px 8px 14px;min-width:0}
+.cmd code{flex:1;font-size:13.5px;color:var(--teal);white-space:nowrap;overflow-x:auto;scrollbar-width:thin}
+.cp{flex:0 0 auto;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);border-radius:9px;padding:7px 12px;font:inherit;font-size:13px;cursor:pointer}.cp.ok{color:var(--teal);border-color:var(--teal)}
+.rlink{color:var(--orange2);font-weight:700}.rnote{color:var(--muted);font-size:15px;margin-top:16px}
+.crit{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:30px}
+.crit>div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column}
+.crit h3{margin:0 0 8px;font-size:19px;color:#fff}.crit p{margin:0 0 16px;color:var(--muted);font-size:15px;line-height:1.45;flex:1}.crit a{color:var(--orange2);font-weight:700;font-size:15px}
+.navR a.cur{color:#fff;box-shadow:inset 0 -2px 0 var(--orange)}
+.cp:focus-visible,.crit a:focus-visible,.rlink:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+@media(max-width:860px){.gl{grid-template-columns:1fr 1fr}.runs li{grid-template-columns:40px 1fr}.runs li .cmd,.runs li .rlink{grid-column:1/-1}.chap{padding-top:80px}.chap .wrap{gap:16px}}
 .stoK{color:var(--muted);margin:26px 0 12px}.stories{display:flex;gap:18px;overflow-x:auto;padding:6px 2px 14px;scrollbar-width:none}.stories::-webkit-scrollbar{display:none}
 .sto{flex:0 0 auto;background:none;border:0;color:var(--text);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;font:inherit;width:92px}
 .sto .ring{width:84px;height:84px;border-radius:50%;padding:3px;background:conic-gradient(var(--orange),var(--gold),var(--orange))}.sto.seen .ring{background:var(--line)}
@@ -661,7 +682,7 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
 
 <header class="bar">
   <a class="brand" href="#top"><svg width="26" height="28" viewBox="0 0 400 440" aria-hidden="true"><ellipse cx="200" cy="240" rx="150" ry="170" fill="#F2641A"/><ellipse cx="200" cy="290" rx="96" ry="110" fill="#FFE3CC"/><circle cx="140" cy="190" r="58" fill="#fff"/><circle cx="260" cy="190" r="58" fill="#fff"/><circle cx="140" cy="195" r="25" fill="#1F2D4D"/><circle cx="260" cy="195" r="25" fill="#1F2D4D"/></svg>Rafeeq <b>رفيق</b></a>
-  <nav class="navR" aria-label="Sections"><a href="#why" data-i="nW"></a><a href="#brain" data-i="nA"></a><a href="#features" data-i="nF"></a><a href="#safe" data-i="nS"></a><a href="#faq" data-i="nQ"></a><a href="https://github.com/abdullahnaji353-blip/rafeeq">GitHub</a><a class="play" href="#play" data-i="n1"></a>
+  <nav class="navR" aria-label="Sections"><a href="#c1" data-i="nC1"></a><a href="#c2" data-i="nC2"></a><a href="#c3" data-i="nC3"></a><a href="#c4" data-i="nC4"></a><a href="#faq" data-i="nQ"></a><a href="https://github.com/abdullahnaji353-blip/rafeeq">GitHub</a><a class="play" href="#play" data-i="n1"></a>
   <div class="lang" role="group" aria-label="Language"><button id="lEn" class="on" lang="en">EN</button><button id="lAr" lang="ar">عربي</button></div></nav>
 </header>
 
@@ -687,18 +708,22 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
     <article class="page last" data-step="6"><div class="cap"><p data-i="st6"></p><a class="btn primary" href="#play" data-i="st.cta"></a></div></article>
   </div>
 </section>
-
+<div class="chap" id="c1"><div class="wrap"><span class="cn" aria-hidden="true">1</span><div><h2 class="ct" data-i="c1.t"></h2><p data-i="c1.d"></p></div></div></div>
+<section id="glance"><div class="wrap"><div class="gl">
+  <div><b data-i="g1"></b><span data-i="g1d"></span></div>
+  <div><b data-i="g2"></b><span data-i="g2d"></span></div>
+  <div><b data-i="g3"></b><span data-i="g3d"></span></div>
+  <div><b data-i="g4"></b><span data-i="g4d"></span></div>
+</div></div></section>
 <section class="facts" id="why"><div class="wrap">
   <h2 data-i="fa.t"></h2>
   <div id="factText"></div>
 </div></section>
-
 <section id="voices"><div class="wrap">
   <h2 data-i="vo.t"></h2><p class="lead2" data-i="vo.l"></p>
   <div class="vtabs" id="vTabs" role="tablist"><button role="tab" data-g="p"><span data-i="vo.p"></span> <em></em></button><button role="tab" data-g="a"><span data-i="vo.a"></span> <em></em></button></div>
   <div class="vgrid" id="vGrid"></div>
 </div></section>
-
 <section id="compare"><div class="wrap">
   <h2 data-i="c.t"></h2><p class="lead2" data-i="c.l"></p>
   <div class="cmp" id="cmp" role="table"></div>
@@ -706,6 +731,24 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
   <p class="cnote" data-i="c.n"></p>
 </div></section>
 
+<div class="chap" id="c2"><div class="wrap"><span class="cn" aria-hidden="true">2</span><div><h2 class="ct" data-i="c2.t"></h2><p data-i="c2.d"></p></div></div></div>
+<section id="video"><div class="wrap">
+  <h2 data-i="v.t"></h2>
+  <p class="stoK" data-i="sto.k"></p>
+  <div class="stories" id="stories">
+    <button type="button" class="sto" data-s="0"><span class="ring"><img src="stories/st1.jpg" alt="" loading="lazy"></span><b data-i="sto.1"></b></button>
+    <button type="button" class="sto" data-s="1"><span class="ring"><img src="stories/st2.jpg" alt="" loading="lazy"></span><b data-i="sto.2"></b></button>
+    <button type="button" class="sto" data-s="2"><span class="ring"><img src="stories/st3.jpg" alt="" loading="lazy"></span><b data-i="sto.3"></b></button>
+    <button type="button" class="sto" data-s="3"><span class="ring"><img src="stories/st4.jpg" alt="" loading="lazy"></span><b data-i="sto.4"></b></button>
+    <button type="button" class="sto" data-s="4"><span class="ring"><img src="stories/st5.jpg" alt="" loading="lazy"></span><b data-i="sto.5"></b></button>
+    <button type="button" class="sto" data-s="5"><span class="ring"><img src="stories/st6.jpg" alt="" loading="lazy"></span><b data-i="sto.6"></b></button>
+    <button type="button" class="sto" data-s="6"><span class="ring"><img src="stories/st7.jpg" alt="" loading="lazy"></span><b data-i="sto.7"></b></button>
+  </div>
+  <h3 class="vh" data-i="vd.t"></h3><p class="vnote" data-i="vd.d"></p>
+  <div class="vidWrap"><video controls preload="metadata" playsinline poster="demo-poster.jpg" src="rafeeq-demo.mp4" aria-label="Rafeeq demo app, recorded in test mode"></video></div>
+  <h3 class="vh" data-i="vp.t"></h3>
+  <div class="vidWrap"><video controls preload="metadata" playsinline poster="video-poster.jpg" src="rafeeq-prototype-video.mp4" aria-label="Rafeeq prototype video"><track kind="captions" src="captions-en.vtt" srclang="en" label="English"><track kind="captions" src="captions-ar.vtt" srclang="ar" label="العربية"></video></div>
+</div></section>
 <section id="play"><div class="wrap" id="sim">
   <h2 data-i="pl.t"></h2><p class="lead" data-i="s.l"></p>
   <div class="simGrid">
@@ -769,9 +812,18 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
     </div></div></div>
   </div>
 </div></section>
+<section id="run"><div class="wrap">
+  <h2 data-i="ru.t"></h2><p class="lead2" data-i="ru.l"></p>
+  <ol class="runs">
+    <li><div class="rh"><b data-i="ru.1"></b><span data-i="ru.1d"></span></div><a class="rlink" href="https://ollama.com/download" data-i="ru.1a"></a></li>
+    <li><div class="rh"><b data-i="ru.2"></b><span data-i="ru.2d"></span></div><div class="cmd"><code dir="ltr">ollama pull gemma3:4b</code><button type="button" class="cp" data-i="ru.cp"></button></div></li>
+    <li><div class="rh"><b data-i="ru.3"></b><span data-i="ru.3d"></span></div><div class="cmd"><code dir="ltr">git clone https://github.com/abdullahnaji353-blip/rafeeq &amp;&amp; cd rafeeq/demo &amp;&amp; npm install &amp;&amp; npm start</code><button type="button" class="cp" data-i="ru.cp"></button></div></li>
+    <li><div class="rh"><b data-i="ru.4"></b><span data-i="ru.4d"></span></div><div class="cmd"><code dir="ltr">http://localhost:3000</code><button type="button" class="cp" data-i="ru.cp"></button></div></li>
+  </ol>
+  <p class="rnote" data-i="ru.n"></p>
+</div></section>
 
-
-
+<div class="chap" id="c3"><div class="wrap"><span class="cn" aria-hidden="true">3</span><div><h2 class="ct" data-i="c3.t"></h2><p data-i="c3.d"></p></div></div></div>
 <section id="brain"><div class="wrap">
   <h2 data-i="ai.t"></h2><p class="lead2" data-i="ai.l"></p>
   <div class="think">
@@ -792,20 +844,17 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
     <div class="whyLocal"><h3 data-i="ai.w"></h3><ul><li data-i="ai.w1"></li><li data-i="ai.w2"></li><li data-i="ai.w3"></li></ul></div>
   </div>
 </div></section>
-
 <section id="fade"><div class="wrap">
   <h2 data-i="fd.t"></h2><p class="lead2" data-i="fd.l"></p>
   <div class="weeks" id="weeks"></div>
   <p class="wcap" data-i="fd.c"></p>
   <div class="rule"><h3 data-i="fd.r"></h3><ul><li data-i="fd.r1"></li><li data-i="fd.r2"></li><li data-i="fd.r3"></li></ul></div>
 </div></section>
-
 <section id="features"><div class="wrap">
   <h2 data-i="fe.t"></h2><p class="lead2" data-i="fe.l"></p>
   <div class="fbar"><div class="fchips" id="fChips" role="group"><button data-c="all" data-i="fe.all"></button><button data-c="r" data-i="fe.r"></button><button data-c="c" data-i="fe.c"></button><button data-c="f" data-i="fe.f"></button><button data-c="l" data-i="fe.lg"></button></div><div class="fcount" id="fCount" aria-live="polite"></div></div>
   <div class="fgrid" id="fGrid"></div>
 </div></section>
-
 <section id="inside"><div class="wrap">
   <h2 data-i="in.t"></h2>
   <div class="hw">
@@ -825,6 +874,7 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
   <div class="brain"><div><h3 data-i="br.t"></h3><p data-i="br.d"></p><code>ollama run gemma3:4b</code></div></div>
 </div></section>
 
+<div class="chap" id="c4"><div class="wrap"><span class="cn" aria-hidden="true">4</span><div><h2 class="ct" data-i="c4.t"></h2><p data-i="c4.d"></p></div></div></div>
 <section id="safe"><div class="wrap">
   <h2 data-i="sf.t"></h2>
   <div class="safe4">
@@ -834,7 +884,16 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
     <div><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="11" y="4" width="18" height="32" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M16 15h8M16 21h8M16 27h5" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg><h3 data-i="sf4"></h3><p data-i="sf4d"></p></div>
   </div>
 </div></section>
-
+<section id="criteria"><div class="wrap">
+  <h2 data-i="cr.t"></h2><p class="lead2" data-i="cr.l"></p>
+  <div class="crit">
+    <div><h3 data-i="cr1"></h3><p data-i="cr1d"></p><a href="#fade" data-i="cr1a"></a></div>
+    <div><h3 data-i="cr2"></h3><p data-i="cr2d"></p><a href="#brain" data-i="cr2a"></a></div>
+    <div><h3 data-i="cr3"></h3><p data-i="cr3d"></p><a href="#play" data-i="cr3a"></a></div>
+    <div><h3 data-i="cr4"></h3><p data-i="cr4d"></p><a href="#run" data-i="cr4a"></a></div>
+    <div><h3 data-i="cr5"></h3><p data-i="cr5d"></p><a href="#voices" data-i="cr5a"></a></div>
+  </div>
+</div></section>
 <section id="status"><div class="wrap">
   <h2 data-i="ss.t"></h2>
   <div class="stat2">
@@ -842,29 +901,10 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
     <div class="next"><h3 data-i="ss.n"></h3><ol><li data-i="ss.n1"></li><li data-i="ss.n2"></li><li data-i="ss.n3"></li><li data-i="ss.n4"></li></ol></div>
   </div>
 </div></section>
-
 <section id="faq"><div class="wrap">
   <h2 data-i="fq.t"></h2>
   <div class="fqs"><input id="faqQ" type="search" autocomplete="off" aria-label="Search the questions"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></div>
   <div id="faqList"></div><p id="faqNone" class="fqn" data-i="fq.no" hidden></p>
-</div></section>
-
-<section id="video"><div class="wrap">
-  <h2 data-i="v.t"></h2>
-  <p class="stoK" data-i="sto.k"></p>
-  <div class="stories" id="stories">
-    <button type="button" class="sto" data-s="0"><span class="ring"><img src="stories/st1.jpg" alt="" loading="lazy"></span><b data-i="sto.1"></b></button>
-    <button type="button" class="sto" data-s="1"><span class="ring"><img src="stories/st2.jpg" alt="" loading="lazy"></span><b data-i="sto.2"></b></button>
-    <button type="button" class="sto" data-s="2"><span class="ring"><img src="stories/st3.jpg" alt="" loading="lazy"></span><b data-i="sto.3"></b></button>
-    <button type="button" class="sto" data-s="3"><span class="ring"><img src="stories/st4.jpg" alt="" loading="lazy"></span><b data-i="sto.4"></b></button>
-    <button type="button" class="sto" data-s="4"><span class="ring"><img src="stories/st5.jpg" alt="" loading="lazy"></span><b data-i="sto.5"></b></button>
-    <button type="button" class="sto" data-s="5"><span class="ring"><img src="stories/st6.jpg" alt="" loading="lazy"></span><b data-i="sto.6"></b></button>
-    <button type="button" class="sto" data-s="6"><span class="ring"><img src="stories/st7.jpg" alt="" loading="lazy"></span><b data-i="sto.7"></b></button>
-  </div>
-  <h3 class="vh" data-i="vd.t"></h3><p class="vnote" data-i="vd.d"></p>
-  <div class="vidWrap"><video controls preload="metadata" playsinline poster="demo-poster.jpg" src="rafeeq-demo.mp4" aria-label="Rafeeq demo app, recorded in test mode"></video></div>
-  <h3 class="vh" data-i="vp.t"></h3>
-  <div class="vidWrap"><video controls preload="metadata" playsinline poster="video-poster.jpg" src="rafeeq-prototype-video.mp4" aria-label="Rafeeq prototype video"><track kind="captions" src="captions-en.vtt" srclang="en" label="English"><track kind="captions" src="captions-ar.vtt" srclang="ar" label="العربية"></video></div>
 </div></section>
 
 <div class="sv" id="sv" role="dialog" aria-modal="true" aria-label="Rafeeq stories" hidden><div class="svBox"><div class="svBars" id="svBars"></div><video id="svVid" playsinline muted preload="auto"></video><button type="button" class="svNav prev" id="svPrev" aria-label="Previous"></button><button type="button" class="svNav next" id="svNext" aria-label="Next"></button><button type="button" class="svX" id="svX" aria-label="Close">×</button></div></div>
@@ -910,7 +950,7 @@ f1:"See",f1d:"Camera frame every few seconds.",f2:"Think",f2d:"Gemma 3 checks th
 m1:"Works offline",m2:"No account needed",m3:"Video never leaves home",m4:"Open model",
 "hw.k":"Hardware","hw.t":"Everyday parts. Friendly shape.",
 hw1:"Camera",hw1d:"ESP32-S3",hw2:"LED eyes",hw2d:"Color = mood",hw3:"Speaker + mic",hw3d:"Talks and listens",hw4:"2 servos",hw4d:"Head turns and nods",hw5:"3D-printed body",hw5d:"No sharp edges",hw6:"Raspberry Pi 5",hw6d:"Runs Gemma 3 offline",
-"v.k":"Prototype video","v.t":"See it work","sto.k":"Tap a story. Each one is a real clip from the demo app.","sto.1":"Coaching","sto.2":"Timer","sto.3":"Calm mode","sto.4":"Band","sto.5":"Parents","sto.6":"Fading","sto.7":"Privacy","vd.t":"The demo app, recorded","vd.d":"Recorded in test mode: the app gives scripted answers instead of Gemma, and the camera shows a drawing.","vp.t":"Yousef's morning, the story video",
+"v.k":"Prototype video","v.t":"Clips from the demo","sto.k":"Tap a story. Each one is a real clip from the demo app.","sto.1":"Coaching","sto.2":"Timer","sto.3":"Calm mode","sto.4":"Band","sto.5":"Parents","sto.6":"Fading","sto.7":"Privacy","vd.t":"The demo app, recorded","vd.d":"Recorded in test mode: the app gives scripted answers instead of Gemma, and the camera shows a drawing.","vp.t":"Yousef's morning, the story video",
 "e.k":"The goal","e.t":"Rafeeq wins when it's not needed.","e.c":"Play the simulation",
 "c.t":"What families use today","c.l":"Every option helps a little. None of them can see the child, speak his dialect, and step back on purpose.",
 "c.h1":"Picture chart","c.h2":"Parent at every step","c.h3":"Tablet app","c.h4":"Rafeeq",
@@ -942,6 +982,28 @@ q10:"What happens during a meltdown?",a10:"Rafeeq stops giving instructions. It 
 q11:"Can parents change the routines?",a11:"Yes. In the demo's parent app, parents build their own routines, record their voice for each step, and can pin the help level of any step.",
 q13:"Does the child have to wear the band?",a13:"No, it's optional. Many autistic children dislike things on the wrist, so it can go on the ankle or be clipped to clothes, and Rafeeq works fully without it. Research with wristbands that track heart rate, sweat and movement predicted outbursts 1 to 3 minutes ahead (Northeastern University, 2019 and 2024).",
 q12:"Who made Rafeeq?",a12:"A.Naji, a student in Kuwait, for the ATSN26 Gen-AI & Software Innovation Competition.",
+"nC1":"Problem","nC2":"See it","nC3":"How it works","nC4":"Trust",
+"c1.t":"The problem","c1.d":"Why mornings break down, and what families told us.",
+"c2.t":"See it work","c2.d":"Real clips from the demo app, then try it yourself.",
+"c3.t":"How it works","c3.d":"What the AI sees, how it decides, and how it steps back.",
+"c4.t":"Can you trust it?","c4.d":"Privacy, honesty about what's built, and your questions.",
+"g1":"Offline","g1d":"The AI runs at home. No internet, no cloud.",
+"g2":"Kuwaiti Arabic","g2d":"It talks the way the family talks.",
+"g3":"Steps back","g3d":"Help fades as the child learns: full, hint, silent.",
+"g4":"21 features","g4d":"working in the demo today. 4 more are planned.",
+"ru.t":"Run it yourself","ru.l":"The real demo runs on any laptop. No account and no API key: the AI downloads once, then works offline.",
+"ru.1":"Install Ollama","ru.1d":"Free app that runs AI models on your own computer.","ru.1a":"ollama.com/download",
+"ru.2":"Download Gemma 3","ru.2d":"About 3 GB, one time only.",
+"ru.3":"Get Rafeeq and start it","ru.3d":"Needs Node.js 18 or newer.",
+"ru.4":"Open it","ru.4d":"The child screen. The parent app is at /parent.html.",
+"ru.cp":"Copy","ru.ok":"Copied",
+"ru.n":"Use Chrome or Edge for the camera and the Rafeeq Band. Without a band, try the simulated band in the child screen.",
+"cr.t":"How Rafeeq meets the ATSN26 criteria","cr.l":"Each one links to the part of this page that proves it.",
+"cr1":"Impact on independence","cr1d":"The child finishes the routine alone, and help drops a level after 3 good mornings.","cr1a":"See the fading",
+"cr2":"Gen-AI innovation","cr2d":"Gemma 3 looks at the camera and writes a fresh line for this exact moment, in dialect.","cr2a":"See how it thinks",
+"cr3":"Easy to use","cr3d":"No screen for the child, no menus. An owl that talks, glows and nods.","cr3a":"Try the simulation",
+"cr4":"Can be built","cr4d":"Off-the-shelf parts, an open model on the device, and a demo anyone can run today.","cr4a":"Run it yourself",
+"cr5":"Arabic support","cr5d":"Kuwaiti Arabic from day one, plus simple English, for the child and the parent app.","cr5a":"Hear what families said",
 nF:"Features",nQ:"FAQ","pt.1":"Today","pt.2":"Settings","st.bd":"Rafeeq Band","st.bdd":"Optional heart-rate band. A rise starts calm mode early.","f.hr":"Heart rate up on the band: calm mode early","st.af":"Automatic fading","st.afd":"Remembers each step. 3 mornings alone means less help.","st.ft":"First, then","st.ftd":"A reward after the routine: the iPad","st.q":"Quiet mode","st.qd":"No voice, just lights and nods","st.sw":"Simple words","st.swd":"One-word hints only","st.cs":"Calm sound","cs.rain":"Rain","cs.waves":"Waves","cs.hum":"Hum","cs.off":"Off","st.note":"All of these also run in the real camera demo.","fm.t":"Fading memory","step":"Step","fm.next":"Next morning","fm.up":"needs less help next time","fm.down":"gets one level more help","ft.s":"First we finish, then the iPad 🎁","ft.e":"Now it's iPad time! 🎁","tm.b":"Brush until the circle in my eyes is full","tm.h":"Rub until the circle in my eyes is full","tm.f":"The circle is full! ⭐","auto":"Auto",
 nA:"How it thinks",nS:"Safety",priv:"Privacy",terms:"Terms",
 foot:"Rafeeq رفيق · by A.Naji · ATSN26 · Simulation: responses are scripted to show how the real system behaves."
@@ -981,7 +1043,7 @@ f1:"يشوف",f1d:"صورة من الكاميرا كل كم ثانية.",f2:"ي�
 m1:"يشتغل بدون إنترنت",m2:"بدون حساب",m3:"الفيديو ما يطلع من البيت",m4:"نموذج مفتوح",
 "hw.k":"القطع","hw.t":"قطع متوفرة. شكل ودود.",
 hw1:"كاميرا",hw1d:"ESP32-S3",hw2:"عيون LED",hw2d:"اللون = المزاج",hw3:"سماعة ومايك",hw3d:"يتكلم ويسمع",hw4:"٢ سيرفو",hw4d:"الرأس يلف ويهز",hw5:"جسم مطبوع 3D",hw5d:"بدون حواف حادة",hw6:"Raspberry Pi 5",hw6d:"يشغّل Gemma 3 بدون إنترنت",
-"v.k":"فيديو النموذج","v.t":"شوفه وهو يشتغل","sto.k":"اضغط على ستوري. كل وحدة مقطع حقيقي من التطبيق.","sto.1":"التوجيه","sto.2":"المؤقت","sto.3":"الهدوء","sto.4":"السوار","sto.5":"الأهل","sto.6":"التدرّج","sto.7":"الخصوصية","vd.t":"التطبيق التجريبي، مسجّل","vd.d":"مسجّل في وضع الاختبار: التطبيق يعطي ردود مكتوبة مسبقاً بدل Gemma، والكاميرا تعرض رسمة.","vp.t":"صباح يوسف، فيديو القصة",
+"v.k":"فيديو النموذج","v.t":"مقاطع من التطبيق","sto.k":"اضغط على ستوري. كل وحدة مقطع حقيقي من التطبيق.","sto.1":"التوجيه","sto.2":"المؤقت","sto.3":"الهدوء","sto.4":"السوار","sto.5":"الأهل","sto.6":"التدرّج","sto.7":"الخصوصية","vd.t":"التطبيق التجريبي، مسجّل","vd.d":"مسجّل في وضع الاختبار: التطبيق يعطي ردود مكتوبة مسبقاً بدل Gemma، والكاميرا تعرض رسمة.","vp.t":"صباح يوسف، فيديو القصة",
 "e.k":"الهدف","e.t":"رفيق يفوز لما ما يحتاجونه.","e.c":"جرّب المحاكاة",
 "c.t":"شنو تستخدم العوايل اليوم","c.l":"كل خيار يساعد شوي. بس ولا واحد يشوف الطفل، ويتكلم بلهجته، ويخفّف مساعدته عن قصد.",
 "c.h1":"جدول صور","c.h2":"الأهل بكل خطوة","c.h3":"تطبيق آيباد","c.h4":"رفيق",
@@ -1013,6 +1075,28 @@ q10:"شنو يصير وقت الانهيار؟",a10:"رفيق يوقف الأو�
 q11:"الأهل يقدرون يغيرون الروتين؟",a11:"إي. في تطبيق الأهل بالديمو، الأهل يسوون روتينهم بنفسهم، ويسجّلون صوتهم لكل خطوة، ويقدرون يثبّتون مستوى المساعدة لأي خطوة.",
 q13:"لازم الطفل يلبس السوار؟",a13:"لا، اختياري. أطفال توحد كثير ما يحبون شي على المعصم، فممكن يكون على الكاحل أو مشبوك بالملابس، ورفيق يشتغل كامل بدونه. أبحاث على أساور تقيس النبض والتعرق والحركة توقعت نوبات الغضب قبلها بدقيقة إلى ٣ دقايق (جامعة نورث إيسترن، 2019 و2024).",
 q12:"منو سوّا رفيق؟",a12:"A.Naji، طالب في الكويت، لمسابقة ATSN26 للابتكار في الذكاء الاصطناعي التوليدي والبرمجيات.",
+"nC1":"المشكلة","nC2":"شوفه","nC3":"كيف يشتغل","nC4":"الثقة",
+"c1.t":"المشكلة","c1.d":"ليش الصبح يخرب، وشنو قالت العوايل.",
+"c2.t":"شوفه وهو يشتغل","c2.d":"مقاطع حقيقية من التطبيق، وبعدين جربه بنفسك.",
+"c3.t":"كيف يشتغل","c3.d":"شنو يشوف الذكاء الاصطناعي، كيف يقرر، وكيف يخفف مساعدته.",
+"c4.t":"تقدر تثق فيه؟","c4.d":"الخصوصية، والصراحة عن اللي انبنى، وأسئلتك.",
+"g1":"بدون إنترنت","g1d":"الذكاء الاصطناعي يشتغل في البيت. بدون سحابة.",
+"g2":"لهجة كويتية","g2d":"يتكلم مثل ما تتكلم العائلة.",
+"g3":"يتراجع","g3d":"المساعدة تقل مع تعلم الطفل: كاملة، تلميح، سكوت.",
+"g4":"٢١ ميزة","g4d":"تشتغل في التطبيق اليوم، و٤ مخطط لها.",
+"ru.t":"شغّله بنفسك","ru.l":"التطبيق الحقيقي يشتغل على أي لابتوب. بدون حساب وبدون مفتاح: النموذج ينزل مرة وحدة، وبعدها يشتغل بدون إنترنت.",
+"ru.1":"نزّل Ollama","ru.1d":"برنامج مجاني يشغّل نماذج الذكاء الاصطناعي على جهازك.","ru.1a":"ollama.com/download",
+"ru.2":"نزّل Gemma 3","ru.2d":"حوالي ٣ جيجا، مرة وحدة بس.",
+"ru.3":"نزّل رفيق وشغّله","ru.3d":"يحتاج Node.js 18 أو أحدث.",
+"ru.4":"افتحه","ru.4d":"شاشة الطفل. وتطبيق الأهل على /parent.html.",
+"ru.cp":"نسخ","ru.ok":"انتسخ",
+"ru.n":"استخدم Chrome أو Edge للكاميرا وسوار رفيق. إذا ما عندك سوار، جرّب السوار التجريبي في شاشة الطفل.",
+"cr.t":"كيف يحقق رفيق معايير ATSN26","cr.l":"كل معيار يوديك للجزء اللي يثبته في هالصفحة.",
+"cr1":"أثر على الاستقلالية","cr1d":"الطفل يخلص روتينه بروحه، والمساعدة تنزل مستوى بعد ٣ صباحات زينة.","cr1a":"شوف التخفيف",
+"cr2":"ابتكار بالذكاء التوليدي","cr2d":"Gemma 3 يشوف الكاميرا ويكتب جملة جديدة لهاللحظة بالذات، باللهجة.","cr2a":"شوف كيف يفكر",
+"cr3":"سهل الاستخدام","cr3d":"بدون شاشة للطفل وبدون قوائم. بومة تتكلم وتضوي وتهز راسها.","cr3a":"جرّب المحاكاة",
+"cr4":"قابل للتنفيذ","cr4d":"قطع متوفرة في السوق، ونموذج مفتوح على الجهاز، وتطبيق أي أحد يقدر يشغّله اليوم.","cr4a":"شغّله بنفسك",
+"cr5":"دعم العربية","cr5d":"لهجة كويتية من أول يوم، وإنجليزي بسيط، للطفل وتطبيق الأهل.","cr5a":"اسمع شنو قالت العوايل",
 nF:"المميزات",nQ:"الأسئلة","pt.1":"اليوم","pt.2":"الإعدادات","st.bd":"سوار رفيق","st.bdd":"سوار نبض اختياري. إذا ارتفع النبض، يبدأ الهدوء بدري.","f.hr":"النبض ارتفع على السوار: هدوء بدري","st.af":"تخفيف تلقائي","st.afd":"يتذكر كل خطوة. ٣ صباحات بروحه يعني مساعدة أقل.","st.ft":"أول، بعدين","st.ftd":"مكافأة بعد الروتين: الآيباد","st.q":"بدون صوت","st.qd":"بدون كلام، بس أضواء وهزة راس","st.sw":"كلمات بسيطة","st.swd":"تلميحات بكلمة وحدة بس","st.cs":"صوت الهدوء","cs.rain":"مطر","cs.waves":"موج","cs.hum":"همهمة","cs.off":"بدون","st.note":"كل هذي تشتغل بعد في ديمو الكاميرا الحقيقي.","fm.t":"ذاكرة التخفيف","step":"الخطوة","fm.next":"الصبح اللي بعده","fm.up":"بيحتاج مساعدة أقل المرة الجاية","fm.down":"بياخذ مساعدة أكثر بمستوى واحد","ft.s":"أول نخلص، بعدين الآيباد 🎁","ft.e":"الحين وقت الآيباد! 🎁","tm.b":"فرّش لين تكمل الدائرة في عيوني","tm.h":"افرك لين تكمل الدائرة في عيوني","tm.f":"الدائرة كملت! ⭐","auto":"تلقائي",
 nA:"كيف يفكر",nS:"الأمان",priv:"الخصوصية",terms:"الشروط",
 foot:"رفيق · إعداد A.Naji · ATSN26 · محاكاة: الردود مكتوبة مسبقاً عشان توضح كيف يشتغل النظام الحقيقي."}};
@@ -1423,8 +1507,8 @@ const _xc=window.exitCalm;window.exitCalm=exitCalm=function(){stage.classList.re
 const _apply=window.applyLang;window.applyLang=applyLang=function(){_apply();renderFacts();sbLabel();nStop();const s=step;step=-1;setStep(s<0?0:s);};
 applyLang();
 /* ===== WATCH MODE: the page plays itself like a short film ===== */
-const TL={en:{ch:["Story","Why","Families","Try it","How it thinks","Fading","Features","Inside","Safety","FAQ","The end"],film:"a short film",take:"Scroll, tap or press a key to take over",p:"Paused",r:"Resume",x:"Exit",sk:"Next chapter"},
- ar:{ch:["القصة","ليش","العوايل","جرّب","كيف يفكر","تخفيف المساعدة","المميزات","من داخل","الأمان","الأسئلة","النهاية"],film:"فيلم قصير",take:"حرّك الصفحة أو المس الشاشة عشان تتحكم",p:"موقّف",r:"كمّل",x:"اطلع",sk:"الجزء الجاي"}};
+const TL={en:{ch:["Story","Why","Families","Watch","Try it","How it thinks","Fading","Features","Inside","Safety","FAQ","The end"],film:"a short film",take:"Scroll, tap or press a key to take over",p:"Paused",r:"Resume",x:"Exit",sk:"Next chapter"},
+ ar:{ch:["القصة","ليش","العوايل","شوفه","جرّب","كيف يفكر","تخفيف المساعدة","المميزات","من داخل","الأمان","الأسئلة","النهاية"],film:"فيلم قصير",take:"حرّك الصفحة أو المس الشاشة عشان تتحكم",p:"موقّف",r:"كمّل",x:"اطلع",sk:"الجزء الجاي"}};
 const tl=k=>(TL[lang]||TL.en)[k];
 const bars=["t","b"].map(c=>{const d=document.createElement("div");d.className="tBar "+c;d.setAttribute("aria-hidden","true");document.body.appendChild(d);return d;});
 const card=document.createElement("div");card.className="tCard";card.setAttribute("aria-hidden","true");
@@ -1452,13 +1536,14 @@ const CH=[
  async my=>dolly($$("why"),4800),
  async my=>{const v=$$("voices");if(!await glide(topOf(v)+20,1400))return false;window.voicesTab&&window.voicesTab("p");for(const k of [0,1]){if(!await nap(1600))return false;window.voicesFlip(k);if(!await nap(3000))return false;}
    window.voicesTab("a");if(!await nap(1200))return false;window.voicesFlip(1);if(!await nap(3600))return false;return dolly($$("compare"),5200);},
+ async my=>dolly($$("video"),5000),
  async my=>{const sg=$$("stage");if(!await glide(topOf(sg)+sg.offsetHeight/2-innerHeight/2+40,1500))return false;if(!await nap(400))return false;auto();
-   for(let k=0;k<160;k++){if(!await nap(400))return false;if(S&&S.finished&&$$("result").classList.contains("show"))break;}return nap(2600);},
+   for(let k=0;k<160;k++){if(!await nap(400))return false;if(S&&S.finished&&$$("result").classList.contains("show"))break;}if(!await nap(2600))return false;return dolly($$("run"),4500);},
  async my=>{const b=$$("brain");if(!await glide(topOf(b)+40,1500))return false;for(let m=0;m<4;m++){window.brainPick&&window.brainPick(m,nOn);if(!await nap(m===2?4200:3400))return false;}return true;},
  async my=>dolly($$("fade"),6500),
  async my=>{const f=$$("features");if(!await glide(topOf(f)+20,1400))return false;for(const c of ["all","c","f"]){window.featuresFilter(c);if(!await nap(2800))return false;}window.featuresFilter("all");return true;},
  async my=>dolly($$("inside"),7500),
- async my=>{if(!await dolly($$("safe"),4500))return false;return dolly($$("status"),6000);},
+ async my=>{if(!await dolly($$("safe"),4500))return false;if(!await dolly($$("criteria"),5500))return false;return dolly($$("status"),6000);},
  async my=>{const q=$$("faq");if(!await glide(topOf(q)+10,1400))return false;for(const k of [2,3,6]){window.faqOpen(k);if(!await nap(3600))return false;}window.faqOpen(-1);return true;},
  async my=>{const e=document.querySelector(".end");if(!await glide(topOf(e)+e.offsetHeight/2-innerHeight/2,1600))return false;return nap(2600);}];
 async function runTour(){const my=++tTok;paint();for(;tCh<CH.length;tCh++){paint();const ok=await CH[tCh](my);if(!alive(my))return;tPg=0;}exitTour();}
@@ -1627,6 +1712,15 @@ document.getElementById("svX").onclick=close;
 sv.addEventListener("click",e=>{if(e.target===sv)close();});
 let hold;vid.parentElement.addEventListener("pointerdown",()=>{hold=setTimeout(()=>vid.pause(),180)});vid.parentElement.addEventListener("pointerup",()=>{clearTimeout(hold);if(vid.paused&&!sv.hidden)vid.play().catch(()=>{})});
 document.addEventListener("keydown",e=>{if(sv.hidden)return;if(e.key==="Escape")close();else if(e.key==="ArrowRight")show(document.dir==="rtl"?i-1:i+1);else if(e.key==="ArrowLeft")show(document.dir==="rtl"?i+1:i-1);});
+})();
+</script>
+<script>
+(function(){
+document.querySelectorAll(".cp").forEach(b=>b.addEventListener("click",async()=>{const c=b.previousElementSibling.textContent;try{await navigator.clipboard.writeText(c);}catch(e){const r=document.createRange();r.selectNodeContents(b.previousElementSibling);const s=getSelection();s.removeAllRanges();s.addRange(r);}
+ const L2=(document.documentElement.lang||"en").startsWith("ar")?"ar":"en";b.textContent=L2==="ar"?"انتسخ":"Copied";b.classList.add("ok");setTimeout(()=>{b.textContent=L2==="ar"?"نسخ":"Copy";b.classList.remove("ok");},1600);}));
+const links=[...document.querySelectorAll('.navR a[href^="#c"],.navR a[href="#faq"]')],marks=links.map(a=>document.querySelector(a.getAttribute("href")));
+function spy(){const y=scrollY+innerHeight*.35;let k=-1;marks.forEach((m,i)=>{if(m&&m.getBoundingClientRect().top+scrollY<=y)k=i;});links.forEach((a,i)=>a.classList.toggle("cur",i===k));}
+addEventListener("scroll",spy,{passive:true});spy();
 })();
 </script>
 </body>
