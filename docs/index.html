@@ -572,6 +572,27 @@ html[dir=rtl] .fq summary::after{right:auto;left:6px}
 .fq p{margin:0 0 22px;color:#DDE3F5;font-size:18px;max-width:64ch}
 .fqn{color:var(--muted)}
 
+/* sim settings (phone) */
+#segW button.dim{opacity:.45}
+.ptabs{display:flex;gap:4px;background:#EEE8E0;border-radius:999px;padding:3px}
+.ptabs button{flex:1;border:0;border-radius:999px;padding:7px 8px;background:none;font:700 13px/1 inherit;color:#5B6478;cursor:pointer}
+.ptabs button.on{background:#fff;color:#14213D;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.pset{display:flex;flex-direction:column;gap:6px;overflow:auto;max-height:470px}
+.pset[hidden]{display:none}
+.pset .sw{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border-radius:14px;padding:10px 12px;color:#14213D;cursor:pointer}
+.pset .sw.col{flex-direction:column;align-items:stretch;cursor:default}
+.pset .sw b{display:block;font-size:13.5px}.pset .sw small{display:block;font-size:11.5px;color:#5B6478;line-height:1.35;margin-top:2px}
+.pset input[type=checkbox]{appearance:none;-webkit-appearance:none;width:42px;height:24px;border-radius:999px;background:#D9D3CB;position:relative;flex:none;cursor:pointer;transition:background .2s;margin:0}
+.pset input[type=checkbox]::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.pset input[type=checkbox]:checked{background:#1F9A85}.pset input[type=checkbox]:checked::after{transform:translateX(18px)}
+html[dir=rtl] .pset input[type=checkbox]:checked::after{transform:translateX(18px)}
+.pset input[type=checkbox]:focus-visible{outline:2px solid var(--owl);outline-offset:2px}
+.cs{display:flex;gap:4px;margin-top:8px}.cs button{flex:1;border:0;border-radius:10px;padding:7px 4px;background:#F2EEE8;font:700 12px/1.1 inherit;color:#14213D;cursor:pointer}.cs button.on{background:#14213D;color:#fff}
+.fmem{background:#fff;border-radius:14px;padding:10px 12px;color:#14213D;font-size:12px;line-height:1.5}.fmem:empty{display:none}
+.fmem b{font-size:13px}.fmem .r{display:flex;justify-content:space-between;gap:8px}.fmem .dots{letter-spacing:2px;color:#1F9A85;white-space:nowrap}
+.pnote{font-size:11.5px;color:#5B6478;margin:2px 4px}
+.resNote{font-size:13.5px;color:var(--muted);max-width:320px;margin:0 auto 12px;text-align:center}.resNote div{margin:3px 0}.resNote .up{color:var(--mint)}
+.resGift{display:inline-block;margin:0 auto 12px;padding:8px 14px;border-radius:999px;background:linear-gradient(135deg,#FFB020,#FF7A2F);color:#fff;font-weight:800}
 /* watch mode */
 .watch{margin-top:22px;display:inline-flex;align-items:center;gap:14px;padding:10px 22px 10px 10px;border:0;border-radius:999px;background:rgba(255,255,255,.08);color:#fff;cursor:pointer;backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);text-align:start;font:inherit;transition:background .25s,transform .25s}
 .watch:hover{background:rgba(255,255,255,.16);transform:translateY(-2px)}
@@ -718,6 +739,16 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
     </div>
     <div class="phone" role="region" aria-label="Parent app"><div class="screen"><div class="notch"></div><div class="app">
       <div class="appH"><div><b data-i="ph.t"></b><br><small data-i="ph.c"></small></div></div>
+      <div class="ptabs" role="tablist"><button role="tab" id="ptToday" class="on" aria-selected="true" data-i="pt.1"></button><button role="tab" id="ptSet" aria-selected="false" data-i="pt.2"></button></div>
+      <div class="pset" id="pset" hidden>
+        <label class="sw"><span><b data-i="st.af"></b><small data-i="st.afd"></small></span><input type="checkbox" id="setAuto"></label>
+        <label class="sw"><span><b data-i="st.ft"></b><small data-i="st.ftd"></small></span><input type="checkbox" id="setReward"></label>
+        <label class="sw"><span><b data-i="st.q"></b><small data-i="st.qd"></small></span><input type="checkbox" id="setQuiet"></label>
+        <label class="sw"><span><b data-i="st.sw"></b><small data-i="st.swd"></small></span><input type="checkbox" id="setSimple"></label>
+        <div class="sw col"><b data-i="st.cs"></b><div class="cs" id="setCalm" role="group"><button data-c="rain" data-i="cs.rain"></button><button data-c="waves" data-i="cs.waves"></button><button data-c="hum" data-i="cs.hum"></button><button data-c="off" data-i="cs.off"></button></div></div>
+        <div class="fmem" id="fmem"></div>
+        <p class="pnote" data-i="st.note"></p>
+      </div>
       <div class="sum"><svg width="54" height="54" viewBox="0 0 58 58"><circle cx="29" cy="29" r="24" fill="none" stroke="#EEE8E0" stroke-width="7"/><circle id="ring" cx="29" cy="29" r="24" fill="none" stroke="#1F9A85" stroke-width="7" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="150.8" transform="rotate(-90 29 29)" style="transition:stroke-dashoffset .5s"/><text id="ringTxt" x="29" y="34" text-anchor="middle" font-weight="800" font-size="14" fill="#14213D">0/4</text></svg><div><div class="t" data-i="ph.d"></div><div class="v" id="phR"></div></div></div>
       <ul class="feed" id="feed" aria-live="polite"></ul>
     </div></div></div>
@@ -881,7 +912,8 @@ q9:"Why an owl?",a9:"It looks like a friendly toy, not a medical device. Its big
 q10:"What happens during a meltdown?",a10:"Rafeeq stops giving instructions. It lowers its voice, dims its eyes to a soft blue and starts a slow breathing game. The routine waits until the child is calm.",
 q11:"Can parents change the routines?",a11:"Yes. In the demo's parent app, parents build their own routines, record their voice for each step, and can pin the help level of any step.",
 q12:"Who made Rafeeq?",a12:"A.Naji, a student in Kuwait, for the ATSN26 Gen-AI & Software Innovation Competition.",
-nF:"Features",nQ:"FAQ",nA:"How it thinks",nS:"Safety",priv:"Privacy",
+nF:"Features",nQ:"FAQ","pt.1":"Today","pt.2":"Settings","st.af":"Automatic fading","st.afd":"Remembers each step. 3 mornings alone means less help.","st.ft":"First, then","st.ftd":"A reward after the routine: the iPad","st.q":"Quiet mode","st.qd":"No voice, just lights and nods","st.sw":"Simple words","st.swd":"One-word hints only","st.cs":"Calm sound","cs.rain":"Rain","cs.waves":"Waves","cs.hum":"Hum","cs.off":"Off","st.note":"All of these also run in the real camera demo.","fm.t":"Fading memory","step":"Step","fm.next":"Next morning","fm.up":"needs less help next time","fm.down":"gets one level more help","ft.s":"First we finish, then the iPad 🎁","ft.e":"Now it's iPad time! 🎁","tm.b":"Brush until the circle in my eyes is full","tm.h":"Rub until the circle in my eyes is full","tm.f":"The circle is full! ⭐","auto":"Auto",
+nA:"How it thinks",nS:"Safety",priv:"Privacy",
 foot:"Rafeeq رفيق · by A.Naji · ATSN26 · Simulation: responses are scripted to show how the real system behaves."
 },ar:{
 nW:"ليش",
@@ -950,7 +982,8 @@ q9:"ليش بومة؟",a9:"شكلها لعبة لطيفة، مو جهاز طبي
 q10:"شنو يصير وقت الانهيار؟",a10:"رفيق يوقف الأوامر. يوطّي صوته، ويخفف عيونه للون أزرق هادي، ويبدأ لعبة تنفس بطيئة. الروتين ينطر لين يهدأ الطفل.",
 q11:"الأهل يقدرون يغيرون الروتين؟",a11:"إي. في تطبيق الأهل بالديمو، الأهل يسوون روتينهم بنفسهم، ويسجّلون صوتهم لكل خطوة، ويقدرون يثبّتون مستوى المساعدة لأي خطوة.",
 q12:"منو سوّا رفيق؟",a12:"A.Naji، طالب في الكويت، لمسابقة ATSN26 للابتكار في الذكاء الاصطناعي التوليدي والبرمجيات.",
-nF:"المميزات",nQ:"الأسئلة",nA:"كيف يفكر",nS:"الأمان",priv:"الخصوصية",
+nF:"المميزات",nQ:"الأسئلة","pt.1":"اليوم","pt.2":"الإعدادات","st.af":"تخفيف تلقائي","st.afd":"يتذكر كل خطوة. ٣ صباحات بروحه يعني مساعدة أقل.","st.ft":"أول، بعدين","st.ftd":"مكافأة بعد الروتين: الآيباد","st.q":"بدون صوت","st.qd":"بدون كلام، بس أضواء وهزة راس","st.sw":"كلمات بسيطة","st.swd":"تلميحات بكلمة وحدة بس","st.cs":"صوت الهدوء","cs.rain":"مطر","cs.waves":"موج","cs.hum":"همهمة","cs.off":"بدون","st.note":"كل هذي تشتغل بعد في ديمو الكاميرا الحقيقي.","fm.t":"ذاكرة التخفيف","step":"الخطوة","fm.next":"الصبح اللي بعده","fm.up":"بيحتاج مساعدة أقل المرة الجاية","fm.down":"بياخذ مساعدة أكثر بمستوى واحد","ft.s":"أول نخلص، بعدين الآيباد 🎁","ft.e":"الحين وقت الآيباد! 🎁","tm.b":"فرّش لين تكمل الدائرة في عيوني","tm.h":"افرك لين تكمل الدائرة في عيوني","tm.f":"الدائرة كملت! ⭐","auto":"تلقائي",
+nA:"كيف يفكر",nS:"الأمان",priv:"الخصوصية",
 foot:"رفيق · إعداد A.Naji · ATSN26 · محاكاة: الردود مكتوبة مسبقاً عشان توضح كيف يشتغل النظام الحقيقي."}};
 let lang="en";const t=k=>(L[lang][k]??L.en[k]??k);
 function owlSVG(){return `<svg class="owl" viewBox="0 0 400 460" style="width:100%;overflow:visible">
@@ -1038,7 +1071,7 @@ const DISTRACT=[["يوسف، أنا هني، خلنا نكمل","Yousef, I'm her
 const LED={idle:"#9AA5B8",coach:"#3EE6C8",alert:"#FF9A4D",calm:"#9CC8FF",done:"#FFD166"};
 let S=null,sound=true,mode="idle",feed=[],timers=[],sel={r:"teeth",w:1};
 const cur={ears:0,mood:.6,armR:-8,rock:0,jump:0},tgt={ears:0,mood:.6,armR:-8};
-const owl={pt:0,talkUntil:0,glow:0,sleepy:0,look:0,happyUntil:0,qUntil:0,hop:0};
+const owl={ring:1,pt:0,talkUntil:0,glow:0,sleepy:0,look:0,happyUntil:0,qUntil:0,hop:0};
 const later=(f,ms)=>{const id=setTimeout(f,ms);timers.push(id);return id};
 function clearTimers(){timers.forEach(id=>{clearTimeout(id);clearInterval(id)});timers=[];}
 const lvl=w=>["","full","light","nudge","silent"][w];
@@ -1067,7 +1100,7 @@ function applyLang(){const h=document.documentElement;h.lang=lang;h.dir=lang==="
  $("lEn").classList.toggle("on",lang==="en");$("lAr").classList.toggle("on",lang==="ar");
  setMode(mode);renderSteps();renderFeed();if(S&&S.finished&&$("result").classList.contains("show"))showResult();try{localStorage.setItem("rafeeqLang",lang)}catch(e){}}
 function setMode(m){mode=m;$("hudMode").textContent=t("m."+m);const d=$("hudDot");d.style.background=LED[m];d.style.color=LED[m];
- OWL.querySelectorAll(".led").forEach(c=>c.setAttribute("stroke",LED[m]));$("hudWeek").textContent=t("wk")+" "+(S&&!S.finished?S.week:sel.w);}
+ OWL.querySelectorAll(".led").forEach(c=>c.setAttribute("stroke",LED[m]));$("hudWeek").textContent=(SET&&SET.auto)?t("wk")+" "+t("auto"):t("wk")+" "+(S&&!S.finished?S.week:sel.w);}
 function renderSteps(){const key=S?S.key:sel.r,r=R[key],n=4,step=S?S.step:0;
  $("tracker").innerHTML=r.ic.map((ic,i)=>{const st=S&&S.res[i];return `<span class="${st==="alone"?"star":st==="help"?"help":(S&&i===step&&!S.finished)?"now":""}" title="${r[lang==="ar"?"ar":"en"][i]}">${st==="alone"?"★":st==="help"?"✓":ic}</span>`}).join("");
  $("ring").setAttribute("stroke-dashoffset",150.8*(1-step/n));$("ringTxt").textContent=`${step}/${n}`;$("phR").textContent=t("r."+key);
@@ -1084,7 +1117,8 @@ function loadVoice(){if(vLoad)return vLoad;vLoad=(async()=>{try{AC=AC||new(windo
 function playVoice(i){if(!VBUF||i==null||!VMETA[i])return 0;try{if(VSRC)VSRC.stop();const s=AC.createBufferSource(),g=AC.createGain();g.gain.value=1;s.buffer=VBUF;s.connect(g).connect(AC.destination);s.start(0,VMETA[i][0],VMETA[i][1]);VSRC=s;return VMETA[i][1]*1000;}catch(e){return 0;}}
 let typeIv=null;function say(ar,en,vi){const sr=document.getElementById("srNow");if(sr)sr.textContent=(lang==="ar"?ar:en+" — "+ar);clearInterval(typeIv);const el=$("bAr");let i=0;el.textContent="";typeIv=setInterval(()=>{i+=2;el.textContent=ar.slice(0,i);if(i>=ar.length)clearInterval(typeIv);},26);
  $("bEn").textContent=en;$("bubble").classList.remove("hide");let ms=0;
- if(sound){ms=playVoice(vi);
+ if(SET.quiet){owl.hop=performance.now();}
+ else if(sound){ms=playVoice(vi);
   if(!ms&&!VBUF&&"speechSynthesis"in window){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(ar);const v=speechSynthesis.getVoices().find(v=>/^ar/i.test(v.lang));if(v)u.voice=v;u.lang=v?v.lang:"ar-SA";u.rate=.9;speechSynthesis.speak(u);}catch(e){}}}
  owl.talkUntil=performance.now()+(ms||Math.max(1200,ar.length*70));}
 const hush=()=>$("bubble").classList.add("hide");
@@ -1097,10 +1131,38 @@ function start(){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)(
  setRoom(S.key);Object.assign(tgt,{ears:0,mood:.6,armR:-8});exitCalm(true);setStress(20);setMode("coach");renderSteps();enableActs(true);updWater();
  vision("detecting child…");log({event:"routine_started",routine:S.key,week:S.week,hint_level:lvl(S.week),language:"ar-KW"},"Rafeeq wakes up");
  addFeed("▶️",()=>t("f.start"),()=>t("f.start"));
- later(()=>{say("صباح الخير يوسف ☀️","Good morning, Yousef",0);vision(R[S.key].vis[0]+" · waiting");},350);later(prompt,1900);}
-function prompt(){if(!S||S.finished||S.calm)return;const r=R[S.key],i=S.step,lv=lvl(S.week);vision(r.vis[i]+" · in_progress");
- if(lv==="silent"){hush();log({step:r.en[i],status:"in_progress",hint_level:"silent",say:""},"week 4: child on track, staying quiet");return;}
- pointAt(TGT[S.key][i],1800);const line=r[lv][i];say(line[0],line[1],r.v+{full:0,light:4,nudge:8}[lv]+i);S.hints++;log({step:r.en[i],status:"in_progress",hint_level:lv,say:line[0]},`week ${S.week}: ${lv} hint`);}
+ later(()=>{say("صباح الخير يوسف ☀️","Good morning, Yousef",0);vision(R[S.key].vis[0]+" · waiting");},350);
+ if(SET.reward){later(()=>say(L.ar["ft.s"],L.en["ft.s"]),1900);later(prompt,4300);}else later(prompt,1900);renderSet();}
+function prompt(){if(!S||S.finished||S.calm)return;const r=R[S.key],i=S.step,lv0=stepLv(i),lv=SET.simple&&lv0!=="silent"?"nudge":lv0;vision(r.vis[i]+" · in_progress");
+ if(lv==="silent"){hush();log({step:r.en[i],status:"in_progress",hint_level:"silent",say:""},`${SET.auto?"auto level":"week "+S.week}: child on track, staying quiet`);return;}
+ pointAt(TGT[S.key][i],1800);const line=r[lv][i];say(line[0],line[1],r.v+{full:0,light:4,nudge:8}[lv]+i);S.hints++;log({step:r.en[i],status:"in_progress",hint_level:lv,say:line[0]},`${SET.auto?"auto":"week "+S.week}: ${lv} hint${SET.simple?" (simple words)":""}`);}
+/* ===== SIM SETTINGS: the parent app's switches ===== */
+var SET={auto:false,reward:false,quiet:false,simple:false,calm:"rain"};
+const LVN=["full","light","nudge","silent"];
+var FM={};try{Object.assign(SET,JSON.parse(localStorage.getItem("rafeeqSet")||"{}"));FM=JSON.parse(localStorage.getItem("rafeeqFade")||"{}");}catch(e){}
+const saveSet=()=>{try{localStorage.setItem("rafeeqSet",JSON.stringify(SET));localStorage.setItem("rafeeqFade",JSON.stringify(FM));}catch(e){}};
+const fm=k=>FM[k]||(FM[k]=[0,1,2,3].map(()=>({lv:0,st:0})));
+function stepLv(i){const base=SET.auto?LVN[fm(S.key)[i].lv]:lvl(S.week);return base;}
+var calmSnd=[];
+function calmSoundOn(){if(!sound||SET.calm==="off")return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const ac=AC,out=ac.createGain();out.gain.value=0;out.connect(ac.destination);out.gain.linearRampToValueAtTime(.16,ac.currentTime+1.5);
+ if(SET.calm==="hum"){[110,164.8].forEach(f=>{const o=ac.createOscillator();o.frequency.value=f;o.connect(out);o.start();calmSnd.push(o);});}
+ else{const b=ac.createBuffer(1,ac.sampleRate*2,ac.sampleRate),d=b.getChannelData(0);let l=0;for(let i=0;i<d.length;i++){l=(l+.02*(Math.random()*2-1))/1.02;d[i]=l*3.5;}
+  const src=ac.createBufferSource();src.buffer=b;src.loop=true;const lp=ac.createBiquadFilter();lp.type="lowpass";lp.frequency.value=SET.calm==="waves"?700:1400;src.connect(lp);lp.connect(out);src.start();calmSnd.push(src);
+  if(SET.calm==="waves"){const lfo=ac.createOscillator(),dep=ac.createGain();lfo.frequency.value=.12;dep.gain.value=.1;lfo.connect(dep);dep.connect(out.gain);lfo.start();calmSnd.push(lfo);}}
+ calmSnd.push({stop:()=>{try{out.gain.linearRampToValueAtTime(0,ac.currentTime+.8);setTimeout(()=>out.disconnect(),1000);}catch(e){}}});}catch(e){}}
+function calmSoundOff(){calmSnd.forEach(n=>{try{n.stop();}catch(e){}});calmSnd=[];}
+function renderSet(){const m=id=>document.getElementById(id);if(!m("setAuto"))return;m("setAuto").checked=SET.auto;m("setReward").checked=SET.reward;m("setQuiet").checked=SET.quiet;m("setSimple").checked=SET.simple;
+ document.querySelectorAll("#setCalm button").forEach(b=>{b.classList.toggle("on",b.dataset.c===SET.calm);b.setAttribute("aria-pressed",b.dataset.c===SET.calm);});
+ document.querySelectorAll("#segW button").forEach(b=>b.classList.toggle("dim",SET.auto));
+ const key=S?S.key:sel.r,r=R[key],f=fm(key);m("fmem").innerHTML=SET.auto?`<b>${t("fm.t")}</b>`+r.en.map((x,i)=>`<div class="r"><span>${i+1}. ${lang==="ar"?r.ar[i]:x}</span><span class="dots" title="${f[i].st}/3">${"●".repeat(f[i].st)}${"○".repeat(3-f[i].st)} · ${t("lv"+(f[i].lv+1))}</span></div>`).join(""):"";
+ const hw=m("hudWeek");if(hw)hw.textContent=SET.auto?t("wk")+" "+t("auto"):t("wk")+" "+(S&&!S.finished?S.week:sel.w);}
+function bindSet(){const m=id=>document.getElementById(id);if(!m("setAuto")||m("setAuto").dataset.b)return;m("setAuto").dataset.b=1;
+ [["setAuto","auto"],["setReward","reward"],["setQuiet","quiet"],["setSimple","simple"]].forEach(([id,k])=>m(id).addEventListener("change",()=>{SET[k]=m(id).checked;saveSet();renderSet();}));
+ document.querySelectorAll("#setCalm button").forEach(b=>b.onclick=()=>{SET.calm=b.dataset.c;saveSet();renderSet();});
+ const tab=on=>{m("ptToday").classList.toggle("on",!on);m("ptSet").classList.toggle("on",on);m("ptToday").setAttribute("aria-selected",!on);m("ptSet").setAttribute("aria-selected",on);m("pset").hidden=!on;
+  document.querySelector(".phone .sum").style.display=on?"none":"";m("feed").style.display=on?"none":"";if(on)renderSet();};
+ m("ptToday").onclick=()=>tab(false);m("ptSet").onclick=()=>tab(true);}
+setTimeout(()=>{bindSet();renderSet();},0);
 /* ===== ACTED-OUT SIMULATION: the kid really does each step ===== */
 const KA={x:0,dy:0,rot:0,armR:null,armL:null,ex:0,walk:0,foam:0,hfoam:0,q:0,mouthO:0};
 let tok=0;const GEN={};
@@ -1142,18 +1204,18 @@ function sideOf(id){const e=item(id);if(!e)return -1;const c=parseFloat(e.style.
 function pointAt(id,ms){document.querySelectorAll(".it.glow").forEach(e=>e.classList.remove("glow"));owl.pt=id?sideOf(id):-1;if(id)cls(id,"glow");
  if(ms)later(()=>{if(S&&!KA.q){owl.pt=0;document.querySelectorAll(".it.glow").forEach(e=>e.classList.remove("glow"));}},ms);}
 function clearStuck(){KA.q=0;KA.ex=0;owl.pt=0;document.querySelectorAll(".it.glow").forEach(e=>e.classList.remove("glow"));}
-function resetKid(key){tok++;for(const k in GEN)GEN[k]++;Object.assign(KA,{x:HOME[key],dy:0,rot:0,armR:null,armL:null,ex:0,walk:0,foam:0,hfoam:0,q:0,mouthO:0});owl.pt=0;}
+function resetKid(key){owl.ring=1;tok++;for(const k in GEN)GEN[k]++;Object.assign(KA,{x:HOME[key],dy:0,rot:0,armR:null,armL:null,ex:0,walk:0,foam:0,hfoam:0,q:0,mouthO:0});owl.pt=0;}
 const W=()=>$("water");
 const STEPACT={
  teeth:[
   async h=>{await walkTo(h+10);await arm(-80);cls("cup","nob");setProp("brush");await wait(150);await arm(-8);return walkTo(h);},
   async h=>{await walkTo(h+12);await arm(-82);cls("tube","lift");await wait(450);setProp("brushPaste");await wait(250);cls("tube","lift",false);await arm(-8);return walkTo(h);},
-  async h=>{KA.mouthO=1;await arm(-135,500);setProp("brushMouth");KA.foam=1;await osc(KA,"armR",-135,7,2.6,2300);KA.foam=0;KA.mouthO=0;setProp("brush");return arm(-8);},
+  async h=>{KA.mouthO=1;await arm(-135,500);setProp("brushMouth");KA.foam=1;say(L.ar["tm.b"],L.en["tm.b"]);owl.ring=0;tw(owl,"ring",1,2300);await osc(KA,"armR",-135,7,2.6,2300);say(L.ar["tm.f"],L.en["tm.f"]);KA.foam=0;KA.mouthO=0;setProp("brush");return arm(-8);},
   async h=>{W().classList.add("on");await arm(-50);await osc(KA,"armR",-50,9,3,1100);W().classList.remove("on");await walkTo(h+10);await arm(-80);setProp(null);cls("cup","nob",false);await wait(150);await arm(-8);return walkTo(h);}],
  hands:[
   async h=>{await arm(-135,520);await wait(200);W().classList.add("on");burst(.225,.62,"bub",6);return arm(-8);},
   async h=>{await walkTo(h+11);await arm(-80);cls("pump","press");await wait(260);cls("pump","press",false);setProp("soap");await wait(150);await arm(-8);return walkTo(h);},
-  async h=>{setProp(null);await all(tw(KA,"armL",-30,380),arm(30,380));KA.hfoam=1;burst(.12,.8,"bub",10);await all(osc(KA,"armL",-30,9,3,2000),osc(KA,"armR",30,9,3,2000));return true;},
+  async h=>{setProp(null);await all(tw(KA,"armL",-30,380),arm(30,380));KA.hfoam=1;burst(.12,.8,"bub",10);say(L.ar["tm.h"],L.en["tm.h"]);owl.ring=0;tw(owl,"ring",1,2000);await all(osc(KA,"armL",-30,9,3,2000),osc(KA,"armR",30,9,3,2000));say(L.ar["tm.f"],L.en["tm.f"]);return true;},
   async h=>{W().classList.remove("on");await armRest();await walkTo(h+13);await arm(-82);cls("towel","gone");setProp("towel");await arm(-8);await walkTo(h);
    await all(tw(KA,"armL",-30,350),arm(30,350));await all(osc(KA,"armL",-30,9,3,1400),osc(KA,"armR",30,9,3,1400));KA.hfoam=0;await armRest();return true;}],
  bag:[
@@ -1162,8 +1224,8 @@ const STEPACT={
   async h=>{await walkTo(h+10);await arm(-125,480);cls("books","gone");setProp("notebook");await arm(-8);await walkTo(h);await arm(-45);setProp(null);cls("bag","books");await wait(150);return arm(-8);},
   async h=>{await walkTo(h+36);await arm(-125,480);cls("pencil","gone");setProp("pencil");await arm(-8);await walkTo(h);await arm(-45);setProp(null);cls("bag","pencil");await wait(150);return arm(-8);},
   async h=>{await walkTo(h+4);await all(tw(KA,"dy",14,300),arm(-40,300));cls("bag","zip");await osc(KA,"armR",-40,10,1.2,900);cls("bag","gone");setProp("bag");await all(tw(KA,"dy",0,300),arm(-60,300));await arm(-8);return walkTo(h);}]};
-async function act(a){if(!S||S.finished||S.calm||S.over||S.busy)return;const r=R[S.key],my=tok;
- if(a==="do"){const i=S.step,alone=S.week>1&&!S.helped;S.busy=true;enableActs(false);clearStuck();hush();tgt.mood=.8;
+async function act(a){if(!S||S.finished||S.calm||S.over||S.busy)return;const r=R[S.key],my=tok;if(a!=="do"){S.hard=S.hard||[];S.hard[S.step]=true;}
+ if(a==="do"){const i=S.step,alone=SET.auto?!S.helped:(S.week>1&&!S.helped);S.busy=true;enableActs(false);clearStuck();hush();tgt.mood=.8;
   if(KA.armL!=null)await tw(KA,"armL",8,250);KA.armL=null;vision(r.vis[i]+" · in_progress");
   const ok=await STEPACT[S.key][i](HOME[S.key]);if(!ok||my!==tok||!S)return;KA.armR=null;
   S.res[i]=alone?"alone":"help";if(alone)S.alone++;S.helped=false;tgt.mood=1;cur.jump=alone?1:.5;setStress(S.stress-7);
@@ -1187,32 +1249,36 @@ function overload(){S.over=true;S.calmStart=performance.now();setMode("alert");s
  let v=S.stress;const iv=setInterval(()=>{if(!S||!S.over){clearInterval(iv);return;}v+=11;setStress(v);if(v>=88){clearInterval(iv);$("stage").classList.remove("shake");
   log({signals:["hands_on_ears","rocking","raised_voice"],stress_score:.88,action:"enter_calm_mode"},"early overload signs",true);vision("overload 0.88 → calm",true);
   addFeed("🫧",()=>t("f.over"),()=>t("f.over"));later(enterCalm,500);}},170);timers.push(iv);}
-function enterCalm(){if(!S)return;S.calm=true;S.calms++;sfx("calm");setMode("calm");$("calmglow").style.opacity=1;$("breath").style.opacity=1;owl.glow=1;owl.sleepy=.7;
+function enterCalm(){if(!S)return;S.calm=true;S.calms++;sfx("calm");calmSoundOn();setMode("calm");$("calmglow").style.opacity=1;$("breath").style.opacity=1;owl.glow=1;owl.sleepy=.7;
  say("خذ نفس عميق معاي…","Take a deep breath with me…",43);log({voice:"soft",volume:.4,eyes:"dim_blue",activity:"breathing_game"},"calm mode on");
  let n=0;const iv=setInterval(()=>{if(!S||!S.calm){clearInterval(iv);return;}n++;burst(.5,1,"bub",3);setStress(S.stress-8.5);if(n>4)tgt.ears=clamp(tgt.ears-.25);tgt.mood=lerp(-1,.6,n/9);if(n>=9){clearInterval(iv);exitCalm();}},700);timers.push(iv);}
-function exitCalm(silent){$("calmglow").style.opacity=0;$("breath").style.opacity=0;$("stage").classList.remove("shake");owl.glow=0;owl.sleepy=0;tgt.ears=0;
+function exitCalm(silent){calmSoundOff();$("calmglow").style.opacity=0;$("breath").style.opacity=0;$("stage").classList.remove("shake");owl.glow=0;owl.sleepy=0;tgt.ears=0;
  if(!S)return;const was=S.calm;S.calm=false;S.over=false;$("redglow").style.opacity=0;
  if(!silent&&was&&!S.finished){S.helped=true;setMode("coach");const secs=Math.round((performance.now()-S.calmStart)/1000);
   addFeed("💙",()=>`${t("f.calm")} ${secs}s`,()=>`${t("f.calm")} ${secs} ث`);vision("calm 0.22 · resume");
   say("خلنا نكمل، خطوة صغيرة بس","Let's keep going, just one small step",44);log({stress_score:.22,action:"resume_routine"},"calm again");later(prompt,2200);}}
-function finish(){S.finished=true;S.secs=Math.round((performance.now()-S.t0)/1000);setMode("done");enableActs(false);renderSteps();$("vbox").classList.remove("on");
+function applyFade(){S.fadeChg=[];if(!SET.auto)return;const f=fm(S.key);for(let i=0;i<4;i++){const c=f[i],from=c.lv;
+  if(S.res[i]==="alone"){c.st++;if(c.st>=3&&c.lv<3){c.lv++;c.st=0;}}else{c.st=0;if(S.res[i]!=="alone"&&S.hard&&S.hard[i]&&c.lv>0)c.lv--;}
+  if(c.lv!==from)S.fadeChg.push({i,from,to:c.lv});}saveSet();renderSet();}
+function finish(){S.finished=true;S.secs=Math.round((performance.now()-S.t0)/1000);applyFade();if(SET.reward)later(()=>say(L.ar["ft.e"],L.en["ft.e"]),2300);setMode("done");enableActs(false);renderSteps();$("vbox").classList.remove("on");
  later(()=>{burst(0,0,"conf",130);sfx("finish");say("عفية عليك يوسف، خلصت كل شي!","Well done Yousef, you finished everything!",45);},700);
  log({event:"routine_complete",steps_alone:S.alone,hints:S.hints,calm_downs:S.calms,seconds:S.secs},"report sent to parent app");
  const a=S.alone;addFeed("🎉",()=>`<b>${t("f.fin")}</b> · ${a}/4 ${t("res.a")}`,()=>`<b>${t("f.fin")}</b> · ${a}/4 ${t("res.a")}`);later(showResult,2800);}
 function showResult(){const s=S;$("resCard").innerHTML=`<div class="kick">${t("m.done")}</div><div style="font-size:24px;font-weight:800;margin-top:4px">${t("res.t")}</div>
  <div class="resStars">${[0,1,2,3].map(i=>s.res[i]==="alone"?"⭐":"☆").join("")}</div>
  <div class="resGrid"><div><b>${s.alone}/4</b><small>${t("res.a")}</small></div><div><b>${s.hints}</b><small>${t("res.h")}</small></div><div><b>${s.calms}</b><small>${t("res.c")}</small></div></div>
- <div style="color:var(--muted);font-size:14px;max-width:300px;margin:0 auto 14px">${t(s.week<4?"res.tip1":"res.tip4")}</div>
- <div class="row" style="justify-content:center">${s.week<4?`<button class="btn primary sm" id="go4">▶ ${t("wk")} 4</button>`:""}<button class="btn ghost sm" id="again">${t("res.again")}</button></div>`;
- $("result").classList.add("show");const g=$("go4");if(g)g.onclick=()=>{pickW(4);start();};$("again").onclick=start;}
+ ${SET.reward?`<div class="resGift">${t("ft.e")}</div>`:""}
+ ${SET.auto?`<div class="resNote">${(s.fadeChg||[]).length?`<div class="up">📉 ${(s.fadeChg||[]).filter(z=>z.to>z.from).map(z=>z.i+1).join(", ")?`${t("step")||"Step"} ${(s.fadeChg||[]).filter(z=>z.to>z.from).map(z=>z.i+1).join(", ")}: ${t("fm.up")}`:""}</div>`:`<div><b>${t("fm.t")}</b> ${fm(s.key).map(c=>"●".repeat(c.st)+"○".repeat(3-c.st)).join("  ")}</div>`}</div>`:`<div style="color:var(--muted);font-size:14px;max-width:300px;margin:0 auto 14px">${t(s.week<4?"res.tip1":"res.tip4")}</div>`}
+ <div class="row" style="justify-content:center">${SET.auto?`<button class="btn primary sm" id="nextM">▶ ${t("fm.next")}</button>`:s.week<4?`<button class="btn primary sm" id="go4">▶ ${t("wk")} 4</button>`:""}<button class="btn ghost sm" id="again">${t("res.again")}</button></div>`;
+ $("result").classList.add("show");const g=$("go4");if(g)g.onclick=()=>{pickW(4);start();};const nm=$("nextM");if(nm)nm.onclick=start;$("again").onclick=start;}
 function updWater(){}
 async function auto(){pickR("teeth");pickW(1);start();$("sim").scrollIntoView({behavior:"smooth"});const my=tok;
  for(const [ms,a] of [[2300,"do"],[1500,"do"],[900,"overload"],[1900,"stuck"],[1600,"do"],[1300,"distract"],[1400,"do"]]){
   if(!await wait(ms))return;while(S&&(S.busy||S.calm||S.over)){if(!await wait(200))return;}if(my!==tok||!S||S.finished)return;if(a==="do"&&S.calm===false&&ms<1000)await wait(1200);act(a);}}
 function pickR(r){sel.r=r;document.querySelectorAll("#segR button").forEach(b=>b.classList.toggle("on",b.dataset.r===r));if(!S||S.finished){setRoom(r);if(S){S=null;feed=[];$("result").classList.remove("show");setMode("idle");}renderSteps();renderFeed();}}
 function pickW(w){sel.w=+w;document.querySelectorAll("#segW button").forEach(b=>b.classList.toggle("on",+b.dataset.w===sel.w));if(!S||S.finished)setMode(mode);}
-document.querySelectorAll("#segR button").forEach(b=>b.onclick=()=>pickR(b.dataset.r));
-document.querySelectorAll("#segW button").forEach(b=>b.onclick=()=>pickW(b.dataset.w));
+document.querySelectorAll("#segR button").forEach(b=>b.onclick=()=>{pickR(b.dataset.r);renderSet();});
+document.querySelectorAll("#segW button").forEach(b=>b.onclick=()=>{if(SET.auto){SET.auto=false;saveSet();}pickW(b.dataset.w);renderSet();});
 $("start").onclick=start;$("ovStart").onclick=start;$("auto").onclick=auto;$("ovAuto").onclick=auto;
 $("sound").onclick=()=>{sound=!sound;$("sound").textContent=sound?"🔊":"🔈";if(sound){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume();}catch(e){}loadVoice();sfx("done");}else{try{if(VSRC)VSRC.stop();speechSynthesis.cancel();}catch(e){}}};
 document.querySelectorAll(".acts button").forEach(b=>b.onclick=()=>act(b.dataset.a));
@@ -1238,7 +1304,7 @@ function loop(now){const tt=now/1000;
  const kb=(tt%3.1)<.13?1:(cur.ears>.5?.85:0);KID.querySelectorAll(".e").forEach(e=>e.setAttribute("ry",13*(1-.9*kb)));KID.querySelectorAll(".eh").forEach(e=>e.setAttribute("opacity",kb>.5?0:1));
  const happy=now<owl.happyUntil,shut=happy?0:Math.max(owl.sleepy*.55,(tt%3.6)<.13?1:0);
  const pu=OWL.querySelector(".pups");pu.style.transform=`translateX(${owl.look?-14:owl.pt*13}px) scaleY(${1-shut})`;pu.style.opacity=happy?0:1;OWL.querySelector(".happy").setAttribute("opacity",happy?1:0);
- OWL.querySelectorAll(".led").forEach(e=>e.setAttribute("opacity",happy?.3:1-shut*.8));
+ OWL.querySelectorAll(".led").forEach(e=>{e.setAttribute("opacity",happy?.3:1-shut*.8);e.setAttribute("stroke-dasharray","251.3");e.setAttribute("stroke-dashoffset",251.3*(1-owl.ring));});
  OWL.querySelector(".beak").style.transform=`scaleY(${1+.6*(now<owl.talkUntil?Math.abs(Math.sin(tt*11)):0)})`;
  OWL.querySelector(".glow").setAttribute("opacity",.4*owl.glow*(.75+.25*Math.sin(tt*1.6)));
  OWL.querySelector(".head").style.transform=`rotate(${owl.look?-12:owl.pt?owl.pt*9:now<owl.qUntil?8:0}deg)`;OWL.querySelector(".q").setAttribute("opacity",now<owl.qUntil?1:0);
@@ -1505,7 +1571,7 @@ function filterFaq(){const q=$$("faqQ").value.trim().toLowerCase();let n=0;docum
 $$("faqQ").addEventListener("input",filterFaq);
 window.faqOpen=k=>{const ds=[...document.querySelectorAll("#faqList .fq")];ds.forEach((d,i)=>d.open=i===k);};
 function ph(){$$("faqQ").placeholder=t("fq.ph");}
-const _ap=window.applyLang;window.applyLang=applyLang=function(){_ap();renderVoices();renderFeatures();renderFaq();ph();};
+const _ap=window.applyLang;window.applyLang=applyLang=function(){_ap();renderVoices();renderFeatures();renderFaq();ph();if(window.renderSet)renderSet();};
 renderVoices();renderFeatures();renderFaq();ph();
 })();
 </script>
