@@ -354,6 +354,22 @@ html[dir=rtl] .facts p.big{letter-spacing:0;line-height:1.5}
 .brain .cost small{display:block;font:500 17px/1.45 "Atkinson Hyperlegible";color:var(--muted);margin-top:10px;letter-spacing:0}
 html[dir=rtl] .brain .cost small{font-family:"IBM Plex Sans Arabic"}
 /* ---------- video + end ---------- */
+.pg{display:none}.pg.on,body.touring .pg{display:block}body.paged:not(.touring) .homeOnly{display:none}body.touring .pager{display:none}
+.pg>.chap:first-child{padding-top:70px}
+#home{padding:40px 0 110px}.hT{font-size:clamp(28px,3.4vw,40px);margin:64px 0 18px}
+.hcards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.hcard{position:relative;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--text);background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 22px 20px;min-height:220px;transition:border-color .2s,transform .2s}
+.hcard:hover{border-color:rgba(255,122,61,.55);transform:translateY(-3px)}.hcard:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.hcard .hn{font:800 56px/.9 "Bricolage Grotesque",sans-serif;color:var(--orange);letter-spacing:-.04em}.hcard b{font-size:21px;color:#fff;margin-top:auto}.hcard span{color:var(--muted);font-size:15px;line-height:1.4}
+.hcard em{font-style:normal;font-size:13px;color:var(--orange2);margin-top:6px}
+.hrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:30px 0 110px;border-top:1px solid var(--line);padding-top:34px}
+.pager a{display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--text);background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 22px}
+.pager a:hover{border-color:rgba(255,122,61,.55)}.pager a:focus-visible{outline:3px solid var(--teal);outline-offset:3px}.pager small{color:var(--muted);font-size:14px}.pager b{font-size:22px;color:#fff}
+.pager .nx{text-align:end;background:linear-gradient(160deg,rgba(255,122,61,.16),rgba(255,122,61,.03));border-color:rgba(255,122,61,.35)}
+.navR a.cur{color:#fff;box-shadow:inset 0 -2px 0 var(--orange)}
+@media(max-width:860px){.hcards{grid-template-columns:1fr 1fr}.hcard{min-height:170px}}
+@media(max-width:520px){.hcards,.pager{grid-template-columns:1fr}}
 .chap{padding:110px 0 10px}.chap .wrap{display:flex;gap:26px;align-items:flex-start;border-top:1px solid var(--line);padding-top:34px}
 .chap .cn{font:800 clamp(64px,8vw,104px)/.8 "Bricolage Grotesque",sans-serif;color:var(--orange);letter-spacing:-.04em}
 .chap .ct{margin:0 0 6px;font-size:clamp(34px,4.6vw,58px)}.chap p{margin:0;color:var(--muted);font-size:18px;max-width:560px}
@@ -681,13 +697,13 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
 </defs></svg>
 
 <header class="bar">
-  <a class="brand" href="#top"><svg width="26" height="28" viewBox="0 0 400 440" aria-hidden="true"><ellipse cx="200" cy="240" rx="150" ry="170" fill="#F2641A"/><ellipse cx="200" cy="290" rx="96" ry="110" fill="#FFE3CC"/><circle cx="140" cy="190" r="58" fill="#fff"/><circle cx="260" cy="190" r="58" fill="#fff"/><circle cx="140" cy="195" r="25" fill="#1F2D4D"/><circle cx="260" cy="195" r="25" fill="#1F2D4D"/></svg>Rafeeq <b>رفيق</b></a>
-  <nav class="navR" aria-label="Sections"><a href="#c1" data-i="nC1"></a><a href="#c2" data-i="nC2"></a><a href="#c3" data-i="nC3"></a><a href="#c4" data-i="nC4"></a><a href="#faq" data-i="nQ"></a><a href="https://github.com/abdullahnaji353-blip/rafeeq">GitHub</a><a class="play" href="#play" data-i="n1"></a>
+  <a class="brand" href="#home"><svg width="26" height="28" viewBox="0 0 400 440" aria-hidden="true"><ellipse cx="200" cy="240" rx="150" ry="170" fill="#F2641A"/><ellipse cx="200" cy="290" rx="96" ry="110" fill="#FFE3CC"/><circle cx="140" cy="190" r="58" fill="#fff"/><circle cx="260" cy="190" r="58" fill="#fff"/><circle cx="140" cy="195" r="25" fill="#1F2D4D"/><circle cx="260" cy="195" r="25" fill="#1F2D4D"/></svg>Rafeeq <b>رفيق</b></a>
+  <nav class="navR" aria-label="Sections"><a href="#problem" data-r="problem" data-i="nC1"></a><a href="#see" data-r="see" data-i="nC2"></a><a href="#how" data-r="how" data-i="nC3"></a><a href="#trust" data-r="trust" data-i="nC4"></a><a href="https://github.com/abdullahnaji353-blip/rafeeq">GitHub</a><a class="play" href="#play" data-i="n1"></a>
   <div class="lang" role="group" aria-label="Language"><button id="lEn" class="on" lang="en">EN</button><button id="lAr" lang="ar">عربي</button></div></nav>
 </header>
 
 <main id="top">
-<section class="story" aria-label="Story">
+<section class="story homeOnly" aria-label="Story">
   <div class="scene noowl" id="scene" aria-hidden="true"><div class="sbox">
     <div class="sroom" id="sroom"></div>
     <div class="sred"></div><div class="scalm"></div><div class="grade"></div>
@@ -708,13 +724,19 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
     <article class="page last" data-step="6"><div class="cap"><p data-i="st6"></p><a class="btn primary" href="#play" data-i="st.cta"></a></div></article>
   </div>
 </section>
-<div class="chap" id="c1"><div class="wrap"><span class="cn" aria-hidden="true">1</span><div><h2 class="ct" data-i="c1.t"></h2><p data-i="c1.d"></p></div></div></div>
-<section id="glance"><div class="wrap"><div class="gl">
+<section id="home" class="homeOnly"><div class="wrap">
+  <div class="gl">
   <div><b data-i="g1"></b><span data-i="g1d"></span></div>
   <div><b data-i="g2"></b><span data-i="g2d"></span></div>
   <div><b data-i="g3"></b><span data-i="g3d"></span></div>
   <div><b data-i="g4"></b><span data-i="g4d"></span></div>
-</div></div></section>
+</div>
+  <h2 class="hT" data-i="hm.t"></h2>
+  <div class="hcards"><a class="hcard" href="#problem"><span class="hn" aria-hidden="true">1</span><b data-i="c1.t"></b><span data-i="c1.d"></span><em data-i="hc.1"></em></a><a class="hcard" href="#see"><span class="hn" aria-hidden="true">2</span><b data-i="c2.t"></b><span data-i="c2.d"></span><em data-i="hc.2"></em></a><a class="hcard" href="#how"><span class="hn" aria-hidden="true">3</span><b data-i="c3.t"></b><span data-i="c3.d"></span><em data-i="hc.3"></em></a><a class="hcard" href="#trust"><span class="hn" aria-hidden="true">4</span><b data-i="c4.t"></b><span data-i="c4.d"></span><em data-i="hc.4"></em></a></div>
+  <div class="hrow"><a class="btn primary" href="#play" data-i="hm.play"></a><a class="btn ghost" href="#video" data-i="hm.vid"></a><button class="btn ghost" type="button" data-watch data-i="tw.b"></button></div>
+</div></section>
+<div class="pg" data-pg="problem" id="problem">
+<div class="chap" id="c1"><div class="wrap"><span class="cn" aria-hidden="true">1</span><div><h2 class="ct" data-i="c1.t"></h2><p data-i="c1.d"></p></div></div></div>
 <section class="facts" id="why"><div class="wrap">
   <h2 data-i="fa.t"></h2>
   <div id="factText"></div>
@@ -730,7 +752,9 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
   <div class="cleg" aria-hidden="true"><span><i class="d2"></i><span data-i="c.y"></span></span><span><i class="d1"></i><span data-i="c.s"></span></span><span><i class="d0"></i><span data-i="c.no"></span></span></div>
   <p class="cnote" data-i="c.n"></p>
 </div></section>
-
+<div class="wrap"><nav class="pager" aria-label="Pages"><a class="pv" href="#home"><small data-i="pg.prev"></small><b data-i="pn.home"></b></a><a class="nx" href="#see"><small data-i="pg.next"></small><b data-i="pn.see"></b></a></nav>
+</div></div>
+<div class="pg" data-pg="see" id="see">
 <div class="chap" id="c2"><div class="wrap"><span class="cn" aria-hidden="true">2</span><div><h2 class="ct" data-i="c2.t"></h2><p data-i="c2.d"></p></div></div></div>
 <section id="video"><div class="wrap">
   <h2 data-i="v.t"></h2>
@@ -822,7 +846,9 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
   </ol>
   <p class="rnote" data-i="ru.n"></p>
 </div></section>
-
+<div class="wrap"><nav class="pager" aria-label="Pages"><a class="pv" href="#problem"><small data-i="pg.prev"></small><b data-i="pn.problem"></b></a><a class="nx" href="#how"><small data-i="pg.next"></small><b data-i="pn.how"></b></a></nav>
+</div></div>
+<div class="pg" data-pg="how" id="how">
 <div class="chap" id="c3"><div class="wrap"><span class="cn" aria-hidden="true">3</span><div><h2 class="ct" data-i="c3.t"></h2><p data-i="c3.d"></p></div></div></div>
 <section id="brain"><div class="wrap">
   <h2 data-i="ai.t"></h2><p class="lead2" data-i="ai.l"></p>
@@ -873,7 +899,9 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
 
   <div class="brain"><div><h3 data-i="br.t"></h3><p data-i="br.d"></p><code>ollama run gemma3:4b</code></div></div>
 </div></section>
-
+<div class="wrap"><nav class="pager" aria-label="Pages"><a class="pv" href="#see"><small data-i="pg.prev"></small><b data-i="pn.see"></b></a><a class="nx" href="#trust"><small data-i="pg.next"></small><b data-i="pn.trust"></b></a></nav>
+</div></div>
+<div class="pg" data-pg="trust" id="trust">
 <div class="chap" id="c4"><div class="wrap"><span class="cn" aria-hidden="true">4</span><div><h2 class="ct" data-i="c4.t"></h2><p data-i="c4.d"></p></div></div></div>
 <section id="safe"><div class="wrap">
   <h2 data-i="sf.t"></h2>
@@ -906,9 +934,10 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
   <div class="fqs"><input id="faqQ" type="search" autocomplete="off" aria-label="Search the questions"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></div>
   <div id="faqList"></div><p id="faqNone" class="fqn" data-i="fq.no" hidden></p>
 </div></section>
-
+<div class="wrap"><nav class="pager" aria-label="Pages"><a class="pv" href="#how"><small data-i="pg.prev"></small><b data-i="pn.how"></b></a><a class="nx" href="#home"><small data-i="pg.back"></small><b data-i="pn.home"></b></a></nav>
+</div></div>
 <div class="sv" id="sv" role="dialog" aria-modal="true" aria-label="Rafeeq stories" hidden><div class="svBox"><div class="svBars" id="svBars"></div><video id="svVid" playsinline muted preload="auto"></video><button type="button" class="svNav prev" id="svPrev" aria-label="Previous"></button><button type="button" class="svNav next" id="svNext" aria-label="Next"></button><button type="button" class="svX" id="svX" aria-label="Close">×</button></div></div>
-<div class="end"><p class="theend" data-i="end.t"></p><p data-i="end.d"></p><div class="row"><button class="btn ghost" type="button" data-watch data-i="tw.a"></button><a class="btn primary" href="#play" data-i="e.c"></a><a class="btn ghost" href="https://github.com/abdullahnaji353-blip/rafeeq" data-i="end.gh"></a></div></div>
+<div class="end homeOnly"><p class="theend" data-i="end.t"></p><p data-i="end.d"></p><div class="row"><button class="btn ghost" type="button" data-watch data-i="tw.a"></button><a class="btn primary" href="#play" data-i="e.c"></a><a class="btn ghost" href="https://github.com/abdullahnaji353-blip/rafeeq" data-i="end.gh"></a></div></div>
 </main>
 <footer><div class="wrap"><span data-i="foot"></span> · <a href="privacy.html" data-i="priv"></a> · <a href="terms.html" data-i="terms"></a></div></footer>
 
@@ -982,6 +1011,8 @@ q10:"What happens during a meltdown?",a10:"Rafeeq stops giving instructions. It 
 q11:"Can parents change the routines?",a11:"Yes. In the demo's parent app, parents build their own routines, record their voice for each step, and can pin the help level of any step.",
 q13:"Does the child have to wear the band?",a13:"No, it's optional. Many autistic children dislike things on the wrist, so it can go on the ankle or be clipped to clothes, and Rafeeq works fully without it. Research with wristbands that track heart rate, sweat and movement predicted outbursts 1 to 3 minutes ahead (Northeastern University, 2019 and 2024).",
 q12:"Who made Rafeeq?",a12:"A.Naji, a student in Kuwait, for the ATSN26 Gen-AI & Software Innovation Competition.",
+"pg.prev":"Back","pg.next":"Next","pg.back":"Back to","pn.home":"Start","pn.problem":"The problem","pn.see":"See it work","pn.how":"How it works","pn.trust":"Can you trust it?",
+"hm.t":"Pick where to start","hc.1":"4 min read","hc.2":"Videos + simulation","hc.3":"The AI, step by step","hc.4":"Privacy + FAQ","hm.play":"Play the simulation","hm.vid":"Watch the clips",
 "nC1":"Problem","nC2":"See it","nC3":"How it works","nC4":"Trust",
 "c1.t":"The problem","c1.d":"Why mornings break down, and what families told us.",
 "c2.t":"See it work","c2.d":"Real clips from the demo app, then try it yourself.",
@@ -1075,6 +1106,8 @@ q10:"شنو يصير وقت الانهيار؟",a10:"رفيق يوقف الأو�
 q11:"الأهل يقدرون يغيرون الروتين؟",a11:"إي. في تطبيق الأهل بالديمو، الأهل يسوون روتينهم بنفسهم، ويسجّلون صوتهم لكل خطوة، ويقدرون يثبّتون مستوى المساعدة لأي خطوة.",
 q13:"لازم الطفل يلبس السوار؟",a13:"لا، اختياري. أطفال توحد كثير ما يحبون شي على المعصم، فممكن يكون على الكاحل أو مشبوك بالملابس، ورفيق يشتغل كامل بدونه. أبحاث على أساور تقيس النبض والتعرق والحركة توقعت نوبات الغضب قبلها بدقيقة إلى ٣ دقايق (جامعة نورث إيسترن، 2019 و2024).",
 q12:"منو سوّا رفيق؟",a12:"A.Naji، طالب في الكويت، لمسابقة ATSN26 للابتكار في الذكاء الاصطناعي التوليدي والبرمجيات.",
+"pg.prev":"السابق","pg.next":"التالي","pg.back":"ارجع إلى","pn.home":"البداية","pn.problem":"المشكلة","pn.see":"شوفه وهو يشتغل","pn.how":"كيف يشتغل","pn.trust":"تقدر تثق فيه؟",
+"hm.t":"اختار من وين تبدأ","hc.1":"قراءة ٤ دقايق","hc.2":"فيديوهات ومحاكاة","hc.3":"الذكاء الاصطناعي خطوة خطوة","hc.4":"الخصوصية والأسئلة","hm.play":"جرّب المحاكاة","hm.vid":"شوف المقاطع",
 "nC1":"المشكلة","nC2":"شوفه","nC3":"كيف يشتغل","nC4":"الثقة",
 "c1.t":"المشكلة","c1.d":"ليش الصبح يخرب، وشنو قالت العوايل.",
 "c2.t":"شوفه وهو يشتغل","c2.d":"مقاطع حقيقية من التطبيق، وبعدين جربه بنفسك.",
@@ -1718,9 +1751,22 @@ document.addEventListener("keydown",e=>{if(sv.hidden)return;if(e.key==="Escape")
 (function(){
 document.querySelectorAll(".cp").forEach(b=>b.addEventListener("click",async()=>{const c=b.previousElementSibling.textContent;try{await navigator.clipboard.writeText(c);}catch(e){const r=document.createRange();r.selectNodeContents(b.previousElementSibling);const s=getSelection();s.removeAllRanges();s.addRange(r);}
  const L2=(document.documentElement.lang||"en").startsWith("ar")?"ar":"en";b.textContent=L2==="ar"?"انتسخ":"Copied";b.classList.add("ok");setTimeout(()=>{b.textContent=L2==="ar"?"نسخ":"Copy";b.classList.remove("ok");},1600);}));
-const links=[...document.querySelectorAll('.navR a[href^="#c"],.navR a[href="#faq"]')],marks=links.map(a=>document.querySelector(a.getAttribute("href")));
-function spy(){const y=scrollY+innerHeight*.35;let k=-1;marks.forEach((m,i)=>{if(m&&m.getBoundingClientRect().top+scrollY<=y)k=i;});links.forEach((a,i)=>a.classList.toggle("cur",i===k));}
-addEventListener("scroll",spy,{passive:true});spy();
+const PG=["problem","see","how","trust"];let curPg=null;
+function show(pg,target){const paged=pg!=="home";document.body.classList.toggle("paged",paged);
+ document.querySelectorAll(".pg").forEach(p=>p.classList.toggle("on",p.dataset.pg===pg));
+ document.querySelectorAll(".navR a[data-r]").forEach(a=>{a.classList.toggle("cur",a.dataset.r===pg);a.toggleAttribute("aria-current",a.dataset.r===pg);});
+ const changed=pg!==curPg;curPg=pg;if(changed)dispatchEvent(new Event("resize"));
+ const de=document.documentElement,sb=de.style.scrollBehavior;de.style.scrollBehavior="auto";
+ if(target){requestAnimationFrame(()=>{const y=target.getBoundingClientRect().top+scrollY-70;scrollTo(0,Math.max(0,y));de.style.scrollBehavior=sb;});}
+ else{scrollTo(0,0);de.style.scrollBehavior=sb;}
+ if(paged&&changed){const h=document.querySelector('.pg.on .chap h2');if(h&&!target){h.setAttribute("tabindex","-1");h.focus({preventScroll:true});}}}
+function route(){if(document.body.classList.contains("touring"))return;const id=decodeURIComponent(location.hash.slice(1));
+ if(!id||id==="home"||id==="top")return show("home",id==="top"?null:null);
+ if(PG.includes(id))return show(id,null);
+ const el=document.getElementById(id);if(!el)return show("home",null);
+ const p=el.closest(".pg");show(p?p.dataset.pg:"home",el);}
+addEventListener("hashchange",route);route();
+let wasT=false;new MutationObserver(()=>{const t=document.body.classList.contains("touring");if(t!==wasT){wasT=t;if(!t)route();}}).observe(document.body,{attributes:true,attributeFilter:["class"]});
 })();
 </script>
 </body>
