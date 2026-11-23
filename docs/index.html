@@ -354,6 +354,19 @@ html[dir=rtl] .facts p.big{letter-spacing:0;line-height:1.5}
 .brain .cost small{display:block;font:500 17px/1.45 "Atkinson Hyperlegible";color:var(--muted);margin-top:10px;letter-spacing:0}
 html[dir=rtl] .brain .cost small{font-family:"IBM Plex Sans Arabic"}
 /* ---------- video + end ---------- */
+.stoK{color:var(--muted);margin:26px 0 12px}.stories{display:flex;gap:18px;overflow-x:auto;padding:6px 2px 14px;scrollbar-width:none}.stories::-webkit-scrollbar{display:none}
+.sto{flex:0 0 auto;background:none;border:0;color:var(--text);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;font:inherit;width:92px}
+.sto .ring{width:84px;height:84px;border-radius:50%;padding:3px;background:conic-gradient(var(--orange),var(--gold),var(--orange))}.sto.seen .ring{background:var(--line)}
+.sto img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid var(--bg);display:block}.sto b{font-size:13px;font-weight:600;text-align:center;line-height:1.2}
+.sto:focus-visible .ring{outline:3px solid var(--teal);outline-offset:3px}
+.vh{font-size:22px;margin:44px 0 0}.vnote{color:var(--muted);font-size:15px;margin:6px 0 0}#video .vh+.vnote+.vidWrap,#video .vh+.vidWrap{margin-top:18px}
+.sv{position:fixed;inset:0;z-index:100;background:rgba(5,8,18,.94);display:flex;align-items:center;justify-content:center}.sv[hidden]{display:none}
+.svBox{position:relative;height:min(92vh,calc(92vw*16/9));aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:#0f1730}
+.svBox video{width:100%;height:100%;display:block}.svBars{position:absolute;top:10px;left:10px;right:10px;display:flex;gap:4px;z-index:3}
+.svBars i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.3);overflow:hidden}.svBars i b{display:block;height:100%;width:0;background:#fff}
+.svNav{position:absolute;top:0;bottom:0;width:40%;background:none;border:0;cursor:pointer;z-index:2}.svNav.prev{left:0}.svNav.next{right:0}
+.svX{position:absolute;top:20px;right:12px;z-index:4;width:40px;height:40px;border-radius:50%;border:0;background:rgba(0,0,0,.45);color:#fff;font-size:26px;line-height:1;cursor:pointer}
+.svX:focus-visible,.svNav:focus-visible{outline:3px solid var(--teal);outline-offset:-3px}
 #video{padding:0 0 110px}
 .vidWrap{margin-top:28px;border-radius:20px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 0 1px var(--line)}
 video{width:100%;display:block;background:#000}
@@ -838,9 +851,23 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
 
 <section id="video"><div class="wrap">
   <h2 data-i="v.t"></h2>
+  <p class="stoK" data-i="sto.k"></p>
+  <div class="stories" id="stories">
+    <button type="button" class="sto" data-s="0"><span class="ring"><img src="stories/st1.jpg" alt="" loading="lazy"></span><b data-i="sto.1"></b></button>
+    <button type="button" class="sto" data-s="1"><span class="ring"><img src="stories/st2.jpg" alt="" loading="lazy"></span><b data-i="sto.2"></b></button>
+    <button type="button" class="sto" data-s="2"><span class="ring"><img src="stories/st3.jpg" alt="" loading="lazy"></span><b data-i="sto.3"></b></button>
+    <button type="button" class="sto" data-s="3"><span class="ring"><img src="stories/st4.jpg" alt="" loading="lazy"></span><b data-i="sto.4"></b></button>
+    <button type="button" class="sto" data-s="4"><span class="ring"><img src="stories/st5.jpg" alt="" loading="lazy"></span><b data-i="sto.5"></b></button>
+    <button type="button" class="sto" data-s="5"><span class="ring"><img src="stories/st6.jpg" alt="" loading="lazy"></span><b data-i="sto.6"></b></button>
+    <button type="button" class="sto" data-s="6"><span class="ring"><img src="stories/st7.jpg" alt="" loading="lazy"></span><b data-i="sto.7"></b></button>
+  </div>
+  <h3 class="vh" data-i="vd.t"></h3><p class="vnote" data-i="vd.d"></p>
+  <div class="vidWrap"><video controls preload="metadata" playsinline poster="demo-poster.jpg" src="rafeeq-demo.mp4" aria-label="Rafeeq demo app, recorded in test mode"></video></div>
+  <h3 class="vh" data-i="vp.t"></h3>
   <div class="vidWrap"><video controls preload="metadata" playsinline poster="video-poster.jpg" src="rafeeq-prototype-video.mp4" aria-label="Rafeeq prototype video"><track kind="captions" src="captions-en.vtt" srclang="en" label="English"><track kind="captions" src="captions-ar.vtt" srclang="ar" label="العربية"></video></div>
 </div></section>
 
+<div class="sv" id="sv" role="dialog" aria-modal="true" aria-label="Rafeeq stories" hidden><div class="svBox"><div class="svBars" id="svBars"></div><video id="svVid" playsinline muted preload="auto"></video><button type="button" class="svNav prev" id="svPrev" aria-label="Previous"></button><button type="button" class="svNav next" id="svNext" aria-label="Next"></button><button type="button" class="svX" id="svX" aria-label="Close">×</button></div></div>
 <div class="end"><p class="theend" data-i="end.t"></p><p data-i="end.d"></p><div class="row"><button class="btn ghost" type="button" data-watch data-i="tw.a"></button><a class="btn primary" href="#play" data-i="e.c"></a><a class="btn ghost" href="https://github.com/abdullahnaji353-blip/rafeeq" data-i="end.gh"></a></div></div>
 </main>
 <footer><div class="wrap"><span data-i="foot"></span> · <a href="privacy.html" data-i="priv"></a> · <a href="terms.html" data-i="terms"></a></div></footer>
@@ -883,7 +910,7 @@ f1:"See",f1d:"Camera frame every few seconds.",f2:"Think",f2d:"Gemma 3 checks th
 m1:"Works offline",m2:"No account needed",m3:"Video never leaves home",m4:"Open model",
 "hw.k":"Hardware","hw.t":"Everyday parts. Friendly shape.",
 hw1:"Camera",hw1d:"ESP32-S3",hw2:"LED eyes",hw2d:"Color = mood",hw3:"Speaker + mic",hw3d:"Talks and listens",hw4:"2 servos",hw4d:"Head turns and nods",hw5:"3D-printed body",hw5d:"No sharp edges",hw6:"Raspberry Pi 5",hw6d:"Runs Gemma 3 offline",
-"v.k":"Prototype video","v.t":"Yousef's morning",
+"v.k":"Prototype video","v.t":"See it work","sto.k":"Tap a story. Each one is a real clip from the demo app.","sto.1":"Coaching","sto.2":"Timer","sto.3":"Calm mode","sto.4":"Band","sto.5":"Parents","sto.6":"Fading","sto.7":"Privacy","vd.t":"The demo app, recorded","vd.d":"Recorded in test mode: the app gives scripted answers instead of Gemma, and the camera shows a drawing.","vp.t":"Yousef's morning, the story video",
 "e.k":"The goal","e.t":"Rafeeq wins when it's not needed.","e.c":"Play the simulation",
 "c.t":"What families use today","c.l":"Every option helps a little. None of them can see the child, speak his dialect, and step back on purpose.",
 "c.h1":"Picture chart","c.h2":"Parent at every step","c.h3":"Tablet app","c.h4":"Rafeeq",
@@ -954,7 +981,7 @@ f1:"يشوف",f1d:"صورة من الكاميرا كل كم ثانية.",f2:"ي�
 m1:"يشتغل بدون إنترنت",m2:"بدون حساب",m3:"الفيديو ما يطلع من البيت",m4:"نموذج مفتوح",
 "hw.k":"القطع","hw.t":"قطع متوفرة. شكل ودود.",
 hw1:"كاميرا",hw1d:"ESP32-S3",hw2:"عيون LED",hw2d:"اللون = المزاج",hw3:"سماعة ومايك",hw3d:"يتكلم ويسمع",hw4:"٢ سيرفو",hw4d:"الرأس يلف ويهز",hw5:"جسم مطبوع 3D",hw5d:"بدون حواف حادة",hw6:"Raspberry Pi 5",hw6d:"يشغّل Gemma 3 بدون إنترنت",
-"v.k":"فيديو النموذج","v.t":"صباح يوسف",
+"v.k":"فيديو النموذج","v.t":"شوفه وهو يشتغل","sto.k":"اضغط على ستوري. كل وحدة مقطع حقيقي من التطبيق.","sto.1":"التوجيه","sto.2":"المؤقت","sto.3":"الهدوء","sto.4":"السوار","sto.5":"الأهل","sto.6":"التدرّج","sto.7":"الخصوصية","vd.t":"التطبيق التجريبي، مسجّل","vd.d":"مسجّل في وضع الاختبار: التطبيق يعطي ردود مكتوبة مسبقاً بدل Gemma، والكاميرا تعرض رسمة.","vp.t":"صباح يوسف، فيديو القصة",
 "e.k":"الهدف","e.t":"رفيق يفوز لما ما يحتاجونه.","e.c":"جرّب المحاكاة",
 "c.t":"شنو تستخدم العوايل اليوم","c.l":"كل خيار يساعد شوي. بس ولا واحد يشوف الطفل، ويتكلم بلهجته، ويخفّف مساعدته عن قصد.",
 "c.h1":"جدول صور","c.h2":"الأهل بكل خطوة","c.h3":"تطبيق آيباد","c.h4":"رفيق",
@@ -1582,5 +1609,25 @@ renderVoices();renderFeatures();renderFaq();ph();
 })();
 </script>
 
+<script>
+(function(){
+const N=7,sv=document.getElementById("sv"),vid=document.getElementById("svVid"),bars=document.getElementById("svBars"),btns=[...document.querySelectorAll(".sto")];
+let i=0,raf=0,last=null;
+bars.innerHTML=Array.from({length:N},()=>"<i><b></b></i>").join("");
+const fills=[...bars.querySelectorAll("b")];
+function paint(){fills.forEach((f,k)=>f.style.width=k<i?"100%":k>i?"0":(vid.duration?Math.min(100,vid.currentTime/vid.duration*100):0)+"%");raf=requestAnimationFrame(paint);}
+function show(k){if(k<0)k=0;if(k>=N)return close();i=k;btns[k].classList.add("seen");vid.src="stories/st"+(k+1)+".mp4";vid.play().catch(()=>{});}
+function open(k){last=document.activeElement;sv.hidden=false;document.body.style.overflow="hidden";show(k);cancelAnimationFrame(raf);paint();document.getElementById("svX").focus();}
+function close(){sv.hidden=true;vid.pause();vid.removeAttribute("src");vid.load();cancelAnimationFrame(raf);document.body.style.overflow="";if(last)last.focus();}
+btns.forEach(b=>b.onclick=()=>open(+b.dataset.s));
+vid.onended=()=>show(i+1);
+document.getElementById("svNext").onclick=()=>show(i+1);
+document.getElementById("svPrev").onclick=()=>show(i-1);
+document.getElementById("svX").onclick=close;
+sv.addEventListener("click",e=>{if(e.target===sv)close();});
+let hold;vid.parentElement.addEventListener("pointerdown",()=>{hold=setTimeout(()=>vid.pause(),180)});vid.parentElement.addEventListener("pointerup",()=>{clearTimeout(hold);if(vid.paused&&!sv.hidden)vid.play().catch(()=>{})});
+document.addEventListener("keydown",e=>{if(sv.hidden)return;if(e.key==="Escape")close();else if(e.key==="ArrowRight")show(document.dir==="rtl"?i-1:i+1);else if(e.key==="ArrowLeft")show(document.dir==="rtl"?i+1:i-1);});
+})();
+</script>
 </body>
 </html>
