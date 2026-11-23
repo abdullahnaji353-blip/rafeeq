@@ -49,6 +49,14 @@
   .report .chg{color:var(--teal)}
   .err{color:#FF8A8A;font-size:14px;min-height:20px;margin:6px 0}
   .modes{font-size:13px;color:var(--muted);margin-top:6px;text-align:center}
+  .band{display:none;width:100%;max-width:560px;margin-top:8px;background:var(--card);border-radius:16px;padding:10px 14px;align-items:center;gap:12px;flex-wrap:wrap}
+  .band.on{display:flex}
+  .hr{font-size:26px;font-weight:800;min-width:96px;direction:ltr}
+  .hr .beat{display:inline-block;animation:beat 1s ease-in-out infinite}
+  @keyframes beat{15%{transform:scale(1.25)}30%{transform:scale(1)}}
+  .hr.up{color:#FF8A8A}
+  .bandInfo{flex:1;font-size:13px;color:var(--muted);min-width:150px}
+  .band button{font-size:14px;padding:8px 10px}
 </style>
 </head>
 <body>
@@ -91,6 +99,13 @@
     <button id="calmBtn" title="Calm mode">😣 هدوء</button>
     <button id="stop">إيقاف</button>
   </div>
+  <div class="band" id="band">
+    <div class="hr" id="hr"><span class="beat">💓</span> <span id="bpm">—</span></div>
+    <div class="bandInfo" id="bandInfo">سوار رفيق · Rafeeq Band</div>
+    <button id="bandConnect">⌚ وصّل السوار</button>
+    <button id="bandSim" title="For trying it without a band">🧪 سوار تجريبي</button>
+    <button id="bandStress" style="display:none" title="Simulated band only">📈 ارفع النبض</button>
+  </div>
   <p class="modes" id="modes"></p>
   <p class="err" id="err"></p>
 
@@ -121,8 +136,10 @@ async function load() {
   if (p.quiet) m.push("بدون صوت");
   if (p.reward) m.push("أول، بعدين: " + p.reward);
   if (p.noiseCheck) m.push("ينتبه للأصوات العالية");
+  if (p.band) m.push("سوار رفيق");
   $("modes").textContent = m.length ? "الإعدادات: " + m.join(" · ") : "";
   $("camoff").style.display = p.cameraOn ? "none" : "flex";
+  bandShow();
   $("go").disabled = !p.cameraOn;
   renderSteps();
 }
@@ -264,6 +281,7 @@ async function start() {
   await load();
   if (!S.profile.cameraOn) return;
   const r = routine();
+  BAND.alerts = 0; BAND.max = BAND.last || 0;
   run = { i: 0, t0: Date.now(), calmDowns: 0, steps: r.steps.map(() => ({ done: false, hints: 0, offTask: 0 })) };
   $("report").style.display = "none"; $("reward").style.display = "none";
   renderSteps(); setEyes("coach");
@@ -291,7 +309,7 @@ function stop(silent) {
 
 async function saveSession(finished) {
   const r = routine();
-  const body = { routineId: r.id, seconds: (Date.now() - run.t0) / 1000, calmDowns: run.calmDowns, steps: run.steps.slice(0, finished ? undefined : run.i) };
+  const body = { routineId: r.id, seconds: (Date.now() - run.t0) / 1000, calmDowns: run.calmDowns, bandAlerts: BAND.alerts, hrRest: BAND.rest, hrMax: BAND.max, steps: run.steps.slice(0, finished ? undefined : run.i) };
   try {
     const out = await (await fetch("/api/session", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })).json();
     return out.changes || [];
@@ -318,6 +336,7 @@ async function finish() {
     `الروتين: ${r.icon} ${r.name}<br>` +
     `خطوات سواها بروحه: ${alone} / ${r.steps.length}<br>` +
     `عدد التلميحات: ${hints} · مرات التهدئة: ${run.calmDowns}<br>` +
+    (S.profile.band && BAND.reads.length ? `💓 النبض: الطبيعي ${BAND.rest || "?"}، أعلى شي ${BAND.max} · تنبيهات السوار: ${BAND.alerts}<br>` : "") +
     `المدة: حوالي ${mins} دقيقة<br>${chg}` +
     `<small>Parent summary · alone ${alone}/${r.steps.length}, hints ${hints}, calm-downs ${run.calmDowns}, ~${mins} min</small>`;
   await load();
@@ -382,6 +401,75 @@ async function startNoiseCheck() {
   } catch (e) { $("err").textContent = "ما قدرت أفتح الميكروفون: " + e.message; }
 }
 function stopNoiseCheck() { clearInterval(micTimer); micTimer = null; if (micStream) micStream.getTracks().forEach(t => t.stop()); micStream = null; }
+
+/* ---------- Rafeeq Band: heart rate (optional) ---------- */
+// Works with any band that speaks the standard Bluetooth Heart Rate Service
+// (many armbands, chest straps and some watches). Chrome or Edge, desktop or Android.
+const BAND = { dev: null, sim: null, reads: [], rest: 0, last: 0, coolUntil: 0, alerts: 0, max: 0, simBoost: 0 };
+function bandShow() {
+  $("band").classList.toggle("on", !!S.profile.band);
+  $("bandConnect").style.display = "navigator" in window && navigator.bluetooth ? "" : "none";
+}
+function bandInfo(text) { $("bandInfo").textContent = text; }
+function onBpm(bpm) {
+  if (!bpm || bpm < 30 || bpm > 230) return;
+  const now = Date.now();
+  BAND.reads.push({ t: now, bpm }); BAND.reads = BAND.reads.filter(r => now - r.t < 120000);
+  BAND.last = bpm; BAND.max = Math.max(BAND.max, bpm);
+  $("bpm").textContent = bpm;
+  // resting level: set by the parent, or learned from the first minute
+  if (!BAND.rest) {
+    if (S.profile.bandRest) BAND.rest = S.profile.bandRest;
+    else {
+      const first = BAND.reads.filter(r => r.t - BAND.reads[0].t < 60000);
+      if (now - BAND.reads[0].t >= 60000 && first.length >= 20) {
+        const v = first.map(r => r.bpm).sort((a, b) => a - b); BAND.rest = v[Math.floor(v.length / 2)];
+      } else { bandInfo(`يتعلم النبض الطبيعي… · learning resting heart rate (${Math.ceil((60000 - (now - BAND.reads[0].t)) / 1000)} s)`); return; }
+    }
+  }
+  const limit = Math.round(BAND.rest * (1 + (S.profile.bandRise || 20) / 100));
+  const recent = BAND.reads.filter(r => now - r.t < 15000), avg = recent.reduce((n, r) => n + r.bpm, 0) / recent.length;
+  const up = recent.length >= 5 && avg > limit;
+  $("hr").classList.toggle("up", up);
+  bandInfo(`الطبيعي ${BAND.rest} · التنبيه فوق ${limit} · resting ${BAND.rest}, alert above ${limit} bpm`);
+  if (up && run && !run.paused && now > BAND.coolUntil) {
+    BAND.coolUntil = now + 60000; BAND.alerts++;
+    startCalm(`💓 النبض ارتفع (${Math.round(avg)})، رفيق شغّل وضع الهدوء بدري · heart rate up, calm mode early`);
+  }
+}
+async function bandConnect() {
+  try {
+    bandStopSim();
+    const dev = await navigator.bluetooth.requestDevice({ filters: [{ services: ["heart_rate"] }] });
+    bandInfo("يتصل… · connecting…");
+    const gatt = await dev.gatt.connect();
+    const ch = await (await gatt.getPrimaryService("heart_rate")).getCharacteristic("heart_rate_measurement");
+    ch.addEventListener("characteristicvaluechanged", e => {
+      const v = e.target.value, flags = v.getUint8(0);
+      onBpm(flags & 1 ? v.getUint16(1, true) : v.getUint8(1));       // standard Heart Rate Measurement format
+    });
+    await ch.startNotifications();
+    dev.addEventListener("gattserverdisconnected", () => bandInfo("السوار انفصل · band disconnected"));
+    BAND.dev = dev; BAND.reads = []; BAND.rest = 0;
+    bandInfo(`متصل: ${dev.name || "heart-rate band"}`);
+  } catch (e) { bandInfo("ما قدرت أوصل السوار: " + e.message); }
+}
+// Simulated band: only for trying the app or filming without a real band. Clearly labelled.
+function bandStartSim() {
+  bandStopSim(); BAND.reads = []; BAND.rest = S.profile.bandRest || 0; BAND.simBoost = 0;
+  let base = 88;
+  BAND.sim = setInterval(() => {
+    BAND.simBoost = Math.max(0, BAND.simBoost - 0.6);
+    onBpm(Math.round(base + BAND.simBoost + (Math.random() * 4 - 2)));
+  }, 1000);
+  if (!S.profile.bandRest) { BAND.rest = 88; }   // skip the learning minute in the simulation
+  $("bandStress").style.display = "";
+  bandInfo("🧪 سوار تجريبي، مو قراءات حقيقية · simulated band, not real readings");
+}
+function bandStopSim() { clearInterval(BAND.sim); BAND.sim = null; $("bandStress").style.display = "none"; }
+$("bandConnect").onclick = bandConnect;
+$("bandSim").onclick = () => BAND.sim ? (bandStopSim(), bandInfo("سوار رفيق · Rafeeq Band"), $("bpm").textContent = "—") : bandStartSim();
+$("bandStress").onclick = () => { BAND.simBoost = 40; };
 
 /* ---------- buttons ---------- */
 $("go").onclick = start;

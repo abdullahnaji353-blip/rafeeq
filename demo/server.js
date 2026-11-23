@@ -69,6 +69,9 @@ const DEFAULT_DB = {
     noiseCheck: false,     // listen for loud noise and offer calm mode
     cameraOn: true,        // software camera switch (the device adds a physical cover)
     shareOk: false,        // parent allows exporting the weekly summary
+    band: false,           // Rafeeq Band: a Bluetooth heart-rate band (optional)
+    bandRest: 0,           // child's resting heart rate; 0 = learn it in the first minute
+    bandRise: 20,          // % above resting that counts as "stress rising"
   },
   routines: DEFAULT_ROUTINES,
   levels: {},              // "routineId:stepIndex" -> { level, streak, manual }
@@ -211,6 +214,8 @@ app.put("/api/profile", (req, res) => {
   for (const k of allowed) if (k in (req.body || {})) db.profile[k] = req.body[k];
   db.profile.childName = String(db.profile.childName || "").slice(0, 40);
   db.profile.reward = String(db.profile.reward || "").slice(0, 60);
+  db.profile.bandRest = Math.max(0, Math.min(180, Math.round(Number(db.profile.bandRest) || 0)));
+  db.profile.bandRise = Math.max(10, Math.min(60, Math.round(Number(db.profile.bandRise) || 20)));
   saveDb();
   res.json(db.profile);
 });
@@ -349,6 +354,9 @@ app.post("/api/session", (req, res) => {
     finished: steps.length === r.steps.length && steps.every((s) => s.done),
     minutes: Math.max(0, Math.round(Number(b.seconds || 0) / 6) / 10),
     calmDowns: Math.max(0, Number(b.calmDowns) || 0),
+    bandAlerts: Math.max(0, Number(b.bandAlerts) || 0),
+    hrRest: Math.max(0, Number(b.hrRest) || 0),
+    hrMax: Math.max(0, Number(b.hrMax) || 0),
     steps,
   };
   db.sessions.push(session);
@@ -393,6 +401,7 @@ function summary(days) {
       routine: r.name, routineEn: r.nameEn, runs: runs.length,
       finished: runs.filter((s) => s.finished).length,
       calmDowns: runs.reduce((n, s) => n + (s.calmDowns || 0), 0),
+      bandAlerts: runs.reduce((n, s) => n + (s.bandAlerts || 0), 0),
       steps: r.steps.map((st, i) => {
         const tries = runs.map((s) => s.steps[i]).filter(Boolean);
         return {
@@ -420,7 +429,7 @@ app.get("/summary.html", (req, res) => {
   const name = esc(db.profile.childName || "—");
   const body = rs.length ? rs.map((r) => `
     <h2>${esc(r.routine)} · ${esc(r.routineEn)}</h2>
-    <p>${r.runs} runs · ${r.finished} finished · ${r.calmDowns} calm-downs</p>
+    <p>${r.runs} runs · ${r.finished} finished · ${r.calmDowns} calm-downs${r.bandAlerts ? ` · ${r.bandAlerts} early warnings from the band` : ""}</p>
     <table><tr><th>Step · الخطوة</th><th>Done alone</th><th>Help now</th></tr>
     ${r.steps.map((s) => `<tr><td>${esc(s.ar)}<br><small>${esc(s.en)}</small></td><td>${s.alone} / ${s.tries}</td><td>${LV[s.level]}<br><small>${LV_AR[s.level]}</small></td></tr>`).join("")}
     </table>

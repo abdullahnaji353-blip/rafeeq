@@ -65,6 +65,9 @@
     <label><span>صوت الهدوء المفضل<small>Calm sound played in calm mode</small></span><select id="calmSound"><option value="rain">🌧️ مطر · Rain</option><option value="waves">🌊 موج · Waves</option><option value="hum">🎵 همهمة هادية · Soft hum</option><option value="none">بدون · None</option></select></label>
     <label><span>ينتبه للأصوات العالية<small>Noise check: if it stays loud for 1.5 s, Rafeeq starts calm mode (uses the mic, nothing is recorded)</small></span><input type="checkbox" id="noiseCheck"></label>
     <label><span>الكاميرا شغّالة<small>Camera switch: off means Rafeeq can't see anything. The real owl adds a physical cover.</small></span><input type="checkbox" id="cameraOn"></label>
+    <label><span>سوار رفيق (اختياري)<small>Rafeeq Band: a Bluetooth heart-rate band on the wrist, ankle or clipped on. Only if your child is comfortable wearing it; Rafeeq works fully without it.</small></span><input type="checkbox" id="band"></label>
+    <label><span>النبض الطبيعي<small>Resting heart rate. Leave 0 and Rafeeq learns it in the first minute.</small></span><input type="number" id="bandRest" min="0" max="180" style="width:90px"></label>
+    <label><span>حساسية التنبيه %<small>How far above resting counts as stress rising (default 20%). Higher = fewer alerts.</small></span><input type="number" id="bandRise" min="10" max="60" style="width:90px"></label>
     <label><span>أسمح بمشاركة الملخص الأسبوعي<small>Allow sharing the weekly summary with a teacher or therapist</small></span><input type="checkbox" id="shareOk"></label>
     <p class="note" id="saved"></p>
   </section>
@@ -105,8 +108,9 @@ async function load() {
   S = await api("/api/state");
   const p = S.profile;
   for (const k of ["childName", "reward"]) $(k).value = p[k] || "";
+  $("bandRest").value = p.bandRest || 0; $("bandRise").value = p.bandRise || 20;
   for (const k of ["language", "calmSound"]) $(k).value = p[k];
-  for (const k of ["simpleWords", "quiet", "noiseCheck", "cameraOn", "shareOk"]) $(k).checked = !!p[k];
+  for (const k of ["simpleWords", "quiet", "noiseCheck", "cameraOn", "shareOk", "band"]) $(k).checked = !!p[k];
   renderRoutines(); renderLevels(); renderWeek();
 }
 
@@ -119,12 +123,13 @@ document.querySelectorAll("#tabs button").forEach(b => b.onclick = () => {
 
 /* 1. profile: save on every change */
 let saveT = null;
-document.querySelectorAll("#child input, #child select").forEach(el => el.addEventListener(el.type === "text" ? "input" : "change", () => {
+document.querySelectorAll("#child input, #child select").forEach(el => el.addEventListener(el.type === "text" || el.type === "number" ? "input" : "change", () => {
   clearTimeout(saveT);
   saveT = setTimeout(async () => {
     const body = {};
     for (const k of ["childName", "reward", "language", "calmSound"]) body[k] = $(k).value;
-    for (const k of ["simpleWords", "quiet", "noiseCheck", "cameraOn", "shareOk"]) body[k] = $(k).checked;
+    for (const k of ["simpleWords", "quiet", "noiseCheck", "cameraOn", "shareOk", "band"]) body[k] = $(k).checked;
+    body.bandRest = Number($("bandRest").value) || 0; body.bandRise = Number($("bandRise").value) || 20;
     await api("/api/profile", "PUT", body);
     $("saved").textContent = "✓ انحفظ · Saved"; setTimeout(() => $("saved").textContent = "", 1500);
   }, 350);
@@ -219,7 +224,7 @@ async function renderWeek() {
   const s = await api("/api/summary?days=7");
   $("sum").innerHTML = s.routines.length ? s.routines.map(r => `
     <h3 style="margin:10px 0 4px">${esc(r.routine)}</h3>
-    <p class="muted">${r.runs} مرات · ${r.finished} خلّصها · ${r.calmDowns} مرات تهدئة</p>
+    <p class="muted">${r.runs} مرات · ${r.finished} خلّصها · ${r.calmDowns} مرات تهدئة${r.bandAlerts ? ` · ${r.bandAlerts} تنبيهات من السوار` : ""}</p>
     <table><tr><th>الخطوة</th><th>بروحه</th><th>المساعدة الحين</th></tr>${r.steps.map(x => `<tr><td>${esc(x.ar)}</td><td class="${x.alone ? "ok" : ""}">${x.alone} / ${x.tries}</td><td>${LV[x.level].split(" · ")[0]}</td></tr>`).join("")}</table>`).join("")
     : `<p class="muted">ما فيه روتين هالأسبوع للحين. Do a routine on the child screen first.</p>`;
   $("share").disabled = !s.shareOk;

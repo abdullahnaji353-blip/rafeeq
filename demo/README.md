@@ -22,6 +22,7 @@ A working slice of Rafeeq: point a camera at a child doing a routine, and Rafeeq
 | Calm mode | A button, or the optional loud-noise check (loud for 1.5 s), pauses the routine: blue eyes, a breathing circle and the family's chosen calm sound (rain, waves or a soft hum). |
 | Stars for doing it alone | Praise only when a step at a reduced help level was done with no hints. |
 | Weekly summary | Text only: runs, steps done alone, current help level, every change. A printable page for a teacher or therapist opens only if the parent allows sharing. |
+| Rafeeq Band (optional) | Connect any Bluetooth heart-rate band that uses the standard Heart Rate Service (many armbands, chest straps and some watches) with **⌚ Connect band** on the child screen. Chrome or Edge, desktop or Android. Rafeeq learns the child's resting heart rate in the first minute (or the parent sets it). If the average over 15 s stays more than 20% above resting (adjustable), calm mode starts early. 🧪 **Simulated band** fakes readings for trying it or filming without a band, and says so on screen. Only use it if the child is comfortable wearing it: wrist, ankle or clipped to clothes. |
 | Camera switch | Off in the parent app = the server refuses every frame. The real owl adds a physical cover. |
 
 ## Run it (free, local)

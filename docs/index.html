@@ -573,6 +573,7 @@ html[dir=rtl] .fq summary::after{right:auto;left:6px}
 .fqn{color:var(--muted)}
 
 /* sim settings (phone) */
+.hudR{display:flex;gap:6px}.pill.hr b{font-variant-numeric:tabular-nums}.pill.hr.up{color:#FF8A8A}.pill.hr[hidden]{display:none}
 #segW button.dim{opacity:.45}
 .ptabs{display:flex;gap:4px;background:#EEE8E0;border-radius:999px;padding:3px}
 .ptabs button{flex:1;border:0;border-radius:999px;padding:7px 8px;background:none;font:700 13px/1 inherit;color:#5B6478;cursor:pointer}
@@ -711,7 +712,7 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
         <div class="bubble hide" id="bubble" aria-hidden="true"><div class="ar" id="bAr"></div><div class="en" id="bEn"></div></div>
         <div aria-hidden="true" class="redglow" id="redglow"></div>
         <div aria-hidden="true" class="vignette"></div>
-        <div class="hud"><div class="hudL"><span class="pill"><span class="dot" id="hudDot"></span><span id="hudMode"></span></span><span class="pill" id="hudWeek"></span></div><span class="pill" id="hudStars">⭐ 0</span></div>
+        <div class="hud"><div class="hudL"><span class="pill"><span class="dot" id="hudDot"></span><span id="hudMode"></span></span><span class="pill" id="hudWeek"></span></div><span class="hudR"><span class="pill hr" id="hudHr" hidden>💓 <b id="hrV">88</b></span><span class="pill" id="hudStars">⭐ 0</span></span></div>
         <div aria-hidden="true" class="tracker" id="tracker"></div>
         <svg aria-hidden="true" class="meter" viewBox="0 0 66 66"><circle cx="33" cy="33" r="27" fill="rgba(10,15,30,.72)" stroke="rgba(255,255,255,.12)" stroke-width="6"/><circle id="mArc" cx="33" cy="33" r="27" fill="none" stroke="#3EE6C8" stroke-width="6" stroke-linecap="round" stroke-dasharray="169.6" stroke-dashoffset="135" transform="rotate(-90 33 33)" style="transition:stroke-dashoffset .4s,stroke .4s"/><text id="mTxt" x="33" y="38" text-anchor="middle">20</text></svg>
         <div class="overlay" id="overlay"><div class="big" data-i="ov.t"></div><div class="row" style="justify-content:center"><button class="btn primary" id="ovStart" data-i="ov.s"></button><button class="btn ghost" id="ovAuto" data-i="ov.a"></button></div><div class="keys" data-i="ov.k"></div></div>
@@ -743,6 +744,7 @@ html[dir=rtl] .tour{font-family:"Alexandria",sans-serif;padding:7px 16px 7px 7px
       <div class="pset" id="pset" hidden>
         <label class="sw"><span><b data-i="st.af"></b><small data-i="st.afd"></small></span><input type="checkbox" id="setAuto"></label>
         <label class="sw"><span><b data-i="st.ft"></b><small data-i="st.ftd"></small></span><input type="checkbox" id="setReward"></label>
+        <label class="sw"><span><b data-i="st.bd"></b><small data-i="st.bdd"></small></span><input type="checkbox" id="setBand"></label>
         <label class="sw"><span><b data-i="st.q"></b><small data-i="st.qd"></small></span><input type="checkbox" id="setQuiet"></label>
         <label class="sw"><span><b data-i="st.sw"></b><small data-i="st.swd"></small></span><input type="checkbox" id="setSimple"></label>
         <div class="sw col"><b data-i="st.cs"></b><div class="cs" id="setCalm" role="group"><button data-c="rain" data-i="cs.rain"></button><button data-c="waves" data-i="cs.waves"></button><button data-c="hum" data-i="cs.hum"></button><button data-c="off" data-i="cs.off"></button></div></div>
@@ -911,8 +913,9 @@ q8:"Who is it for?",a8:"Young children learning daily routines: autistic childre
 q9:"Why an owl?",a9:"It looks like a friendly toy, not a medical device. Its big LED eyes can show calm or attention without a human face the child has to read.",
 q10:"What happens during a meltdown?",a10:"Rafeeq stops giving instructions. It lowers its voice, dims its eyes to a soft blue and starts a slow breathing game. The routine waits until the child is calm.",
 q11:"Can parents change the routines?",a11:"Yes. In the demo's parent app, parents build their own routines, record their voice for each step, and can pin the help level of any step.",
+q13:"Does the child have to wear the band?",a13:"No, it's optional. Many autistic children dislike things on the wrist, so it can go on the ankle or be clipped to clothes, and Rafeeq works fully without it. Research with wristbands that track heart rate, sweat and movement predicted outbursts 1 to 3 minutes ahead (Northeastern University, 2019 and 2024).",
 q12:"Who made Rafeeq?",a12:"A.Naji, a student in Kuwait, for the ATSN26 Gen-AI & Software Innovation Competition.",
-nF:"Features",nQ:"FAQ","pt.1":"Today","pt.2":"Settings","st.af":"Automatic fading","st.afd":"Remembers each step. 3 mornings alone means less help.","st.ft":"First, then","st.ftd":"A reward after the routine: the iPad","st.q":"Quiet mode","st.qd":"No voice, just lights and nods","st.sw":"Simple words","st.swd":"One-word hints only","st.cs":"Calm sound","cs.rain":"Rain","cs.waves":"Waves","cs.hum":"Hum","cs.off":"Off","st.note":"All of these also run in the real camera demo.","fm.t":"Fading memory","step":"Step","fm.next":"Next morning","fm.up":"needs less help next time","fm.down":"gets one level more help","ft.s":"First we finish, then the iPad 🎁","ft.e":"Now it's iPad time! 🎁","tm.b":"Brush until the circle in my eyes is full","tm.h":"Rub until the circle in my eyes is full","tm.f":"The circle is full! ⭐","auto":"Auto",
+nF:"Features",nQ:"FAQ","pt.1":"Today","pt.2":"Settings","st.bd":"Rafeeq Band","st.bdd":"Optional heart-rate band. A rise starts calm mode early.","f.hr":"Heart rate up on the band: calm mode early","st.af":"Automatic fading","st.afd":"Remembers each step. 3 mornings alone means less help.","st.ft":"First, then","st.ftd":"A reward after the routine: the iPad","st.q":"Quiet mode","st.qd":"No voice, just lights and nods","st.sw":"Simple words","st.swd":"One-word hints only","st.cs":"Calm sound","cs.rain":"Rain","cs.waves":"Waves","cs.hum":"Hum","cs.off":"Off","st.note":"All of these also run in the real camera demo.","fm.t":"Fading memory","step":"Step","fm.next":"Next morning","fm.up":"needs less help next time","fm.down":"gets one level more help","ft.s":"First we finish, then the iPad 🎁","ft.e":"Now it's iPad time! 🎁","tm.b":"Brush until the circle in my eyes is full","tm.h":"Rub until the circle in my eyes is full","tm.f":"The circle is full! ⭐","auto":"Auto",
 nA:"How it thinks",nS:"Safety",priv:"Privacy",
 foot:"Rafeeq رفيق · by A.Naji · ATSN26 · Simulation: responses are scripted to show how the real system behaves."
 },ar:{
@@ -981,8 +984,9 @@ q8:"لمن هو؟",a8:"للأطفال الصغار اللي يتعلمون ال�
 q9:"ليش بومة؟",a9:"شكلها لعبة لطيفة، مو جهاز طبي. وعيونها الـ LED الكبيرة توضح الهدوء أو الانتباه بدون وجه إنسان يحتاج الطفل يقراه.",
 q10:"شنو يصير وقت الانهيار؟",a10:"رفيق يوقف الأوامر. يوطّي صوته، ويخفف عيونه للون أزرق هادي، ويبدأ لعبة تنفس بطيئة. الروتين ينطر لين يهدأ الطفل.",
 q11:"الأهل يقدرون يغيرون الروتين؟",a11:"إي. في تطبيق الأهل بالديمو، الأهل يسوون روتينهم بنفسهم، ويسجّلون صوتهم لكل خطوة، ويقدرون يثبّتون مستوى المساعدة لأي خطوة.",
+q13:"لازم الطفل يلبس السوار؟",a13:"لا، اختياري. أطفال توحد كثير ما يحبون شي على المعصم، فممكن يكون على الكاحل أو مشبوك بالملابس، ورفيق يشتغل كامل بدونه. أبحاث على أساور تقيس النبض والتعرق والحركة توقعت نوبات الغضب قبلها بدقيقة إلى ٣ دقايق (جامعة نورث إيسترن، 2019 و2024).",
 q12:"منو سوّا رفيق؟",a12:"A.Naji، طالب في الكويت، لمسابقة ATSN26 للابتكار في الذكاء الاصطناعي التوليدي والبرمجيات.",
-nF:"المميزات",nQ:"الأسئلة","pt.1":"اليوم","pt.2":"الإعدادات","st.af":"تخفيف تلقائي","st.afd":"يتذكر كل خطوة. ٣ صباحات بروحه يعني مساعدة أقل.","st.ft":"أول، بعدين","st.ftd":"مكافأة بعد الروتين: الآيباد","st.q":"بدون صوت","st.qd":"بدون كلام، بس أضواء وهزة راس","st.sw":"كلمات بسيطة","st.swd":"تلميحات بكلمة وحدة بس","st.cs":"صوت الهدوء","cs.rain":"مطر","cs.waves":"موج","cs.hum":"همهمة","cs.off":"بدون","st.note":"كل هذي تشتغل بعد في ديمو الكاميرا الحقيقي.","fm.t":"ذاكرة التخفيف","step":"الخطوة","fm.next":"الصبح اللي بعده","fm.up":"بيحتاج مساعدة أقل المرة الجاية","fm.down":"بياخذ مساعدة أكثر بمستوى واحد","ft.s":"أول نخلص، بعدين الآيباد 🎁","ft.e":"الحين وقت الآيباد! 🎁","tm.b":"فرّش لين تكمل الدائرة في عيوني","tm.h":"افرك لين تكمل الدائرة في عيوني","tm.f":"الدائرة كملت! ⭐","auto":"تلقائي",
+nF:"المميزات",nQ:"الأسئلة","pt.1":"اليوم","pt.2":"الإعدادات","st.bd":"سوار رفيق","st.bdd":"سوار نبض اختياري. إذا ارتفع النبض، يبدأ الهدوء بدري.","f.hr":"النبض ارتفع على السوار: هدوء بدري","st.af":"تخفيف تلقائي","st.afd":"يتذكر كل خطوة. ٣ صباحات بروحه يعني مساعدة أقل.","st.ft":"أول، بعدين","st.ftd":"مكافأة بعد الروتين: الآيباد","st.q":"بدون صوت","st.qd":"بدون كلام، بس أضواء وهزة راس","st.sw":"كلمات بسيطة","st.swd":"تلميحات بكلمة وحدة بس","st.cs":"صوت الهدوء","cs.rain":"مطر","cs.waves":"موج","cs.hum":"همهمة","cs.off":"بدون","st.note":"كل هذي تشتغل بعد في ديمو الكاميرا الحقيقي.","fm.t":"ذاكرة التخفيف","step":"الخطوة","fm.next":"الصبح اللي بعده","fm.up":"بيحتاج مساعدة أقل المرة الجاية","fm.down":"بياخذ مساعدة أكثر بمستوى واحد","ft.s":"أول نخلص، بعدين الآيباد 🎁","ft.e":"الحين وقت الآيباد! 🎁","tm.b":"فرّش لين تكمل الدائرة في عيوني","tm.h":"افرك لين تكمل الدائرة في عيوني","tm.f":"الدائرة كملت! ⭐","auto":"تلقائي",
 nA:"كيف يفكر",nS:"الأمان",priv:"الخصوصية",
 foot:"رفيق · إعداد A.Naji · ATSN26 · محاكاة: الردود مكتوبة مسبقاً عشان توضح كيف يشتغل النظام الحقيقي."}};
 let lang="en";const t=k=>(L[lang][k]??L.en[k]??k);
@@ -1122,7 +1126,7 @@ let typeIv=null;function say(ar,en,vi){const sr=document.getElementById("srNow")
   if(!ms&&!VBUF&&"speechSynthesis"in window){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(ar);const v=speechSynthesis.getVoices().find(v=>/^ar/i.test(v.lang));if(v)u.voice=v;u.lang=v?v.lang:"ar-SA";u.rate=.9;speechSynthesis.speak(u);}catch(e){}}}
  owl.talkUntil=performance.now()+(ms||Math.max(1200,ar.length*70));}
 const hush=()=>$("bubble").classList.add("hide");
-function setStress(v){S.stress=clamp(v,5,95);const s=S.stress;$("mTxt").textContent=Math.round(s);$("mArc").setAttribute("stroke-dashoffset",169.6*(1-s/100));
+function setStress(v){S.stress=clamp(v,5,95);const s=S.stress;{const h=$("hrV");if(h){const b=Math.round(86+s*.5);h.textContent=b;$("hudHr").classList.toggle("up",b>104);}}$("mTxt").textContent=Math.round(s);$("mArc").setAttribute("stroke-dashoffset",169.6*(1-s/100));
  $("mArc").setAttribute("stroke",s>60?"#FF5A6A":s>40?"#FFB27A":"#3EE6C8");$("redglow").style.opacity=s>55&&!S.calm?(s-55)/40:0;}
 const enableActs=on=>document.querySelectorAll(".acts button").forEach(b=>b.disabled=!on);
 function setRoom(key){$("room").innerHTML=ROOMS[R[key].room];buildItems(key);setProp(null);resetKid(key);W().classList.remove("on");}
@@ -1137,7 +1141,7 @@ function prompt(){if(!S||S.finished||S.calm)return;const r=R[S.key],i=S.step,lv0
  if(lv==="silent"){hush();log({step:r.en[i],status:"in_progress",hint_level:"silent",say:""},`${SET.auto?"auto level":"week "+S.week}: child on track, staying quiet`);return;}
  pointAt(TGT[S.key][i],1800);const line=r[lv][i];say(line[0],line[1],r.v+{full:0,light:4,nudge:8}[lv]+i);S.hints++;log({step:r.en[i],status:"in_progress",hint_level:lv,say:line[0]},`${SET.auto?"auto":"week "+S.week}: ${lv} hint${SET.simple?" (simple words)":""}`);}
 /* ===== SIM SETTINGS: the parent app's switches ===== */
-var SET={auto:false,reward:false,quiet:false,simple:false,calm:"rain"};
+var SET={auto:false,reward:false,quiet:false,simple:false,calm:"rain",band:false};
 const LVN=["full","light","nudge","silent"];
 var FM={};try{Object.assign(SET,JSON.parse(localStorage.getItem("rafeeqSet")||"{}"));FM=JSON.parse(localStorage.getItem("rafeeqFade")||"{}");}catch(e){}
 const saveSet=()=>{try{localStorage.setItem("rafeeqSet",JSON.stringify(SET));localStorage.setItem("rafeeqFade",JSON.stringify(FM));}catch(e){}};
@@ -1151,13 +1155,13 @@ function calmSoundOn(){if(!sound||SET.calm==="off")return;try{AC=AC||new(window.
   if(SET.calm==="waves"){const lfo=ac.createOscillator(),dep=ac.createGain();lfo.frequency.value=.12;dep.gain.value=.1;lfo.connect(dep);dep.connect(out.gain);lfo.start();calmSnd.push(lfo);}}
  calmSnd.push({stop:()=>{try{out.gain.linearRampToValueAtTime(0,ac.currentTime+.8);setTimeout(()=>out.disconnect(),1000);}catch(e){}}});}catch(e){}}
 function calmSoundOff(){calmSnd.forEach(n=>{try{n.stop();}catch(e){}});calmSnd=[];}
-function renderSet(){const m=id=>document.getElementById(id);if(!m("setAuto"))return;m("setAuto").checked=SET.auto;m("setReward").checked=SET.reward;m("setQuiet").checked=SET.quiet;m("setSimple").checked=SET.simple;
+function renderSet(){const m=id=>document.getElementById(id);if(!m("setAuto"))return;m("setAuto").checked=SET.auto;m("setReward").checked=SET.reward;m("setQuiet").checked=SET.quiet;m("setSimple").checked=SET.simple;m("setBand").checked=SET.band;const hh=m("hudHr");if(hh)hh.hidden=!SET.band;
  document.querySelectorAll("#setCalm button").forEach(b=>{b.classList.toggle("on",b.dataset.c===SET.calm);b.setAttribute("aria-pressed",b.dataset.c===SET.calm);});
  document.querySelectorAll("#segW button").forEach(b=>b.classList.toggle("dim",SET.auto));
  const key=S?S.key:sel.r,r=R[key],f=fm(key);m("fmem").innerHTML=SET.auto?`<b>${t("fm.t")}</b>`+r.en.map((x,i)=>`<div class="r"><span>${i+1}. ${lang==="ar"?r.ar[i]:x}</span><span class="dots" title="${f[i].st}/3">${"●".repeat(f[i].st)}${"○".repeat(3-f[i].st)} · ${t("lv"+(f[i].lv+1))}</span></div>`).join(""):"";
  const hw=m("hudWeek");if(hw)hw.textContent=SET.auto?t("wk")+" "+t("auto"):t("wk")+" "+(S&&!S.finished?S.week:sel.w);}
 function bindSet(){const m=id=>document.getElementById(id);if(!m("setAuto")||m("setAuto").dataset.b)return;m("setAuto").dataset.b=1;
- [["setAuto","auto"],["setReward","reward"],["setQuiet","quiet"],["setSimple","simple"]].forEach(([id,k])=>m(id).addEventListener("change",()=>{SET[k]=m(id).checked;saveSet();renderSet();}));
+ [["setAuto","auto"],["setReward","reward"],["setQuiet","quiet"],["setSimple","simple"],["setBand","band"]].forEach(([id,k])=>m(id).addEventListener("change",()=>{SET[k]=m(id).checked;saveSet();renderSet();}));
  document.querySelectorAll("#setCalm button").forEach(b=>b.onclick=()=>{SET.calm=b.dataset.c;saveSet();renderSet();});
  const tab=on=>{m("ptToday").classList.toggle("on",!on);m("ptSet").classList.toggle("on",on);m("ptToday").setAttribute("aria-selected",!on);m("ptSet").setAttribute("aria-selected",on);m("pset").hidden=!on;
   document.querySelector(".phone .sum").style.display=on?"none":"";m("feed").style.display=on?"none":"";if(on)renderSet();};
@@ -1246,7 +1250,7 @@ async function act(a){if(!S||S.finished||S.calm||S.over||S.busy)return;const r=R
  else if(a==="overload"){clearStuck();KA.armL=null;KA.armR=null;overload();}}
 function overload(){S.over=true;S.calmStart=performance.now();setMode("alert");sfx("alert");tgt.ears=1;tgt.mood=-1;hush();vision("hands_on_ears · stress ↑",true);$("stage").classList.add("shake");
  log({audio_db:78,source:"hairdryer next door",child:"covering ears"},"environment getting loud",true);
- let v=S.stress;const iv=setInterval(()=>{if(!S||!S.over){clearInterval(iv);return;}v+=11;setStress(v);if(v>=88){clearInterval(iv);$("stage").classList.remove("shake");
+ let v=S.stress;const lim=SET.band?62:88;const iv=setInterval(()=>{if(!S||!S.over){clearInterval(iv);return;}v+=11;setStress(v);if(v>=lim){clearInterval(iv);$("stage").classList.remove("shake");if(SET.band){log({band:"heart_rate",bpm:Math.round(86+v*.5),resting:88,rise:"+"+Math.round((86+v*.5)/88*100-100)+"%"},"band: heart rate rising, act before overload",true);addFeed("💓",()=>t("f.hr"),()=>t("f.hr"));}
   log({signals:["hands_on_ears","rocking","raised_voice"],stress_score:.88,action:"enter_calm_mode"},"early overload signs",true);vision("overload 0.88 → calm",true);
   addFeed("🫧",()=>t("f.over"),()=>t("f.over"));later(enterCalm,500);}},170);timers.push(iv);}
 function enterCalm(){if(!S)return;S.calm=true;S.calms++;sfx("calm");calmSoundOn();setMode("calm");$("calmglow").style.opacity=1;$("breath").style.opacity=1;owl.glow=1;owl.sleepy=.7;
@@ -1554,6 +1558,8 @@ const FE=[
  ["l","d","Works offline","Gemma 3 runs on the device. No internet, no account.","يشتغل بدون إنترنت","Gemma 3 يشتغل على الجهاز. بدون إنترنت ولا حساب."],
  ["l","d","Simple-words mode","Even shorter lines for children with Down syndrome or little speech.","وضع الكلمات البسيطة","جمل أقصر للأطفال اللي عندهم متلازمة داون أو كلامهم قليل."],
  ["l","d","English mode","For bilingual homes.","وضع إنجليزي","للبيوت اللي تتكلم لغتين."],
+ ["c","d","Rafeeq Band","An optional Bluetooth heart-rate band on the wrist, ankle or clipped on. A rise above the child's resting level starts calm mode early.","سوار رفيق","سوار نبض بالبلوتوث اختياري، على المعصم أو الكاحل أو مشبوك. إذا ارتفع النبض فوق الطبيعي، رفيق يبدأ وضع الهدوء بدري."],
+ ["c","p","Sweat and movement sensors","Skin sweat (EDA) and motion on the band: the signals research uses to spot stress minutes ahead.","حساس التعرق والحركة","تعرق الجلد والحركة على السوار: الإشارات اللي تستخدمها الأبحاث عشان تكشف التوتر قبلها بدقايق."],
  ["c","p","Hands-over-ears check","Spot stress from body language, not only from loud noise.","ملاحظة اليدين على الأذن","يلاحظ التوتر من حركة الجسم، مو بس من الصوت العالي."],
  ["l","p","Local Gulf voice","A Gulf-Arabic voice on the device that can say any new line, offline.","صوت خليجي محلي","صوت خليجي على الجهاز يقدر يقول أي جملة جديدة، بدون إنترنت."]];
 let fc="all";
@@ -1565,7 +1571,7 @@ function renderFeatures(){const ar=lang==="ar";const list=FE.filter(f=>fc==="all
 $$("fChips").querySelectorAll("button").forEach(b=>b.onclick=()=>{fc=b.dataset.c;renderFeatures();});
 window.featuresFilter=c=>{fc=c;renderFeatures();};
 /* FAQ */
-const FQ=[1,2,3,4,5,6,7,8,9,10,11,12];
+const FQ=[1,2,3,4,5,6,7,8,9,10,13,11,12];
 function renderFaq(){$$("faqList").innerHTML=FQ.map(i=>`<details class="fq"><summary>${t("q"+i)}</summary><p>${t("a"+i)}</p></details>`).join("");filterFaq();}
 function filterFaq(){const q=$$("faqQ").value.trim().toLowerCase();let n=0;document.querySelectorAll("#faqList .fq").forEach(d=>{const hit=!q||d.textContent.toLowerCase().includes(q);d.hidden=!hit;if(hit)n++;});$$("faqNone").hidden=n>0;}
 $$("faqQ").addEventListener("input",filterFaq);
