@@ -5,12 +5,24 @@ A working slice of Rafeeq: point a camera at a child doing a routine, and Rafeeq
 **Runs 100% free by default** on a local model through [Ollama](https://ollama.com). No API key, no bill.
 
 ## What it does
-- Pick a routine: brushing teeth, washing hands or packing the school bag
-- Every 3 seconds the app sends one camera frame to your own computer
-- The model judges the current step (done / in progress / off task / not visible) and writes a short Kuwaiti-Arabic coaching line
-- The phone speaks the line, ticks off finished steps and celebrates
-- **Hint level** shows fading help: full guidance, light hints, or silent unless stuck
-- A simple parent report appears at the end
+- **Child screen** (`/`): pick a routine, and every 3 seconds one camera frame goes to the model on your own computer. It judges the current step (done / in progress / off task / not visible) and Rafeeq says a short line.
+- **Parent app** (`/parent.html`): everything below is set up here, and saved only on this computer in `demo/data/`.
+
+### Features
+| Feature | How it works |
+|---|---|
+| Automatic fading | Each step has a help level: full guidance, light hint, or silent unless stuck. Done alone 3 mornings in a row → one level less. A hard morning (3+ hints, or not finished) → one level back. Every change is logged; parents can pin or undo any level. |
+| Routine builder | Parents add or edit routines and steps: what Rafeeq says, an English description for the camera, and an optional timer. |
+| Mum's or Dad's voice | Record up to 10 seconds per step. At full guidance, Rafeeq plays the parent's recording instead of his own voice. |
+| Eye-ring timer | Timed steps (brushing 120 s, rubbing hands 20 s) fill a ring around Rafeeq's eyes. The step only counts as done when the ring is full. |
+| First, then | Parents set a reward. Rafeeq says "first teeth, then the iPad" at the start and celebrates it at the end. |
+| Quiet mode | No voice at all: text in the bubble, a nod and eye colours, for sound-sensitive children. |
+| Simple words | Lines of 1 to 3 words (Down syndrome, little speech). |
+| English mode | Rafeeq speaks simple English instead of Kuwaiti Arabic. |
+| Calm mode | A button, or the optional loud-noise check (loud for 1.5 s), pauses the routine: blue eyes, a breathing circle and the family's chosen calm sound (rain, waves or a soft hum). |
+| Stars for doing it alone | Praise only when a step at a reduced help level was done with no hints. |
+| Weekly summary | Text only: runs, steps done alone, current help level, every change. A printable page for a teacher or therapist opens only if the parent allows sharing. |
+| Camera switch | Off in the parent app = the server refuses every frame. The real owl adds a physical cover. |
 
 ## Run it (free, local)
 1. Install [Node.js 18+](https://nodejs.org) and [Ollama](https://ollama.com/download)
@@ -24,7 +36,9 @@ A working slice of Rafeeq: point a camera at a child doing a routine, and Rafeeq
    npm install
    npm start
    ```
-4. Open **http://localhost:3000**, pick a routine and tap **ابدأ** (Start)
+4. Open **http://localhost:3000**, pick a routine and tap **ابدأ** (Start). Open **http://localhost:3000/parent.html** to set up the child, routines and voices.
+
+**Try it without a model:** `PROVIDER=mock npm start` gives scripted answers, only to click through the app. It is not the AI.
 
 ### Other free models
 Set `OLLAMA_MODEL` in a `.env` file (see `.env.example`):
@@ -48,4 +62,4 @@ For the highest accuracy, set `PROVIDER=claude` and your own `ANTHROPIC_API_KEY`
 
 ## Notes
 - The voice uses the device's built-in Arabic text-to-speech, because the lines are written live by the AI. (The website simulation uses a recorded Gulf-Arabic voice, see the main README.) A local Gulf-Arabic TTS model is the next upgrade.
-- Frames are processed only while a routine is running, and nothing is saved.
+- Frames are processed only while a routine is running, and no picture is ever saved. The only things stored are the parent's settings, routines, voice recordings and the text history, all in `demo/data/` on this computer (git-ignored).

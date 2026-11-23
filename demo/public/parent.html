@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>رفيق · تطبيق الأهل</title>
+<style>
+  :root{--bg:#0F1733;--card:#18224A;--ink:#F3F5FB;--muted:#A9B4D6;--orange:#FF7A2F;--teal:#3EE6C8;--ok:#3ED6B4;--line:rgba(255,255,255,.12)}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Arabic',system-ui,sans-serif;padding:16px 16px 60px}
+  main{max-width:760px;margin:auto}
+  a{color:var(--orange)}
+  h1{margin:6px 0 4px;font-size:28px}
+  h2{margin:0 0 12px;font-size:20px}
+  .sub{color:var(--muted);margin:0 0 16px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+  .tabs button{border-radius:999px;padding:9px 16px}
+  .tabs button.on{background:#fff;color:var(--bg)}
+  section{display:none;background:var(--card);border-radius:20px;padding:18px}
+  section.on{display:block}
+  label{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  label small{display:block;color:var(--muted);font-size:13px}
+  label>span{flex:1;min-width:0}
+  label input[type=text],label select{width:46%;max-width:280px;flex:none}
+  input[type=text],input[type=number],select{font:inherit;font-size:16px;border-radius:10px;border:1px solid var(--line);padding:9px 10px;background:#0F1733;color:var(--ink)}
+  input[type=checkbox]{width:24px;height:24px;accent-color:var(--orange)}
+  button{font:inherit;font-size:15px;border-radius:10px;border:1px solid var(--line);padding:8px 12px;background:#22306A;color:var(--ink);cursor:pointer}
+  button.main{background:var(--orange);border-color:var(--orange);color:#fff;font-weight:700}
+  button.rec{background:#5E1A20}
+  .routine{border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+  .rhead{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+  .step{display:grid;grid-template-columns:1.4fr 1.4fr 90px auto;gap:6px;align-items:center;margin:6px 0}
+  .step input{width:100%}
+  .lvrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .pill{font-size:12px;border-radius:999px;padding:3px 9px;background:rgba(255,255,255,.08);color:var(--muted)}
+  .pill.auto{background:rgba(62,214,180,.15);color:#A8F0DF}
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{text-align:right;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+  .muted{color:var(--muted);font-size:14px}
+  .ok{color:var(--ok)}
+  .note{font-size:13px;color:var(--muted);margin-top:12px}
+  @media (max-width:600px){.step{grid-template-columns:1fr 1fr}.step .sec{grid-column:1}}
+</style>
+</head>
+<body><main>
+  <a href="./">← شاشة الطفل · Child screen</a>
+  <h1>تطبيق الأهل</h1>
+  <p class="sub">Parent app · كل شي محفوظ على هالجهاز بس. Everything stays on this computer.</p>
+
+  <div class="tabs" id="tabs">
+    <button data-t="child" class="on">👦 الطفل</button>
+    <button data-t="routines">📋 الروتين</button>
+    <button data-t="help">📉 مستوى المساعدة</button>
+    <button data-t="week">📊 الملخص الأسبوعي</button>
+  </div>
+
+  <!-- 1. Child & modes -->
+  <section id="child" class="on">
+    <h2>الطفل والإعدادات · Child and modes</h2>
+    <label><span>اسم الطفل<small>Child's name: Rafeeq says it in each line</small></span><input type="text" id="childName" maxlength="40"></label>
+    <label><span>اللغة<small>Language Rafeeq speaks</small></span><select id="language"><option value="ar">كويتي · Kuwaiti Arabic</option><option value="en">English</option></select></label>
+    <label><span>كلمات بسيطة<small>Simple words: 1 to 3 words a line (Down syndrome, little speech)</small></span><input type="checkbox" id="simpleWords"></label>
+    <label><span>بدون صوت<small>Quiet mode: no voice, only lights and nods (sound-sensitive kids)</small></span><input type="checkbox" id="quiet"></label>
+    <label><span>أول، بعدين<small>First, then: the reward after the routine, e.g. "الآيباد" or "playing outside"</small></span><input type="text" id="reward" maxlength="60" placeholder="مثلاً: الآيباد"></label>
+    <label><span>صوت الهدوء المفضل<small>Calm sound played in calm mode</small></span><select id="calmSound"><option value="rain">🌧️ مطر · Rain</option><option value="waves">🌊 موج · Waves</option><option value="hum">🎵 همهمة هادية · Soft hum</option><option value="none">بدون · None</option></select></label>
+    <label><span>ينتبه للأصوات العالية<small>Noise check: if it stays loud for 1.5 s, Rafeeq starts calm mode (uses the mic, nothing is recorded)</small></span><input type="checkbox" id="noiseCheck"></label>
+    <label><span>الكاميرا شغّالة<small>Camera switch: off means Rafeeq can't see anything. The real owl adds a physical cover.</small></span><input type="checkbox" id="cameraOn"></label>
+    <label><span>أسمح بمشاركة الملخص الأسبوعي<small>Allow sharing the weekly summary with a teacher or therapist</small></span><input type="checkbox" id="shareOk"></label>
+    <p class="note" id="saved"></p>
+  </section>
+
+  <!-- 2. Routine builder -->
+  <section id="routines">
+    <h2>صانع الروتين · Routine builder</h2>
+    <p class="muted">لكل خطوة: الكلام اللي يقوله رفيق، ووصف بالإنجليزي للكاميرا، ومؤقت إذا تبي (مثلاً التفريش ١٢٠ ثانية). 🎙️ سجّل صوتك للخطوة عشان رفيق يشغّله بدل صوته.<br>
+    Each step: what Rafeeq says, an English description for the camera, and an optional timer. 🎙️ Record your own voice for a step and Rafeeq plays it instead of his.</p>
+    <div id="rlist"></div>
+    <button class="main" id="addR">+ روتين جديد · New routine</button>
+  </section>
+
+  <!-- 3. Help level & fading log -->
+  <section id="help">
+    <h2>مستوى المساعدة · Help level</h2>
+    <p class="muted" id="rule"></p>
+    <div id="levels"></div>
+    <h2 style="margin-top:20px">التغييرات · Every change</h2>
+    <div id="log" class="muted"></div>
+  </section>
+
+  <!-- 4. Weekly summary -->
+  <section id="week">
+    <h2>الملخص الأسبوعي · Weekly summary</h2>
+    <div id="sum"></div>
+    <p><button class="main" id="share">📤 افتح صفحة للمعلمة أو الأخصائي · Open a page to share</button></p>
+    <p class="note">ملخص مكتوب فقط، بدون صور. Text only, no pictures. Sharing works only when you allow it in the first tab.</p>
+  </section>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const LV = ["توجيه كامل · Full", "تلميح خفيف · Light hint", "ساكت إلا إذا احتاج · Silent unless stuck"];
+let S = null;
+const api = (u, method = "GET", body) => fetch(u, { method, headers: { "Content-Type": "application/json" }, body: body ? JSON.stringify(body) : undefined }).then(r => r.json());
+
+async function load() {
+  S = await api("/api/state");
+  const p = S.profile;
+  for (const k of ["childName", "reward"]) $(k).value = p[k] || "";
+  for (const k of ["language", "calmSound"]) $(k).value = p[k];
+  for (const k of ["simpleWords", "quiet", "noiseCheck", "cameraOn", "shareOk"]) $(k).checked = !!p[k];
+  renderRoutines(); renderLevels(); renderWeek();
+}
+
+/* tabs */
+document.querySelectorAll("#tabs button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("#tabs button").forEach(x => x.classList.toggle("on", x === b));
+  document.querySelectorAll("section").forEach(s => s.classList.toggle("on", s.id === b.dataset.t));
+  if (b.dataset.t === "week") renderWeek();
+});
+
+/* 1. profile: save on every change */
+let saveT = null;
+document.querySelectorAll("#child input, #child select").forEach(el => el.addEventListener(el.type === "text" ? "input" : "change", () => {
+  clearTimeout(saveT);
+  saveT = setTimeout(async () => {
+    const body = {};
+    for (const k of ["childName", "reward", "language", "calmSound"]) body[k] = $(k).value;
+    for (const k of ["simpleWords", "quiet", "noiseCheck", "cameraOn", "shareOk"]) body[k] = $(k).checked;
+    await api("/api/profile", "PUT", body);
+    $("saved").textContent = "✓ انحفظ · Saved"; setTimeout(() => $("saved").textContent = "", 1500);
+  }, 350);
+}));
+
+/* 2. routines */
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+function stepRow(s, ri, i) {
+  return `<div class="step" data-i="${i}">
+    <input type="text" class="ar" value="${esc(s.ar)}" placeholder="الخطوة بالعربي">
+    <input type="text" class="en" dir="ltr" value="${esc(s.en)}" placeholder="What the camera should see">
+    <input type="number" class="sec" min="0" max="600" value="${s.seconds || ""}" placeholder="⏱️ s" title="Timer seconds">
+    <span>${ri ? `<button class="rec" data-rec="${i}" title="Record your voice">🎙️</button>${s.voice ? ` <button data-play="${i}">▶️</button> <button data-del="${i}" title="Delete recording">🗑️</button>` : ""}` : ""} <button data-rm="${i}" title="Remove step">✕</button></span>
+  </div>`;
+}
+function renderRoutines() {
+  $("rlist").innerHTML = S.routines.map(r => `
+    <div class="routine" data-id="${r.id}">
+      <div class="rhead"><span><input type="text" class="icon" value="${esc(r.icon)}" style="width:56px"> <input type="text" class="name" value="${esc(r.name)}"> <input type="text" class="nameEn" dir="ltr" value="${esc(r.nameEn)}"></span>
+      <span><button class="save main">حفظ · Save</button> <button class="delr">🗑️</button></span></div>
+      <div class="steps">${r.steps.map((s, i) => stepRow(s, r.id, i)).join("")}</div>
+      <button class="adds">+ خطوة · Add step</button>
+    </div>`).join("");
+  document.querySelectorAll(".routine").forEach(wireRoutine);
+}
+function readRoutine(el) {
+  return {
+    icon: el.querySelector(".icon").value, name: el.querySelector(".name").value, nameEn: el.querySelector(".nameEn").value,
+    steps: [...el.querySelectorAll(".step")].map(s => ({ ar: s.querySelector(".ar").value, en: s.querySelector(".en").value, seconds: s.querySelector(".sec").value }))
+  };
+}
+function wireRoutine(el) {
+  const id = el.dataset.id;
+  el.querySelector(".save").onclick = async () => { const r = await api(`/api/routines/${id}`, "PUT", readRoutine(el)); if (r.error) alertBox(el, r.error); else { await load(); } };
+  el.querySelector(".delr").onclick = async () => { if (confirmBox(el, "delete")) { await api(`/api/routines/${id}`, "DELETE"); await load(); } };
+  el.querySelector(".adds").onclick = () => el.querySelector(".steps").insertAdjacentHTML("beforeend", stepRow({ ar: "", en: "" }, null, el.querySelectorAll(".step").length));
+  el.addEventListener("click", async e => {
+    const b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.rm != null) b.closest(".step").remove();
+    if (b.dataset.play != null) new Audio(`/api/voice/${id}/${b.dataset.play}?t=${Date.now()}`).play();
+    if (b.dataset.del != null) { await api(`/api/voice/${id}/${b.dataset.del}`, "DELETE"); await load(); }
+    if (b.dataset.rec != null) record(b, id, b.dataset.rec);
+  });
+}
+// delete asks once, inline (no browser pop-ups)
+function confirmBox(el, what) {
+  if (el.dataset.sure === what) return true;
+  el.dataset.sure = what; const b = el.querySelector(".delr"); b.textContent = "متأكد؟ Sure?"; setTimeout(() => { el.dataset.sure = ""; b.textContent = "🗑️"; }, 3000);
+  return false;
+}
+function alertBox(el, msg) { el.querySelector(".rhead").insertAdjacentHTML("afterend", `<p class="muted" style="color:#FF8A8A">${esc(msg)}</p>`); }
+$("addR").onclick = async () => {
+  await api("/api/routines", "POST", { icon: "⭐", name: "روتين جديد", nameEn: "New routine", steps: [{ ar: "الخطوة الأولى", en: "First step" }] });
+  await load();
+};
+
+/* parent voice recording, up to 10 s per step */
+async function record(btn, rid, i) {
+  if (btn.rec) { btn.rec.stop(); return; }
+  try {
+    const st = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const rec = new MediaRecorder(st), chunks = [];
+    rec.ondataavailable = e => chunks.push(e.data);
+    rec.onstop = async () => {
+      st.getTracks().forEach(t => t.stop()); btn.rec = null; btn.textContent = "⏳";
+      const blob = new Blob(chunks, { type: rec.mimeType || "audio/webm" });
+      const data = await new Promise(r => { const f = new FileReader(); f.onload = () => r(f.result); f.readAsDataURL(blob); });
+      await api(`/api/voice/${rid}/${i}`, "POST", { audio: data });
+      await load();
+    };
+    rec.start(); btn.rec = rec; btn.textContent = "⏹️ وقّف"; setTimeout(() => btn.rec && btn.rec.stop(), 10000);
+  } catch (e) { btn.textContent = "🚫"; btn.title = e.message; }
+}
+
+/* 3. help levels */
+function renderLevels() {
+  $("rule").textContent = `القاعدة: إذا سوّى الخطوة بروحه ${S.fade.aloneStreakUp} مرات ورا بعض، رفيق يقلّل المساعدة. إذا كان الصبح صعب (${S.fade.hardHints} تلميحات أو أكثر، أو ما خلّص)، يرجع مستوى واحد. تقدر تثبّت أي مستوى بنفسك. · Rule: done alone ${S.fade.aloneStreakUp} times in a row → less help; a hard morning → one level back. You can pin any level yourself.`;
+  $("levels").innerHTML = S.routines.map(r => `<h3 style="margin:14px 0 4px">${r.icon} ${esc(r.name)}</h3>` + r.steps.map((s, i) => `
+    <div class="lvrow"><span>${i + 1}. ${esc(s.ar)} <span class="pill ${s.manual ? "" : "auto"}">${s.manual ? "ثابت · pinned" : `تلقائي · auto · ${s.streak}/${S.fade.aloneStreakUp}`}</span></span>
+    <span><select data-r="${r.id}" data-i="${i}">${LV.map((l, k) => `<option value="${k}" ${k === s.level ? "selected" : ""}>${l}</option>`).join("")}</select>
+    ${s.manual ? `<button data-auto="${r.id}:${i}">↩️ تلقائي · Auto</button>` : ""}</span></div>`).join("")).join("");
+  $("levels").querySelectorAll("select").forEach(sel => sel.onchange = async () => { await api(`/api/levels/${sel.dataset.r}/${sel.dataset.i}`, "PUT", { level: Number(sel.value) }); await load(); });
+  $("levels").querySelectorAll("[data-auto]").forEach(b => b.onclick = async () => { const [r, i] = b.dataset.auto.split(":"); await api(`/api/levels/${r}/${i}`, "PUT", { auto: true }); await load(); });
+  const name = id => (S.routines.find(r => r.id === id) || {}).name || id;
+  $("log").innerHTML = S.fadeLog.length ? `<table><tr><th>الوقت</th><th>الروتين</th><th>الخطوة</th><th>التغيير</th><th>ليش</th></tr>` +
+    S.fadeLog.slice().reverse().map(c => `<tr><td>${new Date(c.t).toLocaleString("en-GB", { dateStyle: "short", timeStyle: "short" })}</td><td>${esc(name(c.routine))}</td><td>${c.step + 1}</td><td>${c.from == null ? "" : LV[c.from].split(" · ")[0] + " ← "}${LV[c.to].split(" · ")[0]}</td><td>${esc(c.why)}</td></tr>`).join("") + "</table>"
+    : "ما فيه تغييرات للحين. No changes yet.";
+}
+
+/* 4. weekly summary */
+async function renderWeek() {
+  const s = await api("/api/summary?days=7");
+  $("sum").innerHTML = s.routines.length ? s.routines.map(r => `
+    <h3 style="margin:10px 0 4px">${esc(r.routine)}</h3>
+    <p class="muted">${r.runs} مرات · ${r.finished} خلّصها · ${r.calmDowns} مرات تهدئة</p>
+    <table><tr><th>الخطوة</th><th>بروحه</th><th>المساعدة الحين</th></tr>${r.steps.map(x => `<tr><td>${esc(x.ar)}</td><td class="${x.alone ? "ok" : ""}">${x.alone} / ${x.tries}</td><td>${LV[x.level].split(" · ")[0]}</td></tr>`).join("")}</table>`).join("")
+    : `<p class="muted">ما فيه روتين هالأسبوع للحين. Do a routine on the child screen first.</p>`;
+  $("share").disabled = !s.shareOk;
+  $("share").title = s.shareOk ? "" : "Turn on sharing in the first tab";
+}
+$("share").onclick = () => window.open("/summary.html?days=7", "_blank");
+
+load();
+</script>
+</body>
+</html>
