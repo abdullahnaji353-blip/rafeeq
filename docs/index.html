@@ -246,7 +246,7 @@ header.bar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-ite
 .scene{position:sticky;top:0;height:100vh;overflow:hidden;background:#0F1733}
 .sbox{position:absolute;left:50%;top:50%;width:max(100vw,177.78vh);height:max(56.25vw,100vh);transform:translate(-50%,-50%)}
 .sroom,.sroom>div{position:absolute;inset:0}
-.sroom{filter:brightness(.62) saturate(.85) contrast(1.05);transition:filter .8s}
+.sroom{filter:brightness(.82) saturate(.95) contrast(1.03);transition:filter .8s}
 .scene.lit .sroom{filter:brightness(.92) saturate(1)}
 .grade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(15,23,51,.55) 0%,rgba(15,23,51,0) 22%,rgba(15,23,51,0) 50%,rgba(15,23,51,.92) 100%)}
 .skid{position:absolute;left:12%;bottom:4%;width:20%;transition:transform .8s cubic-bezier(.3,1.2,.5,1),opacity .6s;transform:translateX(-140%);opacity:0}
@@ -473,7 +473,7 @@ html[dir=rtl] .sndBtn{font-family:"Alexandria",sans-serif}
 .sndBtn::before{content:"";width:18px;height:18px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 5V4L7 9H3z'/%3E%3Cpath d='M16 8l6 8M22 8l-6 8' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 5V4L7 9H3z'/%3E%3Cpath d='M16 8l6 8M22 8l-6 8' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E") center/contain no-repeat}
 .sndBtn.on{background:var(--owl);color:#fff}
 .sndBtn.on::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 5V4L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 9v6h4l5 5V4L7 9H3z'/%3E%3Cpath d='M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E")}
-.sndBtn{left:24px;transform:translateY(20px)}.sndBtn.show{transform:none}html[dir=rtl] .sndBtn{left:auto;right:24px}
+.sndBtn{left:24px;transform:translateY(20px)}.sndBtn.show{transform:none}html[dir=rtl] .sndBtn{left:24px;right:auto}
 
 /* new sections */
 .lead2{font-size:20px;color:#C9D2EC;max-width:58ch;margin:0 0 34px}
@@ -996,7 +996,7 @@ hw1:"Camera",hw1d:"ESP32-S3",hw2:"LED eyes",hw2d:"Color = mood",hw3:"Speaker + m
 "ss.t":"Where Rafeeq is today","ss.b":"Built and working","ss.b1":"A camera demo: Gemma 3 checks real steps and coaches in Kuwaiti Arabic, with a parent app. Code on GitHub.","ss.b2":"A recorded Gulf-Arabic voice for Rafeeq's lines.","ss.b3":"This website and simulation, in Arabic and English.",
 "ss.n":"Next","ss.n1":"Build the owl: Raspberry Pi 5, camera, LED eyes and servos in a 3D-printed body.","ss.n2":"Spot stress from body language (hands over ears), not only from loud noise.","ss.n3":"Test with families and a special-needs teacher in Kuwait, and change it based on what they say.","ss.n4":"A local Gulf-Arabic voice that can say any new line, offline.",
 "vo.t":"What families say","vo.l":"From studies in Kuwait, the Gulf, and autistic adults. Tap a card.","vo.p":"Parents","vo.a":"Autistic adults","vo.how":"How Rafeeq answers","vo.ans":"Rafeeq's answer","vo.src":"Source","vo.back":"Back",
-"fe.t":"Everything Rafeeq can do","fe.l":"What works today, and what's planned.","fe.all":"All","fe.r":"Routines","fe.c":"Calm","fe.f":"Family","fe.lg":"Language","fe.d":"Works in the demo","fe.s":"In the simulation","fe.p":"Planned",
+"fe.t":"Everything Rafeeq can do","fe.l":"\"Works in the demo\" means it runs in the demo app on a laptop today. The owl robot itself isn't built yet.","fe.all":"All","fe.r":"Routines","fe.c":"Calm","fe.f":"Family","fe.lg":"Language","fe.d":"Works in the demo","fe.s":"In the simulation","fe.p":"Planned",
 "fq.t":"Questions people ask","fq.ph":"Search the questions","fq.no":"No match. Try another word.",
 fq1:"Is Rafeeq a real robot yet?",fa1:"Not yet. The camera demo works today. The owl body is next.",
 fq2:"Does it replace parents or therapists?",fa2:"No. They decide what the child learns. Rafeeq helps practise it at home.",
@@ -1021,7 +1021,7 @@ fq12:"Who made Rafeeq?",fa12:"A.Naji, a student in Kuwait, for ATSN26.",
 "g1":"Offline","g1d":"The AI runs at home. No internet, no cloud.",
 "g2":"Kuwaiti Arabic","g2d":"It talks the way the family talks.",
 "g3":"Steps back","g3d":"Help fades as the child learns: full, hint, silent.",
-"g4":"21 features","g4d":"working in the demo today. 4 more are planned.",
+"g4":"21 features","g4d":"in the demo app today, not the robot yet. The owl body is next.",
 "ru.t":"Run it yourself","ru.l":"Runs on any laptop. No account, no API key, offline after one download.",
 "ru.1":"Install Ollama","ru.1d":"Free app that runs AI models on your own computer.","ru.1a":"ollama.com/download",
 "ru.2":"Download Gemma 3","ru.2d":"About 3 GB, one time only.",
@@ -1091,7 +1091,7 @@ hw1:"كاميرا",hw1d:"ESP32-S3",hw2:"عيون LED",hw2d:"اللون = الم�
 "ss.t":"وين وصل رفيق اليوم","ss.b":"جاهز ويشتغل","ss.b1":"ديمو بالكاميرا: Gemma 3 يفحص خطوات حقيقية ويوجّه بالكويتي، مع تطبيق للأهل. الكود على GitHub.","ss.b2":"صوت خليجي مسجّل لجمل رفيق.","ss.b3":"هالموقع والمحاكاة، بالعربي والإنجليزي.",
 "ss.n":"الجاي","ss.n1":"نبني البومة: Raspberry Pi 5 وكاميرا وعيون LED وسيرفوهات داخل جسم مطبوع 3D.","ss.n2":"يلاحظ التوتر من حركة الجسم (اليدين على الأذن)، مو بس من الصوت العالي.","ss.n3":"نجربه مع عوايل ومعلمة تربية خاصة في الكويت، ونعدّل حسب كلامهم.","ss.n4":"صوت خليجي محلي يقدر يقول أي جملة جديدة، بدون إنترنت.",
 "vo.t":"شنو تقول العوايل","vo.l":"من دراسات في الكويت والخليج، ومن أشخاص عندهم توحد. اضغط على بطاقة.","vo.p":"الأهل","vo.a":"أشخاص عندهم توحد","vo.how":"كيف يتعامل رفيق","vo.ans":"رد رفيق","vo.src":"المصدر","vo.back":"رجوع",
-"fe.t":"كل شي يقدر يسويه رفيق","fe.l":"شنو يشتغل اليوم، وشنو مخطط له.","fe.all":"الكل","fe.r":"الروتين","fe.c":"الهدوء","fe.f":"العائلة","fe.lg":"اللغة","fe.d":"يشتغل في الديمو","fe.s":"في المحاكاة","fe.p":"مخطط له",
+"fe.t":"كل شي يقدر يسويه رفيق","fe.l":"«يشتغل في الديمو» يعني يشتغل في التطبيق التجريبي على اللابتوب اليوم. روبوت البومة نفسه لسا ما انبنى.","fe.all":"الكل","fe.r":"الروتين","fe.c":"الهدوء","fe.f":"العائلة","fe.lg":"اللغة","fe.d":"يشتغل في الديمو","fe.s":"في المحاكاة","fe.p":"مخطط له",
 "fq.t":"أسئلة الناس","fq.ph":"دوّر في الأسئلة","fq.no":"ما فيه نتيجة. جرّب كلمة ثانية.",
 fq1:"رفيق روبوت حقيقي الحين؟",fa1:"مو بعد. ديمو الكاميرا شغّال اليوم، وجسم البومة الخطوة الجاية.",
 fq2:"يعوّض الأهل أو الأخصائي؟",fa2:"لا. هم يقررون شنو يتعلم الطفل، ورفيق يساعده يتمرن في البيت.",
@@ -1116,7 +1116,7 @@ fq12:"منو سوّا رفيق؟",fa12:"A.Naji، طالب في الكويت، ل
 "g1":"بدون إنترنت","g1d":"الذكاء الاصطناعي يشتغل في البيت. بدون سحابة.",
 "g2":"لهجة كويتية","g2d":"يتكلم مثل ما تتكلم العائلة.",
 "g3":"يتراجع","g3d":"المساعدة تقل مع تعلم الطفل: كاملة، تلميح، سكوت.",
-"g4":"٢١ ميزة","g4d":"تشتغل في التطبيق اليوم، و٤ مخطط لها.",
+"g4":"٢١ ميزة","g4d":"في التطبيق التجريبي اليوم، مو في الروبوت بعد. جسم البومة الخطوة الجاية.",
 "ru.t":"شغّله بنفسك","ru.l":"يشتغل على أي لابتوب. بدون حساب ولا مفتاح، وبدون إنترنت بعد أول تنزيل.",
 "ru.1":"نزّل Ollama","ru.1d":"برنامج مجاني يشغّل نماذج الذكاء الاصطناعي على جهازك.","ru.1a":"ollama.com/download",
 "ru.2":"نزّل Gemma 3","ru.2d":"حوالي ٣ جيجا، مرة وحدة بس.",
@@ -1520,13 +1520,13 @@ new IntersectionObserver(es=>es.forEach(e=>{sb.classList.toggle("show",e.isInter
 const FT={en:[`In Kuwait, <b data-n="30" data-s="+">30+</b> in every 10,000 children are diagnosed with autism, and the real number is likely higher.`,
  `Our region has 1 psychologist for every 100,000 people. Europe has <b data-n="5.4">5.4</b>.`,
  `When <b data-n="82">82</b> families in Kuwait ranked their hardest daily challenges, behaviour came first.`],
- ar:[`في الكويت، أكثر من <b data-n="30" data-s="+">30+</b> طفل من كل 10,000 مشخّصين بالتوحد، والرقم الحقيقي غالباً أعلى.`,
- `في منطقتنا، أخصائي نفسي واحد لكل 100,000 شخص. في أوروبا <b data-n="5.4">5.4</b>.`,
+ ar:[`في الكويت، أكثر من <b data-n="30">30</b> طفل من كل 10,000 مشخّصين بالتوحد، والرقم الحقيقي غالباً أعلى.`,
+ `في منطقتنا، أخصائي نفسي واحد لكل 100,000 شخص، وفي أوروبا <b data-n="5.4">5.4</b> أخصائي.`,
  `لما <b data-n="82">82</b> عائلة في الكويت رتّبوا أصعب التحديات اليومية، السلوك جا الأول.`]};
 const SRC={en:"Sources: PwC Middle East (2024), citing WHO Mental Health Atlas 2020 · Study of 82 families in Ahmadi Governorate, College of Basic Education (PAAET), Kuwait",ar:"المصادر: PwC الشرق الأوسط (2024)، نقلاً عن أطلس الصحة النفسية لمنظمة الصحة العالمية 2020 · دراسة على 82 عائلة في محافظة الأحمدي، كلية التربية الأساسية (الهيئة العامة للتعليم التطبيقي)، الكويت"};
 const ft=$$("factText");let counted=false;
 function renderFacts(){ft.innerHTML=(FT[lang]||FT.en).map(x=>`<p class="big">${x}</p>`).join("")+`<p class="src">${SRC[lang]||SRC.en}</p>`;if(!counted)ft.querySelectorAll("b").forEach(b=>b.dataset.final=b.textContent);}
-function count(){counted=true;if(RMx)return;ft.querySelectorAll("b").forEach((b,k)=>{const n=+b.dataset.n,fin=b.textContent,t0=performance.now()+k*200,D=1100;
+function count(){counted=true;return;ft.querySelectorAll("b").forEach((b,k)=>{const n=+b.dataset.n,fin=b.textContent,t0=performance.now()+k*200,D=1100;
  (function st(now){const p=Math.max(0,Math.min(1,(now-t0)/D)),e=1-Math.pow(1-p,3),v=n*e;b.textContent=(n%1?v.toFixed(1):Math.round(v).toLocaleString("en-US"))+(b.dataset.s||"");if(p<1)requestAnimationFrame(st);else b.textContent=fin;})(performance.now());});}
 const fio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){fio.disconnect();count();}}),{threshold:.35});fio.observe(ft);
 
