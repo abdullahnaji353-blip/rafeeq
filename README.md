@@ -373,3 +373,7 @@ After that, **every push to `main` updates the site automatically** within a min
 **A.Naji**
 
 *Made for the ATSN26 Gen-AI & Software Innovation Competition, Kuwait.*
+
+## License
+
+© 2026 A.Naji. All rights reserved. You may view the code and run the demo to try or judge the project; anything else needs written permission. See [LICENSE](LICENSE).

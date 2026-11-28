@@ -58,6 +58,59 @@ const DEFAULT_ROUTINES = [
   ]},
 ];
 
+// Ready-made routines parents can add with one tap. camera:false = private
+// routines (dressing, bedtime): the camera stays off and the child taps "done".
+const ROUTINE_LIBRARY = [
+  { id: "wake", icon: "🌅", name: "الصحوة", nameEn: "Waking up", steps: [
+    { ar: "يقوم من السرير", en: "Get out of bed" },
+    { ar: "يرتب اللحاف", en: "Straighten the blanket on the bed" },
+    { ar: "يفتح الستارة", en: "Open the curtain" },
+  ]},
+  { id: "face", icon: "💦", name: "غسل الوجه", nameEn: "Washing the face", steps: [
+    { ar: "يفتح الماي", en: "Turn on the tap" },
+    { ar: "يغسل وجهه بالماي", en: "Wash the face with water", seconds: 10 },
+    { ar: "ينشف وجهه بالفوطة", en: "Dry the face with a towel" },
+  ]},
+  { id: "dress", icon: "👕", name: "لبس الملابس", nameEn: "Getting dressed", camera: false, steps: [
+    { ar: "يجيب ملابسه", en: "Get your clothes" },
+    { ar: "يلبس القميص", en: "Put on your shirt" },
+    { ar: "يلبس البنطلون", en: "Put on your trousers" },
+    { ar: "يلبس الجواريب", en: "Put on your socks" },
+  ]},
+  { id: "shoes", icon: "👟", name: "لبس الجوتي", nameEn: "Putting on shoes", steps: [
+    { ar: "يجيب الجوتي", en: "Get the shoes" },
+    { ar: "يلبس الجوتي اليمين", en: "Put on the right shoe" },
+    { ar: "يلبس الجوتي اليسار", en: "Put on the left shoe" },
+    { ar: "يسكر اللاصق", en: "Close the straps" },
+  ]},
+  { id: "breakfast", icon: "🥣", name: "الريوق", nameEn: "Breakfast", steps: [
+    { ar: "يقعد على الطاولة", en: "Sit at the table" },
+    { ar: "يقول بسم الله", en: "Say bismillah" },
+    { ar: "ياكل ريوقه", en: "Eat breakfast", seconds: 300 },
+    { ar: "يحط الصحن في المغسلة", en: "Put the plate in the sink" },
+  ]},
+  { id: "wudu", icon: "🕌", name: "الوضوء", nameEn: "Wudu", steps: [
+    { ar: "يغسل يدينه", en: "Wash both hands" },
+    { ar: "يمضمض", en: "Rinse the mouth" },
+    { ar: "يستنشق", en: "Rinse the nose" },
+    { ar: "يغسل وجهه", en: "Wash the face" },
+    { ar: "يغسل يدينه لين الكوع", en: "Wash the arms up to the elbows" },
+    { ar: "يمسح على راسه وإذونه", en: "Wipe over the head and ears" },
+    { ar: "يغسل رجوله", en: "Wash both feet" },
+  ]},
+  { id: "tidy", icon: "🧸", name: "ترتيب الألعاب", nameEn: "Tidying toys", steps: [
+    { ar: "يجمع الألعاب", en: "Pick up the toys" },
+    { ar: "يحطها في الصندوق", en: "Put them in the box" },
+    { ar: "يرجع الصندوق مكانه", en: "Put the box back in its place" },
+  ]},
+  { id: "bedtime", icon: "🌙", name: "وقت النوم", nameEn: "Bedtime", camera: false, steps: [
+    { ar: "يلبس البيجاما", en: "Put on pyjamas" },
+    { ar: "يفرش أسنانه", en: "Brush the teeth" },
+    { ar: "يروح الحمام", en: "Go to the bathroom" },
+    { ar: "يدخل السرير", en: "Get into bed" },
+  ]},
+];
+
 const DEFAULT_DB = {
   profile: {
     childName: "",
@@ -235,9 +288,84 @@ function cleanRoutine(body, id) {
     icon: String(body.icon || "⭐").slice(0, 4),
     name: String(body.name || "روتين").trim().slice(0, 40),
     nameEn: String(body.nameEn || body.name || "Routine").trim().slice(0, 60),
+    ...(body.camera === false || body.camera === "false" ? { camera: false } : {}),
     steps,
   };
 }
+/* ready-made routines */
+app.get("/api/library", (_req, res) => {
+  res.json(ROUTINE_LIBRARY.map((r) => ({ ...r, added: db.routines.some((x) => x.from === r.id) })));
+});
+app.post("/api/library/:id", (req, res) => {
+  const src = ROUTINE_LIBRARY.find((r) => r.id === req.params.id);
+  if (!src) return res.status(404).json({ error: "no such routine in the library" });
+  const r = { ...cleanRoutine(src, "r" + Date.now().toString(36)), from: src.id };
+  db.routines.push(r);
+  saveDb();
+  res.json(r);
+});
+
+/* the AI routine builder: one sentence from the parent -> a draft routine.
+   It only drafts; the parent checks and edits before anything is saved. */
+const DRAFT_SYSTEM = `You help parents of children with autism, Down syndrome or ADHD build a daily routine.
+The parent describes a routine in one sentence. Reply with JSON only:
+{"icon":"one emoji","name":"short name in Kuwaiti Arabic","nameEn":"short English name","camera":true,"steps":[{"ar":"step in simple Kuwaiti Arabic, 2 to 5 words, third person like يفتح الماي","en":"the same step in plain English, what a camera would see"}]}
+Rules: 3 to 6 steps, one small physical action each, in the right order. No medical advice. Never include anything unsafe for a child.
+Set "camera": false for private routines (dressing, showering, toilet, bedtime), so the camera stays off.`;
+
+async function askText(system, userText) {
+  if (PROVIDER === "claude") {
+    if (!claude) {
+      if (!process.env.ANTHROPIC_API_KEY) throw new Error("PROVIDER=claude needs ANTHROPIC_API_KEY in .env");
+      const { default: Anthropic } = await import("@anthropic-ai/sdk");
+      claude = new Anthropic();
+    }
+    const msg = await claude.messages.create({ model: CLAUDE_MODEL, max_tokens: 500, system, messages: [{ role: "user", content: userText }] });
+    return msg.content.filter((b) => b.type === "text").map((b) => b.text).join("");
+  }
+  const r = await fetch(`${OLLAMA_URL}/api/chat`, {
+    signal: AbortSignal.timeout(90000), method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ model: OLLAMA_MODEL, stream: false, format: "json", options: { temperature: 0.4 },
+      messages: [{ role: "system", content: system }, { role: "user", content: userText }] }),
+  }).catch((e) => { throw new Error(`Can't reach Ollama at ${OLLAMA_URL} (${e.message})`); });
+  if (!r.ok) throw new Error(`Ollama ${r.status}: ${await r.text()}`);
+  return (await r.json()).message?.content || "";
+}
+
+// Test mode only: a scripted draft so the builder can be tried without a model.
+function mockDraft(text) {
+  const t = text.toLowerCase();
+  if (/swim|سباح/.test(t)) return { icon: "🏊", name: "شنطة السباحة", nameEn: "Swimming bag", steps: [
+    { ar: "يجيب شنطة السباحة", en: "Get the swimming bag" }, { ar: "يحط المايوه", en: "Put the swimsuit in the bag" },
+    { ar: "يحط الفوطة", en: "Put the towel in the bag" }, { ar: "يحط النظارة", en: "Put the goggles in the bag" }, { ar: "يسكر الشنطة", en: "Close the bag" }] };
+  if (/dress|cloth|ملابس|يلبس/.test(t)) return { ...ROUTINE_LIBRARY.find((r) => r.id === "dress") };
+  if (/sleep|bed|نوم/.test(t)) return { ...ROUTINE_LIBRARY.find((r) => r.id === "bedtime") };
+  return { icon: "⭐", name: "روتين جديد", nameEn: "New routine", steps: [
+    { ar: "يجيب الأغراض", en: "Get the things you need" }, { ar: "يسوي الخطوة الأولى", en: "Do the first part" }, { ar: "يرجع الأغراض مكانها", en: "Put everything back" }] };
+}
+
+app.post("/api/routines/draft", async (req, res) => {
+  try {
+    const text = String(req.body?.text || "").trim().slice(0, 240);
+    if (text.length < 4) return res.status(400).json({ error: "describe the routine in a sentence" });
+    let out;
+    if (PROVIDER === "mock") out = mockDraft(text);
+    else {
+      const raw = await askText(DRAFT_SYSTEM, `Routine: ${text}`);
+      const m = raw.match(/\{[\s\S]*\}/);
+      if (!m) return res.status(502).json({ error: "no JSON from model", raw });
+      out = JSON.parse(m[0]);
+    }
+    const r = cleanRoutine(out, "draft");
+    if (!r.steps.length) return res.status(502).json({ error: "the model gave no steps, try rewording" });
+    r.steps = r.steps.slice(0, 8);
+    res.json(r);
+  } catch (err) {
+    console.error(err.message || err);
+    res.status(500).json({ error: err.message || "draft failed" });
+  }
+});
+
 app.post("/api/routines", (req, res) => {
   const id = "r" + Date.now().toString(36);
   const r = cleanRoutine(req.body || {}, id);
@@ -249,7 +377,7 @@ app.post("/api/routines", (req, res) => {
 app.put("/api/routines/:id", (req, res) => {
   const i = db.routines.findIndex((r) => r.id === req.params.id);
   if (i < 0) return res.status(404).json({ error: "no such routine" });
-  const r = cleanRoutine(req.body || {}, req.params.id);
+  const r = { ...cleanRoutine(req.body || {}, req.params.id), ...(db.routines[i].from ? { from: db.routines[i].from } : {}) };
   if (!r.steps.length) return res.status(400).json({ error: "add at least one step" });
   db.routines[i] = r;
   // steps may have moved: drop levels past the new length
@@ -311,6 +439,7 @@ app.post("/api/coach", async (req, res) => {
     const r = findRoutine(routineId);
     const step = r?.steps[stepIndex];
     if (!image || !step) return res.status(400).json({ error: "image, routineId and stepIndex are required" });
+    if (r.camera === false) return res.status(400).json({ error: "this routine keeps the camera off" });
 
     const p = db.profile;
     const hintLevel = levelOf(r.id, stepIndex);

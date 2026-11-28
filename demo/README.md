@@ -13,6 +13,9 @@ A working slice of Rafeeq: point a camera at a child doing a routine, and Rafeeq
 |---|---|
 | Automatic fading | Each step has a help level: full guidance, light hint, or silent unless stuck. Done alone 3 mornings in a row → one level less. A hard morning (3+ hints, or not finished) → one level back. Every change is logged; parents can pin or undo any level. |
 | Routine builder | Parents add or edit routines and steps: what Rafeeq says, an English description for the camera, and an optional timer. |
+| AI routine builder | Parents describe a routine in one sentence ("my son needs to get ready for swimming") and Gemma drafts the steps in Kuwaiti Arabic and English. Nothing is saved until the parent checks it. |
+| Routine library | Eight ready-made routines in one tap: waking up, washing the face, getting dressed, shoes, breakfast, wudu, tidying toys, bedtime. |
+| Camera-free routines | Private routines (dressing, bedtime) keep the camera off. The child taps a big "I did it" button, and Rafeeq reminds gently if a step takes long. |
 | Mum's or Dad's voice | Record up to 10 seconds per step. At full guidance, Rafeeq plays the parent's recording instead of his own voice. |
 | Eye-ring timer | Timed steps (brushing 120 s, rubbing hands 20 s) fill a ring around Rafeeq's eyes. The step only counts as done when the ring is full. |
 | First, then | Parents set a reward. Rafeeq says "first teeth, then the iPad" at the start and celebrates it at the end. |

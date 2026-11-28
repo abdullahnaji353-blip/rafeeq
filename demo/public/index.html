@@ -28,6 +28,10 @@
   .bubble small{display:block;font-size:14px;font-weight:500;color:#55607E}
   .stage{position:relative;width:100%;max-width:560px}
   video{width:100%;border-radius:20px;background:#000;aspect-ratio:4/3;object-fit:cover;display:block}
+  .nocam{display:none;position:absolute;inset:0;border-radius:20px;background:#141B36;color:#fff;align-items:center;justify-content:center;text-align:center;font-size:20px;padding:20px;line-height:1.6}
+  .nocam small{color:#A3ADCB;font-size:14px}
+  .tapDone{display:none;width:100%;margin:12px 0 0;padding:22px;border:0;border-radius:18px;background:#3EE6C8;color:#062A24;font:inherit;font-weight:800;font-size:24px;cursor:pointer}
+  .tapDone:focus-visible{outline:4px solid #fff;outline-offset:3px}
   .camoff{display:none;position:absolute;inset:0;border-radius:20px;background:#000;color:#fff;align-items:center;justify-content:center;text-align:center;font-size:18px;padding:20px}
   .calm{display:none;position:absolute;inset:0;border-radius:20px;background:rgba(10,20,50,.86);flex-direction:column;align-items:center;justify-content:center;gap:16px}
   .calm.on{display:flex}
@@ -82,10 +86,12 @@
 
   <div class="stage">
     <video id="cam" playsinline muted autoplay></video>
+    <div class="nocam" id="nocam">🔒<br>الكاميرا مطفية لهالروتين<br><small>Camera stays off for this routine. Tap the button when a step is done.</small></div>
     <div class="camoff" id="camoff">📷🚫<br>الكاميرا مطفية من تطبيق الأهل<br><small>Camera is switched off in the parent app</small></div>
     <div class="calm" id="calm"><div class="breath"></div><p id="calmTxt">خذ نفس معاي…</p><button id="calmEnd">أحسن الحين 👍</button></div>
   </div>
 
+  <button class="tapDone" id="tapDone" type="button">✅ خلصت · I did it</button>
   <ul class="steps" id="steps"></ul>
 
   <div class="row">
@@ -127,7 +133,7 @@ let AC = null, calmNodes = [], micStream = null, micTimer = null;
 async function load() {
   S = await (await fetch("/api/state")).json();
   const sel = $("routine"), keep = sel.value;
-  sel.innerHTML = S.routines.map(r => `<option value="${r.id}">${r.icon} ${r.name}</option>`).join("");
+  sel.innerHTML = S.routines.map(r => `<option value="${r.id}">${r.icon} ${r.name}${r.camera === false ? " 🔒" : ""}</option>`).join("");
   if (keep && S.routines.some(r => r.id === keep)) sel.value = keep;
   $("model").textContent = S.provider;
   $("model").classList.toggle("mock", S.provider.startsWith("mock"));
@@ -139,10 +145,17 @@ async function load() {
   if (p.noiseCheck) m.push("ينتبه للأصوات العالية");
   if (p.band) m.push("سوار رفيق");
   $("modes").textContent = m.length ? "الإعدادات: " + m.join(" · ") : "";
-  $("camoff").style.display = p.cameraOn ? "none" : "flex";
   bandShow();
-  $("go").disabled = !p.cameraOn;
+  camUi();
   renderSteps();
+}
+const needsCam = r => r && r.camera !== false;
+function camUi() {
+  const r = routine(), cam = needsCam(r);
+  $("nocam").style.display = cam ? "none" : "flex";
+  $("camoff").style.display = cam && !S.profile.cameraOn ? "flex" : "none";
+  $("facing").style.display = cam ? "" : "none";
+  $("go").disabled = cam && !S.profile.cameraOn;
 }
 const routine = () => S.routines.find(r => r.id === $("routine").value);
 
@@ -250,12 +263,7 @@ async function check() {
     if (data.status === "done" && step.seconds && !run.timerFull) {
       speak(T("شوي بعد، لين تكمل الدائرة", "A bit more, until the circle is full"));   // timed step: wait for the ring
     } else if (data.status === "done") {
-      st.done = true;
-      $("owl").classList.remove("happy"); void $("owl").offsetWidth; $("owl").classList.add("happy");
-      const alone = st.hints === 0 && st.offTask === 0;
-      if (alone && step.level > 0) speak(T("⭐ سويتها بروحك!", "⭐ You did it by yourself!"), { force: true });
-      else speak(data.say || T("شاطر!", "Great job!"), { force: true });
-      nextStep();
+      stepDone(data.say);
     } else {
       if (data.status === "off_task" || data.status === "not_visible") st.offTask++;
       if (data.say) { st.hints++; speak(data.say); }
@@ -267,25 +275,64 @@ async function check() {
   }
 }
 
+function stepDone(say) {
+  const st = run.steps[run.i], step = routine().steps[run.i];
+  st.done = true;
+  $("owl").classList.remove("happy"); void $("owl").offsetWidth; $("owl").classList.add("happy");
+  const alone = st.hints === 0 && st.offTask === 0;
+  if (alone && step.level > 0) speak(T("⭐ سويتها بروحك!", "⭐ You did it by yourself!"), { force: true });
+  else speak(say || T("شاطر!", "Great job!"), { force: true });
+  nextStep();
+}
+
+/* camera-free routines: the child taps when done; Rafeeq reminds gently if it takes long */
+function tapDone() {
+  if (!run || run.paused || needsCam(routine())) return;
+  const step = routine().steps[run.i];
+  if (!step) return;
+  if (step.seconds && !run.timerFull) { speak(T("شوي بعد، لين تكمل الدائرة", "A bit more, until the circle is full")); return; }
+  stepDone();
+}
+function nudgeTick() {
+  if (!run || run.paused || needsCam(routine())) return;
+  const step = routine().steps[run.i];
+  if (!step) return;
+  const wait = (step.seconds || 0) * 1000 + 25000;
+  if (Date.now() - run.stepT0 < wait) return;
+  run.stepT0 = Date.now();
+  if (step.level >= 2) return;            // silent level: no reminders
+  run.steps[run.i].hints++;
+  announce();
+}
+
 function nextStep() {
   clearInterval(run.timerId); run.timerStart = 0; setRing(0);
   run.i++;
+  run.stepT0 = Date.now() + 1600;
   renderSteps();
   if (run.i >= routine().steps.length) return finish(true);
   setEyes("coach");
-  setTimeout(() => run && announce(), 1600);
+  setTimeout(() => { if (!run) return; announce(); const st = routine().steps[run.i]; if (!needsCam(routine()) && st && st.seconds) startTimer(st.seconds); }, 1600);
 }
 
 /* ---------- start / stop / finish ---------- */
 async function start() {
   stop(true);
   await load();
-  if (!S.profile.cameraOn) return;
   const r = routine();
+  if (needsCam(r) && !S.profile.cameraOn) return;
   BAND.alerts = 0; BAND.max = BAND.last || 0;
-  run = { i: 0, t0: Date.now(), calmDowns: 0, steps: r.steps.map(() => ({ done: false, hints: 0, offTask: 0 })) };
+  run = { i: 0, t0: Date.now(), stepT0: Date.now() + 3200, calmDowns: 0, steps: r.steps.map(() => ({ done: false, hints: 0, offTask: 0 })) };
   $("report").style.display = "none"; $("reward").style.display = "none";
   renderSteps(); setEyes("coach");
+  if (!needsCam(r)) {
+    $("tapDone").style.display = "block";
+    if (S.profile.reward) speak(T(`أول ${r.name}، بعدين ${S.profile.reward} 🎁`, `First ${r.nameEn.toLowerCase()}, then ${S.profile.reward} 🎁`), { force: true });
+    setTimeout(() => { if (run) { announce(); const s0 = r.steps[0]; if (s0.seconds) startTimer(s0.seconds); } }, S.profile.reward ? 3200 : 300);
+    timer = setInterval(nudgeTick, 1000);
+    if (S.profile.noiseCheck) startNoiseCheck();
+    return;
+  }
   try {
     stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: $("facing").value }, audio: false });
     $("cam").srcObject = stream;
@@ -300,6 +347,7 @@ async function start() {
 
 function stop(silent) {
   clearInterval(timer); timer = null;
+  $("tapDone").style.display = "none";
   if (run) clearInterval(run.timerId);
   if (stream) stream.getTracks().forEach(t => t.stop());
   stream = null;
@@ -319,6 +367,7 @@ async function saveSession(finished) {
 
 async function finish() {
   clearInterval(timer); timer = null; stopNoiseCheck();
+  $("tapDone").style.display = "none";
   const r = routine(), mins = Math.max(1, Math.round((Date.now() - run.t0) / 60000));
   const alone = run.steps.filter(s => s.done && !s.hints && !s.offTask).length;
   const hints = run.steps.reduce((n, s) => n + s.hints, 0);
@@ -477,7 +526,8 @@ $("go").onclick = start;
 $("stop").onclick = () => { stop(false); $("bubble").textContent = "وقفنا. نكمل بعدين 👋"; renderSteps(); };
 $("calmBtn").onclick = () => run ? startCalm() : null;
 $("calmEnd").onclick = () => endCalm(false);
-$("routine").onchange = () => { run = null; renderSteps(); };
+$("routine").onchange = () => { stop(true); run = null; camUi(); renderSteps(); };
+$("tapDone").onclick = tapDone;
 if ("speechSynthesis" in window) speechSynthesis.onvoiceschanged = () => {};
 load().catch(e => { $("err").textContent = "Server not reachable: " + e.message; });
 </script>
